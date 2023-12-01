@@ -17,6 +17,8 @@ namespace LibCheck {
                     throw new InvalidOperationException("Database aren't connected.");
 
                 Credentials.Initialize();
+                if (!Credentials.LoginAsLibrarian())
+                    return;
 
             } catch (Exception ex) {
                 Console.WriteLine($"Crashed! ({ex.Message})");
