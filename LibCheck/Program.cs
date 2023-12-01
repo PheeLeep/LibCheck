@@ -1,3 +1,5 @@
+using LibCheck.Modules;
+
 namespace LibCheck {
     internal static class Program {
         /// <summary>
@@ -9,6 +11,18 @@ namespace LibCheck {
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
+            try {
+                Database.Load();
+                if (!Database.IsConnected)
+                    throw new InvalidOperationException("Database aren't connected.");
+
+                Credentials.Initialize();
+
+            } catch (Exception ex) {
+                Console.WriteLine($"Crashed! ({ex.Message})");
+                MessageBox.Show(null, "This software is experiencing fatal error and it needs to close. We're sorry for inconvenience." +
+                                $"\n\nCause: {ex.Message}", "Crashed!", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
             // Uncomment when a new Form was created.
             // Application.Run(new );
         }
