@@ -1,4 +1,6 @@
-﻿namespace LibCheck.Modules {
+﻿using LibCheck.Forms;
+
+namespace LibCheck.Modules {
     internal static class Credentials {
         private static bool _isInitialized = false;
         private static readonly object _lock = new object();
@@ -15,25 +17,24 @@
 
         internal static bool LoginAsLibrarian() {
             lock (_lock) {
-                switch (CheckLibrarianPresence()) {
-                    case 0:
-                        // Assume for the librarian sign in.
-                        SecureDesktop.EnterSecureMode(new Action(() => {
-                            MessageBox.Show("Sign up!");
-                        }));
-                         return true;
-                    case 1:
-                        // Login
-                        MessageBox.Show("Log in");
-                        return true;
-                    default:
-                        throw new InvalidOperationException("Failed to identify.");
+                while (true) {
+                    if (!CheckPresence()) {
+                        using (RegisterLib rLib = new RegisterLib()) {
+                            if (rLib.ShowDialog() == DialogResult.Yes)
+                                continue;
+                        }
+                        return false;
+                    }
+                    MessageBox.Show("Log in");
+                    return true;
                 }
             }
         }
 
-        private static int CheckLibrarianPresence() {
-            return Database.Count("SELECT COUNT(*) FROM admin");
+        private static bool CheckPresence() {
+            FileInfo f = new FileInfo(Path.Combine(EnvVars.CredentialsInfo.FullName, "lc_cred.json"));
+            if (!f.Exists || f.Length == 0) return false;
+            return true;
         }
     }
 }

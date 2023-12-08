@@ -1,7 +1,9 @@
 ﻿using static LibCheck.Modules.WinNatives;
 
-namespace LibCheck.Modules {
-    internal static class SecureDesktop {
+namespace LibCheck.Modules.Security
+{
+    internal static class SecureDesktop
+    {
 
         private static readonly object _lock = new object();
 
@@ -10,25 +12,28 @@ namespace LibCheck.Modules {
         /// </summary>
         /// <param name="action">The supplied method to be invoked in the secure desktop.</param>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static void EnterSecureMode(Action action) {
-            lock (_lock) {
+        internal static void EnterSecureMode(Action action)
+        {
+            lock (_lock)
+            {
                 if (action == null)
                     throw new ArgumentNullException(nameof(action));
 
-                IntPtr oldDesktop = IntPtr.Zero;
-                IntPtr secureDesktop = IntPtr.Zero;
+                nint oldDesktop = nint.Zero;
+                nint secureDesktop = nint.Zero;
                 Form? dimForm = null;
 
                 // Pansy besto waifu!!
 
-                try {
+                try
+                {
                     dimForm = new Forms.DimForm(Screenshot());
 
                     // Get the current thread desktop, and create a new desktop.
                     oldDesktop = GetThreadDesktop(GetCurrentThreadId());
-                    secureDesktop = CreateDesktop("LibCheckSecureDesktop", IntPtr.Zero, IntPtr.Zero, 0, GENERIC_ALL, IntPtr.Zero);
+                    secureDesktop = CreateDesktop("LibCheckSecureDesktop", nint.Zero, nint.Zero, 0, GENERIC_ALL, nint.Zero);
 
-                    if (secureDesktop == IntPtr.Zero)
+                    if (secureDesktop == nint.Zero)
                         throw new Exception("Failed to create secure desktop.");
 
                     if (!SwitchDesktop(secureDesktop))
@@ -38,28 +43,35 @@ namespace LibCheck.Modules {
                     SetThreadDesktop(secureDesktop);
 
                     // Create a separate task.
-                    Task.Factory.StartNew(() => {
+                    Task.Factory.StartNew(() =>
+                    {
                         SetThreadDesktop(secureDesktop);
                         dimForm.Show();
                         action();
                     }).Wait();
 
-                } catch {
-                    throw; 
-                } finally {
+                }
+                catch
+                {
+                    throw;
+                }
+                finally
+                {
                     dimForm?.Dispose();
                     SwitchDesktop(oldDesktop);
                     SetThreadDesktop(oldDesktop);
-                    if (secureDesktop != IntPtr.Zero)
+                    if (secureDesktop != nint.Zero)
                         CloseDesktop(secureDesktop);
                 }
             }
         }
 
-        private static Bitmap Screenshot() {
+        private static Bitmap Screenshot()
+        {
             Rectangle r = (Screen.PrimaryScreen?.Bounds) ?? throw new InvalidOperationException("No screen available!");
             Bitmap bmp = new Bitmap(r.Width, r.Height);
-            using (Graphics g = Graphics.FromImage(bmp)) {
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
                 g.CopyFromScreen(0, 0, 0, 0, r.Size, CopyPixelOperation.SourceCopy);
                 g.Flush();
                 Color c = Color.FromArgb((int)(255 * 0.5f), Color.Black);

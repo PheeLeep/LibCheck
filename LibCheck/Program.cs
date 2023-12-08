@@ -12,9 +12,6 @@ namespace LibCheck {
             ApplicationConfiguration.Initialize();
 
             try {
-                Database.Load();
-                if (!Database.IsConnected)
-                    throw new InvalidOperationException("Database aren't connected.");
 
                 Credentials.Initialize();
                 if (!Credentials.LoginAsLibrarian())
