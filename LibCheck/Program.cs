@@ -1,4 +1,6 @@
+using LibCheck.Forms;
 using LibCheck.Modules;
+using System.Diagnostics;
 
 namespace LibCheck {
     internal static class Program {
@@ -7,23 +9,31 @@ namespace LibCheck {
         /// </summary>
         [STAThread]
         static void Main() {
+            /// Make it a single executable instance.
+            if (Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName).Length > 1)
+                return;
+
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
             try {
 
+                Logger.Initialize();
                 Credentials.Initialize();
-                if (!Credentials.LoginAsLibrarian())
-                    return;
+                Credentials.LoginAsLibrarian();
 
+                if (Credentials.LoggedIn) {
+                    if (Modules.Database.Connection == null)
+                        throw new InvalidOperationException("Database is not connected.");
+                    Application.Run(new MainForm());
+                }
+                
+                Modules.Database.Unload();
+                Credentials.Unload();
             } catch (Exception ex) {
-                Console.WriteLine($"Crashed! ({ex.Message})");
-                MessageBox.Show(null, "This software is experiencing fatal error and it needs to close. We're sorry for inconvenience." +
-                                $"\n\nCause: {ex.Message}", "Crashed!", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                CrashControl.SCRAM(ex);
             }
-            // Uncomment when a new Form was created.
-            // Application.Run(new );
         }
     }
 }

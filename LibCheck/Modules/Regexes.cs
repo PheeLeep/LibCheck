@@ -1,6 +1,10 @@
 ﻿using System.Text.RegularExpressions;
 
 namespace LibCheck.Modules {
+
+    /// <summary>
+    /// A class that houses Regex checkers for various formats.
+    /// </summary>
     internal static partial class Regexes {
 
         [GeneratedRegex("^(?=[a-zA-Z])[-\\w.]{0,23}([a-zA-Z\\d]|(?<![-.])_)$")]

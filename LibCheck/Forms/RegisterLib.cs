@@ -1,5 +1,7 @@
-﻿using LibCheck.Modules;
+﻿using LibCheck.Database.Tables;
+using LibCheck.Modules;
 using LibCheck.Modules.Security;
+using System.Security;
 using System.Text;
 
 namespace LibCheck.Forms {
@@ -12,8 +14,18 @@ namespace LibCheck.Forms {
         private Panel currentPanel;
         public RegisterLib() {
             InitializeComponent();
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             currentPanel = WelcomePanel;
             InitPanels();
+        }
+
+        protected override CreateParams CreateParams {
+            get {
+                // Minimize form and control flickering.
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;
+                return cp;
+            }
         }
 
         private void RegisterLib_FormClosing(object sender, FormClosingEventArgs e) {
@@ -58,7 +70,47 @@ namespace LibCheck.Forms {
                     }
                     break;
                 case Panel p when p.Name.Equals(FinishPanel.Name):
-                    MessageBox.Show(CryptComp.GenerateSecurePassword());
+                    if (PleaseWait.IsRunning) return;
+                    LibrarianInfo lInfo = new LibrarianInfo {
+                        Username = usernameTxtBox.Text,
+                        FirstName = FNameTxtBox.Text,
+                        MiddleName = MNameTxtBox.Text,
+                        LastName = LNameTxtBox.Text,
+                        BirthDate = BDatePicker.Value,
+                        IsFemale = GenderCBox.SelectedIndex == 1
+                    };
+
+                    byte[] salt = CryptComp.GenerateRNGBytes();
+                    byte[] sqlcDBSalt = CryptComp.GenerateRNGBytes();
+                    LibrarianToken token = new LibrarianToken {
+                        Username = CryptComp.HashPassword(lInfo.Username, salt),
+                        Salt = Convert.ToBase64String(salt),
+                        Hash = CryptComp.HashPassword(passTxtBox.Text, salt),
+                        SQLCipherDBKey = CryptComp.ConvertToString(CryptComp.GenerateSecurePassword()),
+                        SQLCipherDBKeySalt = Convert.ToBase64String(sqlcDBSalt)
+                    };
+
+                    PleaseWait.RunInPleaseWait(this, new Action(() => {
+                        try {
+                            char[] c = passTxtBox.Text.ToCharArray();
+                            using (SecureString sb = new SecureString()) {
+                                for (int i = 0; i < c.Length; i++)
+                                    sb.AppendChar(c[i]);
+
+                                Credentials.Register(token, lInfo, sb);
+                                Invoke(new Action(() => {
+                                    MessageBox.Show(this, "Registration succeed!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    isDone = true;
+                                    DialogResult = DialogResult.Yes;
+                                    Close();
+                                }));
+                            }
+                        } catch (Exception ex) {
+                            Invoke(new Action(() => {
+                                MessageBox.Show(this, $"{ex.Message}", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }));
+                        }
+                    }));
                     return;
             }
             SwapPanels(nextPanels, prevPanels);
