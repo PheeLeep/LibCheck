@@ -24,24 +24,37 @@
         /// </summary>
         private void InitializeComponent() {
             WelcomeLabel = new Label();
+            ShowAdminButton = new Button();
             SuspendLayout();
             // 
             // WelcomeLabel
             // 
             WelcomeLabel.AutoSize = true;
             WelcomeLabel.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            WelcomeLabel.Location = new Point(62, 39);
+            WelcomeLabel.Location = new Point(54, 29);
             WelcomeLabel.Name = "WelcomeLabel";
-            WelcomeLabel.Size = new Size(59, 25);
+            WelcomeLabel.Size = new Size(50, 20);
             WelcomeLabel.TabIndex = 0;
             WelcomeLabel.Text = "label1";
             // 
+            // ShowAdminButton
+            // 
+            ShowAdminButton.Location = new Point(617, 12);
+            ShowAdminButton.Name = "ShowAdminButton";
+            ShowAdminButton.Size = new Size(90, 39);
+            ShowAdminButton.TabIndex = 1;
+            ShowAdminButton.Text = "Open Admin";
+            ShowAdminButton.UseVisualStyleBackColor = true;
+            ShowAdminButton.Click += ShowAdminButton_Click;
+            // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(719, 394);
+            Controls.Add(ShowAdminButton);
             Controls.Add(WelcomeLabel);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "MainForm";
             Text = "MainForm";
             Load += MainForm_Load;
@@ -52,5 +65,6 @@
         #endregion
 
         private Label WelcomeLabel;
+        private Button ShowAdminButton;
     }
 }

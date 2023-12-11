@@ -20,12 +20,13 @@ namespace LibCheck.Modules {
         private static DateTime expTime = DateTime.Now;
         private static int retries = 0;
         private static int incrementTimer = 0;
-
+ 
         /// <summary>
         /// Checks whether the user is currently logged in.
         /// </summary>
         internal static bool LoggedIn { get; private set; }
 
+        internal static LibrarianInfo? Librarian { get; private set; }
         /// <summary>
         /// Initialize the credentials.
         /// </summary>
@@ -48,9 +49,11 @@ namespace LibCheck.Modules {
         /// Unload all credentials.
         /// </summary>
         internal static void Unload() {
-            if (!_isInitialized) return;
+            if (!_isInitialized)
+                return;
             token?.Dispose();
-            Logger.Log(Logger.LogEnums.Info,"Tokens unloaded.");
+            Librarian = null;
+            Logger.Log(Logger.LogEnums.Info, "Tokens unloaded.");
             _isInitialized = false;
         }
 
@@ -80,7 +83,8 @@ namespace LibCheck.Modules {
         }
 
         internal static void Register(LibrarianToken token, LibrarianInfo lInfo, SecureString key) {
-            if (LoggedIn) throw new InvalidOperationException("Access denied.");
+            if (LoggedIn)
+                throw new InvalidOperationException("Access denied.");
 
             PleaseWait.SetPWDText("Setting up database...");
             string dbPath = Path.Combine(EnvVars.MainPath.FullName, "libcheckdb.sqlite");
@@ -129,7 +133,8 @@ namespace LibCheck.Modules {
                 return;
             }
 
-            if (LoggedIn) throw new InvalidOperationException("Already logged in.");
+            if (LoggedIn)
+                throw new InvalidOperationException("Already logged in.");
 
             SecureString sqlKey = new SecureString();
 
@@ -147,11 +152,35 @@ namespace LibCheck.Modules {
                 handler.Free();
 
                 Database.Load(sqlKey);
+
+                IEnumerable<LibrarianInfo>? infos = Modules.Database.Connection?
+                                                   .Query<LibrarianInfo>("SELECT * FROM LibrarianInfo");
+                if (infos == null || infos.Count() != 1) {
+                    CrashControl.SCRAM(new InvalidOperationException("Corrupted information found!"));
+                    return;
+                }
+                Librarian = infos.Take(1).ToArray()[0];
+
                 LoggedIn = true;
                 Logger.Log(Logger.LogEnums.Info, "Login successful.");
             } finally {
                 sqlKey.Dispose();
             }
+        }
+
+        internal static void Authenticate(string password) {
+            if (!LoggedIn || Librarian == null)
+                throw new InvalidOperationException("Access denied.");
+
+            string username = "";
+            try {
+                if (string.IsNullOrEmpty(Librarian.Username))
+                    throw new InvalidOperationException("Data corruption detected.");
+                username = Librarian.Username;
+            } catch (Exception ex) {
+                CrashControl.SCRAM(ex);
+            }
+            Authenticate(username, password);
         }
 
         internal static void Authenticate(string username, string password) {
@@ -170,8 +199,12 @@ namespace LibCheck.Modules {
                 byte[] salt = Convert.FromBase64String(token.Salt);
                 string provUserHash = CryptComp.HashPassword(username, salt);
                 string provPassHash = CryptComp.HashPassword(password, salt);
-                if (!provUserHash.Equals(token.Username)) throw new InvalidOperationException("Username is invalid.");
-                if (!provPassHash.Equals(token.Hash)) throw new InvalidOperationException("Password is invalid.");
+                if (!provUserHash.Equals(token.Username))
+                    throw new InvalidOperationException("Username is invalid.");
+                if (!provPassHash.Equals(token.Hash))
+                    throw new InvalidOperationException("Password is invalid.");
+
+                retries = 0; // Reset since the librarian logged in.
             } catch (Exception) {
                 retries++;
                 if (retries >= 5) {
@@ -202,8 +235,10 @@ namespace LibCheck.Modules {
         /// </summary>
         /// <returns>Returns whether the login is in halt.</returns>
         private static bool IsInHaltPhase() {
-            if (retries < 5) return false;
-            if (DateTime.Now < expTime) return true;
+            if (retries < 5)
+                return false;
+            if (DateTime.Now < expTime)
+                return true;
             retries = 0;
             return false;
         }

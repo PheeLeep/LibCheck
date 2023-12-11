@@ -36,6 +36,7 @@ namespace LibCheck.Modules.Security {
                     StartSecureMode();
 
                     // Pansy besto waifu!!
+
                     Task.Factory.StartNew(() => {
                         SetThreadDesktop(secureDesktop);
                         dimForm?.Show();
@@ -78,10 +79,13 @@ namespace LibCheck.Modules.Security {
         /// </summary>
         private static void CloseSecureMode() {
             dimForm?.Dispose();
+            dimForm = null;
             SwitchDesktop(oldDesktop);
             SetThreadDesktop(oldDesktop);
-            if (secureDesktop != nint.Zero)
+            if (secureDesktop != nint.Zero) {
                 CloseDesktop(secureDesktop);
+                secureDesktop = nint.Zero;
+            }
         }
 
         /// <summary>

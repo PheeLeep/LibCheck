@@ -1,8 +1,12 @@
-﻿using LibCheck.Database.Tables;
-using LibCheck.Modules;
+﻿using LibCheck.Modules;
+using LibCheck.Modules.Security;
 
 namespace LibCheck.Forms {
     public partial class MainForm : Form {
+
+        private AdminForm? adminForm;
+        private readonly object _lock = new object();
+
         public MainForm() {
             InitializeComponent();
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
@@ -18,18 +22,26 @@ namespace LibCheck.Forms {
         }
 
         private void MainForm_Load(object sender, EventArgs e) {
-            Task.Run(() => {
-                IEnumerable<LibrarianInfo>? infos = Modules.Database.Connection?
-                                                    .Query<LibrarianInfo>("SELECT * FROM LibrarianInfo");
-                if (infos == null || infos.Count() != 1) {
-                    CrashControl.SCRAM(new InvalidOperationException("Corrupted information found!"));
-                    return;
-                }
-                LibrarianInfo inf = infos.Take(1).ToArray()[0];
-                Invoke(new Action(() => {
-                    WelcomeLabel.Text = $"Welcome, {inf.Username}!";
-                }));
+            WelcomeLabel.Text = $"Welcome, {Credentials.Librarian?.Username}!";
+        }
+
+        private void ShowAdminButton_Click(object sender, EventArgs e) {
+            if (adminForm != null) {
+                adminForm.Show();
+                return;
+            }
+            bool isAuthenticated = false;
+            SecureDesktop.EnterSecureMode(() => {
+                isAuthenticated = new AuthenticateDiag().ShowDialog() == DialogResult.Yes;
             });
+            if (isAuthenticated) {
+                adminForm = new AdminForm();
+                adminForm.FormClosing += (s, e) => {
+                    adminForm.FormClosing -= (s, e) => { };
+                    adminForm = null;
+                };
+                adminForm.Show();
+            }
         }
     }
 }
