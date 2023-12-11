@@ -57,6 +57,7 @@
             Margin = new Padding(3, 2, 3, 2);
             Name = "MainForm";
             Text = "MainForm";
+            FormClosing += MainForm_FormClosing;
             Load += MainForm_Load;
             ResumeLayout(false);
             PerformLayout();

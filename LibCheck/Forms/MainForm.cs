@@ -1,7 +1,7 @@
-﻿using LibCheck.Modules;
-using LibCheck.Modules.Security;
+﻿using LibCheck.Modules.Security;
 
-namespace LibCheck.Forms {
+namespace LibCheck.Forms
+{
     public partial class MainForm : Form {
 
         private AdminForm? adminForm;
@@ -28,6 +28,9 @@ namespace LibCheck.Forms {
         private void ShowAdminButton_Click(object sender, EventArgs e) {
             if (adminForm != null) {
                 adminForm.Show();
+                if (adminForm.WindowState == FormWindowState.Minimized)
+                    adminForm.WindowState = FormWindowState.Normal;
+                adminForm.BringToFront();
                 return;
             }
             bool isAuthenticated = false;
@@ -41,6 +44,17 @@ namespace LibCheck.Forms {
                     adminForm = null;
                 };
                 adminForm.Show();
+            }
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
+            if (adminForm != null) {
+                if (MessageBox.Show(this, "An admin page is still open. Do you want to close it anyway?", 
+                    "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No) {
+                    e.Cancel = true;
+                    return;
+                }
+                adminForm.Close();
             }
         }
     }

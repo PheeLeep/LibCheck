@@ -36,6 +36,7 @@
             passwordTextBox.Size = new Size(408, 27);
             passwordTextBox.TabIndex = 6;
             passwordTextBox.UseSystemPasswordChar = true;
+            passwordTextBox.TextChanged += passwordTextBox_TextChanged;
             // 
             // label3
             // 
@@ -50,6 +51,7 @@
             // 
             LoginButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             LoginButton.BackColor = SystemColors.ScrollBar;
+            LoginButton.Enabled = false;
             LoginButton.FlatAppearance.BorderSize = 0;
             LoginButton.FlatStyle = FlatStyle.Flat;
             LoginButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);

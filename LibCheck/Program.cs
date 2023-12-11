@@ -1,8 +1,10 @@
 using LibCheck.Forms;
 using LibCheck.Modules;
+using LibCheck.Modules.Security;
 using System.Diagnostics;
 
-namespace LibCheck {
+namespace LibCheck
+{
     internal static class Program {
         /// <summary>
         ///  The main entry point for the application.

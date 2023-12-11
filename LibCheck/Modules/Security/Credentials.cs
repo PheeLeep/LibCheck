@@ -1,14 +1,14 @@
 ﻿using LibCheck.Database.Tables;
 using LibCheck.Forms;
-using LibCheck.Modules.Security;
 using Newtonsoft.Json;
 using SQLite;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
 using static LibCheck.Modules.WinNatives;
+using static System.Windows.Forms.LinkLabel;
 
-namespace LibCheck.Modules {
+namespace LibCheck.Modules.Security {
 
     /// <summary>
     /// A class that houses credentials and functions.
@@ -20,7 +20,7 @@ namespace LibCheck.Modules {
         private static DateTime expTime = DateTime.Now;
         private static int retries = 0;
         private static int incrementTimer = 0;
- 
+
         /// <summary>
         /// Checks whether the user is currently logged in.
         /// </summary>
@@ -101,7 +101,7 @@ namespace LibCheck.Modules {
 
             PleaseWait.SetPWDText("Saving credentials...");
             string encryptedStr = CryptComp.StringCrypt(token.SQLCipherDBKey,
-                                                          Encoding.UTF8.GetBytes(CryptComp.ConvertToString(key)),
+                                                          Encoding.UTF8.GetBytes(key.ConvertToString()),
                                                           Convert.FromBase64String(token.SQLCipherDBKeySalt));
             token.SQLCipherDBKey = encryptedStr;
 
@@ -153,7 +153,7 @@ namespace LibCheck.Modules {
 
                 Database.Load(sqlKey);
 
-                IEnumerable<LibrarianInfo>? infos = Modules.Database.Connection?
+                IEnumerable<LibrarianInfo>? infos = Database.Connection?
                                                    .Query<LibrarianInfo>("SELECT * FROM LibrarianInfo");
                 if (infos == null || infos.Count() != 1) {
                     CrashControl.SCRAM(new InvalidOperationException("Corrupted information found!"));
@@ -183,7 +183,7 @@ namespace LibCheck.Modules {
             Authenticate(username, password);
         }
 
-        internal static void Authenticate(string username, string password) {
+        private static void Authenticate(string username, string password) {
             try {
                 if (token == null)
                     throw new InvalidOperationException("Credential is not loaded.");
@@ -216,6 +216,55 @@ namespace LibCheck.Modules {
             }
         }
 
+        internal static void ChangePassword(string password, string newPassword) {
+            if (!LoggedIn || string.IsNullOrEmpty(Librarian?.Username))
+                throw new InvalidOperationException("Access denied.");
+            try {
+                if (token == null)
+                    throw new InvalidOperationException("Credential is not loaded.");
+            } catch (Exception ex) {
+                CrashControl.SCRAM(ex);
+                return;
+            }
+
+            byte[] salt = Convert.FromBase64String(token.Salt);
+            string provPassHash = CryptComp.HashPassword(password, salt);
+            if (!provPassHash.Equals(token.Hash))
+                throw new InvalidOperationException("Password is invalid.");
+
+            if (provPassHash.Equals(CryptComp.HashPassword(newPassword, salt)))
+                throw new InvalidOperationException("Password is the same as the previous one.");
+
+            byte[] newSalt = CryptComp.GenerateRNGBytes();
+            string sqlKeyUnsafe = CryptComp.StringCrypt(token.SQLCipherDBKey,
+                                                             Encoding.UTF8.GetBytes(password),
+                                                             Convert.FromBase64String(token.SQLCipherDBKeySalt),
+                                                             false);
+            GCHandle handler = GCHandle.Alloc(sqlKeyUnsafe, GCHandleType.Pinned);
+           
+            LibrarianToken newToken = new LibrarianToken {
+                Username = CryptComp.HashPassword(Librarian.Username, newSalt),
+                Salt = Convert.ToBase64String(newSalt),
+                Hash = CryptComp.HashPassword(newPassword, newSalt),
+                SQLCipherDBKey = CryptComp.StringCrypt(sqlKeyUnsafe,
+                                                             Encoding.UTF8.GetBytes(newPassword),
+                                                             Convert.FromBase64String(token.SQLCipherDBKeySalt)),
+                SQLCipherDBKeySalt = token.SQLCipherDBKeySalt
+            };
+
+            FileInfo f = new FileInfo(Path.Combine(EnvVars.CredentialsInfo.FullName, "lc_cred.json"));
+            using (StreamWriter sw = new StreamWriter(f.FullName)) {
+                using (JsonTextWriter writer = new JsonTextWriter(sw)) {
+                    JsonSerializer serializer = new JsonSerializer();
+                    serializer.Formatting = Formatting.Indented;
+                    serializer.Serialize(writer, newToken);
+                    writer.Flush();
+                }
+            }
+
+            token.Dispose();
+            token = newToken;
+        }
         /// <summary>
         /// Load the credentials.
         /// </summary>

@@ -38,7 +38,7 @@
             label1.Font = new Font("Segoe UI", 16.2F, FontStyle.Italic, GraphicsUnit.Point);
             label1.Location = new Point(31, 24);
             label1.Name = "label1";
-            label1.Size = new Size(138, 38);
+            label1.Size = new Size(109, 30);
             label1.TabIndex = 0;
             label1.Text = "Welcome!";
             // 
@@ -46,6 +46,7 @@
             // 
             LoginButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             LoginButton.BackColor = SystemColors.ScrollBar;
+            LoginButton.Enabled = false;
             LoginButton.FlatAppearance.BorderSize = 0;
             LoginButton.FlatStyle = FlatStyle.Flat;
             LoginButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
@@ -62,7 +63,7 @@
             label2.AutoSize = true;
             label2.Location = new Point(45, 93);
             label2.Name = "label2";
-            label2.Size = new Size(91, 23);
+            label2.Size = new Size(74, 19);
             label2.TabIndex = 2;
             label2.Text = "Username:";
             // 
@@ -70,15 +71,16 @@
             // 
             usernameTextBox.Location = new Point(158, 90);
             usernameTextBox.Name = "usernameTextBox";
-            usernameTextBox.Size = new Size(296, 30);
+            usernameTextBox.Size = new Size(296, 26);
             usernameTextBox.TabIndex = 3;
+            usernameTextBox.TextChanged += TextBoxes_TextChanged;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Location = new Point(45, 138);
             label3.Name = "label3";
-            label3.Size = new Size(84, 23);
+            label3.Size = new Size(70, 19);
             label3.TabIndex = 2;
             label3.Text = "Password:";
             // 
@@ -86,23 +88,24 @@
             // 
             passwordTextBox.Location = new Point(158, 135);
             passwordTextBox.Name = "passwordTextBox";
-            passwordTextBox.Size = new Size(296, 30);
+            passwordTextBox.Size = new Size(296, 26);
             passwordTextBox.TabIndex = 3;
             passwordTextBox.UseSystemPasswordChar = true;
+            passwordTextBox.TextChanged += TextBoxes_TextChanged;
             // 
             // linkForgorPass
             // 
             linkForgorPass.AutoSize = true;
             linkForgorPass.Location = new Point(158, 183);
             linkForgorPass.Name = "linkForgorPass";
-            linkForgorPass.Size = new Size(143, 23);
+            linkForgorPass.Size = new Size(118, 19);
             linkForgorPass.TabIndex = 4;
             linkForgorPass.TabStop = true;
             linkForgorPass.Text = "Forgot Password?";
             // 
             // Login
             // 
-            AutoScaleDimensions = new SizeF(120F, 120F);
+            AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(490, 313);
             Controls.Add(linkForgorPass);
