@@ -10,6 +10,7 @@ namespace LibCheck.Modules {
         private static FilterInfoCollection? devs;
         private static VideoCaptureDevice? videoSource;
         private static Bitmap? blackBmp;
+        private static Bitmap? bmp;
 
         internal static event NewFrameDelegate? NewFrame;
 
@@ -53,9 +54,8 @@ namespace LibCheck.Modules {
                 NewFrame?.Invoke((Bitmap)blackBmp.Clone());
                 return;
             }
-            Bitmap bmp = (Bitmap)eventArgs.Frame.Clone();
-            NewFrame?.Invoke(bmp);
-            // QR Code goes here...
+            NewFrame?.Invoke((Bitmap)eventArgs.Frame.Clone());
+
         }
 
         private static Bitmap CreateBlankBmp() {

@@ -24,5 +24,35 @@ namespace LibCheck.Forms {
         private void AdminForm_Load(object sender, EventArgs e) {
             WelcomeLabel.Text = $"Welcome, {Credentials.Librarian?.Username}!";
         }
+
+        private void AdminForm_FormClosing(object sender, FormClosingEventArgs e) {
+            switch (MessageBox.Show(this, "Do you want to go back to main window, or exit the program?", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)) {
+                case DialogResult.Yes:
+                    Modules.AppContext.Current.Switch();
+                    break;
+                case DialogResult.No:
+                    e.Cancel = true;
+                    Modules.Database.Unload();
+                    Credentials.Unload();
+                    Environment.Exit(0);
+                    break;
+                case DialogResult.Cancel:
+                    e.Cancel = true;
+                    return;
+            }
+        }
+
+        private void ChangeDashboards(UserControl uc) {
+            Panel p = splitContainer1.Panel2;
+            if (p.Controls.GetChildIndex(uc) != 0)
+                uc.BringToFront();
+        }
+        private void HomeButton_Click(object sender, EventArgs e) {
+            ChangeDashboards(homeDashboard1);
+        }
+
+        private void BooksButton_Click(object sender, EventArgs e) {
+            ChangeDashboards(booksDashboard1);
+        }
     }
 }

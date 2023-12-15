@@ -2,6 +2,7 @@
 using LibCheck.Modules.Security;
 using System.Reflection;
 using System.Text;
+using System.Windows.Forms;
 
 namespace LibCheck.Modules {
 
@@ -29,14 +30,19 @@ namespace LibCheck.Modules {
             IsSCRAMed = true;
 
             // Force all program to close.
-            foreach (Form form in Application.OpenForms) {
+            for (int i = Application.OpenForms.Count - 1; i >= 0; i--) {
+                Form? f = Application.OpenForms[i];
                 try {
-                    if (form is DimForm) continue;
-                    form.Dispose();
+                    if (f != null) {
+                        if (f is DimForm)
+                            continue;
+                        f.Dispose();
+                    }
                 } catch {
                     // Ignore
                 }
             }
+
             if (SecureDesktop.IsInSecureMode)
                 SecureDesktop.ForceCloseSecureMode();
 

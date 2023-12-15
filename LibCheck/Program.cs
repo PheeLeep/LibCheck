@@ -20,19 +20,7 @@ namespace LibCheck
             ApplicationConfiguration.Initialize();
 
             try {
-
-                Logger.Initialize();
-                Credentials.Initialize();
-                Credentials.LoginAsLibrarian();
-
-                if (Credentials.LoggedIn) {
-                    if (Modules.Database.Connection == null)
-                        throw new InvalidOperationException("Database is not connected.");
-                    Application.Run(new MainForm());
-                }
-                
-                Modules.Database.Unload();
-                Credentials.Unload();
+                Application.Run(Modules.AppContext.Current);  
             } catch (Exception ex) {
                 CrashControl.SCRAM(ex);
             }

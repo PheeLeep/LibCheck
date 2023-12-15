@@ -4,8 +4,6 @@ using LibCheck.Modules.Security;
 namespace LibCheck.Forms {
     public partial class MainForm : Form {
 
-        private AdminForm? adminForm;
-
         public MainForm() {
             InitializeComponent();
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
@@ -28,47 +26,29 @@ namespace LibCheck.Forms {
         }
 
         private void QRCamModule_NewFrame(Bitmap bmp) {
-            pictureBox1.Image = bmp;
+            using (Bitmap oldBmp = (Bitmap)pictureBox1.Image)
+                pictureBox1.Image = bmp; 
         }
 
         private void ShowAdminButton_Click(object sender, EventArgs e) {
-            if (adminForm != null) {
-                adminForm.Show();
-                if (adminForm.WindowState == FormWindowState.Minimized)
-                    adminForm.WindowState = FormWindowState.Normal;
-                adminForm.BringToFront();
+            if (!Modules.AppContext.Current.Switch())
                 return;
-            }
-            bool isAuthenticated = false;
-            SecureDesktop.EnterSecureMode(() => {
-                isAuthenticated = new AuthenticateDiag().ShowDialog() == DialogResult.Yes;
-            });
-            if (isAuthenticated) {
-                adminForm = new AdminForm();
-                adminForm.FormClosing += (s, e) => {
-                    adminForm = null;
-                };
-                adminForm.Show();
-            }
-        }
-
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
-            if (adminForm != null) {
-                if (MessageBox.Show(this, "An admin page is still open. Do you want to close it anyway?",
-                    "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No) {
-                    e.Cancel = true;
-                    return;
-                }
-                adminForm.Close();
-            }
-            timer1.Enabled = false;
             QRCamModule.Stop();
             QRCamModule.NewFrame -= QRCamModule_NewFrame;
         }
 
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
+            timer1.Enabled = false;
+            QRCamModule.Stop();
+            QRCamModule.NewFrame -= QRCamModule_NewFrame;
+           if (!Modules.AppContext.IsInAdminMode)
+                Application.Exit();
+        }
+
         private void camComboBox_SelectedIndexChanged(object sender, EventArgs e) {
             string? val = camComboBox.Items[camComboBox.SelectedIndex].ToString();
-            if (string.IsNullOrEmpty(val)) return;
+            if (string.IsNullOrEmpty(val))
+                return;
             QRCamModule.Stop();
             QRCamModule.Start(val);
         }
