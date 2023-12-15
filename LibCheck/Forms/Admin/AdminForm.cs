@@ -23,6 +23,7 @@ namespace LibCheck.Forms {
 
         private void AdminForm_Load(object sender, EventArgs e) {
             WelcomeLabel.Text = $"Welcome, {Credentials.Librarian?.Username}!";
+            booksDashboard1.Load();
         }
 
         private void AdminForm_FormClosing(object sender, FormClosingEventArgs e) {
@@ -43,8 +44,7 @@ namespace LibCheck.Forms {
         }
 
         private void ChangeDashboards(UserControl uc) {
-            Panel p = splitContainer1.Panel2;
-            if (p.Controls.GetChildIndex(uc) != 0)
+            if (StagePanel.Controls.GetChildIndex(uc) != 0)
                 uc.BringToFront();
         }
         private void HomeButton_Click(object sender, EventArgs e) {
