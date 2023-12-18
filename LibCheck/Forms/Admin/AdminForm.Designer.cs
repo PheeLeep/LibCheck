@@ -35,12 +35,13 @@
             homeDashboard1 = new Admin.UserControls.HomeDashboard();
             LogsButton = new Button();
             panel2 = new Panel();
-            panel3 = new Panel();
             StagePanel = new Panel();
+            panel3 = new Panel();
+            AccountRecoveryButton = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
-            panel3.SuspendLayout();
             StagePanel.SuspendLayout();
+            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // ChangePasswordButton
@@ -56,6 +57,7 @@
             // 
             // panel1
             // 
+            panel1.Controls.Add(AccountRecoveryButton);
             panel1.Controls.Add(WelcomeLabel);
             panel1.Controls.Add(ChangePasswordButton);
             panel1.Dock = DockStyle.Top;
@@ -171,6 +173,16 @@
             panel2.Size = new Size(882, 418);
             panel2.TabIndex = 4;
             // 
+            // StagePanel
+            // 
+            StagePanel.Controls.Add(homeDashboard1);
+            StagePanel.Controls.Add(booksDashboard1);
+            StagePanel.Dock = DockStyle.Fill;
+            StagePanel.Location = new Point(193, 0);
+            StagePanel.Name = "StagePanel";
+            StagePanel.Size = new Size(689, 418);
+            StagePanel.TabIndex = 4;
+            // 
             // panel3
             // 
             panel3.Controls.Add(LogsButton);
@@ -185,15 +197,16 @@
             panel3.Size = new Size(193, 418);
             panel3.TabIndex = 4;
             // 
-            // StagePanel
+            // AccountRecoveryButton
             // 
-            StagePanel.Controls.Add(homeDashboard1);
-            StagePanel.Controls.Add(booksDashboard1);
-            StagePanel.Dock = DockStyle.Fill;
-            StagePanel.Location = new Point(193, 0);
-            StagePanel.Name = "StagePanel";
-            StagePanel.Size = new Size(689, 418);
-            StagePanel.TabIndex = 4;
+            AccountRecoveryButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            AccountRecoveryButton.Location = new Point(689, 3);
+            AccountRecoveryButton.Name = "AccountRecoveryButton";
+            AccountRecoveryButton.Size = new Size(90, 39);
+            AccountRecoveryButton.TabIndex = 4;
+            AccountRecoveryButton.Text = "Account Recovery";
+            AccountRecoveryButton.UseVisualStyleBackColor = true;
+            AccountRecoveryButton.Click += AccountRecoveryButton_Click;
             // 
             // AdminForm
             // 
@@ -211,8 +224,8 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
-            panel3.ResumeLayout(false);
             StagePanel.ResumeLayout(false);
+            panel3.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -232,5 +245,6 @@
         private Panel panel2;
         private Panel StagePanel;
         private Panel panel3;
+        private Button AccountRecoveryButton;
     }
 }
