@@ -1,5 +1,7 @@
 ﻿using LibCheck.Database.Tables;
 using LibCheck.Modules;
+using System.Data;
+using System.Data.Common;
 
 namespace LibCheck.Forms.Admin.UserControls {
     public partial class BooksDashboard : UserControl {
@@ -49,7 +51,7 @@ namespace LibCheck.Forms.Admin.UserControls {
                 string? isbn = dataGridView1.SelectedRows[0].Cells["ISBN"].Value.ToString();
                 if (string.IsNullOrEmpty(isbn))
                     return;
-                using (BooksDialog bdg = new BooksDialog(Modules.Miscellaneous.DatabaseMode.Update, isbn)) {
+                using (BooksDialog bdg = new BooksDialog(Miscellaneous.DatabaseMode.Update, isbn)) {
                     if (bdg.ShowDialog(this) == DialogResult.OK) {
                         Load();
                     }
@@ -86,7 +88,7 @@ namespace LibCheck.Forms.Admin.UserControls {
                 string? isbn = dataGridView1.SelectedRows[0].Cells["ISBN"].Value.ToString();
                 if (string.IsNullOrEmpty(isbn))
                     return;
-                using (BooksDialog bdg = new BooksDialog(Modules.Miscellaneous.DatabaseMode.Read,
+                using (BooksDialog bdg = new BooksDialog(Miscellaneous.DatabaseMode.Read,
                                                   isbn)) {
                     if (bdg.ShowDialog(this) == DialogResult.OK) {
                         Load();
@@ -110,10 +112,26 @@ namespace LibCheck.Forms.Admin.UserControls {
             PleaseWait.RunInPleaseWait(ParentForm, () => {
                 PleaseWait.SetPWDText("Please wait while generating QR...");
                 try {
-                    Bitmap bitmap = QRCamModule.GenerateQR($"LC#{isbn}");
+                    Bitmap? isbnCard = null;
+                    using (Bitmap qr = QRCamModule.GenerateQR($"LC#0#{isbn}")) {
+                        isbnCard = new Bitmap(qr.Width, qr.Height + 50);
+                        using (Graphics g = Graphics.FromImage(isbnCard)) {
+                            g.FillRectangle(new SolidBrush(Color.White), 0, 0, isbnCard.Width, isbnCard.Height);
+                            g.DrawImage(qr, new Point(0, 0));
+                            g.Flush();
+
+                            PleaseWait.SetPWDText("Writing the information...");
+                            string isbnCompacted = "ISBN: " + isbn;
+                            using (Font font = new Font("Calibri", 12)) {
+                                SizeF txtSize = g.MeasureString(isbnCompacted, font);
+                                g.DrawString(isbnCompacted, font, Brushes.Black, new PointF((isbnCard.Width - txtSize.Width) / 2, qr.Height + 10));
+                            }
+                        }
+                    }
+                    PleaseWait.SetPWDText("Done.");
                     Task.Factory.StartNew(() => {
                         Task.Delay(10).Wait();
-                        Invoke(new Action(() => new IDResultDialog(bitmap).ShowDialog(this)));
+                        Invoke(new Action(() => new IDResultDialog(isbnCard).ShowDialog(this)));
                     });
                 } catch (Exception ex) {
                     MessageBox.Show(ex.Message);
