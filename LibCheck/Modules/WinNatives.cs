@@ -7,6 +7,25 @@ namespace LibCheck.Modules {
     /// </summary>
     internal static class WinNatives {
 
+        [StructLayout(LayoutKind.Sequential)] //Same layout in mem
+        public struct DEV_BROADCAST_VOLUME {
+            public int dbcv_size;
+            public int dbcv_devicetype;
+            public int dbcv_reserved;
+            public int dbcv_unitmask;
+        }
+
+        internal const int WM_DEVICECHANGE = 0x0219; //see msdn site
+        internal const int DBT_DEVICEARRIVAL = 0x8000;
+        internal const int DBT_DEVICEREMOVALCOMPLETE = 0x8004;
+        internal const int DBT_DEVTYPVOLUME = 0x00000002;
+        internal const int DBT_DEVTYP_DEVICEINTERFACE = 5;
+        internal const int DBT_DEVTYP_HANDLE = 6;
+        internal const int BROADCAST_QUERY_DENY = 0x424D5144;
+        internal const int DBT_DEVICEQUERYREMOVE = 0x8001;   // Preparing to remove (any program can disable the removal)
+        internal const int DBT_DEVICEREMOVECOMPLETE = 0x8004; // removed 
+        internal const int DBT_DEVTYP_VOLUME = 0x00000002; // drive type is logical volume
+
         [DllImport("user32.dll", SetLastError = true)]
         internal static extern IntPtr CreateDesktop(string lpszDesktop, IntPtr lpszDevice, IntPtr pDevmode, int dwFlags, uint dwDesiredAccess, IntPtr lpsa);
 

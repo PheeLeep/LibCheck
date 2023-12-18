@@ -54,5 +54,9 @@ namespace LibCheck.Forms {
         private void BooksButton_Click(object sender, EventArgs e) {
             ChangeDashboards(booksDashboard1);
         }
+
+        private void AccountRecoveryButton_Click(object sender, EventArgs e) {
+            new USBAccRecForm().ShowDialog(this);
+        }
     }
 }
