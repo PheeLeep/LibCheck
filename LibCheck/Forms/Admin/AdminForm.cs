@@ -56,7 +56,7 @@ namespace LibCheck.Forms {
         }
 
         private void AccountRecoveryButton_Click(object sender, EventArgs e) {
-            new USBAccRecForm().ShowDialog(this);
+            new AccountRecoveryDiag().ShowDialog(this);
         }
     }
 }

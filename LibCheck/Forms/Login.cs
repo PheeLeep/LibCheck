@@ -24,5 +24,14 @@ namespace LibCheck.Forms
         private void TextBoxes_TextChanged(object sender, EventArgs e) {
             LoginButton.Enabled = !string.IsNullOrEmpty(usernameTextBox.Text) && passwordTextBox.Text.Length >= 8;
         }
+
+        private void linkForgorPass_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            if (RecoveryCodesCenter.Count == 0) {
+                MessageBox.Show(this, "Unable to recover as this account doesn't have a recovery codes before. :(",
+                                "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                return;
+            }
+            new ForgotPasswordDiag().ShowDialog(this);
+        }
     }
 }

@@ -6,7 +6,6 @@ using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
 using static LibCheck.Modules.WinNatives;
-using static System.Windows.Forms.LinkLabel;
 
 namespace LibCheck.Modules.Security {
 
@@ -241,7 +240,7 @@ namespace LibCheck.Modules.Security {
                                                              Convert.FromBase64String(token.SQLCipherDBKeySalt),
                                                              false);
             GCHandle handler = GCHandle.Alloc(sqlKeyUnsafe, GCHandleType.Pinned);
-           
+
             LibrarianToken newToken = new LibrarianToken {
                 Username = CryptComp.HashPassword(Librarian.Username, newSalt),
                 Salt = Convert.ToBase64String(newSalt),
@@ -265,6 +264,46 @@ namespace LibCheck.Modules.Security {
             token.Dispose();
             token = newToken;
         }
+
+        internal static void EmergencyChangePassword(string username, string newPassword, string SQLKey) {
+            if (LoggedIn || !RecoveryCodesCenter.IsByPassed)
+                throw new InvalidOperationException("Access denied.");
+
+            try {
+                if (token == null)
+                    throw new InvalidOperationException("Credential is not loaded.");
+            } catch (Exception ex) {
+                CrashControl.SCRAM(ex);
+                return;
+            }
+
+            byte[] newSalt = CryptComp.GenerateRNGBytes();
+            byte[] newSQLSalt = CryptComp.GenerateRNGBytes();
+
+            LibrarianToken newToken = new LibrarianToken {
+                Username = CryptComp.HashPassword(username, newSalt),
+                Salt = Convert.ToBase64String(newSalt),
+                Hash = CryptComp.HashPassword(newPassword, newSalt),
+                SQLCipherDBKey = CryptComp.StringCrypt(SQLKey,
+                                                             Encoding.UTF8.GetBytes(newPassword),
+                                                             newSQLSalt),
+                SQLCipherDBKeySalt = Convert.ToBase64String(newSQLSalt)
+            };
+
+            FileInfo f = new FileInfo(Path.Combine(EnvVars.CredentialsInfo.FullName, "lc_cred.json"));
+            using (StreamWriter sw = new StreamWriter(f.FullName)) {
+                using (JsonTextWriter writer = new JsonTextWriter(sw)) {
+                    JsonSerializer serializer = new JsonSerializer();
+                    serializer.Formatting = Formatting.Indented;
+                    serializer.Serialize(writer, newToken);
+                    writer.Flush();
+                }
+            }
+
+            token.Dispose();
+            token = newToken;
+        }
+
         /// <summary>
         /// Load the credentials.
         /// </summary>

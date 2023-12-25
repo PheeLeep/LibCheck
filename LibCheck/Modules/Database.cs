@@ -1,6 +1,9 @@
 ﻿using LibCheck.Modules.Security;
 using SQLite;
+using System.Data.SqlTypes;
 using System.Security;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace LibCheck.Modules {
     /// <summary>
@@ -13,6 +16,7 @@ namespace LibCheck.Modules {
         /// </summary>
         internal static SQLiteConnection? Connection { get; private set; }
         private static readonly object _locker = new object();
+        private static byte[]? protectedByte;
 
         /// <summary>
         /// Loads the SQLCipher database.
@@ -28,6 +32,9 @@ namespace LibCheck.Modules {
                     return;
                 SQLiteConnectionString connStr = new SQLiteConnectionString(dbPath, false, key: CryptComp.ConvertToString(secString));
                 Connection = new SQLiteConnection(connStr);
+                protectedByte = ProtectedData.Protect(Encoding.UTF8.GetBytes(CryptComp.ConvertToString(secString)),
+                                                      null,
+                                                      DataProtectionScope.CurrentUser);
             }
         }
 
@@ -41,6 +48,12 @@ namespace LibCheck.Modules {
                 Connection?.Close();
                 Connection = null;
             }
+        }
+
+        internal static byte[] KeyHandover() {
+            if (!Credentials.LoggedIn) throw new InvalidOperationException("Access is denied.");
+            if (protectedByte == null) throw new InvalidOperationException("Byte key not loaded.");
+            return ProtectedData.Unprotect(protectedByte, null, DataProtectionScope.CurrentUser);
         }
     }
 }

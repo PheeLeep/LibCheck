@@ -20,7 +20,7 @@ namespace LibCheck.Modules {
         internal AppContext() {
             Application.ApplicationExit += Application_ApplicationExit;
             Application.ThreadException += Application_ThreadException;
-            USBAccRec.Load();
+            RecoveryCodesCenter.Load();
             Logger.Initialize();
             Credentials.Initialize();
             Credentials.LoginAsLibrarian();
@@ -68,7 +68,7 @@ namespace LibCheck.Modules {
         private void Application_ApplicationExit(object? sender, EventArgs e) {
             Database.Unload();
             Credentials.Unload();
-            USBAccRec.Unload();
+            RecoveryCodesCenter.Unload();
         }
     }
 }

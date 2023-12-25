@@ -43,8 +43,14 @@ namespace LibCheck.Modules.Security {
         /// </summary>
         /// <param name="length">A specified length of password to be use.</param>
         /// <returns>Returns a <see cref="SecureString"/> containing randomized password.</returns>
-        internal static SecureString GenerateSecurePassword(int length = 32) {
-            const string validChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+-=[]{}|;:'\",.<>?/";
+        internal static SecureString GenerateSecurePassword(int length = 32, bool smallCaps = true, bool largeCaps = false,
+                                                            bool numbers = false, bool symbols = false) {
+            string validChars = "";
+            if (smallCaps) validChars += "abcdefghijklmnopqrstuvwxyz";
+            if (largeCaps) validChars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            if (numbers) validChars += "1234567890";
+            if (symbols) validChars += "!@#$%^&*()_+-=[]{}|;:'\",.<>?/";
+            if (string.IsNullOrEmpty(validChars)) return new SecureString();
 
             byte[] randomBytes = RandomNumberGenerator.GetBytes(length);
 
