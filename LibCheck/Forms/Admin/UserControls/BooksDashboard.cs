@@ -1,7 +1,5 @@
 ﻿using LibCheck.Database.Tables;
 using LibCheck.Modules;
-using System.Data;
-using System.Data.Common;
 
 namespace LibCheck.Forms.Admin.UserControls {
     public partial class BooksDashboard : UserControl {
@@ -38,10 +36,6 @@ namespace LibCheck.Forms.Admin.UserControls {
                     Load();
                 }
             }
-        }
-
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e) {
-
         }
 
         private void UpdateButton_Click(object sender, EventArgs e) {

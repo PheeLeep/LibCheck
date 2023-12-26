@@ -24,6 +24,7 @@ namespace LibCheck.Forms {
         private void AdminForm_Load(object sender, EventArgs e) {
             WelcomeLabel.Text = $"Welcome, {Credentials.Librarian?.Username}!";
             booksDashboard1.Load();
+            studentsDashboard1.Load();
         }
 
         private void AdminForm_FormClosing(object sender, FormClosingEventArgs e) {
@@ -57,6 +58,10 @@ namespace LibCheck.Forms {
 
         private void AccountRecoveryButton_Click(object sender, EventArgs e) {
             new AccountRecoveryDiag().ShowDialog(this);
+        }
+
+        private void StudentsButton_Click(object sender, EventArgs e) {
+            ChangeDashboards(studentsDashboard1);
         }
     }
 }

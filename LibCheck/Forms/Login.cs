@@ -1,7 +1,6 @@
 ﻿using LibCheck.Modules.Security;
 
-namespace LibCheck.Forms
-{
+namespace LibCheck.Forms {
     public partial class Login : Form {
         public Login() {
             InitializeComponent();

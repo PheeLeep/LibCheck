@@ -1,10 +1,7 @@
-using LibCheck.Forms;
 using LibCheck.Modules;
-using LibCheck.Modules.Security;
 using System.Diagnostics;
 
-namespace LibCheck
-{
+namespace LibCheck {
     internal static class Program {
         /// <summary>
         ///  The main entry point for the application.
@@ -20,7 +17,7 @@ namespace LibCheck
             ApplicationConfiguration.Initialize();
 
             try {
-                Application.Run(Modules.AppContext.Current);  
+                Application.Run(Modules.AppContext.Current);
             } catch (Exception ex) {
                 CrashControl.SCRAM(ex);
             }

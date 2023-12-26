@@ -1,5 +1,4 @@
 ﻿using LibCheck.Modules;
-using LibCheck.Modules.Security;
 
 namespace LibCheck.Forms {
     public partial class MainForm : Form {
@@ -27,7 +26,7 @@ namespace LibCheck.Forms {
 
         private void QRCamModule_NewFrame(Bitmap bmp) {
             using (Bitmap oldBmp = (Bitmap)pictureBox1.Image)
-                pictureBox1.Image = bmp; 
+                pictureBox1.Image = bmp;
         }
 
         private void ShowAdminButton_Click(object sender, EventArgs e) {
@@ -41,7 +40,7 @@ namespace LibCheck.Forms {
             timer1.Enabled = false;
             QRCamModule.Stop();
             QRCamModule.NewFrame -= QRCamModule_NewFrame;
-           if (!Modules.AppContext.IsInAdminMode)
+            if (!Modules.AppContext.IsInAdminMode)
                 Application.Exit();
         }
 

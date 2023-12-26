@@ -4,8 +4,7 @@ using LibCheck.Modules.Security;
 using System.Security;
 using System.Text;
 
-namespace LibCheck.Forms
-{
+namespace LibCheck.Forms {
     public partial class RegisterLib : Form {
         private bool isDone = false;
         private bool _showPass = false;

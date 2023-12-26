@@ -2,7 +2,7 @@
 
 namespace LibCheck.Forms.Admin {
     public partial class IDResultDialog : Form {
-        Bitmap bmp;
+        readonly Bitmap bmp;
         public IDResultDialog(Bitmap bmp) {
             InitializeComponent();
             this.bmp = bmp;

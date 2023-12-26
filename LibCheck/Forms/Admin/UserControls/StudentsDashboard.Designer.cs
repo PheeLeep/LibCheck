@@ -1,5 +1,5 @@
 ﻿namespace LibCheck.Forms.Admin.UserControls {
-    partial class BooksDashboard {
+    partial class StudentsDashboard {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -23,15 +23,34 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            dataGridView1 = new DataGridView();
             panel1 = new Panel();
             PrintLabel = new Button();
             DeleteButton = new Button();
             UpdateButton = new Button();
             AddButton = new Button();
-            dataGridView1 = new DataGridView();
-            panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AllowUserToResizeRows = false;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Dock = DockStyle.Fill;
+            dataGridView1.Location = new Point(0, 50);
+            dataGridView1.Margin = new Padding(4);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
+            dataGridView1.RowHeadersVisible = false;
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.Size = new Size(861, 472);
+            dataGridView1.TabIndex = 3;
+            dataGridView1.CellContentDoubleClick += dataGridView1_CellContentDoubleClick;
             // 
             // panel1
             // 
@@ -44,7 +63,7 @@
             panel1.Margin = new Padding(4);
             panel1.Name = "panel1";
             panel1.Size = new Size(861, 50);
-            panel1.TabIndex = 0;
+            panel1.TabIndex = 2;
             // 
             // PrintLabel
             // 
@@ -94,46 +113,27 @@
             AddButton.UseVisualStyleBackColor = true;
             AddButton.Click += AddButton_Click;
             // 
-            // dataGridView1
-            // 
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.AllowUserToResizeRows = false;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(0, 50);
-            dataGridView1.Margin = new Padding(4);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
-            dataGridView1.RowHeadersVisible = false;
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(861, 472);
-            dataGridView1.TabIndex = 1;
-            dataGridView1.CellContentDoubleClick += dataGridView1_CellContentDoubleClick;
-            // 
-            // BooksDashboard
+            // StudentsDashboard
             // 
             AutoScaleDimensions = new SizeF(120F, 120F);
             AutoScaleMode = AutoScaleMode.Dpi;
             Controls.Add(dataGridView1);
             Controls.Add(panel1);
             DoubleBuffered = true;
-            Margin = new Padding(4);
-            Name = "BooksDashboard";
+            Name = "StudentsDashboard";
             Size = new Size(861, 522);
-            panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Panel panel1;
         private DataGridView dataGridView1;
-        private Button AddButton;
-        private Button UpdateButton;
-        private Button DeleteButton;
+        private Panel panel1;
         private Button PrintLabel;
+        private Button DeleteButton;
+        private Button UpdateButton;
+        private Button AddButton;
     }
 }

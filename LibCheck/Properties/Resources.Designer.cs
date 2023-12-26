@@ -63,9 +63,29 @@ namespace LibCheck.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap back_card {
+            get {
+                object obj = ResourceManager.GetObject("back_card", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ErrorDiag_Icon {
             get {
                 object obj = ResourceManager.GetObject("ErrorDiag_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap front_card {
+            get {
+                object obj = ResourceManager.GetObject("front_card", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

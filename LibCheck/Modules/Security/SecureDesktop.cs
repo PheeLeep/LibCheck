@@ -8,6 +8,7 @@ namespace LibCheck.Modules.Security {
         private static nint oldDesktop = nint.Zero;
         private static nint secureDesktop = nint.Zero;
         private static DimForm? dimForm = null;
+        private static DimForm? blackScreen = null;
 
         /// <summary>
         /// Determines whether the program is in secure desktop mode.
@@ -58,6 +59,9 @@ namespace LibCheck.Modules.Security {
                 if (secureDesktop != nint.Zero) return;
 
                 dimForm = new DimForm(Screenshot());
+                blackScreen = new DimForm();
+                blackScreen.TopMost = true;
+                blackScreen.Show();
                 // Get the current thread desktop, and create a new desktop.
                 oldDesktop = GetThreadDesktop(GetCurrentThreadId());
                 secureDesktop = CreateDesktop("LibCheckSecureDesktop", nint.Zero, nint.Zero, 0, GENERIC_ALL, nint.Zero);
@@ -80,12 +84,16 @@ namespace LibCheck.Modules.Security {
         private static void CloseSecureMode() {
             dimForm?.Dispose();
             dimForm = null;
+
             SwitchDesktop(oldDesktop);
             SetThreadDesktop(oldDesktop);
             if (secureDesktop != nint.Zero) {
                 CloseDesktop(secureDesktop);
                 secureDesktop = nint.Zero;
             }
+
+            blackScreen?.Dispose();
+            blackScreen = null;
         }
 
         /// <summary>
@@ -97,7 +105,7 @@ namespace LibCheck.Modules.Security {
             Rectangle r = (Screen.PrimaryScreen?.Bounds) ?? throw new InvalidOperationException("No screen available!");
             Bitmap bmp = new Bitmap(r.Width, r.Height);
             using (Graphics g = Graphics.FromImage(bmp)) {
-               try {
+                try {
                     g.CopyFromScreen(0, 0, 0, 0, r.Size, CopyPixelOperation.SourceCopy);
                     g.Flush();
                     Color c = Color.FromArgb((int)(255 * 0.5f), Color.Black);

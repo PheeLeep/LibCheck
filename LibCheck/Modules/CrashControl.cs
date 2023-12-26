@@ -2,7 +2,6 @@
 using LibCheck.Modules.Security;
 using System.Reflection;
 using System.Text;
-using System.Windows.Forms;
 
 namespace LibCheck.Modules {
 

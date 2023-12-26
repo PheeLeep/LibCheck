@@ -1,6 +1,5 @@
 ﻿using LibCheck.Modules.Security;
 using SQLite;
-using System.Data.SqlTypes;
 using System.Security;
 using System.Security.Cryptography;
 using System.Text;

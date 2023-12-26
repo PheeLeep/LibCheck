@@ -1,5 +1,4 @@
 ﻿using LibCheck.Database.Tables;
-using System.Security.Policy;
 using static LibCheck.Modules.Miscellaneous;
 
 namespace LibCheck.Forms.Admin {
@@ -15,7 +14,7 @@ namespace LibCheck.Forms.Admin {
                 if (string.IsNullOrEmpty(isbn))
                     throw new InvalidOperationException("No ISBN provided.");
                 IEnumerable<Books>? infos = Modules.Database.Connection?
-                                       .Query<Books>("SELECT * FROM Books");
+                                       .Query<Books>($"SELECT * FROM Books WHERE ISBN = '{isbn}'");
                 if (infos == null || !infos.Any())
                     throw new InvalidOperationException("No data provided.");
                 book = infos.Take(1).ToArray()[0];
@@ -69,7 +68,7 @@ namespace LibCheck.Forms.Admin {
                 int? res = mode == DatabaseMode.Add ?
                                   Modules.Database.Connection?.Insert(book) :
                                   Modules.Database.Connection?.Update(book);
-                Console.WriteLine("");
+
                 if (!res.HasValue || res == 0) {
                     MessageBox.Show(this, "Failed to execute a database.", "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     return;
