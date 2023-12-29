@@ -1,5 +1,7 @@
-﻿namespace LibCheck.Forms {
-    partial class PleaseWaitDialog {
+﻿namespace LibCheck.Forms
+{
+    partial class PleaseWaitDialog
+    {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -9,8 +11,10 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing) {
-            if (disposing && (components != null)) {
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -22,7 +26,8 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {
+        private void InitializeComponent()
+        {
             label1 = new Label();
             SuspendLayout();
             // 
@@ -30,21 +35,23 @@
             // 
             label1.Dock = DockStyle.Fill;
             label1.Location = new Point(0, 0);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(411, 133);
+            label1.Size = new Size(514, 166);
             label1.TabIndex = 0;
             label1.Text = "Test";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // PleaseWaitDialog
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(411, 133);
+            ClientSize = new Size(514, 166);
             ControlBox = false;
             Controls.Add(label1);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedDialog;
+            Margin = new Padding(4, 4, 4, 4);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "PleaseWaitDialog";
@@ -53,6 +60,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = " ";
             FormClosing += PleaseWaitDialog_FormClosing;
+            Load += PleaseWaitDialog_Load;
             ResumeLayout(false);
         }
 

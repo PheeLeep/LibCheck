@@ -117,4 +117,60 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="PrintLabel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EAAACxABrSO9dQAAARxJREFUWEftlzEKAjEURLewsNFK0BOIYGHhEbSxFTyAnRfwDhaCYKcg3sFTeIm1
+        FgTFzk5ncANh2SUx+YEV8uCBhP8nU+jKJpFIIDpw5yH3xejBt4fcF0Mvs4YrCzkXvEydBxZwLpYpIpYp
+        Q6xMF57gA6pACZnHXOZb0YJXWBQm5Q22oZEl5EIKR3AoKPOYy3zeY+QAObyFTbiHUygFc5nPe4wcIYc3
+        cJJ9PkMpmMtM3mNEL1ODCziAUjiXCYF3mQacech9hXcZ/aHnov7QEy1zgfx5muSc2glWxvfv4P/LvOA9
+        85mdUZcy3FdZzOXZT2XKdClTpFWZPhznnEMV4lKG+/lM3uOE5HfGG71Mpd4OXBQtU6k3ykjkS5J8AHDv
+        ErWB1aaRAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="DeleteButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EAAACxABrSO9dQAAArhJREFUWEft10moTmEcx/Fr2FCmiEjmkI2hKEoZSsmQKClThoUskIWhyIJsKQtJ
+        FqaykFBKpCwMyUKUWWKBRIoQGb/fp/epp3PPyzn3XO/d+NWn2/95zzO85z7nPec0/c8/To/a3zZLLxzE
+        e/yq/T0A2xuaPngCF5Fle280LEfgxG+wBCOxFG9h+2E0JJ3xFU46z4Yk82H7F3SyoUq6w2998Q+uwAl1
+        udYWWcfPPC79LMuz53x1MxtxsEaYhbrpgNXYgp+wwz5sbgWO43iO6/jO43yF8gp2nhOq6pkLx3sZqpK5
+        BjuvC1X1rIfjXQ1VyRyHnfeEqnr2wvGOhapkdsHOp0NVPWfgeDtDVTKrYOfboaqeO3C8laEqmWmw84dQ
+        VY/jON7UUJXMYNhZVW9+7bEW/igOtKFsOuIbXMx4G0rER4oF2ICNWARvrpXyFC5mYaj+ngE4ivglUj9w
+        FqPQolyCA/kL+rdMxztkF5H1GZ6p0jkEB9gfqvoZi4/ITlyPZ8n7YKlsg53Phyo/3l/uwuPuYWJSp15g
+        CuKd/TW6oHAWw44PQ5UfT3mc0Am8Ct2s6YJcyAj0xP1amzahcCbBTj4seXnm5STi4HqOdEHpQm4hPfYG
+        CqcvYsf+NuTkEdIJlC5oOPIWIr9kOxSKB7r77TjZhpzUu4KuI+YE8o5RVxSOm9JOy0LVPI+RnSD91wxC
+        dg9FPksXPjPmHOy4I1TNcwrpBD48pXsku4fSY2+iVOJziBs1L76qxMF9VcnbrM8QF5S+b21FqcyAHb9j
+        DYZiSI2Dew97AI/xm49G3mZ1QRNwoVb7ztUNpeL/NHv5Rr7S9sM4fKq1FeEvsM/ELYovbrvhj1p2YL+p
+        Z2cm4nv3n3g5L0erxEvRR4RUfOUYBs+i3zxvIS58DBoa95Ibezu8ClegRQ9VbZSmpt+eaEafgYxFDAAA
+        AABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="UpdateButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EAAACxABrSO9dQAAAiRJREFUWEft171rFEEYx/FEDKj48h9YqJ2NlWCrtgEV1MYmlY0EiwQhhSIIWsXK
+        IoggioWWNgoKIVaihQkEIwQRtIgWKliYKMb4/R43sCw7ezv7Ugj5wYfcbWbnntubfeZuaDP/e07hWU3j
+        aDUXsdHAFFpLKOY9LlV0D9mCJtBKQjGzvWfVcgLZYtTKFWpSzEfc7T9upaAmxXzAFrRWUJNiPmEfDuB5
+        /5hqr6G21kyeLSM5XRXjvMmpU0xZnGezmKJ0UswDPKrAcdl0UswqPD6I47LppJhruFGB43ZhFO7i7nHO
+        dxXJiRVTJXtxB7/gHHlLOIdhVEqsGJvW6RIX8B3hhb/iBZ5gEX8R/vcYuzEwTdfMO5zEVmTjVbuFdTjO
+        QrejNLFi3sLPP+8LQiFPsRNlcS2twfHTHihL6poJO7RXZFAhIefhOX/gxhpNSjF7EN6lH03V+DVjAZ53
+        3QOxxIpZwbecH3Csj0eQEr9WeO7r3rNI6izgOaTmODzXNxJNrJijcIKs23Cst29qvLWd41jvWSQpa2YM
+        jrWPdJKUYg7CsTY0+0hZvKWLtg9FE4qxhxT9Rsr7Ccfb0MpyE44rEk0oJpWd1XcfyxnM4D5CFw6iqfNb
+        24bnpPYcG5p9pCj78RLZQkqLqZMdcI2FyecxCe+UIzgLO3VoD/693H/cejFmG+ymvxFepMgbHMahzLHO
+        4l5zBa/wGV6FZTyESyDs5v1ihjb+Ad5HT+TzkYjWAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="AddButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EAAACxABrSO9dQAAASRJREFUWEftl0FqQjEURf/ElVTdQ6FupIhLqXbWkQ6sioPWjejALVhxLa0TvScQ
+        kGBMQhMQyYHDJzH/eYmGJE2lkpGufJfLjI5kRyYxkEd5KuCf7MsomBEbZCfH8iODE0k9G6gtgzCVNkiL
+        joxQ70dSf0hHiG/J4Klp5Ye61P8yrQAryWCmtQTUpT7fEyQ1TE9u5YtphSkaZiYZzzOGomEWkvE8Y6hh
+        fDxemGc5l+5+c5CM5+l+xnjeuyRLmI2kP9W1vOTxZsZH/QP7qGF82L3p07TCFA3DamH5uqvGR9EwqSSF
+        uauTnj0Dc1YtcQbeS+q/0RGCew2ndxuIab122k+VOjbIr3ySUXCvsYFyS5BXmQT3Gq4T7n7zH/lpomek
+        UrlN05wBaCP9OSJNstMAAAAASUVORK5CYII=
+</value>
+  </data>
 </root>

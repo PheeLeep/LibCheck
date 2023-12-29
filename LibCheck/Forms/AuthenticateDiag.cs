@@ -6,18 +6,28 @@ namespace LibCheck.Forms {
             InitializeComponent();
         }
 
-        private void LoginButton_Click(object sender, EventArgs e) {
-            try {
+        private void LoginButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
                 Credentials.Authenticate(passwordTextBox.Text);
                 DialogResult = DialogResult.Yes;
                 Close();
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 MessageBox.Show(this, ex.Message, "Failed to login", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
 
-        private void passwordTextBox_TextChanged(object sender, EventArgs e) {
+        private void passwordTextBox_TextChanged(object sender, EventArgs e)
+        {
             LoginButton.Enabled = passwordTextBox.Text.Length >= 8;
+        }
+
+        private void AuthenticateDiag_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
