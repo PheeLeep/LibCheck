@@ -66,9 +66,9 @@ namespace LibCheck.Forms {
         private void pictureBox1_Click(object sender, EventArgs e)
         {
         }
-
+            //Comment only
         private void linkForgorPass_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
-            if (RecoveryCodesCenter.Count == 0) {
+           if (RecoveryCodesCenter.Count == 0) {
                 MessageBox.Show(this, "Unable to recover as this account doesn't have a recovery codes before. :(",
                                 "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 return;
