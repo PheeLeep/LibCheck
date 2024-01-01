@@ -37,7 +37,7 @@ namespace LibCheck.Database {
                 if (IsConnected)
                     return;
                 SQLiteConnectionString connStr = new SQLiteConnectionString(dbPath, false, key: CryptComp.ConvertToString(secString));
-                Debug.Print(CryptComp.ConvertToString(secString));
+
                 _conn = new SQLiteConnection(connStr);
                 protectedByte = ProtectedData.Protect(Encoding.UTF8.GetBytes(CryptComp.ConvertToString(secString)),
                                                       null,
