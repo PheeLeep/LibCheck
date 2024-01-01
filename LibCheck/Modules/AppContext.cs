@@ -30,7 +30,7 @@ namespace LibCheck.Modules {
                 return;
             }
 
-            if (Database.Connection == null)
+            if (!Database.Database.IsConnected)
                 throw new InvalidOperationException("Database is not connected.");
 
             _mainForm = new MainForm();
@@ -66,7 +66,7 @@ namespace LibCheck.Modules {
         }
 
         private void Application_ApplicationExit(object? sender, EventArgs e) {
-            Database.Unload();
+            Database.Database.Unload();
             Credentials.Unload();
             RecoveryCodesCenter.Unload();
         }

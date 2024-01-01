@@ -26,8 +26,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             passwordTextBox = new TextBox();
             label3 = new Label();
             LoginButton = new Button();
@@ -38,36 +37,38 @@
             // 
             // passwordTextBox
             // 
+            passwordTextBox.Anchor = AnchorStyles.Top;
             passwordTextBox.Font = new Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point);
-            passwordTextBox.Location = new Point(72, 200);
+            passwordTextBox.Location = new Point(74, 216);
             passwordTextBox.Name = "passwordTextBox";
-            passwordTextBox.Size = new Size(449, 42);
+            passwordTextBox.Size = new Size(449, 36);
             passwordTextBox.TabIndex = 6;
             passwordTextBox.UseSystemPasswordChar = true;
             passwordTextBox.TextChanged += passwordTextBox_TextChanged;
             // 
             // label3
             // 
+            label3.Anchor = AnchorStyles.Top;
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
             label3.FlatStyle = FlatStyle.Flat;
             label3.Font = new Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point);
             label3.ForeColor = SystemColors.Control;
-            label3.Location = new Point(33, 149);
+            label3.Location = new Point(71, 164);
             label3.Name = "label3";
-            label3.Size = new Size(548, 36);
+            label3.Size = new Size(460, 30);
             label3.TabIndex = 5;
             label3.Text = "Please enter your password for authentication:";
             // 
             // LoginButton
             // 
-            LoginButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            LoginButton.Anchor = AnchorStyles.Top;
             LoginButton.BackColor = SystemColors.ScrollBar;
             LoginButton.Enabled = false;
             LoginButton.FlatAppearance.BorderSize = 0;
             LoginButton.FlatStyle = FlatStyle.Flat;
             LoginButton.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            LoginButton.ForeColor = Color.White;
+            LoginButton.ForeColor = Color.Black;
             LoginButton.Location = new Point(221, 272);
             LoginButton.Name = "LoginButton";
             LoginButton.Size = new Size(159, 44);
@@ -78,22 +79,24 @@
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.Top;
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.FlatStyle = FlatStyle.Flat;
             label1.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.WhiteSmoke;
-            label1.Location = new Point(159, 104);
+            label1.Location = new Point(180, 127);
             label1.Name = "label1";
-            label1.Size = new Size(285, 45);
+            label1.Size = new Size(241, 37);
             label1.TabIndex = 7;
             label1.Text = "Confirm if it's You.";
             // 
             // pictureBox1
             // 
+            pictureBox1.Anchor = AnchorStyles.Top;
             pictureBox1.BackColor = Color.Transparent;
             pictureBox1.Image = Properties.Resources.icons8_user_locked_64;
-            pictureBox1.Location = new Point(243, 11);
+            pictureBox1.Location = new Point(245, 37);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(114, 82);
             pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -102,7 +105,7 @@
             // 
             // AuthenticateDiag
             // 
-            AutoScaleDimensions = new SizeF(144F, 144F);
+            AutoScaleDimensions = new SizeF(120F, 120F);
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = SystemColors.ControlDarkDark;
             BackgroundImage = Properties.Resources.bg;
@@ -124,7 +127,6 @@
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Authenticate";
-            Load += AuthenticateDiag_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();

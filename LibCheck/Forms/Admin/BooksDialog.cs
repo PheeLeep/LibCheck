@@ -1,4 +1,5 @@
 ﻿using LibCheck.Database.Tables;
+using LibCheck.Modules;
 using static LibCheck.Modules.Miscellaneous;
 
 namespace LibCheck.Forms.Admin {
@@ -11,13 +12,11 @@ namespace LibCheck.Forms.Admin {
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             this.mode = mode;
             if (mode != DatabaseMode.Add) {
-                if (string.IsNullOrEmpty(isbn))
+                if (string.IsNullOrWhiteSpace(isbn) || Database.Database.Read(out List<Books>? r, whereCond: $"ISBN = '{isbn}'") < 1)
                     throw new InvalidOperationException("No ISBN provided.");
-                IEnumerable<Books>? infos = Modules.Database.Connection?
-                                       .Query<Books>($"SELECT * FROM Books WHERE ISBN = '{isbn}'");
-                if (infos == null || !infos.Any())
+                if (r == null)
                     throw new InvalidOperationException("No data provided.");
-                book = infos.Take(1).ToArray()[0];
+                book = r[0];
             }
         }
 
@@ -47,8 +46,6 @@ namespace LibCheck.Forms.Admin {
                 DescTextBox.Text = book.Description;
                 DatePublishedDatePicker.Value = book.DatePublished;
 
-                BorrowedLabel.Text = book.StudentID;
-                IsDamagedLabel.Text = book.IsLostOrDamaged ? "Yes" : "No";
                 ConfirmButton.Text = mode == DatabaseMode.Update ? "Update" : "OK";
                 _isEdited = false;
                 return;
@@ -59,17 +56,15 @@ namespace LibCheck.Forms.Admin {
 
         private void ConfirmButton_Click(object sender, EventArgs e) {
             if (_isEdited) {
+                if (!CheckInformation()) return;
                 book.ISBN = ISBNTextBox.Text;
                 book.Title = TitleTextBox.Text;
                 book.Author = AuthorTextBox.Text;
                 book.Publisher = PublisherTextBox.Text;
                 book.DatePublished = DatePublishedDatePicker.Value;
                 book.Description = DescTextBox.Text;
-                int? res = mode == DatabaseMode.Add ?
-                                  Modules.Database.Connection?.Insert(book) :
-                                  Modules.Database.Connection?.Update(book);
 
-                if (!res.HasValue || res == 0) {
+                if (!(mode == DatabaseMode.Add ? Database.Database.Insert(book) : Database.Database.Update(book))) {
                     MessageBox.Show(this, "Failed to execute a database.", "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     return;
                 }
@@ -82,6 +77,20 @@ namespace LibCheck.Forms.Admin {
         private void Controls_ValuesChanged(object sender, EventArgs e) {
             if (!_isEdited)
                 _isEdited = true;
+        }
+
+        private bool CheckInformation() {
+            try {
+                if (!Regexes.IsValidISBN(ISBNTextBox.Text.Replace("-", ""))) throw new InvalidOperationException("Invalid ISBN provided.");
+                if (string.IsNullOrWhiteSpace(TitleTextBox.Text)) throw new InvalidOperationException("Title is empty.");
+                if (string.IsNullOrWhiteSpace(AuthorTextBox.Text)) throw new InvalidOperationException("Author is empty.");
+                if (string.IsNullOrWhiteSpace(PublisherTextBox.Text)) throw new InvalidOperationException("Publisher is empty.");
+                if (string.IsNullOrWhiteSpace(DescTextBox.Text)) DescTextBox.Text = "(no information provided.)";
+                return true;
+            } catch (Exception ex) {
+                MessageBox.Show(this, ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                return false;
+            }
         }
     }
 }

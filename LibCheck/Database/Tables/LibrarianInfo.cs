@@ -17,5 +17,21 @@ namespace LibCheck.Database.Tables {
         public bool IsFemale { get; set; }
         [NotNull]
         public DateTime BirthDate { get; set; }
+
+        [Ignore]
+        public DateTime SafeBirthDate {
+            get => BirthDate.Date;
+            set => BirthDate = value;    
+        }
+
+        // <----------------->
+        [NotNull]
+        public string? SchoolName { get; set; }
+
+        [NotNull]
+        public string? SchoolGUID { get; set; }
+
+        [NotNull]
+        public double FeePerOverdueDay { get; set; }
     }
 }

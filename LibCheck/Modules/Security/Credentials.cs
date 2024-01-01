@@ -2,6 +2,7 @@
 using LibCheck.Forms;
 using Newtonsoft.Json;
 using SQLite;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
@@ -123,13 +124,13 @@ namespace LibCheck.Modules.Security {
         /// <param name="username">A provided username string.</param>
         /// <param name="password">A provided password string.</param>
         /// <exception cref="InvalidOperationException"></exception>
-        internal static void Login(string username, string password) {
+        internal static bool Login(string username, string password) {
             try {
                 if (token == null)
                     throw new InvalidOperationException("Credential is not loaded.");
             } catch (Exception ex) {
                 CrashControl.SCRAM(ex);
-                return;
+                return false;
             }
 
             if (LoggedIn)
@@ -138,7 +139,7 @@ namespace LibCheck.Modules.Security {
             SecureString sqlKey = new SecureString();
 
             try {
-                Authenticate(username, password);
+                if (!Authenticate(username, password)) return false;
                 string sqlKeyUnsafe = CryptComp.StringCrypt(token.SQLCipherDBKey,
                                                               Encoding.UTF8.GetBytes(password),
                                                               Convert.FromBase64String(token.SQLCipherDBKeySalt),
@@ -150,45 +151,47 @@ namespace LibCheck.Modules.Security {
                 ZeroMemory(handler.AddrOfPinnedObject(), sqlKey.Length * 2);
                 handler.Free();
 
-                Database.Load(sqlKey);
+                Database.Database.Load(sqlKey);
 
-                IEnumerable<LibrarianInfo>? infos = Database.Connection?
-                                                   .Query<LibrarianInfo>("SELECT * FROM LibrarianInfo");
-                if (infos == null || infos.Count() != 1) {
+                if (Database.Database.Read(out List<LibrarianInfo>? l) != 1 || l == null) {
                     CrashControl.SCRAM(new InvalidOperationException("Corrupted information found!"));
-                    return;
+                    return false;
                 }
-                Librarian = infos.Take(1).ToArray()[0];
+                Librarian = l[0];
 
                 LoggedIn = true;
                 Logger.Log(Logger.LogEnums.Info, "Login successful.");
+                return true;
+            } catch (Exception ex) {
+                Logger.Log(Logger.LogEnums.Error, $"Failed to login. {ex.Message}");
+                return false;
             } finally {
                 sqlKey.Dispose();
             }
         }
 
-        internal static void Authenticate(string password) {
-            if (!LoggedIn || Librarian == null)
-                throw new InvalidOperationException("Access denied.");
-
-            string username = "";
+        internal static bool Authenticate(string password) {
+            string username;
             try {
+                if (!LoggedIn || Librarian == null)
+                    throw new InvalidOperationException("Access denied.");
                 if (string.IsNullOrEmpty(Librarian.Username))
                     throw new InvalidOperationException("Data corruption detected.");
                 username = Librarian.Username;
             } catch (Exception ex) {
                 CrashControl.SCRAM(ex);
+                return false;
             }
-            Authenticate(username, password);
+            return Authenticate(username, password);
         }
 
-        private static void Authenticate(string username, string password) {
+        private static bool Authenticate(string username, string password) {
             try {
                 if (token == null)
                     throw new InvalidOperationException("Credential is not loaded.");
             } catch (Exception ex) {
                 CrashControl.SCRAM(ex);
-                return;
+                return false;
             }
 
             if (IsInHaltPhase())
@@ -198,20 +201,18 @@ namespace LibCheck.Modules.Security {
                 byte[] salt = Convert.FromBase64String(token.Salt);
                 string provUserHash = CryptComp.HashPassword(username, salt);
                 string provPassHash = CryptComp.HashPassword(password, salt);
-                if (!provUserHash.Equals(token.Username))
-                    throw new InvalidOperationException("Username is invalid.");
-                if (!provPassHash.Equals(token.Hash))
-                    throw new InvalidOperationException("Password is invalid.");
+                if (!provUserHash.Equals(token.Username) || !provPassHash.Equals(token.Hash))
+                    return false;
 
                 retries = 0; // Reset since the librarian logged in.
+                return true;
             } catch (Exception) {
                 retries++;
                 if (retries >= 5) {
                     incrementTimer += 30;
                     expTime = DateTime.Now.AddSeconds(incrementTimer);
-                    throw new InvalidOperationException("You've logged in too many times. Please retry again later.");
                 }
-                throw;
+                return false;
             }
         }
 

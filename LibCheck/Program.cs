@@ -2,7 +2,11 @@ using LibCheck.Modules;
 using System.Diagnostics;
 
 namespace LibCheck {
+
+#pragma warning disable S1215
     internal static class Program {
+        private static bool _stopProc = false;
+
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -15,12 +19,22 @@ namespace LibCheck {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
+            Thread t = new Thread(() => {
+                while (!_stopProc) {
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+                    GC.Collect();
+                    Thread.Sleep(1000);
+                }
+            });
 
             try {
+                t.Start();
                 Application.Run(Modules.AppContext.Current);
             } catch (Exception ex) {
                 CrashControl.SCRAM(ex);
             }
+            _stopProc = true;
         }
     }
 }

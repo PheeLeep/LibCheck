@@ -89,7 +89,7 @@ namespace LibCheck.Modules.Security {
             for (int i = 0; i < 10; i++) {
                 string key = CryptComp.ConvertToString(CryptComp.GenerateSecurePassword(6, false, false, true, false));
                 byte[] asin = CryptComp.GenerateRNGBytes();
-                string firstCryptStr = CryptComp.StringCrypt(Encoding.UTF8.GetString(Database.KeyHandover()),
+                string firstCryptStr = CryptComp.StringCrypt(Encoding.UTF8.GetString(Database.Database.KeyHandover()),
                                                              Encoding.UTF8.GetBytes(key), asin);
                 string finalCryptStr = CryptComp.StringCrypt($"{username}:{firstCryptStr}",
                                                              Encoding.UTF8.GetBytes(key), asin);

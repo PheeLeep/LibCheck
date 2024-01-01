@@ -20,10 +20,18 @@ namespace LibCheck.Database.Tables {
         [NotNull]
         public DateTime DatePublished { get; set; }
 
+        [Ignore]
+        public DateTime SafeDatePublished {
+            get => DatePublished.Date;
+            set => DatePublished = value;
+        }
+
         [NotNull]
         public string? StudentID { get; set; }
 
         [NotNull]
         public bool IsLostOrDamaged { get; set; }
+
+        public DateTime? DateToReturn { get; set; }
     }
 }

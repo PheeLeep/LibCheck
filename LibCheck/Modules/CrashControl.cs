@@ -44,7 +44,6 @@ namespace LibCheck.Modules {
 
             if (SecureDesktop.IsInSecureMode)
                 SecureDesktop.ForceCloseSecureMode();
-
             StringBuilder sb = new StringBuilder();
 
             CreateStackTrace(sb, ex);

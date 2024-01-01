@@ -26,9 +26,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegisterLib));
+        private void InitializeComponent() {
             LowerPanel = new Panel();
             DescLabel = new Label();
             BulletProgressLabel = new Label();
@@ -48,10 +46,6 @@
             FNameTxtBox = new TextBox();
             label9 = new Label();
             label10 = new Label();
-            AccRecPanel = new Panel();
-            SetupRecoButton = new Button();
-            label7 = new Label();
-            label8 = new Label();
             PasswordPanel = new Panel();
             label19 = new Label();
             passReTypeTxtBox = new TextBox();
@@ -67,16 +61,19 @@
             usernameTxtBox = new TextBox();
             label3 = new Label();
             label4 = new Label();
+            SchoolPanel = new Panel();
+            SchoolNameTextBox = new TextBox();
+            label8 = new Label();
             WelcomePanel = new Panel();
             label2 = new Label();
             label1 = new Label();
             LowerPanel.SuspendLayout();
             StagePanel.SuspendLayout();
             BasicInfoPanel.SuspendLayout();
-            AccRecPanel.SuspendLayout();
             PasswordPanel.SuspendLayout();
             FinishPanel.SuspendLayout();
             UsernamePanel.SuspendLayout();
+            SchoolPanel.SuspendLayout();
             WelcomePanel.SuspendLayout();
             SuspendLayout();
             // 
@@ -98,7 +95,7 @@
             DescLabel.AutoSize = true;
             DescLabel.Location = new Point(27, 47);
             DescLabel.Name = "DescLabel";
-            DescLabel.Size = new Size(104, 30);
+            DescLabel.Size = new Size(85, 25);
             DescLabel.TabIndex = 3;
             DescLabel.Text = "Welcome";
             // 
@@ -107,7 +104,7 @@
             BulletProgressLabel.AutoSize = true;
             BulletProgressLabel.Location = new Point(27, 22);
             BulletProgressLabel.Name = "BulletProgressLabel";
-            BulletProgressLabel.Size = new Size(22, 30);
+            BulletProgressLabel.Size = new Size(19, 25);
             BulletProgressLabel.TabIndex = 2;
             BulletProgressLabel.Text = "•";
             // 
@@ -143,11 +140,12 @@
             // 
             // StagePanel
             // 
+            StagePanel.BackgroundImage = Properties.Resources.bg;
             StagePanel.Controls.Add(BasicInfoPanel);
-            StagePanel.Controls.Add(AccRecPanel);
             StagePanel.Controls.Add(PasswordPanel);
             StagePanel.Controls.Add(FinishPanel);
             StagePanel.Controls.Add(UsernamePanel);
+            StagePanel.Controls.Add(SchoolPanel);
             StagePanel.Controls.Add(WelcomePanel);
             StagePanel.Dock = DockStyle.Fill;
             StagePanel.Location = new Point(0, 0);
@@ -157,8 +155,7 @@
             // 
             // BasicInfoPanel
             // 
-            BasicInfoPanel.BackColor = SystemColors.Control;
-            BasicInfoPanel.BackgroundImage = Properties.Resources.bg;
+            BasicInfoPanel.BackColor = Color.Transparent;
             BasicInfoPanel.Controls.Add(label15);
             BasicInfoPanel.Controls.Add(BDatePicker);
             BasicInfoPanel.Controls.Add(GenderCBox);
@@ -177,7 +174,6 @@
             BasicInfoPanel.Size = new Size(833, 389);
             BasicInfoPanel.TabIndex = 4;
             BasicInfoPanel.Tag = "Basic Information";
-            BasicInfoPanel.Paint += BasicInfoPanel_Paint;
             // 
             // label15
             // 
@@ -185,7 +181,7 @@
             label15.BackColor = Color.Transparent;
             label15.Location = new Point(297, 214);
             label15.Name = "label15";
-            label15.Size = new Size(114, 30);
+            label15.Size = new Size(94, 25);
             label15.TabIndex = 12;
             label15.Text = "Birth Date:";
             // 
@@ -194,7 +190,7 @@
             BDatePicker.Format = DateTimePickerFormat.Short;
             BDatePicker.Location = new Point(51, 242);
             BDatePicker.Name = "BDatePicker";
-            BDatePicker.Size = new Size(240, 36);
+            BDatePicker.Size = new Size(240, 31);
             BDatePicker.TabIndex = 11;
             // 
             // GenderCBox
@@ -204,7 +200,7 @@
             GenderCBox.Items.AddRange(new object[] { "Male", "Female" });
             GenderCBox.Location = new Point(297, 244);
             GenderCBox.Name = "GenderCBox";
-            GenderCBox.Size = new Size(240, 38);
+            GenderCBox.Size = new Size(240, 33);
             GenderCBox.TabIndex = 10;
             // 
             // label14
@@ -213,7 +209,7 @@
             label14.BackColor = Color.Transparent;
             label14.Location = new Point(51, 214);
             label14.Name = "label14";
-            label14.Size = new Size(114, 30);
+            label14.Size = new Size(94, 25);
             label14.TabIndex = 9;
             label14.Text = "Birth Date:";
             // 
@@ -223,7 +219,7 @@
             label13.BackColor = Color.Transparent;
             label13.Location = new Point(543, 141);
             label13.Name = "label13";
-            label13.Size = new Size(226, 30);
+            label13.Size = new Size(184, 25);
             label13.TabIndex = 7;
             label13.Text = "Last Name (Required):";
             // 
@@ -231,7 +227,7 @@
             // 
             LNameTxtBox.Location = new Point(543, 169);
             LNameTxtBox.Name = "LNameTxtBox";
-            LNameTxtBox.Size = new Size(240, 36);
+            LNameTxtBox.Size = new Size(240, 31);
             LNameTxtBox.TabIndex = 6;
             // 
             // label12
@@ -240,7 +236,7 @@
             label12.BackColor = Color.Transparent;
             label12.Location = new Point(297, 141);
             label12.Name = "label12";
-            label12.Size = new Size(150, 30);
+            label12.Size = new Size(123, 25);
             label12.TabIndex = 5;
             label12.Text = "Middle Name:";
             // 
@@ -248,7 +244,7 @@
             // 
             MNameTxtBox.Location = new Point(297, 169);
             MNameTxtBox.Name = "MNameTxtBox";
-            MNameTxtBox.Size = new Size(240, 36);
+            MNameTxtBox.Size = new Size(240, 31);
             MNameTxtBox.TabIndex = 4;
             // 
             // label11
@@ -257,7 +253,7 @@
             label11.BackColor = Color.Transparent;
             label11.Location = new Point(48, 141);
             label11.Name = "label11";
-            label11.Size = new Size(229, 30);
+            label11.Size = new Size(186, 25);
             label11.TabIndex = 3;
             label11.Text = "First Name (Required):";
             // 
@@ -265,7 +261,7 @@
             // 
             FNameTxtBox.Location = new Point(51, 169);
             FNameTxtBox.Name = "FNameTxtBox";
-            FNameTxtBox.Size = new Size(240, 36);
+            FNameTxtBox.Size = new Size(240, 31);
             FNameTxtBox.TabIndex = 2;
             // 
             // label9
@@ -274,7 +270,7 @@
             label9.BackColor = Color.Transparent;
             label9.Location = new Point(51, 92);
             label9.Name = "label9";
-            label9.Size = new Size(389, 30);
+            label9.Size = new Size(319, 25);
             label9.TabIndex = 1;
             label9.Text = "This requires for knowing who you are.";
             // 
@@ -285,57 +281,13 @@
             label10.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             label10.Location = new Point(45, 39);
             label10.Name = "label10";
-            label10.Size = new Size(354, 48);
+            label10.Size = new Size(296, 41);
             label10.TabIndex = 0;
             label10.Text = "Setup Your Basic Info";
             // 
-            // AccRecPanel
-            // 
-            AccRecPanel.Controls.Add(SetupRecoButton);
-            AccRecPanel.Controls.Add(label7);
-            AccRecPanel.Controls.Add(label8);
-            AccRecPanel.Dock = DockStyle.Fill;
-            AccRecPanel.Location = new Point(0, 0);
-            AccRecPanel.Name = "AccRecPanel";
-            AccRecPanel.Size = new Size(833, 389);
-            AccRecPanel.TabIndex = 3;
-            AccRecPanel.Tag = "Account Recovery";
-            // 
-            // SetupRecoButton
-            // 
-            SetupRecoButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            SetupRecoButton.BackColor = SystemColors.ScrollBar;
-            SetupRecoButton.FlatAppearance.BorderSize = 0;
-            SetupRecoButton.FlatStyle = FlatStyle.Flat;
-            SetupRecoButton.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            SetupRecoButton.Location = new Point(90, 261);
-            SetupRecoButton.Name = "SetupRecoButton";
-            SetupRecoButton.Size = new Size(138, 41);
-            SetupRecoButton.TabIndex = 3;
-            SetupRecoButton.Text = "Setup";
-            SetupRecoButton.UseVisualStyleBackColor = false;
-            // 
-            // label7
-            // 
-            label7.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            label7.Location = new Point(51, 92);
-            label7.Name = "label7";
-            label7.Size = new Size(732, 163);
-            label7.TabIndex = 1;
-            label7.Text = resources.GetString("label7.Text");
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            label8.Location = new Point(45, 39);
-            label8.Name = "label8";
-            label8.Size = new Size(623, 48);
-            label8.TabIndex = 0;
-            label8.Text = "Do you want to setup Recovery Drive?";
-            // 
             // PasswordPanel
             // 
+            PasswordPanel.BackColor = Color.Transparent;
             PasswordPanel.Controls.Add(label19);
             PasswordPanel.Controls.Add(passReTypeTxtBox);
             PasswordPanel.Controls.Add(label18);
@@ -355,7 +307,7 @@
             label19.AutoSize = true;
             label19.Location = new Point(90, 230);
             label19.Name = "label19";
-            label19.Size = new Size(240, 30);
+            label19.Size = new Size(197, 25);
             label19.TabIndex = 6;
             label19.Text = "Re-type New Password:";
             // 
@@ -364,7 +316,7 @@
             passReTypeTxtBox.Location = new Point(90, 258);
             passReTypeTxtBox.MaxLength = 64;
             passReTypeTxtBox.Name = "passReTypeTxtBox";
-            passReTypeTxtBox.Size = new Size(550, 36);
+            passReTypeTxtBox.Size = new Size(550, 31);
             passReTypeTxtBox.TabIndex = 5;
             passReTypeTxtBox.UseSystemPasswordChar = true;
             // 
@@ -373,7 +325,7 @@
             label18.AutoSize = true;
             label18.Location = new Point(90, 153);
             label18.Name = "label18";
-            label18.Size = new Size(158, 30);
+            label18.Size = new Size(131, 25);
             label18.TabIndex = 4;
             label18.Text = "New Password:";
             // 
@@ -397,7 +349,7 @@
             passTxtBox.Location = new Point(90, 181);
             passTxtBox.MaxLength = 64;
             passTxtBox.Name = "passTxtBox";
-            passTxtBox.Size = new Size(550, 36);
+            passTxtBox.Size = new Size(550, 31);
             passTxtBox.TabIndex = 2;
             passTxtBox.UseSystemPasswordChar = true;
             // 
@@ -406,7 +358,7 @@
             label5.AutoSize = true;
             label5.Location = new Point(51, 92);
             label5.Name = "label5";
-            label5.Size = new Size(521, 30);
+            label5.Size = new Size(426, 25);
             label5.TabIndex = 1;
             label5.Text = "Setup your password. (at least 8 characters required)";
             // 
@@ -416,12 +368,13 @@
             label6.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             label6.Location = new Point(45, 39);
             label6.Name = "label6";
-            label6.Size = new Size(350, 48);
+            label6.Size = new Size(295, 41);
             label6.TabIndex = 0;
             label6.Text = "Setup Your Password";
             // 
             // FinishPanel
             // 
+            FinishPanel.BackColor = Color.Transparent;
             FinishPanel.Controls.Add(label16);
             FinishPanel.Controls.Add(label17);
             FinishPanel.Dock = DockStyle.Fill;
@@ -437,7 +390,7 @@
             label16.AutoSize = true;
             label16.Location = new Point(51, 92);
             label16.Name = "label16";
-            label16.Size = new Size(778, 30);
+            label16.Size = new Size(640, 25);
             label16.TabIndex = 1;
             label16.Text = "You're now ready to use LibCheck! Click Finish to setup, login, and ready to go! ";
             // 
@@ -447,12 +400,13 @@
             label17.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             label17.Location = new Point(45, 39);
             label17.Name = "label17";
-            label17.Size = new Size(239, 48);
+            label17.Size = new Size(200, 41);
             label17.TabIndex = 0;
             label17.Text = "You're All Set!";
             // 
             // UsernamePanel
             // 
+            UsernamePanel.BackColor = Color.Transparent;
             UsernamePanel.Controls.Add(usernameTxtBox);
             UsernamePanel.Controls.Add(label3);
             UsernamePanel.Controls.Add(label4);
@@ -468,7 +422,7 @@
             usernameTxtBox.Location = new Point(90, 158);
             usernameTxtBox.MaxLength = 64;
             usernameTxtBox.Name = "usernameTxtBox";
-            usernameTxtBox.Size = new Size(550, 36);
+            usernameTxtBox.Size = new Size(550, 31);
             usernameTxtBox.TabIndex = 2;
             // 
             // label3
@@ -476,7 +430,7 @@
             label3.AutoSize = true;
             label3.Location = new Point(51, 92);
             label3.Name = "label3";
-            label3.Size = new Size(399, 30);
+            label3.Size = new Size(328, 25);
             label3.TabIndex = 1;
             label3.Text = "Setup your own username as a librarian.";
             // 
@@ -486,12 +440,43 @@
             label4.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             label4.Location = new Point(45, 39);
             label4.Name = "label4";
-            label4.Size = new Size(362, 48);
+            label4.Size = new Size(304, 41);
             label4.TabIndex = 0;
             label4.Text = "Setup Your Username";
             // 
+            // SchoolPanel
+            // 
+            SchoolPanel.BackColor = Color.Transparent;
+            SchoolPanel.Controls.Add(SchoolNameTextBox);
+            SchoolPanel.Controls.Add(label8);
+            SchoolPanel.Dock = DockStyle.Fill;
+            SchoolPanel.Location = new Point(0, 0);
+            SchoolPanel.Name = "SchoolPanel";
+            SchoolPanel.Size = new Size(833, 389);
+            SchoolPanel.TabIndex = 6;
+            SchoolPanel.Tag = "School";
+            // 
+            // SchoolNameTextBox
+            // 
+            SchoolNameTextBox.Location = new Point(90, 158);
+            SchoolNameTextBox.MaxLength = 64;
+            SchoolNameTextBox.Name = "SchoolNameTextBox";
+            SchoolNameTextBox.Size = new Size(550, 31);
+            SchoolNameTextBox.TabIndex = 2;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            label8.Location = new Point(45, 39);
+            label8.Name = "label8";
+            label8.Size = new Size(338, 41);
+            label8.TabIndex = 0;
+            label8.Text = "Enter Your School Name";
+            // 
             // WelcomePanel
             // 
+            WelcomePanel.BackColor = Color.Transparent;
             WelcomePanel.Controls.Add(label2);
             WelcomePanel.Controls.Add(label1);
             WelcomePanel.Dock = DockStyle.Fill;
@@ -517,13 +502,13 @@
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             label1.Location = new Point(45, 39);
             label1.Name = "label1";
-            label1.Size = new Size(179, 48);
+            label1.Size = new Size(151, 41);
             label1.TabIndex = 0;
             label1.Text = "Welcome!";
             // 
             // RegisterLib
             // 
-            AutoScaleDimensions = new SizeF(144F, 144F);
+            AutoScaleDimensions = new SizeF(120F, 120F);
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.FromArgb(224, 224, 224);
             ClientSize = new Size(833, 483);
@@ -545,14 +530,14 @@
             StagePanel.ResumeLayout(false);
             BasicInfoPanel.ResumeLayout(false);
             BasicInfoPanel.PerformLayout();
-            AccRecPanel.ResumeLayout(false);
-            AccRecPanel.PerformLayout();
             PasswordPanel.ResumeLayout(false);
             PasswordPanel.PerformLayout();
             FinishPanel.ResumeLayout(false);
             FinishPanel.PerformLayout();
             UsernamePanel.ResumeLayout(false);
             UsernamePanel.PerformLayout();
+            SchoolPanel.ResumeLayout(false);
+            SchoolPanel.PerformLayout();
             WelcomePanel.ResumeLayout(false);
             WelcomePanel.PerformLayout();
             ResumeLayout(false);
@@ -578,10 +563,6 @@
         private Label label5;
         private Label label6;
         private Button ShowPassButton;
-        private Panel AccRecPanel;
-        private Button SetupRecoButton;
-        private Label label7;
-        private Label label8;
         private Panel BasicInfoPanel;
         private TextBox FNameTxtBox;
         private Label label9;
@@ -601,5 +582,8 @@
         private Label label18;
         private Label label19;
         private TextBox passReTypeTxtBox;
+        private Panel SchoolPanel;
+        private TextBox SchoolNameTextBox;
+        private Label label8;
     }
 }

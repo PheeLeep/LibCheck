@@ -1,5 +1,6 @@
 ﻿using LibCheck.Database.Tables;
 using LibCheck.Modules;
+using LibCheck.Modules.Security;
 using System.Text;
 
 namespace LibCheck.Forms.Admin.UserControls {
@@ -19,7 +20,7 @@ namespace LibCheck.Forms.Admin.UserControls {
         }
 
         internal new void Load() {
-            IEnumerable<Students>? infos = Modules.Database.Connection?.Query<Students>("SELECT * FROM Students");
+            CurrentlyBorrowedLabel.Text = Database.Database.Read(out List<Students>? infos).ToString();
             dataGridView1.DataSource = infos;
             for (int i = 0; i < dataGridView1.Columns.Count; i++)
                 dataGridView1.Columns[i].Visible = false;
@@ -49,7 +50,7 @@ namespace LibCheck.Forms.Admin.UserControls {
                 if (dataGridView1.SelectedRows.Count != 1)
                     return;
                 string? id = dataGridView1.SelectedRows[0].Cells["StudentID"].Value.ToString();
-                if (string.IsNullOrEmpty(id))
+                if (string.IsNullOrWhiteSpace(id))
                     return;
                 using (StudentDialog bdg = new StudentDialog(Miscellaneous.DatabaseMode.Update, id)) {
                     if (bdg.ShowDialog(this) == DialogResult.OK) {
@@ -66,12 +67,11 @@ namespace LibCheck.Forms.Admin.UserControls {
                 if (dataGridView1.SelectedRows.Count != 1)
                     return;
                 string? id = dataGridView1.SelectedRows[0].Cells["StudentID"].Value.ToString();
-                if (string.IsNullOrEmpty(id))
+                if (string.IsNullOrWhiteSpace(id))
                     return;
                 if (MessageBox.Show(this, $"Do you want to delete Student '{id}'?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
                     return;
-                int? res = Modules.Database.Connection?.Delete<Students>(id);
-                if (!res.HasValue || res != 1) {
+                if (!Database.Database.Delete<Students>(id)) {
                     MessageBox.Show(this, "Failed to execute the database command.", "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     return;
                 }
@@ -86,9 +86,9 @@ namespace LibCheck.Forms.Admin.UserControls {
                 if (dataGridView1.SelectedRows.Count == 0)
                     return;
                 string? id = dataGridView1.SelectedRows[0].Cells["StudentID"].Value.ToString();
-                if (string.IsNullOrEmpty(id))
+                if (string.IsNullOrWhiteSpace(id))
                     return;
-                using (StudentDialog bdg = new StudentDialog(Miscellaneous.DatabaseMode.Read, id)) {
+                using (StudentInfo bdg = new StudentInfo(id)) {
                     if (bdg.ShowDialog(this) == DialogResult.OK) {
                         Load();
                     }
@@ -103,40 +103,27 @@ namespace LibCheck.Forms.Admin.UserControls {
             if (dataGridView1.SelectedRows.Count != 1)
                 return;
             string? id = dataGridView1.SelectedRows[0].Cells["StudentID"].Value.ToString();
-            if (string.IsNullOrEmpty(id))
+            if (string.IsNullOrWhiteSpace(id))
                 return;
 
             PleaseWait.RunInPleaseWait(ParentForm, () => {
                 PleaseWait.SetPWDText("Please wait while generating QR...");
                 try {
 
-                    IEnumerable<Students>? infos = Modules.Database.Connection?
-                                       .Query<Students>($"SELECT * FROM Students WHERE StudentID = '{id}'");
-                    if (infos == null || !infos.Any())
+                    if (Database.Database.Read(out List<Students>? s, whereCond: $"StudentID = '{id}'") <= 0 || s == null)
                         throw new InvalidOperationException("No data provided.");
-                    Students student = infos.Take(1).ToArray()[0];
+                    Students student = s[0];
 
                     Bitmap frontCard = new Bitmap(Properties.Resources.front_card);
                     Bitmap backCard = new Bitmap(Properties.Resources.back_card);
                     using (Font font = new Font("Century Gothic", 20)) {
-                        using (Bitmap qr = QRCamModule.GenerateQR($"LC#1#{id}")) {
+                        using (Bitmap qr = QRCamModule.GenerateQR($"LC#{Credentials.Librarian?.SchoolGUID}#1#{id}")) {
                             using (Graphics g = Graphics.FromImage(frontCard)) {
                                 g.DrawImage(qr, new Point(47, 130));
                                 g.Flush();
 
                                 PleaseWait.SetPWDText("Writing the information...");
-                                StringBuilder miBuilder = new StringBuilder();
-
-                                if (!string.IsNullOrEmpty(student.MiddleName)) {
-                                    string[] mi = student.MiddleName.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-                                    for (int i = 0; i < mi.Length; i++) {
-                                        miBuilder.Append($"{mi[i].ToUpper()[0]}.");
-                                        if (i < mi.Length - 1)
-                                            miBuilder.Append(' ');
-                                    }
-                                }
-
-                                string fullName = $"{student.LastName}, {student.FirstName} {miBuilder}";
+                                string fullName = Miscellaneous.GenerateFullName(student);
 
                                 SizeF fNameSize = g.MeasureString(fullName, font);
                                 SizeF sectionSize = g.MeasureString(student.GradeSection, font);

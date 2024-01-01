@@ -242,7 +242,6 @@
             // 
             LevelComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             LevelComboBox.FormattingEnabled = true;
-            LevelComboBox.Items.AddRange(new object[] { "Elementary", "Junior High", "Senior High", "Tertiary" });
             LevelComboBox.Location = new Point(190, 37);
             LevelComboBox.Name = "LevelComboBox";
             LevelComboBox.Size = new Size(249, 29);

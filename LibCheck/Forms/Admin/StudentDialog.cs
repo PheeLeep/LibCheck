@@ -1,4 +1,5 @@
 ﻿using LibCheck.Database.Tables;
+using LibCheck.Modules;
 using static LibCheck.Modules.Miscellaneous;
 
 namespace LibCheck.Forms.Admin {
@@ -13,13 +14,11 @@ namespace LibCheck.Forms.Admin {
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             this.mode = mode;
             if (mode != DatabaseMode.Add) {
-                if (string.IsNullOrEmpty(studentID))
+                if (string.IsNullOrWhiteSpace(studentID) || Database.Database.Read(out List<Students>? l, whereCond: $"StudentID = '{studentID}'") <= 0)
                     throw new InvalidOperationException("No Student ID provided.");
-                IEnumerable<Students>? infos = Modules.Database.Connection?
-                                       .Query<Students>($"SELECT * FROM Students WHERE StudentID = '{studentID}'");
-                if (infos == null || !infos.Any())
+                if (l == null)
                     throw new InvalidOperationException("No data provided.");
-                student = infos.Take(1).ToArray()[0];
+                student = l[0];
             }
         }
 
@@ -33,6 +32,7 @@ namespace LibCheck.Forms.Admin {
         }
 
         private void StudentDialog_Load(object sender, EventArgs e) {
+            LevelComboBox.Items.AddRange(Miscellaneous.Levels);
             SuffixCombobox.SelectedIndex = 0;
             MaleRadioButton.Checked = true;
             DOBDatePicker.MaxDate = DateTime.Today;
@@ -84,7 +84,7 @@ namespace LibCheck.Forms.Admin {
         }
 
         private void SetComboboxIndexByVal(ComboBox cb, string? val) {
-            if (cb.Items.Count == 0 || string.IsNullOrEmpty(val)) return;
+            if (cb.Items.Count == 0 || string.IsNullOrWhiteSpace(val)) return;
             int idx = cb.Items.IndexOf(val);
             if (idx == -1) idx = 0;
             cb.SelectedIndex = idx;
@@ -92,7 +92,7 @@ namespace LibCheck.Forms.Admin {
 
         private void ConfirmButton_Click(object sender, EventArgs e) {
             if (_isEdited) {
-
+                if (!CheckInformation()) return;
                 student.StudentID = StudIDTextBox.Text;
                 student.FirstName = FirstNameTextBox.Text;
                 student.LastName = LastNameTextBox.Text;
@@ -104,10 +104,7 @@ namespace LibCheck.Forms.Admin {
                 student.GradeSection = GradeSecTextBox.Text;
                 student.EmailAddress = EmailAddressTextBox.Text;
 
-                int? res = mode == DatabaseMode.Add ?
-                                 Modules.Database.Connection?.Insert(student) :
-                                 Modules.Database.Connection?.Update(student);
-                if (!res.HasValue || res == 0) {
+                if (!(mode == DatabaseMode.Add ? Database.Database.Insert(student) : Database.Database.Update(student))) {
                     MessageBox.Show(this, "Failed to execute a database.", "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     return;
                 }
@@ -115,6 +112,27 @@ namespace LibCheck.Forms.Admin {
             }
             DialogResult = DialogResult.OK;
             Close();
+        }
+
+        private bool CheckInformation() {
+            try {
+                if (string.IsNullOrWhiteSpace(StudIDTextBox.Text) || !Regexes.IsValidStudentID(StudIDTextBox.Text))
+                    throw new InvalidOperationException("Invalid Student ID.");
+                if (string.IsNullOrWhiteSpace(FirstNameTextBox.Text) || !Regexes.IsValidAlphanumSpace(FirstNameTextBox.Text))
+                    throw new InvalidOperationException("Invalid First Name.");
+                if (!string.IsNullOrWhiteSpace(MiddleNameTextBox.Text) && !Regexes.IsValidAlphanumSpace(MiddleNameTextBox.Text))
+                    throw new InvalidOperationException("Invalid Middle Name.");
+                if (string.IsNullOrWhiteSpace(LastNameTextBox.Text) || !Regexes.IsValidAlphanumSpace(LastNameTextBox.Text))
+                    throw new InvalidOperationException("Invalid Last Name.");
+                if (string.IsNullOrWhiteSpace(GradeSecTextBox.Text) || !Regexes.IsValidAlphanumSpace(GradeSecTextBox.Text))
+                    throw new InvalidOperationException("Invalid Grade and Section.");
+                if (string.IsNullOrWhiteSpace(EmailAddressTextBox.Text) || !Regexes.IsValidEmail(EmailAddressTextBox.Text))
+                    throw new InvalidOperationException("Invalid Email Address.");
+                return true;
+            } catch (Exception ex) {
+                MessageBox.Show(this, ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                return false;
+            }
         }
     }
 }

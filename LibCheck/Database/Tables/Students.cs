@@ -23,6 +23,12 @@ namespace LibCheck.Database.Tables {
         [NotNull]
         public DateTime BirthDate { get; set; }
 
+        [Ignore]
+        public DateTime SafeBirthDate {
+            get => BirthDate.Date;
+            set => BirthDate = value;
+        }
+
         [NotNull]
         public int Level { get; set; }
 

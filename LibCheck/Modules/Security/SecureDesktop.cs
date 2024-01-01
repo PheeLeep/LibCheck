@@ -19,7 +19,7 @@ namespace LibCheck.Modules.Security {
         /// Forces to close a secure desktop in case of program crash.
         /// </summary>
         internal static void ForceCloseSecureMode() {
-            if (IsInSecureMode && CrashControl.IsSCRAMed) CloseSecureMode();
+            if (CrashControl.IsSCRAMed) CloseSecureMode();
         }
 
         /// <summary>

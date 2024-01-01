@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using LibCheck.Forms;
+using System.Text.RegularExpressions;
 
 namespace LibCheck.Modules {
 
@@ -7,11 +8,12 @@ namespace LibCheck.Modules {
     /// </summary>
     internal static partial class Regexes {
 
-        [GeneratedRegex("^(?=[a-zA-Z])[-\\w.]{0,23}([a-zA-Z\\d]|(?<![-.])_)$")]
+        [GeneratedRegex(@"^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$")]
+        private static partial Regex ISBN10x13Pattern();
+
+        [GeneratedRegex(@"^[a-zA-Z0-9_]{3,20}$")]
         private static partial Regex UsernameRegex();
 
-        [GeneratedRegex(@"^\+?(\d[\d-. ]+)?(\([\d-. ]+\))?[\d-. ]+\d$")]
-        private static partial Regex PhoneRegex();
 
         [GeneratedRegex(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$")]
         private static partial Regex EmailRegex();
@@ -25,12 +27,16 @@ namespace LibCheck.Modules {
         [GeneratedRegex(@"[\w\x20]")]
         private static partial Regex AlphanumericSpaceRegex();
 
+        [GeneratedRegex("^\\d{11}$")]
+        private static partial Regex StudentIDRegex();
 
+        internal static bool IsValidISBN(string isbn) => ISBN10x13Pattern().IsMatch(isbn);
         internal static bool IsValidUsername(string username) => UsernameRegex().IsMatch(username); // Checks if the username is valid.
-        internal static bool IsValidPhoneNumber(string phone) => PhoneRegex().IsMatch(phone);// Checks if the phone number is valid.
         internal static bool IsValidEmail(string email) => EmailRegex().IsMatch(email); // Checks if the email address is valid.
         internal static bool IsValidAlphanumeric(string alphanumeric) => AlphanumericRegex().IsMatch(alphanumeric); // Checks if the string is alphanumeric.
         internal static bool IsValidAlphabet(string alphabet) => AlphabetRegex().IsMatch(alphabet);
         internal static bool IsValidAlphanumSpace(string s) => AlphanumericSpaceRegex().IsMatch(s);
+        internal static bool IsValidStudentID(string id) => StudentIDRegex().IsMatch(id);
+
     }
 }
