@@ -32,7 +32,12 @@ namespace LibCheck.Modules {
 
         internal static bool IsValidISBN(string isbn) => ISBN10x13Pattern().IsMatch(isbn);
         internal static bool IsValidUsername(string username) => UsernameRegex().IsMatch(username); // Checks if the username is valid.
-        internal static bool IsValidEmail(string email) => EmailRegex().IsMatch(email); // Checks if the email address is valid.
+        internal static bool IsValidEmail(string email, out Match? m) {
+            m = null;
+            if (!EmailRegex().IsMatch(email)) return false;
+            m = EmailRegex().Match(email);
+            return true;
+        }
         internal static bool IsValidAlphanumeric(string alphanumeric) => AlphanumericRegex().IsMatch(alphanumeric); // Checks if the string is alphanumeric.
         internal static bool IsValidAlphabet(string alphabet) => AlphabetRegex().IsMatch(alphabet);
         internal static bool IsValidAlphanumSpace(string s) => AlphanumericSpaceRegex().IsMatch(s);

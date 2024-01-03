@@ -54,7 +54,7 @@ namespace LibCheck.Forms {
         }
 
         private void OwnedLabel_DoubleClick(object sender, EventArgs e) {
-            if (string.IsNullOrWhiteSpace(book.StudentID) || book.StudentID.Equals("(none)")) {
+            if (string.IsNullOrWhiteSpace(book?.StudentID) || book.StudentID.Equals("(none)")) {
                 return;
             }
             new StudentInfo(book.StudentID).ShowDialog();
@@ -86,7 +86,7 @@ namespace LibCheck.Forms {
 
         private void BorrowBookButton_Click(object sender, EventArgs e) {
             try {
-                if (new BorrowReturnDialog(true, book.ISBN).ShowDialog(this) == DialogResult.Yes)
+                if (new BorrowReturnDialog(true, book?.ISBN).ShowDialog(this) == DialogResult.Yes)
                     LoadInfo();
             } catch (Exception ex) {
                 MessageBox.Show(ex.Message);

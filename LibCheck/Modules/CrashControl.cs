@@ -49,6 +49,8 @@ namespace LibCheck.Modules {
             CreateStackTrace(sb, ex);
             Logger.Log(Logger.LogEnums.Fatal, $"CRASHED!!! {ex.Message}");
             Logger.Unload();
+            EmailService.Unload();
+            Database.Database.Unload();
             new ErrorDialog(ex, sb, SaveFile(sb)).ShowDialog();
 
             Environment.Exit(ex.HResult);

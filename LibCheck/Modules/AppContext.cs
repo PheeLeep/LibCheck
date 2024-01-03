@@ -6,7 +6,6 @@ namespace LibCheck.Modules {
 
         internal static bool IsInAdminMode { get; private set; } = false;
 
-        private AdminForm? _adminForm;
         private MainForm? _mainForm;
         private static AppContext? _currentContext;
 
@@ -32,6 +31,7 @@ namespace LibCheck.Modules {
 
             if (!Database.Database.IsConnected)
                 throw new InvalidOperationException("Database is not connected.");
+            EmailService.Initialize();
 
             _mainForm = new MainForm();
             _mainForm.Show();
@@ -43,7 +43,7 @@ namespace LibCheck.Modules {
                     IsInAdminMode = new AuthenticateDiag().ShowDialog() == DialogResult.Yes;
                 });
                 if (IsInAdminMode) {
-                    _adminForm = new AdminForm();
+                    AdminForm? _adminForm = new AdminForm();
                     _adminForm.FormClosing += (s, e) => {
                         _adminForm = null;
                     };
@@ -66,6 +66,7 @@ namespace LibCheck.Modules {
         }
 
         private void Application_ApplicationExit(object? sender, EventArgs e) {
+            EmailService.Unload();
             Database.Database.Unload();
             Credentials.Unload();
             RecoveryCodesCenter.Unload();

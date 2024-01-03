@@ -12,6 +12,30 @@ namespace LibCheck.Modules {
         internal static string[] Levels {
             get => new string[] { "Elementary", "Junior High", "Senior High", "Tertiary" };
         }
+
+        internal static string GenerateFullName(LibrarianInfo? info, bool firstNameFirst = false, bool generateMI = true) {
+            if (info == null) return "";
+
+            StringBuilder fullName = new StringBuilder();
+            StringBuilder miBuilder = new StringBuilder();
+            if (!string.IsNullOrWhiteSpace(info.MiddleName)) {
+                if (!generateMI) {
+                    miBuilder.Append(info.MiddleName);
+                } else {
+                    string[] mi = info.MiddleName.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                    for (int i = 0; i < mi.Length; i++) {
+                        miBuilder.Append($"{mi[i].ToUpper()[0]}.");
+                        if (i < mi.Length - 1)
+                            miBuilder.Append(' ');
+                    }
+                }
+            }
+
+            fullName.Append($"{(firstNameFirst ?
+                                $"{info.FirstName} {miBuilder} {info.LastName}" :
+                                $"{info.LastName}, {info.FirstName} {miBuilder}")}");
+            return fullName.ToString();
+        }
         internal static string GenerateFullName(Students student, bool firstNameFirst = false, bool generateMI = true) {
             if (student == null) return "";
 
@@ -36,6 +60,22 @@ namespace LibCheck.Modules {
             if (!string.IsNullOrWhiteSpace(student.Suffix) && !student.Suffix.Equals("(none)"))
                 fullName.Append($" {student.Suffix}");
             return fullName.ToString();
+        }
+
+        internal static string Redact(string? stringToRedact) {
+            if (string.IsNullOrWhiteSpace(stringToRedact) || stringToRedact.Length < 2)
+                return "";
+
+            if (Regexes.IsValidEmail(stringToRedact, out _)) {
+                string[] splitEmail = stringToRedact.Split('@');
+                string firstPart = splitEmail[0];
+                int emailSize = firstPart[1..^1].Length;
+                return $"{firstPart[0]}{new string('*', emailSize)}{firstPart[^1]}@{splitEmail[1]}";
+            }
+
+            int size = stringToRedact[1..^1].Length;
+
+            return $"{stringToRedact[0]}{new string('*', size)}{stringToRedact[^1]}";
         }
     }
 }

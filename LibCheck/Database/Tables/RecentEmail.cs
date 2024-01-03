@@ -1,7 +1,7 @@
 ﻿using SQLite;
 
 namespace LibCheck.Database.Tables {
-    internal class EmailQueue {
+    internal class RecentEmail {
         [PrimaryKey, NotNull]
         public DateTime DateOccurred { get; set; }
 

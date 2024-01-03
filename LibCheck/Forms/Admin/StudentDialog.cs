@@ -1,5 +1,6 @@
 ﻿using LibCheck.Database.Tables;
 using LibCheck.Modules;
+using LibCheck.Modules.Security;
 using static LibCheck.Modules.Miscellaneous;
 
 namespace LibCheck.Forms.Admin {
@@ -93,6 +94,19 @@ namespace LibCheck.Forms.Admin {
         private void ConfirmButton_Click(object sender, EventArgs e) {
             if (_isEdited) {
                 if (!CheckInformation()) return;
+                bool isEmailChanged = false;
+
+                if (mode == DatabaseMode.Update) {
+                    if (!string.IsNullOrWhiteSpace(student.EmailAddress) && !student.EmailAddress.Equals(EmailAddressTextBox.Text)
+                        && MessageBox.Show(this, "Changing student's email address will discard the previous. Continue?",
+                                        "Changing Email", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No) {
+                        EmailAddressTextBox.Text = student.EmailAddress;
+                        return;
+                    } else {
+                        isEmailChanged = true;
+                    }
+                }
+
                 student.StudentID = StudIDTextBox.Text;
                 student.FirstName = FirstNameTextBox.Text;
                 student.LastName = LastNameTextBox.Text;
@@ -108,10 +122,27 @@ namespace LibCheck.Forms.Admin {
                     MessageBox.Show(this, "Failed to execute a database.", "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     return;
                 }
+
+                string body;
+                 
+                if (mode == DatabaseMode.Add) {
+                    body = Properties.Resources.AddEmailTxt.Replace("%school%", Credentials.Librarian?.SchoolName)
+                                                           .Replace("%stID%", student.StudentID)
+                                                           .Replace("%name%", Miscellaneous.GenerateFullName(student))
+                                                           .Replace("%librarian%", Miscellaneous.GenerateFullName(Credentials.Librarian));
+                    EmailService.Queue(student, body, "Welcome to LibCheck!");
+                } else if (mode == DatabaseMode.Update && isEmailChanged) {
+                    body = Properties.Resources.UpdateEmailTxt.Replace("%school%", Credentials.Librarian?.SchoolName)
+                                                           .Replace("%stID%", student.StudentID)
+                                                           .Replace("%name%", Miscellaneous.GenerateFullName(student))
+                                                           .Replace("%librarian%", Miscellaneous.GenerateFullName(Credentials.Librarian));
+                    EmailService.Queue(student, body, "Regarding to Email Update.");
+                }
+
                 MessageBox.Show(this, "Database execution completed.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult = DialogResult.OK;
+                Close();
             }
-            DialogResult = DialogResult.OK;
-            Close();
         }
 
         private bool CheckInformation() {
@@ -126,8 +157,13 @@ namespace LibCheck.Forms.Admin {
                     throw new InvalidOperationException("Invalid Last Name.");
                 if (string.IsNullOrWhiteSpace(GradeSecTextBox.Text) || !Regexes.IsValidAlphanumSpace(GradeSecTextBox.Text))
                     throw new InvalidOperationException("Invalid Grade and Section.");
-                if (string.IsNullOrWhiteSpace(EmailAddressTextBox.Text) || !Regexes.IsValidEmail(EmailAddressTextBox.Text))
+                if (string.IsNullOrWhiteSpace(EmailAddressTextBox.Text) || !Regexes.IsValidEmail(EmailAddressTextBox.Text, out _))
                     throw new InvalidOperationException("Invalid Email Address.");
+
+                if (Database.Database.Read(out List<Students>? s, whereCond: $"EmailAddress = '{EmailAddressTextBox.Text}'") > 0 &&
+                    s != null && s.Any(s => !string.IsNullOrWhiteSpace(s.StudentID) && !s.StudentID.Equals(StudIDTextBox.Text)))
+                        throw new InvalidOperationException("The email was already registered by someone.");
+                
                 return true;
             } catch (Exception ex) {
                 MessageBox.Show(this, ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Hand);

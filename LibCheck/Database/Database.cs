@@ -1,11 +1,9 @@
 ﻿using LibCheck.Modules;
 using LibCheck.Modules.Security;
 using SQLite;
-using System.Diagnostics;
 using System.Security;
 using System.Security.Cryptography;
 using System.Text;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace LibCheck.Database {
     /// <summary>
@@ -42,8 +40,8 @@ namespace LibCheck.Database {
                 protectedByte = ProtectedData.Protect(Encoding.UTF8.GetBytes(CryptComp.ConvertToString(secString)),
                                                       null,
                                                       DataProtectionScope.CurrentUser);
-               
-                Logger.Log(Logger.LogEnums.Info,"Database loaded");
+
+                Logger.Log(Logger.LogEnums.Info, "Database loaded");
             }
         }
 
@@ -80,7 +78,7 @@ namespace LibCheck.Database {
             }
         }
 
-        internal static int Read<T>(out List<T>? res, string cols = "*", string whereCond = "") where T : new(){
+        internal static int Read<T>(out List<T>? res, string cols = "*", string whereCond = "") where T : new() {
             res = new List<T>();
             try {
                 CheckConn();
@@ -115,7 +113,17 @@ namespace LibCheck.Database {
             }
         }
 
-        internal static bool Delete<T>(string primaryKey) where T : new (){
+        internal static bool Delete(object obj) {
+            try {
+                CheckConn();
+                return _conn?.Delete(obj) > 0;
+            } catch (Exception ex) {
+                WriteError(ex.Message);
+                return false;
+            }
+        }
+
+        internal static bool Delete<T>(string primaryKey) where T : new() {
             try {
                 CheckConn();
                 return _conn?.Delete<T>(primaryKey) > 0;

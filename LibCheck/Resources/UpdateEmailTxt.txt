@@ -1,0 +1,18 @@
+<p>Greetings,</p>
+    <p>
+        The librarian successfully updated an email address and from now on, 
+        the email address you notified to update, will received notification 
+        regarding the book transactions (like book borrowing and returning, incoming and past dues, etc.) 
+        to keep you up to date.
+    </p>
+    <p>Student ID: <b>%stID%</b></p>
+    <p>Name: <b>%name%</b></p>
+    
+    <p>Thank you and have a great day!</p>
+        
+    <p>
+        <u>%librarian%</u><br/>
+        Librarian in <b>%school%.</b>
+    </p>
+        
+<p style="text-align: center">(Do not reply to this email address.)</p>

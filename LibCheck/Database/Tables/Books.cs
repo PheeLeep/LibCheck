@@ -33,5 +33,8 @@ namespace LibCheck.Database.Tables {
         public bool IsLostOrDamaged { get; set; }
 
         public DateTime? DateToReturn { get; set; }
+
+        [NotNull]
+        public bool ThreeDayNoticeSent { get; set; } = false;
     }
 }

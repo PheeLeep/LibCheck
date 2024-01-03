@@ -1,0 +1,12 @@
+<p>An email was sent from a librarian:</p>
+
+<blockquote>
+%text%
+</blockquote>      
+
+<p>
+    <u>%librarian%</u><br/>
+    Librarian in <b>%school%.</b>
+</p>
+        
+<p style="text-align: center">(Do not reply to this email address.)</p>

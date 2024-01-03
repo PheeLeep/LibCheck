@@ -59,7 +59,7 @@ namespace LibCheck.Forms {
         private void StudentsButton_Click(object sender, EventArgs e) {
             ChangeDashboards(studentsDashboard1);
         }
-        
+
         private void SettingsButton_MouseClick(object sender, MouseEventArgs e) {
             if (e.Button == MouseButtons.Left)
                 cMS1.Show(new Point(Cursor.Position.X, Cursor.Position.Y));
@@ -71,6 +71,10 @@ namespace LibCheck.Forms {
 
         private void accountRecoveryToolStripMenuItem_Click(object sender, EventArgs e) {
             new AccountRecoveryDiag().ShowDialog(this);
+        }
+
+        private void EmailsButton_Click(object sender, EventArgs e) {
+            ChangeDashboards(emailDashboard1);
         }
     }
 }

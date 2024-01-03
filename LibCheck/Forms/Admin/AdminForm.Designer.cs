@@ -46,6 +46,7 @@ namespace LibCheck.Forms
             LogsButton = new Button();
             panel2 = new Panel();
             StagePanel = new Panel();
+            emailDashboard1 = new EmailDashboard();
             panel3 = new Panel();
             cMS1 = new ContextMenuStrip(components);
             securityToolStripMenuItem = new ToolStripMenuItem();
@@ -123,6 +124,7 @@ namespace LibCheck.Forms
             EmailsButton.TabIndex = 4;
             EmailsButton.Text = "Emails";
             EmailsButton.UseVisualStyleBackColor = true;
+            EmailsButton.Click += EmailsButton_Click;
             // 
             // StatsButton
             // 
@@ -239,6 +241,7 @@ namespace LibCheck.Forms
             // StagePanel
             // 
             StagePanel.Controls.Add(homeDashboard1);
+            StagePanel.Controls.Add(emailDashboard1);
             StagePanel.Controls.Add(booksDashboard1);
             StagePanel.Controls.Add(studentsDashboard1);
             StagePanel.Dock = DockStyle.Fill;
@@ -246,6 +249,14 @@ namespace LibCheck.Forms
             StagePanel.Name = "StagePanel";
             StagePanel.Size = new Size(860, 521);
             StagePanel.TabIndex = 4;
+            // 
+            // emailDashboard1
+            // 
+            emailDashboard1.Dock = DockStyle.Fill;
+            emailDashboard1.Location = new Point(0, 0);
+            emailDashboard1.Name = "emailDashboard1";
+            emailDashboard1.Size = new Size(860, 521);
+            emailDashboard1.TabIndex = 5;
             // 
             // panel3
             // 
@@ -278,14 +289,14 @@ namespace LibCheck.Forms
             // changePasswordToolStripMenuItem
             // 
             changePasswordToolStripMenuItem.Name = "changePasswordToolStripMenuItem";
-            changePasswordToolStripMenuItem.Size = new Size(224, 26);
+            changePasswordToolStripMenuItem.Size = new Size(210, 26);
             changePasswordToolStripMenuItem.Text = "Change Password";
             changePasswordToolStripMenuItem.Click += changePasswordToolStripMenuItem_Click;
             // 
             // accountRecoveryToolStripMenuItem
             // 
             accountRecoveryToolStripMenuItem.Name = "accountRecoveryToolStripMenuItem";
-            accountRecoveryToolStripMenuItem.Size = new Size(224, 26);
+            accountRecoveryToolStripMenuItem.Size = new Size(210, 26);
             accountRecoveryToolStripMenuItem.Text = "Account Recovery";
             accountRecoveryToolStripMenuItem.Click += accountRecoveryToolStripMenuItem_Click;
             // 
@@ -334,5 +345,6 @@ namespace LibCheck.Forms
         private ToolStripMenuItem securityToolStripMenuItem;
         private ToolStripMenuItem changePasswordToolStripMenuItem;
         private ToolStripMenuItem accountRecoveryToolStripMenuItem;
+        private EmailDashboard emailDashboard1;
     }
 }

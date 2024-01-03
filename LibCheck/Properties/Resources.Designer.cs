@@ -61,6 +61,30 @@ namespace LibCheck.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;p&gt;Greetings,&lt;/p&gt;
+        ///&lt;p&gt;
+        ///    Thank you for registering to LibCheck Book Borrowing and Returning System in &lt;b&gt;%school%.&lt;/b&gt;
+        ///&lt;/p&gt;
+        ///&lt;p&gt;
+        ///    Your registered email address will receive notification regarding the book transactions 
+        ///    (like book borrowing and returning, incoming and past dues, etc.) to keep you up to date.
+        ///&lt;/p&gt;
+        ///&lt;p&gt;Student ID: &lt;b&gt;%stID%&lt;/b&gt;&lt;/p&gt;
+        ///&lt;p&gt;Name: &lt;b&gt;%name%&lt;/b&gt;&lt;/p&gt;
+        ///    
+        ///&lt;p&gt;Thank you once again and enjoy!&lt;/p&gt;
+        ///        
+        ///&lt;p&gt;
+        ///    &lt;u&gt;%librarian%&lt;/u&gt;&lt;br/&gt;
+        ///    Librarian in &lt;b&gt;%school%.&lt;/ [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string AddEmailTxt {
+            get {
+                return ResourceManager.GetString("AddEmailTxt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap back_card {
@@ -87,6 +111,26 @@ namespace LibCheck.Properties {
             get {
                 object obj = ResourceManager.GetObject("bg", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;p&gt;An email was sent from a librarian:&lt;/p&gt;
+        ///
+        ///&lt;blockquote&gt;
+        ///%text%
+        ///&lt;/blockquote&gt;      
+        ///
+        ///&lt;p&gt;
+        ///    &lt;u&gt;%librarian%&lt;/u&gt;&lt;br/&gt;
+        ///    Librarian in &lt;b&gt;%school%.&lt;/b&gt;
+        ///&lt;/p&gt;
+        ///        
+        ///&lt;p style=&quot;text-align: center&quot;&gt;(Do not reply to this email address.)&lt;/p&gt;.
+        /// </summary>
+        internal static string CustomEmail {
+            get {
+                return ResourceManager.GetString("CustomEmail", resourceCulture);
             }
         }
         
@@ -153,9 +197,39 @@ namespace LibCheck.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_compose_32 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-compose-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_compose_40 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-compose-40", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_email_45 {
             get {
                 object obj = ResourceManager.GetObject("icons8-email-45", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_email_queue_45 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-email-queue-45", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -277,6 +351,29 @@ namespace LibCheck.Properties {
             get {
                 object obj = ResourceManager.GetObject("settings", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;p&gt;Greetings,&lt;/p&gt;
+        ///    &lt;p&gt;
+        ///        The librarian successfully updated an email address and from now on, 
+        ///        the email address you notified to update, will received notification 
+        ///        regarding the book transactions (like book borrowing and returning, incoming and past dues, etc.) 
+        ///        to keep you up to date.
+        ///    &lt;/p&gt;
+        ///    &lt;p&gt;Student ID: &lt;b&gt;%stID%&lt;/b&gt;&lt;/p&gt;
+        ///    &lt;p&gt;Name: &lt;b&gt;%name%&lt;/b&gt;&lt;/p&gt;
+        ///    
+        ///    &lt;p&gt;Thank you and have a great day!&lt;/p&gt;
+        ///        
+        ///    &lt;p&gt;
+        ///        &lt;u&gt;%librarian%&lt;/u&gt;&lt;br/&gt;
+        ///    [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string UpdateEmailTxt {
+            get {
+                return ResourceManager.GetString("UpdateEmailTxt", resourceCulture);
             }
         }
     }
