@@ -9,17 +9,21 @@ namespace LibCheck.Database.Tables {
             BookDeleted,
             BookBorrowed,
             BookReturned,
-            BookMissingDamaged
+            BookMissingDamaged,
+            BookRestored
         }
 
         [PrimaryKey, NotNull]
-        public required DateTime DateOccurred { get; set; }
+        public DateTime DateOccurred { get; set; }
 
         [NotNull]
-        public required string ISBN { get; set; }
+        public string? ISBN { get; set; }
 
         [NotNull]
-        public required RecordStatus Category { get; set; }
+        public string? StudentID { get; set; }
+
+        [NotNull]
+        public RecordStatus Category { get; set; }
 
         public string? AdditionalContext { get; set; }
     }

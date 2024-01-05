@@ -13,6 +13,10 @@ namespace LibCheck.Modules {
             get => new string[] { "Elementary", "Junior High", "Senior High", "Tertiary" };
         }
 
+        internal static string[] Genres {
+            get => new string[] { "Fiction",  "Non-fiction",  "Mystery", "Science Fiction", "Fantasy", "Romance",
+                                  "Thriller", "Horror", "Biography", "History", "Self-help", "Poetry", "Others"};
+        }
         internal static string GenerateFullName(LibrarianInfo? info, bool firstNameFirst = false, bool generateMI = true) {
             if (info == null) return "";
 
@@ -62,6 +66,27 @@ namespace LibCheck.Modules {
             return fullName.ToString();
         }
 
+        internal static void ResetDGVColumns(DataGridView dgv, bool hideCols = true) {
+            for (int i = 0; i < dgv.Columns.Count; i++) {
+                dgv.Columns[i].AutoSizeMode = (i < dgv.Columns.Count - 1) ?
+                                                DataGridViewAutoSizeColumnMode.AllCells :
+                                                DataGridViewAutoSizeColumnMode.Fill;
+                if (hideCols) dgv.Columns[i].Visible = false;
+            }
+        }
+
+        internal static int CalculateDateExcptSun(DateTime from, DateTime to) {
+            int daysDifference = (int)(to - from).TotalDays;
+
+            // Exclude Sundays from the count
+            for (int i = 0; i <= daysDifference; i++) {
+                DateTime currentDay = from.AddDays(i);
+
+                if (currentDay.DayOfWeek == DayOfWeek.Sunday)
+                    daysDifference--;
+            }
+            return daysDifference;
+        }
         internal static string Redact(string? stringToRedact) {
             if (string.IsNullOrWhiteSpace(stringToRedact) || stringToRedact.Length < 2)
                 return "";

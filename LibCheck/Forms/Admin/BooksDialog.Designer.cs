@@ -39,6 +39,8 @@
             tabPage3 = new TabPage();
             DescTextBox = new TextBox();
             panel1 = new Panel();
+            label6 = new Label();
+            genreComboBox = new ComboBox();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage3.SuspendLayout();
@@ -118,13 +120,15 @@
             tabControl1.Location = new Point(0, 0);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(393, 421);
+            tabControl1.Size = new Size(393, 478);
             tabControl1.TabIndex = 7;
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(genreComboBox);
             tabPage1.Controls.Add(DatePublishedDatePicker);
             tabPage1.Controls.Add(label5);
+            tabPage1.Controls.Add(label6);
             tabPage1.Controls.Add(label4);
             tabPage1.Controls.Add(PublisherTextBox);
             tabPage1.Controls.Add(ISBNTextBox);
@@ -136,7 +140,7 @@
             tabPage1.Location = new Point(4, 30);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(385, 387);
+            tabPage1.Size = new Size(385, 444);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Information";
             tabPage1.UseVisualStyleBackColor = true;
@@ -145,7 +149,7 @@
             // 
             DatePublishedDatePicker.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             DatePublishedDatePicker.Format = DateTimePickerFormat.Short;
-            DatePublishedDatePicker.Location = new Point(142, 287);
+            DatePublishedDatePicker.Location = new Point(142, 343);
             DatePublishedDatePicker.Name = "DatePublishedDatePicker";
             DatePublishedDatePicker.Size = new Size(143, 29);
             DatePublishedDatePicker.TabIndex = 10;
@@ -154,7 +158,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(24, 292);
+            label5.Location = new Point(24, 348);
             label5.Name = "label5";
             label5.Size = new Size(129, 23);
             label5.TabIndex = 9;
@@ -203,16 +207,35 @@
             // 
             panel1.Controls.Add(ConfirmButton);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 421);
+            panel1.Location = new Point(0, 478);
             panel1.Name = "panel1";
             panel1.Size = new Size(393, 56);
             panel1.TabIndex = 1;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(24, 285);
+            label6.Name = "label6";
+            label6.Size = new Size(60, 23);
+            label6.TabIndex = 8;
+            label6.Text = "Genre:";
+            // 
+            // genreComboBox
+            // 
+            genreComboBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            genreComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            genreComboBox.FormattingEnabled = true;
+            genreComboBox.Location = new Point(90, 282);
+            genreComboBox.Name = "genreComboBox";
+            genreComboBox.Size = new Size(269, 29);
+            genreComboBox.TabIndex = 11;
             // 
             // BooksDialog
             // 
             AutoScaleDimensions = new SizeF(120F, 120F);
             AutoScaleMode = AutoScaleMode.Dpi;
-            ClientSize = new Size(393, 477);
+            ClientSize = new Size(393, 534);
             Controls.Add(tabControl1);
             Controls.Add(panel1);
             DoubleBuffered = true;
@@ -253,5 +276,7 @@
         private Label label5;
         private TextBox DescTextBox;
         private Panel panel1;
+        private Label label6;
+        private ComboBox genreComboBox;
     }
 }

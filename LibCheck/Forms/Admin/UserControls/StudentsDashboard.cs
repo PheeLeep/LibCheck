@@ -22,8 +22,7 @@ namespace LibCheck.Forms.Admin.UserControls {
             CurrentlyBorrowedLabel.Text = Database.Database.Read(out List<Students>? infos).ToString();
             dataGridView1.DataSource = infos;
             Logger.Log(Logger.LogEnums.Verbose, $"{GetType().Name} info loaded.");
-            for (int i = 0; i < dataGridView1.Columns.Count; i++)
-                dataGridView1.Columns[i].Visible = false;
+            Miscellaneous.ResetDGVColumns(dataGridView1);
 
             dataGridView1.Columns["StudentID"].Visible = true;
             dataGridView1.Columns["StudentID"].HeaderText = "Student ID";

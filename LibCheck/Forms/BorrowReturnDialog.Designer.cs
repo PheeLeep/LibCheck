@@ -41,12 +41,15 @@
             BorrowPanel = new Panel();
             label2 = new Label();
             DateBorrowDTP = new DateTimePicker();
+            groupBox2 = new GroupBox();
+            richTextBox1 = new RichTextBox();
             BookGroupBox.SuspendLayout();
             groupBox1.SuspendLayout();
             panel1.SuspendLayout();
             OptionsPanel.SuspendLayout();
             ReturnPanel.SuspendLayout();
             BorrowPanel.SuspendLayout();
+            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // BookGroupBox
@@ -159,9 +162,9 @@
             // 
             panel1.Controls.Add(ExecuteButton);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 421);
+            panel1.Location = new Point(0, 581);
             panel1.Name = "panel1";
-            panel1.Size = new Size(537, 77);
+            panel1.Size = new Size(537, 71);
             panel1.TabIndex = 2;
             // 
             // ExecuteButton
@@ -182,7 +185,7 @@
             OptionsPanel.Dock = DockStyle.Fill;
             OptionsPanel.Location = new Point(0, 294);
             OptionsPanel.Name = "OptionsPanel";
-            OptionsPanel.Size = new Size(537, 127);
+            OptionsPanel.Size = new Size(537, 78);
             OptionsPanel.TabIndex = 3;
             // 
             // ReturnPanel
@@ -191,7 +194,7 @@
             ReturnPanel.Dock = DockStyle.Fill;
             ReturnPanel.Location = new Point(0, 0);
             ReturnPanel.Name = "ReturnPanel";
-            ReturnPanel.Size = new Size(537, 127);
+            ReturnPanel.Size = new Size(537, 78);
             ReturnPanel.TabIndex = 1;
             // 
             // ReturnLabel
@@ -203,7 +206,7 @@
             ReturnLabel.ForeColor = Color.White;
             ReturnLabel.Location = new Point(0, 0);
             ReturnLabel.Name = "ReturnLabel";
-            ReturnLabel.Size = new Size(537, 127);
+            ReturnLabel.Size = new Size(537, 78);
             ReturnLabel.TabIndex = 1;
             ReturnLabel.Text = "Please scan the book first.";
             ReturnLabel.TextAlign = ContentAlignment.MiddleCenter;
@@ -215,7 +218,7 @@
             BorrowPanel.Dock = DockStyle.Fill;
             BorrowPanel.Location = new Point(0, 0);
             BorrowPanel.Name = "BorrowPanel";
-            BorrowPanel.Size = new Size(537, 127);
+            BorrowPanel.Size = new Size(537, 78);
             BorrowPanel.TabIndex = 0;
             // 
             // label2
@@ -235,12 +238,34 @@
             DateBorrowDTP.TabIndex = 0;
             DateBorrowDTP.ValueChanged += DateBorrowDTP_ValueChanged;
             // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(richTextBox1);
+            groupBox2.Dock = DockStyle.Bottom;
+            groupBox2.Location = new Point(0, 372);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(537, 209);
+            groupBox2.TabIndex = 4;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Notes";
+            // 
+            // richTextBox1
+            // 
+            richTextBox1.Dock = DockStyle.Fill;
+            richTextBox1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            richTextBox1.Location = new Point(3, 27);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Size = new Size(531, 179);
+            richTextBox1.TabIndex = 0;
+            richTextBox1.Text = "";
+            // 
             // BorrowReturnDialog
             // 
             AutoScaleDimensions = new SizeF(120F, 120F);
             AutoScaleMode = AutoScaleMode.Dpi;
-            ClientSize = new Size(537, 498);
+            ClientSize = new Size(537, 652);
             Controls.Add(OptionsPanel);
+            Controls.Add(groupBox2);
             Controls.Add(panel1);
             Controls.Add(groupBox1);
             Controls.Add(BookGroupBox);
@@ -263,6 +288,7 @@
             ReturnPanel.ResumeLayout(false);
             BorrowPanel.ResumeLayout(false);
             BorrowPanel.PerformLayout();
+            groupBox2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -286,5 +312,7 @@
         private Label label2;
         private Panel ReturnPanel;
         private Label ReturnLabel;
+        private GroupBox groupBox2;
+        private RichTextBox richTextBox1;
     }
 }

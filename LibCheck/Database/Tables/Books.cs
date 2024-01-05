@@ -12,6 +12,9 @@ namespace LibCheck.Database.Tables {
         public string? Author { get; set; }
 
         [NotNull]
+        public string? Genre { get; set; }  
+
+        [NotNull]
         public string? Publisher { get; set; }
 
         [NotNull]

@@ -6,11 +6,9 @@ using LibCheck.Modules.Security;
 
 namespace LibCheck.Forms {
     public partial class BorrowReturnDialog : Form {
-        private string? isbn;
-        private string? studentID;
 
-        private bool lockISBNControls;
-        private bool lockStudIDControls;
+        private readonly bool lockISBNControls;
+        private readonly bool lockStudIDControls;
 
         private Books? book;
         private Students? student;
@@ -20,8 +18,6 @@ namespace LibCheck.Forms {
         public BorrowReturnDialog(bool isBorrow, string? isbn = "", string? studentID = "") {
             InitializeComponent();
             this.isBorrow = isBorrow;
-            this.isbn = isbn;
-            this.studentID = studentID;
 
             if (!string.IsNullOrWhiteSpace(isbn)) {
                 lockISBNControls = true;
@@ -37,7 +33,10 @@ namespace LibCheck.Forms {
             if (t == typeof(Books)) {
                 if (Database.Database.Read(out List<Books>? bookInfo, whereCond: $"ISBN = '{val}'") <= 0 || bookInfo == null)
                     throw new BookNotFoundException(val);
-                book = bookInfo.Take(1).ToArray()[0];
+                if (bookInfo[0].IsLostOrDamaged)
+                    throw new InvalidOperationException("This book is currently lost or damaged.");
+
+                book = bookInfo[0];
                 ISBNTextBox.Text = book.ISBN;
                 BookTitleLabel.Text = $"Title: {book.Title}";
 
@@ -47,17 +46,7 @@ namespace LibCheck.Forms {
                     DateTime currentDate = DateTime.Now;
                     DateTime dueDate = book.DateToReturn.Value;
 
-                    int daysDifference = (int)(dueDate - currentDate).TotalDays;
-
-                    // Exclude Sundays from the count
-                    for (int i = 0; i <= daysDifference; i++) {
-                        DateTime currentDay = currentDate.AddDays(i);
-
-                        if (currentDay.DayOfWeek == DayOfWeek.Sunday)
-                            daysDifference--;
-                    }
-
-                    switch (daysDifference) {
+                    switch (Miscellaneous.CalculateDateExcptSun(currentDate, dueDate)) {
                         case int d when d < 3:
                             ReturnLabel.BackColor = Color.Red;
                             if (d < 0) {
@@ -87,7 +76,7 @@ namespace LibCheck.Forms {
 
             if (Database.Database.Read(out List<Students>? studInfo, whereCond: $"StudentID = '{val}'") <= 0 || studInfo == null)
                 throw new StudentNotFoundException(val);
-            student = studInfo.Take(1).ToArray()[0];
+            student = studInfo[0];
             StudIDTextBox.Text = student.StudentID;
             StudNameLabel.Text = $"Name: {Miscellaneous.GenerateFullName(student, true)}";
         }
@@ -131,8 +120,10 @@ namespace LibCheck.Forms {
 
         private void ExecuteButton_Click(object sender, EventArgs e) {
             try {
-                if (book == null || book.IsLostOrDamaged) throw new InvalidOperationException("No book provided or it was damaged.");
-                if (student == null) throw new InvalidOperationException("No student provided.");
+                if (book == null || book.IsLostOrDamaged) 
+                    throw new InvalidOperationException("No book provided or it was damaged.");
+                if (student == null) 
+                    throw new InvalidOperationException("No student provided.");
 
                 if (!Modules.AppContext.Auth()) return;
 
@@ -141,10 +132,21 @@ namespace LibCheck.Forms {
                         throw new InvalidOperationException("This book is already borrowed by someone.");
                     book.DateToReturn = DateBorrowDTP.Value;
                     book.StudentID = student.StudentID;
+                    book.ThreeDayNoticeSent = false;
 
-                    if (!Database.Database.Update(book))
+                    Records rBorrow = new Records() {
+                        DateOccurred = DateTime.Now,
+                        AdditionalContext = string.IsNullOrEmpty(richTextBox1.Text) ?
+                                                    "(no additional context)" :
+                                                    richTextBox1.Text,
+                        ISBN = book.ISBN,
+                        StudentID = student.StudentID,
+                        Category = Records.RecordStatus.BookBorrowed
+                    };
+
+                    if (!Database.Database.Update(book) || !Database.Database.Insert(rBorrow))
                         throw new InvalidOperationException("Unable to execute the database.");
-                    MessageBox.Show("Book borrowed.");
+                    MessageBox.Show(this, "Book borrowed.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     DialogResult = DialogResult.Yes;
                     Close();
                     return;
@@ -158,14 +160,28 @@ namespace LibCheck.Forms {
                         throw new InvalidOperationException("This book was borrowed by someone that supposed to return it.");
                 }
 
-                if (DateTime.Now > book.DateToReturn && MessageBox.Show(this, "The student must pay an overdue fee before you proceed. Continue?"
-                                                                        , "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
-                                                                        == DialogResult.No) return;
+                if (DateTime.Now > book.DateToReturn && 
+                    MessageBox.Show(this, "The student must pay an overdue fee before you proceed. Continue?"
+                                          , "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No) 
+                    return;
+
                 book.StudentID = "(none)";
                 book.DateToReturn = null;
-                if (!Database.Database.Update(book))
+                book.ThreeDayNoticeSent = false;
+
+                Records rReturn = new Records() {
+                    DateOccurred = DateTime.Now,
+                    AdditionalContext = string.IsNullOrEmpty(richTextBox1.Text) ?
+                                                   "(no additional context)" :
+                                                   richTextBox1.Text,
+                    ISBN = book.ISBN,
+                    StudentID = student.StudentID,
+                    Category = Records.RecordStatus.BookReturned
+                };
+
+                if (!Database.Database.Update(book) || !Database.Database.Insert(rReturn))
                     throw new InvalidOperationException("Unable to execute the database.");
-                MessageBox.Show("Book returned.");
+                MessageBox.Show(this, "Book returned.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.Yes;
                 Close();
             } catch (Exception ex) {

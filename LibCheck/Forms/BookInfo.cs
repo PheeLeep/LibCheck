@@ -1,5 +1,6 @@
 ﻿using LibCheck.Database.Tables;
 using LibCheck.Exceptions;
+using Microsoft.VisualBasic;
 
 namespace LibCheck.Forms {
     public partial class BookInfo : Form {
@@ -22,7 +23,7 @@ namespace LibCheck.Forms {
                 throw new BookNotFoundException();
             if (Database.Database.Read(out List<Books>? infos, whereCond: $"ISBN = '{isbn}'") <= 0 || infos == null)
                 throw new BookNotFoundException(isbn);
-            book = infos.Take(1).ToArray()[0];
+            book = infos[0];
             Text = TitleLabel.Text = book.Title;
             OwnedLabel.Text = "No student is currently owned by this book.";
 
@@ -46,6 +47,7 @@ namespace LibCheck.Forms {
             ISBNLabel.Text = $"ISBN: {book.ISBN}";
             PublisherLabel.Text = $"Publisher: {book.Publisher}";
             DatePubLabel.Text = $"Date Published: {book.DatePublished:MMMM dd, yyyy}";
+            GenreLabel.Text = $"Genre: {book.Genre}";
             richTextBox1.Text = book.Description;
 
             BorrowBookButton.Visible = !string.IsNullOrWhiteSpace(book.StudentID) && book.StudentID.Equals("(none)");
@@ -65,15 +67,29 @@ namespace LibCheck.Forms {
             string msg = book.IsLostOrDamaged ? "Make sure the book was found or replaced a new copy before you proceed. Continue?"
                                               : "This will mark as lost or damaged and marked violated to the student who are " +
                                                 "currently borrowed. Continue?";
-            if (MessageBox.Show(this, msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Hand) == DialogResult.No) return;
+            if (MessageBox.Show(this, msg, "", MessageBoxButtons.YesNo, MessageBoxIcon.Hand) == DialogResult.No)
+                return;
+
+            string reason = Interaction.InputBox("Enter the Reason. (optional)");
             book.IsLostOrDamaged = !book.IsLostOrDamaged;
             if (!book.IsLostOrDamaged) {
                 book.DateToReturn = null;
                 book.StudentID = "(none)";
             }
 
-            if (!Database.Database.Update(book)) {
-                MessageBox.Show(this, "Failed to execute the database command.", "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            Records r = new Records() {
+                DateOccurred = DateTime.Now,
+                AdditionalContext = string.IsNullOrWhiteSpace(reason) ? "(no additional context)" : reason,
+                ISBN = book.ISBN,
+                Category = book.IsLostOrDamaged ? Records.RecordStatus.BookMissingDamaged : Records.RecordStatus.BookRestored,
+                StudentID = "(none)"
+            };
+
+            if (book.IsLostOrDamaged && !string.IsNullOrWhiteSpace(book.StudentID) && !book.StudentID.Equals("(none)"))
+                r.StudentID = book.StudentID;
+
+            if (!Database.Database.Update(book) || !Database.Database.Update(r)) {
+                MessageBox.Show(this, "Failed to mark/unmark the book.", "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 return;
             }
             LoadInfo();

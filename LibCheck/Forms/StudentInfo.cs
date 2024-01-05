@@ -40,8 +40,7 @@ namespace LibCheck.Forms {
             EmailAddressLabel.Text = $"Email Address: {student.EmailAddress}";
 
             dataGridView1.DataSource = l;
-            for (int i = 0; i < dataGridView1.Columns.Count; i++)
-                dataGridView1.Columns[i].Visible = false;
+            Miscellaneous.ResetDGVColumns(dataGridView1);
 
             dataGridView1.Columns["ISBN"].Visible = true;
             dataGridView1.Columns["Title"].Visible = true;

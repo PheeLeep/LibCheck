@@ -38,6 +38,7 @@ namespace LibCheck.Forms.Admin.UserControls {
             }
 
             dataGridView1.DataSource = logs;
+            Miscellaneous.ResetDGVColumns(dataGridView1, false) ;
             VerboseLabel.Text = logs?.FindAll(s => s.Level == LogEnums.Verbose).Count.ToString();
             InfoLabel.Text = logs?.FindAll(s => s.Level == LogEnums.Info).Count.ToString();
             WarnCB.Text = logs?.FindAll(s => s.Level == LogEnums.Warn).Count.ToString();

@@ -38,6 +38,7 @@
             ISBNLabel = new Label();
             AuthorLabel = new Label();
             PublisherLabel = new Label();
+            GenreLabel = new Label();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
@@ -163,14 +164,15 @@
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(GenreLabel);
             tabPage2.Controls.Add(DatePubLabel);
             tabPage2.Controls.Add(ISBNLabel);
             tabPage2.Controls.Add(AuthorLabel);
             tabPage2.Controls.Add(PublisherLabel);
-            tabPage2.Location = new Point(4, 29);
+            tabPage2.Location = new Point(4, 34);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(808, 340);
+            tabPage2.Size = new Size(808, 335);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Information";
             tabPage2.UseVisualStyleBackColor = true;
@@ -210,6 +212,15 @@
             PublisherLabel.Size = new Size(88, 25);
             PublisherLabel.TabIndex = 2;
             PublisherLabel.Text = "Publisher:";
+            // 
+            // GenreLabel
+            // 
+            GenreLabel.AutoSize = true;
+            GenreLabel.Location = new Point(35, 156);
+            GenreLabel.Name = "GenreLabel";
+            GenreLabel.Size = new Size(62, 25);
+            GenreLabel.TabIndex = 5;
+            GenreLabel.Text = "Genre:";
             // 
             // BookInfo
             // 
@@ -254,5 +265,6 @@
         private Panel panel3;
         private Button BorrowBookButton;
         private Button MarkAsDamageButton;
+        private Label GenreLabel;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using LibCheck.Database.Tables;
 using LibCheck.Modules;
 using LibCheck.Modules.Security;
+using static LibCheck.Modules.Miscellaneous;
 
 namespace LibCheck.Forms.Admin.UserControls {
     public partial class BooksDashboard : UserControl {
@@ -35,12 +36,12 @@ namespace LibCheck.Forms.Admin.UserControls {
 
                 dataGridView1.DataSource = infos;
                 Logger.Log(Logger.LogEnums.Verbose, $"{GetType().Name} info loaded.");
-                for (int i = 0; i < dataGridView1.Columns.Count; i++)
-                    dataGridView1.Columns[i].Visible = false;
+                Miscellaneous.ResetDGVColumns(dataGridView1);
 
                 dataGridView1.Columns["ISBN"].Visible = true;
                 dataGridView1.Columns["Title"].Visible = true;
                 dataGridView1.Columns["Author"].Visible = true;
+                dataGridView1.Columns["Genre"].Visible = true;
                 dataGridView1.Columns["SafeDatePublished"].Visible = true;
                 dataGridView1.Columns["SafeDatePublished"].HeaderText = "Date Published";
             }
@@ -97,7 +98,15 @@ namespace LibCheck.Forms.Admin.UserControls {
                                     "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
                     return;
 
-                if (!Database.Database.Delete<Books>(isbn))
+                Records r = new Records() {
+                    DateOccurred = DateTime.Now,
+                    ISBN = isbn,
+                    StudentID = "(none)",
+                    Category = Records.RecordStatus.BookDeleted,
+                    AdditionalContext = "(none)"
+                };
+
+                if (!Database.Database.Delete<Books>(isbn) || !Database.Database.Insert(r))
                     throw new InvalidOperationException("Couldn't remove a book from the database.");
                 Logger.Log(Logger.LogEnums.Warn, "Book was deleted. Reloading...");
                 Load();

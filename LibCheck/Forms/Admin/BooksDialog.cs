@@ -34,6 +34,9 @@ namespace LibCheck.Forms.Admin {
         }
 
         private void BooksDialog_Load(object sender, EventArgs e) {
+            genreComboBox.Items.AddRange(Genres);
+            genreComboBox.SelectedIndex = 0;
+
             if (mode == DatabaseMode.Read) {
                 TitleTextBox.ReadOnly = true;
                 AuthorTextBox.ReadOnly = true;
@@ -42,6 +45,9 @@ namespace LibCheck.Forms.Admin {
                 DatePublishedDatePicker.Enabled = false;
             }
             if (mode != DatabaseMode.Add) {
+                int idx = genreComboBox.Items.IndexOf(book.Genre);
+                if (idx == -1) idx = genreComboBox.Items.Count - 1;
+
                 ISBNTextBox.ReadOnly = true;
                 ISBNTextBox.Text = book.ISBN;
                 TitleTextBox.Text = book.Title;
@@ -49,6 +55,7 @@ namespace LibCheck.Forms.Admin {
                 PublisherTextBox.Text = book.Publisher;
                 DescTextBox.Text = book.Description;
                 DatePublishedDatePicker.Value = book.DatePublished;
+                genreComboBox.SelectedIndex = idx;
 
                 ConfirmButton.Text = mode == DatabaseMode.Update ? "Update" : "OK";
                 _isEdited = false;
@@ -67,17 +74,29 @@ namespace LibCheck.Forms.Admin {
                 book.Publisher = PublisherTextBox.Text;
                 book.DatePublished = DatePublishedDatePicker.Value;
                 book.Description = DescTextBox.Text;
+                book.Genre  = genreComboBox.Items[genreComboBox.SelectedIndex].ToString();
 
+                string operation = mode == DatabaseMode.Add ? "add" : "update";
+                string pastSucceed = mode == DatabaseMode.Add ? "added" : "updated";
                 if (!(mode == DatabaseMode.Add ? Database.Database.Insert(book)
                                                : Database.Database.Update(book))) {
-                    Logger.Log(Logger.LogEnums.Error, "Failed to add/update book information.");
-                    MessageBox.Show(this, "Failed to add or update book information.",
+                    Logger.Log(Logger.LogEnums.Error, $"Failed to {operation} book information.");
+                    MessageBox.Show(this, $"Failed to {operation} book information.",
                                     "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     return;
                 }
 
-                Logger.Log(Logger.LogEnums.Info, "Book information is added/updated.");
-                MessageBox.Show(this, "Book information is added/updated.", "",
+                Records r = new Records() {
+                    DateOccurred = DateTime.Now,
+                    ISBN = book.ISBN,
+                    StudentID = "(none)",
+                    Category = mode == DatabaseMode.Add ? Records.RecordStatus.BookAdded : 
+                                                          Records.RecordStatus.BookModified,
+                    AdditionalContext = "(none)"
+                };
+                Database.Database.Insert(r);
+                Logger.Log(Logger.LogEnums.Info, $"Book information is {pastSucceed}.");
+                MessageBox.Show(this, $"Book information is {pastSucceed}.", "",
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             DialogResult = DialogResult.OK;

@@ -163,7 +163,6 @@
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.Size = new Size(856, 313);
             dataGridView1.TabIndex = 8;
-            dataGridView1.VirtualMode = true;
             // 
             // panel3
             // 

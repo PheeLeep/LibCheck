@@ -69,8 +69,7 @@ namespace LibCheck.Forms.Admin.UserControls {
             if (Database.Database.Read(out List<RecentEmail>? _recent) <= 0 || _recent == null)
                 return;
             dataGridView1.DataSource = _recent;
-            for (int i = 0; i < dataGridView1.Columns.Count; i++)
-                dataGridView1.Columns[i].Visible = false;
+            Miscellaneous.ResetDGVColumns(dataGridView1);
 
             dataGridView1.Columns["SafeDateOccurred"].HeaderText = "Date Occurred";
             dataGridView1.Columns["SafeDateOccurred"].Visible = true;
