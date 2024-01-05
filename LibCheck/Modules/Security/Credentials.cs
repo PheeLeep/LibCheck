@@ -2,7 +2,6 @@
 using LibCheck.Forms;
 using Newtonsoft.Json;
 using SQLite;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
@@ -14,12 +13,17 @@ namespace LibCheck.Modules.Security {
     /// A class that houses credentials and functions.
     /// </summary>
     internal static class Credentials {
+
+        internal delegate void TimeoutEventDelegate(bool isInLocked, string? info);
+
         private static bool _isInitialized = false;
         private static readonly object _lock = new object();
         private static LibrarianToken? token;
         private static DateTime expTime = DateTime.Now;
         private static int retries = 0;
         private static int incrementTimer = 0;
+
+        internal static event TimeoutEventDelegate? TimeoutEvent;
 
         /// <summary>
         /// Checks whether the user is currently logged in.
@@ -42,7 +46,32 @@ namespace LibCheck.Modules.Security {
                 Logger.Log(Logger.LogEnums.Verbose, $"Credentials and database found. Proceed loading...");
                 LoadLibCCred();
             }
+
             _isInitialized = true;
+
+            // Start the timeout watchdog.
+            Task.Factory.StartNew(() => {
+                Logger.Log(Logger.LogEnums.Verbose, "Timeout watchdog started.");
+
+                while (_isInitialized) {
+                    Task.Delay(100).Wait();
+                    if (IsInHaltPhase()) {
+                        TimeSpan dt = expTime - DateTime.Now;
+
+                        StringBuilder sb = new StringBuilder();
+                        sb.Append("You've been locked for ");
+                        if ((int)dt.TotalHours > 0) sb.Append($"{string.Format("{00:00}", (int)dt.TotalHours)}:");
+                        sb.Append($"{string.Format("{00:00}", dt.Minutes)}:");
+                        sb.Append($"{string.Format("{00:00}", dt.Seconds)} ({expTime:dd/MM/yyyy hh:mm:ss tt})");
+
+                        TimeoutEvent?.Invoke(true, sb.ToString());
+                        continue;
+                    }
+                    TimeoutEvent?.Invoke(false, "");
+                }
+
+                Logger.Log(Logger.LogEnums.Verbose, "Timeout watchdog ended.");
+            });
         }
 
         /// <summary>
@@ -74,9 +103,7 @@ namespace LibCheck.Modules.Security {
                         }
                         break;
                     }
-                    SecureDesktop.EnterSecureMode(() => {
-                        new Login().ShowDialog();
-                    });
+                    SecureDesktop.EnterSecureMode(() => new Login().ShowDialog());
                     break;
                 }
             }
@@ -95,9 +122,11 @@ namespace LibCheck.Modules.Security {
                 conn.CreateTable<Books>();
                 conn.CreateTable<Students>();
                 conn.CreateTable<EmailQueue>();
+                conn.CreateTable<RecentEmail>();
                 conn.CreateTable<Records>();
                 conn.Insert(lInfo);
             }
+            Logger.Log(Logger.LogEnums.Info, "Main database created.");
 
             PleaseWait.SetPWDText("Saving credentials...");
             string encryptedStr = CryptComp.StringCrypt(token.SQLCipherDBKey,
@@ -112,6 +141,7 @@ namespace LibCheck.Modules.Security {
                     serializer.Formatting = Formatting.Indented;
                     serializer.Serialize(writer, token);
                     writer.Flush();
+                    Logger.Log(Logger.LogEnums.Info, "Credentials written.");
                 }
             }
             token.Dispose();
@@ -128,13 +158,12 @@ namespace LibCheck.Modules.Security {
             try {
                 if (token == null)
                     throw new InvalidOperationException("Credential is not loaded.");
+                if (LoggedIn)
+                    throw new InvalidOperationException("Already logged in.");
             } catch (Exception ex) {
                 CrashControl.SCRAM(ex);
                 return false;
             }
-
-            if (LoggedIn)
-                throw new InvalidOperationException("Already logged in.");
 
             SecureString sqlKey = new SecureString();
 
@@ -175,8 +204,10 @@ namespace LibCheck.Modules.Security {
             try {
                 if (!LoggedIn || Librarian == null)
                     throw new InvalidOperationException("Access denied.");
+
                 if (string.IsNullOrEmpty(Librarian.Username))
                     throw new InvalidOperationException("Data corruption detected.");
+
                 username = Librarian.Username;
             } catch (Exception ex) {
                 CrashControl.SCRAM(ex);
@@ -194,25 +225,25 @@ namespace LibCheck.Modules.Security {
                 return false;
             }
 
-            if (IsInHaltPhase())
-                throw new InvalidOperationException($"You cannot authenticate for a meantime.\nHalt Expiration {expTime:dd/MM/yyyy hh:mm tt}");
-
-            try {
-                byte[] salt = Convert.FromBase64String(token.Salt);
-                string provUserHash = CryptComp.HashPassword(username, salt);
-                string provPassHash = CryptComp.HashPassword(password, salt);
-                if (!provUserHash.Equals(token.Username) || !provPassHash.Equals(token.Hash))
-                    return false;
-
-                retries = 0; // Reset since the librarian logged in.
-                return true;
-            } catch (Exception) {
-                retries++;
-                if (retries >= 5) {
-                    incrementTimer += 30;
-                    expTime = DateTime.Now.AddSeconds(incrementTimer);
-                }
+            byte[] salt = Convert.FromBase64String(token.Salt);
+            string provUserHash = CryptComp.HashPassword(username, salt);
+            string provPassHash = CryptComp.HashPassword(password, salt);
+            if (!provUserHash.Equals(token.Username) || !provPassHash.Equals(token.Hash)) {
+                Penalize();
                 return false;
+            }
+
+            retries = 0; // Reset since the librarian logged in.
+            incrementTimer = 0;
+            return true;
+        }
+
+        private static void Penalize() {
+            retries++;
+            if (retries >= 5) {
+                Logger.Log(Logger.LogEnums.Error, $"Multiple authentication attempts occurred.");
+                incrementTimer += 30;
+                expTime = DateTime.Now.AddSeconds(incrementTimer);
             }
         }
 
@@ -252,6 +283,9 @@ namespace LibCheck.Modules.Security {
                 SQLCipherDBKeySalt = token.SQLCipherDBKeySalt
             };
 
+            ZeroMemory(handler.AddrOfPinnedObject(), sqlKeyUnsafe.Length * 2);
+            handler.Free();
+
             FileInfo f = new FileInfo(Path.Combine(EnvVars.CredentialsInfo.FullName, "lc_cred.json"));
             using (StreamWriter sw = new StreamWriter(f.FullName)) {
                 using (JsonTextWriter writer = new JsonTextWriter(sw)) {
@@ -259,6 +293,7 @@ namespace LibCheck.Modules.Security {
                     serializer.Formatting = Formatting.Indented;
                     serializer.Serialize(writer, newToken);
                     writer.Flush();
+                    Logger.Log(Logger.LogEnums.Info, "Credentials re-written due to changed password.");
                 }
             }
 
@@ -298,6 +333,7 @@ namespace LibCheck.Modules.Security {
                     serializer.Formatting = Formatting.Indented;
                     serializer.Serialize(writer, newToken);
                     writer.Flush();
+                    Logger.Log(Logger.LogEnums.Info, "Credentials re-written due to account recovery.");
                 }
             }
 
@@ -309,7 +345,8 @@ namespace LibCheck.Modules.Security {
         /// Load the credentials.
         /// </summary>
         private static void LoadLibCCred() {
-            using (StreamReader stream = new StreamReader(Path.Combine(EnvVars.CredentialsInfo.FullName, "lc_cred.json"))) {
+            using (StreamReader stream = new StreamReader(Path.Combine(EnvVars.CredentialsInfo.FullName,
+                                                          "lc_cred.json"))) {
                 using (JsonTextReader reader = new JsonTextReader(stream)) {
                     JsonSerializer serializer = new JsonSerializer();
                     serializer.Formatting = Formatting.Indented;

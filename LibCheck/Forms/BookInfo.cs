@@ -1,6 +1,5 @@
 ﻿using LibCheck.Database.Tables;
 using LibCheck.Exceptions;
-using LibCheck.Modules.Security;
 
 namespace LibCheck.Forms {
     public partial class BookInfo : Form {
@@ -62,11 +61,7 @@ namespace LibCheck.Forms {
         }
 
         private void MarkAsDamageButton_Click(object sender, EventArgs e) {
-            bool isAuthenticated = false;
-            SecureDesktop.EnterSecureMode(() => {
-                isAuthenticated = new AuthenticateDiag().ShowDialog() == DialogResult.Yes;
-            });
-            if (!isAuthenticated) return;
+            if (book == null || !Modules.AppContext.Auth()) return;
             string msg = book.IsLostOrDamaged ? "Make sure the book was found or replaced a new copy before you proceed. Continue?"
                                               : "This will mark as lost or damaged and marked violated to the student who are " +
                                                 "currently borrowed. Continue?";

@@ -1,6 +1,8 @@
 ﻿using LibCheck.Modules;
 using LibCheck.Modules.Security;
 using SQLite;
+using System.Diagnostics;
+using System.Reflection;
 using System.Security;
 using System.Security.Cryptography;
 using System.Text;
@@ -32,8 +34,10 @@ namespace LibCheck.Database {
                 string dbPath = Path.Combine(EnvVars.MainPath.FullName, "libcheckdb.sqlite");
                 if (!File.Exists(dbPath))
                     throw new FileNotFoundException("Database file was not found!");
-                if (IsConnected)
+                if (IsConnected) {
+                    Logger.Log(Logger.LogEnums.Warn, "Database already loaded.");
                     return;
+                }
                 SQLiteConnectionString connStr = new SQLiteConnectionString(dbPath, false, key: CryptComp.ConvertToString(secString));
 
                 _conn = new SQLiteConnection(connStr);
@@ -54,12 +58,22 @@ namespace LibCheck.Database {
                     return;
                 _conn?.Close();
                 _conn = null;
+                Logger.Log(Logger.LogEnums.Warn, "Database Unloaded.");
             }
         }
 
         internal static byte[] KeyHandover() {
+            StackTrace stackTrace = new StackTrace();
+            MethodBase? methodBase = stackTrace.GetFrame(1)?.GetMethod();
+
             if (!Credentials.LoggedIn) throw new InvalidOperationException("Access is denied.");
             if (protectedByte == null) throw new InvalidOperationException("Byte key not loaded.");
+            if (methodBase == null) {
+                CrashControl.SCRAM(new InvalidOperationException(""));
+                return Array.Empty<byte>();
+            }
+            Logger.Log(Logger.LogEnums.Warn,
+                       $"SQLCipher: Key was handover to {methodBase.Module.Name}>>{methodBase.Name}().");
             return ProtectedData.Unprotect(protectedByte, null, DataProtectionScope.CurrentUser);
         }
 
@@ -96,7 +110,10 @@ namespace LibCheck.Database {
         internal static bool Insert(object obj) {
             try {
                 CheckConn();
-                return _conn?.Insert(obj) > 0;
+                int? res = _conn?.Insert(obj);
+                if (!res.HasValue) throw new InvalidOperationException("INSERT_FAILED");
+                Logger.Log(Logger.LogEnums.Info, $"{obj.GetType().Name} >> {res} row{(res != 1 ? "s" : "")} inserted.");
+                return res > 0;
             } catch (Exception ex) {
                 WriteError(ex.Message);
                 return false;
@@ -106,7 +123,10 @@ namespace LibCheck.Database {
         internal static bool Update(object obj) {
             try {
                 CheckConn();
-                return _conn?.Update(obj) > 0;
+                int? res = _conn?.Update(obj);
+                if (!res.HasValue) throw new InvalidOperationException("UPDATE_FAILED");
+                Logger.Log(Logger.LogEnums.Info, $"{obj.GetType().Name} >> {res} row{(res != 1 ? "s" : "")} affected.");
+                return res > 0;
             } catch (Exception ex) {
                 WriteError(ex.Message);
                 return false;
@@ -116,7 +136,10 @@ namespace LibCheck.Database {
         internal static bool Delete(object obj) {
             try {
                 CheckConn();
-                return _conn?.Delete(obj) > 0;
+                int? res = _conn?.Delete(obj);
+                if (!res.HasValue) throw new InvalidOperationException("DEL_GEN_FAILED");
+                Logger.Log(Logger.LogEnums.Info, $"{obj.GetType().Name} >> {res} row{(res != 1 ? "s" : "")} deleted.");
+                return res > 0;
             } catch (Exception ex) {
                 WriteError(ex.Message);
                 return false;
@@ -126,7 +149,10 @@ namespace LibCheck.Database {
         internal static bool Delete<T>(string primaryKey) where T : new() {
             try {
                 CheckConn();
-                return _conn?.Delete<T>(primaryKey) > 0;
+                int? res = _conn?.Delete(_conn?.Delete<T>(primaryKey));
+                if (!res.HasValue) throw new InvalidOperationException("DEL_SPECIFIC_FAILED");
+                Logger.Log(Logger.LogEnums.Info, $"SPECIFIC_DEL >> {res} row{(res != 1 ? "s" : "")} deleted.");
+                return res > 0;
             } catch (Exception ex) {
                 WriteError(ex.Message);
                 return false;

@@ -9,6 +9,7 @@ namespace LibCheck.Forms.Admin {
 
         private void AccountRecoveryDiag_Load(object sender, EventArgs e) {
             WriteInfos();
+            Logger.Log(Logger.LogEnums.Verbose, $"{GetType().Name} info loaded.");
         }
 
         private void WriteInfos() {
@@ -18,10 +19,14 @@ namespace LibCheck.Forms.Admin {
             }
             label1.Text = "There are no codes that are previously generated. Click 'Generate' to create a new one.";
         }
+
         private void GenerateButton_Click(object sender, EventArgs e) {
-            if (RecoveryCodesCenter.Count > 0 && MessageBox.Show(this, "Creating another recovery codes will discard the previous codes. Continue?",
-                                                                 "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+            if (RecoveryCodesCenter.Count > 0 &&
+                MessageBox.Show(this, "Creating another recovery codes will discard the previous codes. Continue?",
+                                                                 "", MessageBoxButtons.YesNo,
+                                                                 MessageBoxIcon.Exclamation) == DialogResult.No)
                 return;
+
             PleaseWait.RunInPleaseWait(this, new Action(() => {
                 try {
                     PleaseWait.SetPWDText("Generating code...");
@@ -37,7 +42,8 @@ namespace LibCheck.Forms.Admin {
 
                 } catch (Exception ex) {
                     Logger.Log(Logger.LogEnums.Error, $"Failed to generate recovery codes. ({ex.Message})");
-                    MessageBox.Show(this, $"Failed to generate recovery.\nCause: {ex.Message}", "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    MessageBox.Show(this, $"Failed to generate recovery.\nCause: {ex.Message}",
+                                    "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }
             }));
         }
@@ -58,7 +64,5 @@ namespace LibCheck.Forms.Admin {
                 }
             }));
         }
-
-
     }
 }

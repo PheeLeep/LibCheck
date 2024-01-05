@@ -87,6 +87,16 @@ namespace LibCheck.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap audio_24px {
+            get {
+                object obj = ResourceManager.GetObject("audio_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap back_card {
             get {
                 object obj = ResourceManager.GetObject("back_card", resourceCulture);
@@ -115,6 +125,16 @@ namespace LibCheck.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cancel_24px {
+            get {
+                object obj = ResourceManager.GetObject("cancel_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;p&gt;An email was sent from a librarian:&lt;/p&gt;
         ///
         ///&lt;blockquote&gt;
@@ -131,6 +151,26 @@ namespace LibCheck.Properties {
         internal static string CustomEmail {
             get {
                 return ResourceManager.GetString("CustomEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap empty_trash_32px {
+            get {
+                object obj = ResourceManager.GetObject("empty_trash_32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap error_24px {
+            get {
+                object obj = ResourceManager.GetObject("error_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -297,6 +337,16 @@ namespace LibCheck.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap info_24px {
+            get {
+                object obj = ResourceManager.GetObject("info_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap key_64px {
             get {
                 object obj = ResourceManager.GetObject("key_64px", resourceCulture);
@@ -337,9 +387,39 @@ namespace LibCheck.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap radioactive_24px {
+            get {
+                object obj = ResourceManager.GetObject("radioactive_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap refresh_32px {
+            get {
+                object obj = ResourceManager.GetObject("refresh_32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Reg_ShowPass {
             get {
                 object obj = ResourceManager.GetObject("Reg_ShowPass", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap save_32px {
+            get {
+                object obj = ResourceManager.GetObject("save_32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

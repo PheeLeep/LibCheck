@@ -1,7 +1,5 @@
-﻿using LibCheck.Database.Tables;
-using LibCheck.Exceptions;
+﻿using LibCheck.Exceptions;
 using LibCheck.Forms.SearchTools;
-using LibCheck.Modules;
 
 namespace LibCheck.Forms {
     public partial class MainForm : Form {

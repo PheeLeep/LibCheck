@@ -17,7 +17,7 @@ namespace LibCheck.Modules {
             get => _emailCount;
             private set {
                 _emailCount = value;
-                if (_emailCount != value) 
+                if (_emailCount != value)
                     EmailQueueChanged?.Invoke();
             }
         }
@@ -37,7 +37,7 @@ namespace LibCheck.Modules {
                     EmailQueue queue = queues[0];
                     Database.Database.Delete(queue);
                     string redact = Miscellaneous.Redact(queue.MailTo);
-                    if (!Send(queue.StudentID,queue.MailTo, queue.Body, queue.Subject)) {
+                    if (!Send(queue.StudentID, queue.MailTo, queue.Body, queue.Subject)) {
                         Logger.Log(Logger.LogEnums.Error, $"Couldn't send an email {redact}");
                         continue;
                     }
@@ -49,9 +49,9 @@ namespace LibCheck.Modules {
                         StudentID = queue.StudentID,
                         MailTo = queue.MailTo
                     };
-                    if (!Database.Database.Insert(recent)) 
+                    if (!Database.Database.Insert(recent))
                         Logger.Log(Logger.LogEnums.Error, "Failed to write a log of an email.");
-                    
+
                     EmailQueueCount = queues.Count;
                     continue;
                 }
@@ -70,15 +70,19 @@ namespace LibCheck.Modules {
 
                     string[] scopes = { GmailService.Scope.GmailSend };
                     FileInfo clientFile = new FileInfo(Path.Combine(EnvVars.CredentialsInfo.FullName, "gmailclient.json"));
+
                     if (!clientFile.Exists)
                         throw new FileNotFoundException("Email credentials not found!", clientFile.FullName);
+
                     using (var stream = new FileStream(clientFile.FullName, FileMode.Open, FileAccess.Read)) {
                         Logger.Log(Logger.LogEnums.Verbose, "Loading up the email credential.");
+
+                        FileDataStore fds = new FileDataStore(EnvVars.CredentialsInfo.FullName, true);
                         var creds = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStream(stream).Secrets,
                                                                              scopes,
                                                                              "user",
                                                                              CancellationToken.None,
-                                                                             new FileDataStore(EnvVars.CredentialsInfo.FullName, true)).Result;
+                                                                             fds).Result;
                         Logger.Log(Logger.LogEnums.Verbose, "Initializing email service...");
                         service = new GmailService(new BaseClientService.Initializer {
                             HttpClientInitializer = creds,
@@ -96,6 +100,7 @@ namespace LibCheck.Modules {
             if (!IsInitialized) return;
             service?.Dispose();
             service = null;
+            Logger.Log(Logger.LogEnums.Info, "Email service stopped.");
         }
 
 
@@ -109,8 +114,9 @@ namespace LibCheck.Modules {
 
                 if (Database.Database.Read(out List<EmailQueue>? queues, whereCond: $"StudentID = '{student.StudentID}'") > 0
                     && queues != null) {
-                    List<EmailQueue> queues_changedEmail = queues.FindAll(q =>q != null && !string.IsNullOrWhiteSpace(q.MailTo) && !q.MailTo.Equals(student.EmailAddress));
-                    if (queues_changedEmail.Any() ) {
+                    List<EmailQueue> queues_changedEmail = queues.FindAll(q => q != null && !string.IsNullOrWhiteSpace(q.MailTo)
+                                                                               && !q.MailTo.Equals(student.EmailAddress));
+                    if (queues_changedEmail.Any()) {
                         foreach (EmailQueue q in queues_changedEmail) {
                             Database.Database.Delete(q);
                         }
@@ -149,7 +155,7 @@ namespace LibCheck.Modules {
                     };
                     msg.From.Add(new MailboxAddress("LibCheck Email Notifier", _emailProvider));
                     msg.To.Add(new MailboxAddress("", mailTo));
-                    
+
                     var Base64txt = Convert.ToBase64String(Encoding.UTF8.GetBytes(msg.ToString()))
                                                             .Replace('+', '-')
                                                             .Replace('/', '_')
@@ -163,7 +169,9 @@ namespace LibCheck.Modules {
                     Logger.Log(Logger.LogEnums.Info, "Email sent.");
                     return true;
                 } catch (Exception ex) {
-                    Logger.Log(Logger.LogEnums.Error, $"Failed to send due to an error and it's now on queue for later resent attempt. ({ex.Message}).");
+                    Logger.Log(Logger.LogEnums.Error, "Failed to send due to an error and it's now" +
+                                                      $" on queue for later resent attempt. ({ex.Message}).");
+
                     EmailQueue? queue = new EmailQueue() {
                         DateOccurred = DateTime.Now,
                         StudentID = studentID,

@@ -13,7 +13,7 @@ namespace LibCheck.Forms.Admin {
             students = new List<Students>();
             recent = re;
             if (recent != null) {
-                if (Database.Database.Read(out List<Students>? oldStudent, 
+                if (Database.Database.Read(out List<Students>? oldStudent,
                                            whereCond: $"StudentID = '{recent.StudentID}'") <= 0
                                            || oldStudent == null)
                     throw new InvalidOperationException("No students found.");
@@ -60,12 +60,14 @@ namespace LibCheck.Forms.Admin {
                                               .Replace("\n", "<br />");
                 string txt = Properties.Resources.CustomEmail.Replace("%school%", Credentials.Librarian?.SchoolName)
                                                            .Replace("%text%", body)
-                                                           .Replace("%librarian%", 
+                                                           .Replace("%librarian%",
                                                                     Miscellaneous.GenerateFullName(Credentials.Librarian));
 
                 if (!EmailService.Queue(students[ToComboxBox.SelectedIndex], txt, SubjectTextBox.Text))
                     throw new InvalidOperationException("Failed to add to the email queue.");
-                MessageBox.Show(this, "Your composed email was added to the queue.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                MessageBox.Show(this, "Your composed email was added to the queue.",
+                                "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Close();
             } catch (Exception ex) {
                 MessageBox.Show(this, ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Hand);

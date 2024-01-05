@@ -34,6 +34,7 @@ namespace LibCheck.Forms.Admin.UserControls {
                 }).ToString();
 
                 dataGridView1.DataSource = infos;
+                Logger.Log(Logger.LogEnums.Verbose, $"{GetType().Name} info loaded.");
                 for (int i = 0; i < dataGridView1.Columns.Count; i++)
                     dataGridView1.Columns[i].Visible = false;
 
@@ -46,8 +47,9 @@ namespace LibCheck.Forms.Admin.UserControls {
         }
 
         private void AddButton_Click(object sender, EventArgs e) {
-            using (BooksDialog bdg = new BooksDialog(Modules.Miscellaneous.DatabaseMode.Add)) {
+            using (BooksDialog bdg = new BooksDialog(Miscellaneous.DatabaseMode.Add)) {
                 if (bdg.ShowDialog(this) == DialogResult.OK) {
+                    Logger.Log(Logger.LogEnums.Verbose, $"A book was added. Reloading...");
                     Load();
                 }
             }
@@ -62,11 +64,14 @@ namespace LibCheck.Forms.Admin.UserControls {
                     return;
                 using (BooksDialog bdg = new BooksDialog(Miscellaneous.DatabaseMode.Update, isbn)) {
                     if (bdg.ShowDialog(this) == DialogResult.OK) {
+                        Logger.Log(Logger.LogEnums.Verbose, $"A book was updated. Reloading...");
                         Load();
                     }
                 }
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                Logger.Log(Logger.LogEnums.Error, $"Failed to update a book. ({ex.Message})");
+                MessageBox.Show(this, $"Failed to update.\nCause: {ex.Message}",
+                                "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
 
@@ -77,15 +82,29 @@ namespace LibCheck.Forms.Admin.UserControls {
                 string? isbn = dataGridView1.SelectedRows[0].Cells["ISBN"].Value.ToString();
                 if (string.IsNullOrWhiteSpace(isbn))
                     return;
-                if (MessageBox.Show(this, $"Do you want to delete '{isbn}'?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
-                    return;
-                if (!Database.Database.Delete<Books>(isbn)) {
-                    MessageBox.Show(this, "Failed to execute the database command.", "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                if (Database.Database.Read(out List<Books>? b, whereCond: $"ISBN = '{isbn}'") != 1
+                    || b == null) return;
+
+                Books br = b[0];
+                if (!string.IsNullOrWhiteSpace(br.StudentID) && !br.StudentID.Equals("(none)")) {
+                    MessageBox.Show(this, "Unable to delete as the book was borrowed by someone.",
+                                    "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    Logger.Log(Logger.LogEnums.Warn, $"Unable to delete as the book was borrowed by someone.");
                     return;
                 }
+
+                if (MessageBox.Show(this, $"Do you want to delete '{isbn}'? The printed QR code will invalidate.",
+                                    "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+                    return;
+
+                if (!Database.Database.Delete<Books>(isbn))
+                    throw new InvalidOperationException("Couldn't remove a book from the database.");
+                Logger.Log(Logger.LogEnums.Warn, "Book was deleted. Reloading...");
                 Load();
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                Logger.Log(Logger.LogEnums.Error, $"Failed to delete a book. ({ex.Message})");
+                MessageBox.Show(this, $"Failed to delete.\nCause: {ex.Message}",
+                                "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
 
@@ -100,7 +119,9 @@ namespace LibCheck.Forms.Admin.UserControls {
                     if (bInfo.ShowDialog() == DialogResult.OK)
                         Load();
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                Logger.Log(Logger.LogEnums.Error, $"Failed to read a book. ({ex.Message})");
+                MessageBox.Show(this, $"Failed to read.\nCause: {ex.Message}",
+                                "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
 
@@ -129,17 +150,21 @@ namespace LibCheck.Forms.Admin.UserControls {
                             string isbnCompacted = "ISBN: " + isbn;
                             using (Font font = new Font("Calibri", 12)) {
                                 SizeF txtSize = g.MeasureString(isbnCompacted, font);
-                                g.DrawString(isbnCompacted, font, Brushes.Black, new PointF((isbnCard.Width - txtSize.Width) / 2, qr.Height + 10));
+                                PointF pF = new PointF((isbnCard.Width - txtSize.Width) / 2, qr.Height + 10);
+                                g.DrawString(isbnCompacted, font, Brushes.Black, pF);
                             }
                         }
                     }
                     PleaseWait.SetPWDText("Done.");
+                    Logger.Log(Logger.LogEnums.Info, "Book QR code generated.");
                     Task.Factory.StartNew(() => {
                         Task.Delay(10).Wait();
                         Invoke(new Action(() => new IDResultDialog(isbnCard).ShowDialog(this)));
                     });
                 } catch (Exception ex) {
-                    MessageBox.Show(ex.Message);
+                    Logger.Log(Logger.LogEnums.Error, $"Failed to update a book. ({ex.Message})");
+                    MessageBox.Show(this, $"Failed to print.\nCause: {ex.Message}",
+                                    "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }
             });
         }

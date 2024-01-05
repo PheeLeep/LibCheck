@@ -26,8 +26,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             ChangeButton = new Button();
             oldPassTextBox = new TextBox();
             label3 = new Label();
@@ -56,7 +55,7 @@
             // 
             oldPassTextBox.Location = new Point(29, 111);
             oldPassTextBox.Name = "oldPassTextBox";
-            oldPassTextBox.Size = new Size(408, 37);
+            oldPassTextBox.Size = new Size(408, 32);
             oldPassTextBox.TabIndex = 8;
             oldPassTextBox.UseSystemPasswordChar = true;
             oldPassTextBox.TextChanged += passwordTextBoxes_TextChanged;
@@ -67,7 +66,7 @@
             label3.BackColor = Color.Transparent;
             label3.Location = new Point(29, 81);
             label3.Name = "label3";
-            label3.Size = new Size(158, 31);
+            label3.Size = new Size(130, 25);
             label3.TabIndex = 7;
             label3.Text = "Old Password:";
             // 
@@ -75,7 +74,7 @@
             // 
             newPassTextBox.Location = new Point(29, 206);
             newPassTextBox.Name = "newPassTextBox";
-            newPassTextBox.Size = new Size(409, 37);
+            newPassTextBox.Size = new Size(409, 32);
             newPassTextBox.TabIndex = 10;
             newPassTextBox.UseSystemPasswordChar = true;
             newPassTextBox.TextChanged += passwordTextBoxes_TextChanged;
@@ -86,7 +85,7 @@
             label1.BackColor = Color.Transparent;
             label1.Location = new Point(29, 172);
             label1.Name = "label1";
-            label1.Size = new Size(167, 31);
+            label1.Size = new Size(138, 25);
             label1.TabIndex = 9;
             label1.Text = "New Password:";
             // 
@@ -94,7 +93,7 @@
             // 
             retypePassTextBox.Location = new Point(28, 310);
             retypePassTextBox.Name = "retypePassTextBox";
-            retypePassTextBox.Size = new Size(408, 37);
+            retypePassTextBox.Size = new Size(408, 32);
             retypePassTextBox.TabIndex = 12;
             retypePassTextBox.UseSystemPasswordChar = true;
             retypePassTextBox.TextChanged += passwordTextBoxes_TextChanged;
@@ -107,10 +106,9 @@
             label2.ForeColor = Color.Black;
             label2.Location = new Point(26, 274);
             label2.Name = "label2";
-            label2.Size = new Size(202, 33);
+            label2.Size = new Size(166, 27);
             label2.TabIndex = 11;
             label2.Text = "Re-type Password:";
-            label2.Click += label2_Click;
             // 
             // label4
             // 
@@ -119,13 +117,13 @@
             label4.Font = new Font("Segoe UI", 16.2F, FontStyle.Italic, GraphicsUnit.Point);
             label4.Location = new Point(28, 24);
             label4.Name = "label4";
-            label4.Size = new Size(274, 45);
+            label4.Size = new Size(232, 38);
             label4.TabIndex = 13;
             label4.Text = "Change Password";
             // 
             // ChangePasswordDiag
             // 
-            AutoScaleDimensions = new SizeF(144F, 144F);
+            AutoScaleDimensions = new SizeF(120F, 120F);
             AutoScaleMode = AutoScaleMode.Dpi;
             BackgroundImage = Properties.Resources.bg;
             BackgroundImageLayout = ImageLayout.None;

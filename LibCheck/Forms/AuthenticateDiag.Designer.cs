@@ -49,16 +49,17 @@
             // label3
             // 
             label3.Anchor = AnchorStyles.Top;
-            label3.AutoSize = true;
+            label3.AutoEllipsis = true;
             label3.BackColor = Color.Transparent;
             label3.FlatStyle = FlatStyle.Flat;
             label3.Font = new Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point);
             label3.ForeColor = SystemColors.Control;
-            label3.Location = new Point(71, 164);
+            label3.Location = new Point(12, 164);
             label3.Name = "label3";
-            label3.Size = new Size(460, 30);
+            label3.Size = new Size(570, 30);
             label3.TabIndex = 5;
             label3.Text = "Please enter your password for authentication:";
+            label3.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // LoginButton
             // 
@@ -127,6 +128,7 @@
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Authenticate";
+            Load += AuthenticateDiag_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();

@@ -55,7 +55,8 @@ namespace LibCheck.Forms.Admin {
                 }
 
             } catch (Exception ex) {
-                MessageBox.Show(this, $"Failed to print.\n\nCause: {ex.Message}", "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                MessageBox.Show(this, $"Failed to print.\n\nCause: {ex.Message}", "",
+                                MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
     }

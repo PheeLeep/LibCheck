@@ -113,7 +113,8 @@ namespace LibCheck.Forms {
 
                                 Credentials.Register(token, lInfo, sb);
                                 Invoke(new Action(() => {
-                                    MessageBox.Show(this, "Registration succeed!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    MessageBox.Show(this, "Registration succeed!", "",
+                                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     isDone = true;
                                     DialogResult = DialogResult.Yes;
                                     Close();

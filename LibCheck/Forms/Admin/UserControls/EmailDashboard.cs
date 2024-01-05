@@ -1,11 +1,11 @@
 ﻿using LibCheck.Database.Tables;
 using LibCheck.Modules;
-using LibCheck.Modules.Security;
 
 namespace LibCheck.Forms.Admin.UserControls {
     public partial class EmailDashboard : UserControl {
 
         private ComposeDiag? _diag;
+        private bool isLoaded = false;
         public EmailDashboard() {
             InitializeComponent();
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
@@ -25,6 +25,8 @@ namespace LibCheck.Forms.Admin.UserControls {
             EmailService.EmailQueueChanged += EmailService_EmailQueueChanged;
             EmailQueueLabel.Text = EmailService.EmailQueueCount.ToString();
             CheckRecentEmails();
+            isLoaded = true;
+            Logger.Log(Logger.LogEnums.Verbose, $"{GetType().Name} info loaded.");
         }
 
         private void EmailDashboard_Disposed(object? sender, EventArgs e) {
@@ -49,14 +51,11 @@ namespace LibCheck.Forms.Admin.UserControls {
                 _diag.Focus();
                 return;
             }
-            bool isAuthenticated = false;
-            SecureDesktop.EnterSecureMode(() => {
-                isAuthenticated = new AuthenticateDiag().ShowDialog() == DialogResult.Yes;
-            });
-            if (!isAuthenticated || MessageBox.Show(this, "Please use this feature responsibly! " +
-                                                    "This will record what you're typing and unable to delete!", "",
-                                                    MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+            if (!Modules.AppContext.Auth() || MessageBox.Show(this, "Please use this feature responsibly! " +
+                                                            "This will record what you're typing and unable to delete!", "",
+                                                            MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
                 return;
+
             _diag = new ComposeDiag();
             _diag.FormClosed += (g, e) => {
                 CheckRecentEmails();
@@ -73,21 +72,23 @@ namespace LibCheck.Forms.Admin.UserControls {
             for (int i = 0; i < dataGridView1.Columns.Count; i++)
                 dataGridView1.Columns[i].Visible = false;
 
-            dataGridView1.Columns["DateOccurred"].HeaderText = "Date Occurred";
-            dataGridView1.Columns["DateOccurred"].Visible = true;
+            dataGridView1.Columns["SafeDateOccurred"].HeaderText = "Date Occurred";
+            dataGridView1.Columns["SafeDateOccurred"].Visible = true;
             dataGridView1.Columns["StudentID"].Visible = true;
             dataGridView1.Columns["MailTo"].Visible = true;
         }
 
         private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e) {
             try {
-                if (dataGridView1.DataSource == null) return;
+                if (!isLoaded || dataGridView1.DataSource == null || e.RowIndex < 0) return;
                 List<RecentEmail> recentEmails = (List<RecentEmail>)dataGridView1.DataSource;
                 using (ComposeDiag cd = new ComposeDiag(recentEmails[e.RowIndex])) {
                     cd.ShowDialog();
                 }
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                Logger.Log(Logger.LogEnums.Error, $"Failed to read email. ({ex.Message})");
+                MessageBox.Show(this, $"Failed to read email.\nCause: {ex.Message}",
+                                "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
     }

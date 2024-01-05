@@ -1,5 +1,4 @@
-﻿using LibCheck.Forms;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace LibCheck.Modules {
 

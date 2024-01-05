@@ -25,6 +25,7 @@ namespace LibCheck.Modules {
             Credentials.LoginAsLibrarian();
 
             if (!Credentials.LoggedIn) {
+                Logger.Log(Logger.LogEnums.Info, "Failed to login. Exiting...");
                 Environment.Exit(0);
                 return;
             }
@@ -37,11 +38,18 @@ namespace LibCheck.Modules {
             _mainForm.Show();
         }
 
+        internal static bool Auth() {
+            bool isAuth = false;
+            SecureDesktop.EnterSecureMode(() => {
+                isAuth = new AuthenticateDiag().ShowDialog() == DialogResult.Yes;
+            });
+            return isAuth;
+        }
+
         internal bool Switch() {
             if (!IsInAdminMode) {
-                SecureDesktop.EnterSecureMode(() => {
-                    IsInAdminMode = new AuthenticateDiag().ShowDialog() == DialogResult.Yes;
-                });
+                IsInAdminMode = Auth();
+
                 if (IsInAdminMode) {
                     AdminForm? _adminForm = new AdminForm();
                     _adminForm.FormClosing += (s, e) => {
@@ -51,17 +59,22 @@ namespace LibCheck.Modules {
                     _mainForm?.Close();
                     _mainForm = null;
                     _adminForm.Show();
+                    Logger.Log(Logger.LogEnums.Info, "Context switched to admin mode.");
                     return true;
                 }
                 return false;
             }
+
             IsInAdminMode = false;
             _mainForm = new MainForm();
             MainForm = _mainForm;
             _mainForm.Show();
+            Logger.Log(Logger.LogEnums.Info, "Context switched to normal mode.");
             return true;
         }
         private void Application_ThreadException(object sender, ThreadExceptionEventArgs e) {
+            Logger.Log(Logger.LogEnums.Fatal, "An unhandled exception occurred! A scram will perform immediately." +
+                                              $" (E:{e.Exception.HResult:X})");
             CrashControl.SCRAM(e.Exception);
         }
 

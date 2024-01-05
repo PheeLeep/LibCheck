@@ -79,6 +79,7 @@ namespace LibCheck.Modules.Security {
         internal static string[] Generate() {
             if (!Credentials.LoggedIn || Credentials.Librarian == null)
                 throw new InvalidOperationException("Unable to generate while logged out.");
+
             string? username = Credentials.Librarian.Username;
             if (string.IsNullOrEmpty(username)) throw new InvalidOperationException("Username is empty.");
             for (int i = 0; i < challenges.Count; i++)
@@ -86,10 +87,11 @@ namespace LibCheck.Modules.Security {
             challenges.Clear();
 
             List<string> result = new List<string>();
+            byte[] SQLiteKey = Database.Database.KeyHandover();
             for (int i = 0; i < 10; i++) {
                 string key = CryptComp.ConvertToString(CryptComp.GenerateSecurePassword(6, false, false, true, false));
                 byte[] asin = CryptComp.GenerateRNGBytes();
-                string firstCryptStr = CryptComp.StringCrypt(Encoding.UTF8.GetString(Database.Database.KeyHandover()),
+                string firstCryptStr = CryptComp.StringCrypt(Encoding.UTF8.GetString(SQLiteKey),
                                                              Encoding.UTF8.GetBytes(key), asin);
                 string finalCryptStr = CryptComp.StringCrypt($"{username}:{firstCryptStr}",
                                                              Encoding.UTF8.GetBytes(key), asin);
@@ -107,7 +109,8 @@ namespace LibCheck.Modules.Security {
         }
 
         internal static void Clear() {
-            if (!Credentials.LoggedIn) throw new InvalidOperationException("Unable to remove account recovery while logged out.");
+            if (!Credentials.LoggedIn)
+                throw new InvalidOperationException("Unable to remove account recovery while logged out.");
             if (Count == 0) return;
             for (int i = 0; i < challenges.Count; i++)
                 challenges[i].Dispose();

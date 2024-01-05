@@ -43,8 +43,10 @@ namespace LibCheck.Modules.Security {
         /// </summary>
         /// <param name="length">A specified length of password to be use.</param>
         /// <returns>Returns a <see cref="SecureString"/> containing randomized password.</returns>
-        internal static SecureString GenerateSecurePassword(int length = 32, bool smallCaps = true, bool largeCaps = false,
-                                                            bool numbers = false, bool symbols = false) {
+        internal static SecureString GenerateSecurePassword(int length = 32, bool smallCaps = true,
+                                                            bool largeCaps = false,
+                                                            bool numbers = false,
+                                                            bool symbols = false) {
             string validChars = "";
             if (smallCaps) validChars += "abcdefghijklmnopqrstuvwxyz";
             if (largeCaps) validChars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -71,7 +73,7 @@ namespace LibCheck.Modules.Security {
             IntPtr ptr = IntPtr.Zero;
             try {
                 ptr = Marshal.SecureStringToGlobalAllocUnicode(secStr);
-                return Marshal.PtrToStringUni(ptr) ?? throw new InvalidOperationException("Failed to parse");
+                return Marshal.PtrToStringUni(ptr) ?? throw new InvalidOperationException("Failed to parse.");
             } finally {
                 Marshal.ZeroFreeGlobalAllocUnicode(ptr);
             }
@@ -94,9 +96,11 @@ namespace LibCheck.Modules.Security {
                 }
 
                 using (ICryptoTransform crypto = isEncrypt ? aes.CreateEncryptor() : aes.CreateDecryptor()) {
-                    byte[] plainBytes = isEncrypt ? Encoding.UTF8.GetBytes(input) : Convert.FromBase64String(input);
+                    byte[] plainBytes = isEncrypt ? Encoding.UTF8.GetBytes(input) :
+                                                    Convert.FromBase64String(input);
                     byte[] res = crypto.TransformFinalBlock(plainBytes, 0, plainBytes.Length);
-                    return isEncrypt ? Convert.ToBase64String(res) : Encoding.UTF8.GetString(res);
+                    return isEncrypt ? Convert.ToBase64String(res) :
+                                       Encoding.UTF8.GetString(res);
                 }
             }
         }

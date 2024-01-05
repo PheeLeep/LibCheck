@@ -53,21 +53,26 @@ namespace LibCheck.Forms.SearchTools {
         }
 
         internal void SuspendOp(bool directlyClose) {
-            if (!inModular) throw new InvalidOperationException("Unable to invoke a method when a search is not modular.");
+            if (!inModular)
+                throw new InvalidOperationException("Unable to invoke a method when a search is not modular.");
             if (inSuspension) return;
             TerminateCamera();
 
             if (directlyClose) {
+                Logger.Log(Logger.LogEnums.Info, "Module stopped.");
                 Close();
                 return;
             }
+            Logger.Log(Logger.LogEnums.Info, "Module in suspension.");
             inSuspension = true;
         }
 
         internal void ResumeOp() {
-            if (!inModular) throw new InvalidOperationException("Unable to invoke a method when a search is not modular.");
+            if (!inModular)
+                throw new InvalidOperationException("Unable to invoke a method when a search is not modular.");
             if (!inSuspension) return;
             camComboBox_SelectedIndexChanged(this, EventArgs.Empty);
+            Logger.Log(Logger.LogEnums.Info, "Module resumed.");
             inSuspension = false;
         }
 
@@ -138,6 +143,7 @@ namespace LibCheck.Forms.SearchTools {
                 videoSource = new VideoCaptureDevice(devs[i].MonikerString);
                 videoSource.NewFrame += VideoSource_NewFrame;
                 videoSource.Start();
+                Logger.Log(Logger.LogEnums.Info, $"Camera module started. Input: {videoInput}");
                 return;
             }
 
@@ -174,7 +180,7 @@ namespace LibCheck.Forms.SearchTools {
                             if (r == null) return;
 
                             string[] arr = r.Text.Split('#', StringSplitOptions.RemoveEmptyEntries);
-                            if (arr.Length != 4 || !arr[0].Equals("LC")|| !arr[1].Equals(Credentials.Librarian?.SchoolGUID) || 
+                            if (arr.Length != 4 || !arr[0].Equals("LC") || !arr[1].Equals(Credentials.Librarian?.SchoolGUID) ||
                                 !int.TryParse(arr[2], out int typ)) return;
 
                             switch (typ) {
@@ -212,11 +218,13 @@ namespace LibCheck.Forms.SearchTools {
             blackBmp ??= CreateBlankBmp();
             using (Bitmap oldBmp = (Bitmap)pictureBox1.Image)
                 pictureBox1.Image = (Bitmap)blackBmp.Clone();
+            Logger.Log(Logger.LogEnums.Info, "Camera module stopped.");
         }
 
         private void ManualSearchButton_Click(object sender, EventArgs e) {
             if (string.IsNullOrWhiteSpace(SearchTextBox.Text)) {
-                MessageBox.Show(this, "Please provide a search text.", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(this, "Please provide a search text.", "",
+                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 

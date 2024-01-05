@@ -41,8 +41,10 @@ namespace LibCheck.Forms {
         }
 
         private void ChangeDashboards(UserControl uc) {
-            if (StagePanel.Controls.GetChildIndex(uc) != 0)
+            if (StagePanel.Controls.GetChildIndex(uc) != 0) {
                 uc.BringToFront();
+                uc.Focus();
+            }
         }
         private void HomeButton_Click(object sender, EventArgs e) {
             ChangeDashboards(homeDashboard1);
@@ -75,6 +77,11 @@ namespace LibCheck.Forms {
 
         private void EmailsButton_Click(object sender, EventArgs e) {
             ChangeDashboards(emailDashboard1);
+        }
+
+        private void LogsButton_Click(object sender, EventArgs e) {
+            ChangeDashboards(logsDashboard1);
+            logsDashboard1.Reload();
         }
     }
 }

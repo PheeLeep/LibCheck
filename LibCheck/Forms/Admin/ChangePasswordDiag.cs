@@ -1,4 +1,5 @@
-﻿using LibCheck.Modules.Security;
+﻿using LibCheck.Modules;
+using LibCheck.Modules.Security;
 
 namespace LibCheck.Forms.Admin {
     public partial class ChangePasswordDiag : Form {
@@ -7,7 +8,9 @@ namespace LibCheck.Forms.Admin {
         }
 
         private void passwordTextBoxes_TextChanged(object sender, EventArgs e) {
-            ChangeButton.Enabled = oldPassTextBox.Text.Length >= 8 && newPassTextBox.Text.Length >= 8 && retypePassTextBox.Text.Length >= 8;
+            ChangeButton.Enabled = oldPassTextBox.Text.Length >= 8 &&
+                                   newPassTextBox.Text.Length >= 8 &&
+                                   retypePassTextBox.Text.Length >= 8;
         }
 
         private void ChangeButton_Click(object sender, EventArgs e) {
@@ -15,15 +18,15 @@ namespace LibCheck.Forms.Admin {
                 if (!newPassTextBox.Text.Equals(retypePassTextBox.Text))
                     throw new InvalidOperationException("New and retype passwords are not matched.");
                 Credentials.ChangePassword(oldPassTextBox.Text, newPassTextBox.Text);
+                Logger.Log(Logger.LogEnums.Info, "Password changed.");
                 MessageBox.Show(this, "Password changed.", "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+
                 Close();
             } catch (Exception ex) {
-                MessageBox.Show(this, ex.Message, "Failed to change password.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Logger.Log(Logger.LogEnums.Error, $"Failed to change password. ({ex.Message})");
+                MessageBox.Show(this, ex.Message, "Failed to change password.",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-        }
-
-        private void label2_Click(object sender, EventArgs e) {
-
         }
     }
 }

@@ -37,6 +37,7 @@
             panel1 = new Panel();
             pictureBox1 = new PictureBox();
             panel2 = new Panel();
+            label4 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
@@ -145,6 +146,7 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(label4);
             panel2.Controls.Add(LoginButton);
             panel2.Controls.Add(label2);
             panel2.Controls.Add(usernameTextBox);
@@ -157,6 +159,17 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(449, 382);
             panel2.TabIndex = 6;
+            // 
+            // label4
+            // 
+            label4.AutoEllipsis = true;
+            label4.Dock = DockStyle.Bottom;
+            label4.Location = new Point(0, 357);
+            label4.Name = "label4";
+            label4.Size = new Size(449, 25);
+            label4.TabIndex = 5;
+            label4.TextAlign = ContentAlignment.MiddleCenter;
+            label4.Visible = false;
             // 
             // Login
             // 
@@ -177,6 +190,7 @@
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login | LibCheck";
+            Load += Login_Load;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel2.ResumeLayout(false);
@@ -195,5 +209,6 @@
         private Panel panel1;
         private PictureBox pictureBox1;
         private Panel panel2;
+        private Label label4;
     }
 }

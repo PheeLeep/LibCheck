@@ -42,6 +42,8 @@ namespace LibCheck.Modules.Security {
                         SetThreadDesktop(secureDesktop);
                         dimForm?.Show();
                         action();
+                        dimForm?.Dispose();
+                        dimForm = null;
                     }).Wait();
 
                 } finally {

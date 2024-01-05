@@ -40,18 +40,21 @@ namespace LibCheck.Forms
             StudentsButton = new Button();
             BooksButton = new Button();
             HomeButton = new Button();
-            booksDashboard1 = new BooksDashboard();
-            homeDashboard1 = new HomeDashboard();
-            studentsDashboard1 = new StudentsDashboard();
             LogsButton = new Button();
+            homeDashboard1 = new HomeDashboard();
+            booksDashboard1 = new BooksDashboard();
+            studentsDashboard1 = new StudentsDashboard();
             panel2 = new Panel();
             StagePanel = new Panel();
             emailDashboard1 = new EmailDashboard();
+            logsDashboard1 = new LogsDashboard();
             panel3 = new Panel();
             cMS1 = new ContextMenuStrip(components);
             securityToolStripMenuItem = new ToolStripMenuItem();
             changePasswordToolStripMenuItem = new ToolStripMenuItem();
             accountRecoveryToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator1 = new ToolStripSeparator();
+            aboutToolStripMenuItem = new ToolStripMenuItem();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             StagePanel.SuspendLayout();
@@ -185,35 +188,6 @@ namespace LibCheck.Forms
             HomeButton.UseVisualStyleBackColor = true;
             HomeButton.Click += HomeButton_Click;
             // 
-            // booksDashboard1
-            // 
-            booksDashboard1.Dock = DockStyle.Fill;
-            booksDashboard1.Location = new Point(0, 0);
-            booksDashboard1.Margin = new Padding(5);
-            booksDashboard1.Name = "booksDashboard1";
-            booksDashboard1.Size = new Size(860, 521);
-            booksDashboard1.TabIndex = 4;
-            // 
-            // homeDashboard1
-            // 
-            homeDashboard1.BackColor = SystemColors.ActiveCaption;
-            homeDashboard1.Dock = DockStyle.Fill;
-            homeDashboard1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            homeDashboard1.Location = new Point(0, 0);
-            homeDashboard1.Margin = new Padding(5);
-            homeDashboard1.Name = "homeDashboard1";
-            homeDashboard1.Size = new Size(860, 521);
-            homeDashboard1.TabIndex = 0;
-            // 
-            // studentsDashboard1
-            // 
-            studentsDashboard1.Dock = DockStyle.Fill;
-            studentsDashboard1.Location = new Point(0, 0);
-            studentsDashboard1.Margin = new Padding(5);
-            studentsDashboard1.Name = "studentsDashboard1";
-            studentsDashboard1.Size = new Size(860, 521);
-            studentsDashboard1.TabIndex = 4;
-            // 
             // LogsButton
             // 
             LogsButton.Dock = DockStyle.Top;
@@ -227,6 +201,34 @@ namespace LibCheck.Forms
             LogsButton.TabIndex = 5;
             LogsButton.Text = "Logs";
             LogsButton.UseVisualStyleBackColor = true;
+            LogsButton.Click += LogsButton_Click;
+            // 
+            // homeDashboard1
+            // 
+            homeDashboard1.BackColor = SystemColors.ActiveCaption;
+            homeDashboard1.Dock = DockStyle.Fill;
+            homeDashboard1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            homeDashboard1.Location = new Point(0, 0);
+            homeDashboard1.Margin = new Padding(4);
+            homeDashboard1.Name = "homeDashboard1";
+            homeDashboard1.Size = new Size(860, 521);
+            homeDashboard1.TabIndex = 0;
+            // 
+            // booksDashboard1
+            // 
+            booksDashboard1.Dock = DockStyle.Fill;
+            booksDashboard1.Location = new Point(0, 0);
+            booksDashboard1.Name = "booksDashboard1";
+            booksDashboard1.Size = new Size(860, 521);
+            booksDashboard1.TabIndex = 1;
+            // 
+            // studentsDashboard1
+            // 
+            studentsDashboard1.Dock = DockStyle.Fill;
+            studentsDashboard1.Location = new Point(0, 0);
+            studentsDashboard1.Name = "studentsDashboard1";
+            studentsDashboard1.Size = new Size(860, 521);
+            studentsDashboard1.TabIndex = 2;
             // 
             // panel2
             // 
@@ -241,9 +243,10 @@ namespace LibCheck.Forms
             // StagePanel
             // 
             StagePanel.Controls.Add(homeDashboard1);
-            StagePanel.Controls.Add(emailDashboard1);
             StagePanel.Controls.Add(booksDashboard1);
             StagePanel.Controls.Add(studentsDashboard1);
+            StagePanel.Controls.Add(emailDashboard1);
+            StagePanel.Controls.Add(logsDashboard1);
             StagePanel.Dock = DockStyle.Fill;
             StagePanel.Location = new Point(242, 0);
             StagePanel.Name = "StagePanel";
@@ -257,6 +260,14 @@ namespace LibCheck.Forms
             emailDashboard1.Name = "emailDashboard1";
             emailDashboard1.Size = new Size(860, 521);
             emailDashboard1.TabIndex = 5;
+            // 
+            // logsDashboard1
+            // 
+            logsDashboard1.Dock = DockStyle.Fill;
+            logsDashboard1.Location = new Point(0, 0);
+            logsDashboard1.Name = "logsDashboard1";
+            logsDashboard1.Size = new Size(860, 521);
+            logsDashboard1.TabIndex = 4;
             // 
             // panel3
             // 
@@ -275,9 +286,9 @@ namespace LibCheck.Forms
             // cMS1
             // 
             cMS1.ImageScalingSize = new Size(20, 20);
-            cMS1.Items.AddRange(new ToolStripItem[] { securityToolStripMenuItem });
+            cMS1.Items.AddRange(new ToolStripItem[] { securityToolStripMenuItem, toolStripSeparator1, aboutToolStripMenuItem });
             cMS1.Name = "contextMenuStrip1";
-            cMS1.Size = new Size(131, 28);
+            cMS1.Size = new Size(131, 58);
             // 
             // securityToolStripMenuItem
             // 
@@ -299,6 +310,17 @@ namespace LibCheck.Forms
             accountRecoveryToolStripMenuItem.Size = new Size(210, 26);
             accountRecoveryToolStripMenuItem.Text = "Account Recovery";
             accountRecoveryToolStripMenuItem.Click += accountRecoveryToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(127, 6);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            aboutToolStripMenuItem.Size = new Size(130, 24);
+            aboutToolStripMenuItem.Text = "About";
             // 
             // AdminForm
             // 
@@ -346,5 +368,8 @@ namespace LibCheck.Forms
         private ToolStripMenuItem changePasswordToolStripMenuItem;
         private ToolStripMenuItem accountRecoveryToolStripMenuItem;
         private EmailDashboard emailDashboard1;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripMenuItem aboutToolStripMenuItem;
+        private LogsDashboard logsDashboard1;
     }
 }

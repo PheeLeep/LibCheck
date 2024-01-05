@@ -7,7 +7,8 @@ namespace LibCheck.Forms {
         }
 
         private void passwordTextBoxes_TextChanged(object sender, EventArgs e) {
-            RecoverButton.Enabled = recoveryTextBox.Text.Length == 6 && newPassTextBox.Text.Length >= 8
+            RecoverButton.Enabled = recoveryTextBox.Text.Length == 6
+                                    && newPassTextBox.Text.Length >= 8
                                     && retypePassTextBox.Text.Length >= 8;
         }
         // 186216
@@ -21,12 +22,14 @@ namespace LibCheck.Forms {
                 bool res = RecoveryCodesCenter.Challenge(recoveryTextBox.Text, newPassTextBox.Text);
                 Invoke(new Action(() => {
                     if (res) {
-                        MessageBox.Show(this, "Account successfully recovered!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(this, "Account successfully recovered!", "",
+                                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                         DialogResult = DialogResult.OK;
                         Close();
                         return;
                     }
-                    MessageBox.Show(this, "Failed to recover. Please try again.", "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    MessageBox.Show(this, "Failed to recover. Please try again.", "",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }));
             }));
         }

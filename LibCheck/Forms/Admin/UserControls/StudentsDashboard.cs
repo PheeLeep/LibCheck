@@ -1,7 +1,6 @@
 ﻿using LibCheck.Database.Tables;
 using LibCheck.Modules;
 using LibCheck.Modules.Security;
-using System.Text;
 
 namespace LibCheck.Forms.Admin.UserControls {
     public partial class StudentsDashboard : UserControl {
@@ -22,6 +21,7 @@ namespace LibCheck.Forms.Admin.UserControls {
         internal new void Load() {
             CurrentlyBorrowedLabel.Text = Database.Database.Read(out List<Students>? infos).ToString();
             dataGridView1.DataSource = infos;
+            Logger.Log(Logger.LogEnums.Verbose, $"{GetType().Name} info loaded.");
             for (int i = 0; i < dataGridView1.Columns.Count; i++)
                 dataGridView1.Columns[i].Visible = false;
 
@@ -58,7 +58,9 @@ namespace LibCheck.Forms.Admin.UserControls {
                     }
                 }
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                Logger.Log(Logger.LogEnums.Error, $"Failed to update a student. ({ex.Message})");
+                MessageBox.Show(this, $"Failed to update.\nCause: {ex.Message}",
+                                "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
 
@@ -69,15 +71,25 @@ namespace LibCheck.Forms.Admin.UserControls {
                 string? id = dataGridView1.SelectedRows[0].Cells["StudentID"].Value.ToString();
                 if (string.IsNullOrWhiteSpace(id))
                     return;
-                if (MessageBox.Show(this, $"Do you want to delete Student '{id}'?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
-                    return;
-                if (!Database.Database.Delete<Students>(id)) {
-                    MessageBox.Show(this, "Failed to execute the database command.", "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                if (Database.Database.Read<Books>(out _, whereCond: $"StudentID = {id}") > 0) {
+                    Logger.Log(Logger.LogEnums.Error, $"Couldn't delete. There are remaining borrowed books.");
+                    MessageBox.Show(this, $"Student {id} has some books that are currently borrowed.",
+                                    "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     return;
                 }
+                if (MessageBox.Show(this, $"Do you want to delete Student '{id}'? Deleting info will invalidate the " +
+                                    "QR code that already printed.", "", MessageBoxButtons.YesNo,
+                                    MessageBoxIcon.Exclamation) == DialogResult.No)
+                    return;
+
+                if (!Database.Database.Delete<Students>(id))
+                    throw new InvalidOperationException("Couldn't remove a student info from the database.");
+                Logger.Log(Logger.LogEnums.Warn, "Book was deleted. Reloading...");
                 Load();
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                Logger.Log(Logger.LogEnums.Error, $"Failed to delete a student info. ({ex.Message})");
+                MessageBox.Show(this, $"Failed to delete.\nCause: {ex.Message}",
+                                "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
 
@@ -94,7 +106,9 @@ namespace LibCheck.Forms.Admin.UserControls {
                     }
                 }
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                Logger.Log(Logger.LogEnums.Error, $"Failed to read a student info. ({ex.Message})");
+                MessageBox.Show(this, $"Failed to read.\nCause: {ex.Message}",
+                                "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
 
@@ -127,26 +141,35 @@ namespace LibCheck.Forms.Admin.UserControls {
 
                                 SizeF fNameSize = g.MeasureString(fullName, font);
                                 SizeF sectionSize = g.MeasureString(student.GradeSection, font);
-                                g.DrawString(fullName, font, Brushes.White, new PointF(((378 + 979) / 2) - fNameSize.Width / 2, 249));
-                                g.DrawString(student.GradeSection, font, Brushes.White, new PointF(((378 + 979) / 2) - sectionSize.Width / 2, 398));
+
+                                PointF namePoint = new PointF(((378 + 979) / 2) - fNameSize.Width / 2, 249);
+                                PointF gsPoint = new PointF(((378 + 979) / 2) - sectionSize.Width / 2, 398);
+
+                                g.DrawString(fullName, font, Brushes.White, namePoint);
+                                g.DrawString(student.GradeSection, font, Brushes.White, gsPoint);
 
                                 g.Flush();
                             }
 
                             using (Graphics g = Graphics.FromImage(backCard)) {
                                 SizeF sIDSize = g.MeasureString(student.StudentID, font);
-                                g.DrawString(student.StudentID, font, Brushes.White, new PointF(((182 + 840) / 2) - sIDSize.Width / 2, 138));
+                                PointF sIDPoint = new PointF(((182 + 840) / 2) - sIDSize.Width / 2, 138);
+
+                                g.DrawString(student.StudentID, font, Brushes.White, sIDPoint);
                                 g.Flush();
                             }
                         }
                     }
                     PleaseWait.SetPWDText("Done.");
+                    Logger.Log(Logger.LogEnums.Info, $"Student QR code printed.");
                     Task.Factory.StartNew(() => {
                         Task.Delay(10).Wait();
                         Invoke(new Action(() => new LibCardDialogBox(frontCard, backCard).ShowDialog(this)));
                     });
                 } catch (Exception ex) {
-                    MessageBox.Show(ex.Message);
+                    Logger.Log(Logger.LogEnums.Error, $"Failed to print a student info. ({ex.Message})");
+                    MessageBox.Show(this, $"Failed to print.\nCause: {ex.Message}",
+                                    "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }
             });
         }

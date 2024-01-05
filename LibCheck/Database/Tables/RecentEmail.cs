@@ -5,6 +5,12 @@ namespace LibCheck.Database.Tables {
         [PrimaryKey, NotNull]
         public DateTime DateOccurred { get; set; }
 
+        [Ignore]
+        public DateTime SafeDateOccurred {
+            get => DateOccurred.Date;
+            set => DateOccurred = value;
+        }
+
         [NotNull]
         public string? StudentID { get; set; }
 

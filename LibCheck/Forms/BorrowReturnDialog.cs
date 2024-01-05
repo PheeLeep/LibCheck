@@ -134,12 +134,8 @@ namespace LibCheck.Forms {
                 if (book == null || book.IsLostOrDamaged) throw new InvalidOperationException("No book provided or it was damaged.");
                 if (student == null) throw new InvalidOperationException("No student provided.");
 
-                bool isAuthenticated = false;
-                SecureDesktop.EnterSecureMode(() => {
-                    isAuthenticated = new AuthenticateDiag().ShowDialog() == DialogResult.Yes;
-                });
-                if (!isAuthenticated) return;
-                int? res;
+                if (!Modules.AppContext.Auth()) return;
+
                 if (isBorrow) {
                     if (!string.IsNullOrWhiteSpace(book.StudentID) && !book.StudentID.Equals("(none)"))
                         throw new InvalidOperationException("This book is already borrowed by someone.");
@@ -167,7 +163,7 @@ namespace LibCheck.Forms {
                                                                         == DialogResult.No) return;
                 book.StudentID = "(none)";
                 book.DateToReturn = null;
-                if (!Database.Database.Update(book)) 
+                if (!Database.Database.Update(book))
                     throw new InvalidOperationException("Unable to execute the database.");
                 MessageBox.Show("Book returned.");
                 DialogResult = DialogResult.Yes;
@@ -178,9 +174,9 @@ namespace LibCheck.Forms {
         }
 
         private void DateBorrowDTP_ValueChanged(object sender, EventArgs e) {
-            if (DateBorrowDTP.Value.DayOfWeek == DayOfWeek.Sunday) 
+            if (DateBorrowDTP.Value.DayOfWeek == DayOfWeek.Sunday)
                 DateBorrowDTP.Value = DateBorrowDTP.Value.AddDays(1);
-            
+
         }
     }
 }

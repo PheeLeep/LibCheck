@@ -21,7 +21,7 @@ namespace LibCheck.Database.Tables {
         [Ignore]
         public DateTime SafeBirthDate {
             get => BirthDate.Date;
-            set => BirthDate = value;    
+            set => BirthDate = value;
         }
 
         // <----------------->
