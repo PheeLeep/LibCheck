@@ -3,6 +3,7 @@ using Google.Apis.Gmail.v1;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using LibCheck.Database.Tables;
+using LibCheck.Modules.Security;
 using MimeKit;
 using System.Text;
 
@@ -30,6 +31,37 @@ namespace LibCheck.Modules {
         private static readonly Task _loopTask = new Task(() => {
             while (IsInitialized && !CrashControl.IsSCRAMed) {
                 Task.Delay(1000).Wait();
+
+                // Check for due.
+                if (Database.Database.Read(out List<Books>? books, whereCond: $"StudentID <> '(none)'") > 0 
+                        && books != null) {
+
+                    DateTime currentDate = DateTime.Now;
+                    foreach (Books b in books) {
+                        if (b.DateToReturn != null) {
+                            if (Database.Database.Read(out List<Students>? s, whereCond: $"StudentID = '{b.StudentID}'") <= 0 
+                                || s == null)
+                                continue;
+
+                            DateTime dueDate = b.DateToReturn.Value;
+                            if (Miscellaneous.CalculateDateExcptSun(currentDate, dueDate) == 3 
+                                && !b.IsLostOrDamaged && !b.ThreeDayNoticeSent) {
+                                    b.ThreeDayNoticeSent = true;
+
+                                string body = Properties.Resources.OngoingDueEmail
+                                                       .Replace("%school%", Credentials.Librarian?.SchoolName)
+                                                       .Replace("%isbn%", b.ISBN)
+                                                       .Replace("%title%", b.Title)
+                                                       .Replace("%due%", b.DateToReturn?.ToString("dd/MM/yyyy"))
+                                                       .Replace("%librarian%", Miscellaneous.GenerateFullName(Credentials.Librarian));
+                                
+                                if (!Queue(s[0], body, "Due Soon") || !Database.Database.Update(b)) 
+                                    Logger.Log(Logger.LogEnums.Error, "An error occurred while sending a due.");
+
+                            }
+                        }
+                    }
+                }
                 if (_timeOut == 0) {
                     _timeOut = 30;
                     if (Database.Database.Read(out List<EmailQueue>? queues) <= 0 || queues == null)
@@ -52,7 +84,7 @@ namespace LibCheck.Modules {
                     if (!Database.Database.Insert(recent))
                         Logger.Log(Logger.LogEnums.Error, "Failed to write a log of an email.");
 
-                    EmailQueueCount = queues.Count;
+                    EmailQueueCount = queues.Count - 1;
                     continue;
                 }
                 _timeOut--;

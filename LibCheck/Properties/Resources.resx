@@ -226,4 +226,10 @@
   <data name="empty_trash_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\empty_trash_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BookBorrowedEmail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BookBorrowedEmail.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="OngoingDueEmail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\OngoingDueEmail.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
 </root>

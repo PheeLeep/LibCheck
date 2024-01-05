@@ -15,7 +15,7 @@ namespace LibCheck.Modules {
 
         internal static string[] Genres {
             get => new string[] { "Fiction",  "Non-fiction",  "Mystery", "Science Fiction", "Fantasy", "Romance",
-                                  "Thriller", "Horror", "Biography", "History", "Self-help", "Poetry", "Others"};
+                                  "Thriller", "Horror", "Biography", "History", "Autobiography", "Poetry", "Others"};
         }
         internal static string GenerateFullName(LibrarianInfo? info, bool firstNameFirst = false, bool generateMI = true) {
             if (info == null) return "";
@@ -73,6 +73,7 @@ namespace LibCheck.Modules {
                                                 DataGridViewAutoSizeColumnMode.Fill;
                 if (hideCols) dgv.Columns[i].Visible = false;
             }
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         internal static int CalculateDateExcptSun(DateTime from, DateTime to) {

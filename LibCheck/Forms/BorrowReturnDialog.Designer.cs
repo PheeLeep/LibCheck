@@ -162,7 +162,7 @@
             // 
             panel1.Controls.Add(ExecuteButton);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 581);
+            panel1.Location = new Point(0, 607);
             panel1.Name = "panel1";
             panel1.Size = new Size(537, 71);
             panel1.TabIndex = 2;
@@ -180,12 +180,12 @@
             // 
             // OptionsPanel
             // 
-            OptionsPanel.Controls.Add(ReturnPanel);
             OptionsPanel.Controls.Add(BorrowPanel);
+            OptionsPanel.Controls.Add(ReturnPanel);
             OptionsPanel.Dock = DockStyle.Fill;
             OptionsPanel.Location = new Point(0, 294);
             OptionsPanel.Name = "OptionsPanel";
-            OptionsPanel.Size = new Size(537, 78);
+            OptionsPanel.Size = new Size(537, 114);
             OptionsPanel.TabIndex = 3;
             // 
             // ReturnPanel
@@ -194,7 +194,7 @@
             ReturnPanel.Dock = DockStyle.Fill;
             ReturnPanel.Location = new Point(0, 0);
             ReturnPanel.Name = "ReturnPanel";
-            ReturnPanel.Size = new Size(537, 78);
+            ReturnPanel.Size = new Size(537, 114);
             ReturnPanel.TabIndex = 1;
             // 
             // ReturnLabel
@@ -206,7 +206,7 @@
             ReturnLabel.ForeColor = Color.White;
             ReturnLabel.Location = new Point(0, 0);
             ReturnLabel.Name = "ReturnLabel";
-            ReturnLabel.Size = new Size(537, 78);
+            ReturnLabel.Size = new Size(537, 114);
             ReturnLabel.TabIndex = 1;
             ReturnLabel.Text = "Please scan the book first.";
             ReturnLabel.TextAlign = ContentAlignment.MiddleCenter;
@@ -218,21 +218,21 @@
             BorrowPanel.Dock = DockStyle.Fill;
             BorrowPanel.Location = new Point(0, 0);
             BorrowPanel.Name = "BorrowPanel";
-            BorrowPanel.Size = new Size(537, 78);
+            BorrowPanel.Size = new Size(537, 114);
             BorrowPanel.TabIndex = 0;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(35, 27);
+            label2.Location = new Point(35, 15);
             label2.Name = "label2";
-            label2.Size = new Size(250, 25);
+            label2.Size = new Size(380, 25);
             label2.TabIndex = 1;
-            label2.Text = "Date to Return (max: 30 days):";
+            label2.Text = "Date to Return (max: 30 days, except sundays):";
             // 
             // DateBorrowDTP
             // 
-            DateBorrowDTP.Location = new Point(81, 67);
+            DateBorrowDTP.Location = new Point(81, 55);
             DateBorrowDTP.Name = "DateBorrowDTP";
             DateBorrowDTP.Size = new Size(316, 31);
             DateBorrowDTP.TabIndex = 0;
@@ -242,9 +242,9 @@
             // 
             groupBox2.Controls.Add(richTextBox1);
             groupBox2.Dock = DockStyle.Bottom;
-            groupBox2.Location = new Point(0, 372);
+            groupBox2.Location = new Point(0, 408);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(537, 209);
+            groupBox2.Size = new Size(537, 199);
             groupBox2.TabIndex = 4;
             groupBox2.TabStop = false;
             groupBox2.Text = "Notes";
@@ -255,7 +255,7 @@
             richTextBox1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             richTextBox1.Location = new Point(3, 27);
             richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(531, 179);
+            richTextBox1.Size = new Size(531, 169);
             richTextBox1.TabIndex = 0;
             richTextBox1.Text = "";
             // 
@@ -263,7 +263,7 @@
             // 
             AutoScaleDimensions = new SizeF(120F, 120F);
             AutoScaleMode = AutoScaleMode.Dpi;
-            ClientSize = new Size(537, 652);
+            ClientSize = new Size(537, 678);
             Controls.Add(OptionsPanel);
             Controls.Add(groupBox2);
             Controls.Add(panel1);

@@ -1,19 +1,19 @@
 <p>Greetings,</p>
-<p>
-    Thank you for registering to LibCheck Book Borrowing and Returning System in <b>%school%.</b>
-</p>
-<p>
-    Your registered email address will receive notification regarding the book transactions 
-    (like book borrowing and returning, incoming and past dues, etc.) to keep you up to date.
-</p>
-<p>Student ID: <b>%stID%</b></p>
-<p>Name: <b>%name%</b></p>
+    <p>
+        Thank you for registering to LibCheck Book Borrowing and Returning System in <b>%school%.</b>
+    </p>
+    <p>
+        Your registered email address will receive notification regarding the book transactions 
+        (like book borrowing and returning, incoming and past dues, etc.) to keep you up to date.
+    </p>
+    <p>Student ID: <b>%stID%</b></p>
+    <p>Name: <b>%name%</b></p>
     
-<p>Thank you once again and enjoy!</p>
+    <p>Thank you once again and enjoy!</p>
         
-<p>
-    <u>%librarian%</u><br/>
-    Librarian in <b>%school%.</b>
-</p>
+    <p>
+        <u>%librarian%</u><br/>
+        Librarian in <b>%school%.</b>
+    </p>
         
-<p style="text-align: center">(Do not reply to this email address.)</p>
+<p style="text-align: center">(Do not reply to this email address. This is automated.)</p>

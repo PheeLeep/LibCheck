@@ -15,4 +15,4 @@
         Librarian in <b>%school%.</b>
     </p>
         
-<p style="text-align: center">(Do not reply to this email address.)</p>
+<p style="text-align: center">(Do not reply to this email address. This is automated.)</p>

@@ -3,6 +3,7 @@ using LibCheck.Exceptions;
 using LibCheck.Forms.SearchTools;
 using LibCheck.Modules;
 using LibCheck.Modules.Security;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace LibCheck.Forms {
     public partial class BorrowReturnDialog : Form {
@@ -146,6 +147,16 @@ namespace LibCheck.Forms {
 
                     if (!Database.Database.Update(book) || !Database.Database.Insert(rBorrow))
                         throw new InvalidOperationException("Unable to execute the database.");
+
+                    string body = Properties.Resources.BookBorrowedEmail
+                                                       .Replace("%school%", Credentials.Librarian?.SchoolName)
+                                                       .Replace("%isbn%", book.ISBN)
+                                                       .Replace("%title%", book.Title)
+                                                       .Replace("%author%", book.Author)
+                                                       .Replace("%dateBorrow%", rBorrow.DateOccurred.ToString("dd/MM/yyyy"))
+                                                       .Replace("%due%", book.DateToReturn?.ToString("dd/MM/yyyy"))
+                                                       .Replace("%librarian%", Miscellaneous.GenerateFullName(Credentials.Librarian));
+                    EmailService.Queue(student, body, "Book Borrowed");
                     MessageBox.Show(this, "Book borrowed.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     DialogResult = DialogResult.Yes;
                     Close();

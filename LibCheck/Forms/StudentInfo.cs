@@ -20,7 +20,7 @@ namespace LibCheck.Forms {
             LoadItems();
         }
         private void LoadItems() {
-            Database.Database.Read(out List<Books>? l, "ISBN, Title, Author, DatePublished",
+            Database.Database.Read(out List<Books>? l, "ISBN, Title, Author, DatePublished, DateToReturn",
                                    whereCond: $"StudentID = '{student.StudentID}'");
 
             DateTime currentDate = DateTime.Now;
@@ -47,6 +47,8 @@ namespace LibCheck.Forms {
             dataGridView1.Columns["Author"].Visible = true;
             dataGridView1.Columns["SafeDatePublished"].Visible = true;
             dataGridView1.Columns["SafeDatePublished"].HeaderText = "Date Published";
+            dataGridView1.Columns["SafeDateToReturn"].Visible = true;
+            dataGridView1.Columns["SafeDateToReturn"].HeaderText = "Date to Return";
         }
 
         private void ReturnBookButton_Click(object sender, EventArgs e) {

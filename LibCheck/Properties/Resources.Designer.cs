@@ -62,21 +62,20 @@ namespace LibCheck.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;p&gt;Greetings,&lt;/p&gt;
-        ///&lt;p&gt;
-        ///    Thank you for registering to LibCheck Book Borrowing and Returning System in &lt;b&gt;%school%.&lt;/b&gt;
-        ///&lt;/p&gt;
-        ///&lt;p&gt;
-        ///    Your registered email address will receive notification regarding the book transactions 
-        ///    (like book borrowing and returning, incoming and past dues, etc.) to keep you up to date.
-        ///&lt;/p&gt;
-        ///&lt;p&gt;Student ID: &lt;b&gt;%stID%&lt;/b&gt;&lt;/p&gt;
-        ///&lt;p&gt;Name: &lt;b&gt;%name%&lt;/b&gt;&lt;/p&gt;
+        ///    &lt;p&gt;
+        ///        Thank you for registering to LibCheck Book Borrowing and Returning System in &lt;b&gt;%school%.&lt;/b&gt;
+        ///    &lt;/p&gt;
+        ///    &lt;p&gt;
+        ///        Your registered email address will receive notification regarding the book transactions 
+        ///        (like book borrowing and returning, incoming and past dues, etc.) to keep you up to date.
+        ///    &lt;/p&gt;
+        ///    &lt;p&gt;Student ID: &lt;b&gt;%stID%&lt;/b&gt;&lt;/p&gt;
+        ///    &lt;p&gt;Name: &lt;b&gt;%name%&lt;/b&gt;&lt;/p&gt;
         ///    
-        ///&lt;p&gt;Thank you once again and enjoy!&lt;/p&gt;
+        ///    &lt;p&gt;Thank you once again and enjoy!&lt;/p&gt;
         ///        
-        ///&lt;p&gt;
-        ///    &lt;u&gt;%librarian%&lt;/u&gt;&lt;br/&gt;
-        ///    Librarian in &lt;b&gt;%school%.&lt;/ [rest of string was truncated]&quot;;.
+        ///    &lt;p&gt;
+        ///        &lt;u&gt;%libr [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string AddEmailTxt {
             get {
@@ -121,6 +120,33 @@ namespace LibCheck.Properties {
             get {
                 object obj = ResourceManager.GetObject("bg", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;p&gt;Greetings,&lt;/p&gt;
+        ///    &lt;p&gt;
+        ///        We notify you because you borrowed a book. Here&apos;s the information:
+        ///        &lt;br/&gt;
+        ///    &lt;/p&gt;
+        ///    &lt;p&gt;ISBN: &lt;b&gt;%isbn%&lt;/b&gt;&lt;/p&gt;
+        ///    &lt;p&gt;Title: &lt;b&gt;%title%&lt;/b&gt;&lt;/p&gt;
+        ///    &lt;p&gt;Author: &lt;b&gt;%author%&lt;/b&gt;&lt;/p&gt;
+        ///
+        ///    &lt;p&gt;
+        ///        Please return the book on or before &lt;b&gt;%due%&lt;/b&gt; to prevent overdue cost. Thank you!
+        ///    &lt;/p&gt;
+        ///        
+        ///    &lt;p&gt;
+        ///        &lt;u&gt;%librarian%&lt;/u&gt;&lt;br/&gt;
+        ///        Librarian in &lt;b&gt;%school%.&lt;/b&gt;
+        ///    &lt;/p&gt;
+        ///        
+        ///&lt;p style=&quot;text-align: center&quot;&gt;(Do not reply to this ema [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string BookBorrowedEmail {
+            get {
+                return ResourceManager.GetString("BookBorrowedEmail", resourceCulture);
             }
         }
         
@@ -371,6 +397,15 @@ namespace LibCheck.Properties {
             get {
                 object obj = ResourceManager.GetObject("LOGO-removebg-preview", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string OngoingDueEmail {
+            get {
+                return ResourceManager.GetString("OngoingDueEmail", resourceCulture);
             }
         }
         

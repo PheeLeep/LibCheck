@@ -150,7 +150,6 @@ namespace LibCheck.Forms.Admin {
                     EmailService.Queue(student, body, "Regarding to Email Update.");
                 }
 
-                MessageBox.Show(this, "Database execution completed.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;
                 Close();
             }

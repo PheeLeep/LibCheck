@@ -1,0 +1,14 @@
+<p>Greetings,</p>
+    <p>
+        This is to remind you that your due on the book <b>%title%</b> (<b>%isbn%</b>) is going near.
+        <br/>
+        Please return the book to the librarian, on or before <b>%due%</b> to prevent overdue cost.
+        <br/>
+        If you have any questions, please go to the library for further assistance.
+    </p>
+    <p>
+        <u>%librarian%</u><br/>
+        Librarian in <b>%school%.</b>
+    </p>
+        
+<p style="text-align: center">(Do not reply to this email address. This is automated.)</p>
