@@ -3,7 +3,6 @@ using LibCheck.Exceptions;
 using LibCheck.Forms.SearchTools;
 using LibCheck.Modules;
 using LibCheck.Modules.Security;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace LibCheck.Forms {
     public partial class BorrowReturnDialog : Form {
@@ -43,7 +42,7 @@ namespace LibCheck.Forms {
                 if (isBorrow && !string.IsNullOrWhiteSpace(book.StudentID) && !book.StudentID.Equals("(none)"))
                     throw new BookNotFoundException("This book is currently borrowed.", book.ISBN);
 
-                    ISBNTextBox.Text = book.ISBN;
+                ISBNTextBox.Text = book.ISBN;
                 BookTitleLabel.Text = $"Title: {book.Title}";
 
                 if (!string.IsNullOrWhiteSpace(book.StudentID) && !book.StudentID.Equals("(none)")) {
@@ -126,14 +125,18 @@ namespace LibCheck.Forms {
 
         private void ExecuteButton_Click(object sender, EventArgs e) {
             try {
-                if (book == null || book.IsLostOrDamaged) 
+                if (book == null || book.IsLostOrDamaged)
                     throw new InvalidOperationException("No book provided or it was damaged.");
-                if (student == null) 
+                if (student == null)
                     throw new InvalidOperationException("No student provided.");
 
                 if (isBorrow) {
                     if (!string.IsNullOrWhiteSpace(book.StudentID) && !book.StudentID.Equals("(none)"))
                         throw new InvalidOperationException("This book is already borrowed by someone.");
+
+                    if (Database.Database.Read<Books>(out _, whereCond: $"StudentID = {student.StudentID}") == 3)
+                        throw new InvalidOperationException("This student reached its book borrowed limit.");
+
                     book.DateToReturn = DateBorrowDTP.Value;
                     book.StudentID = student.StudentID;
                     book.ThreeDayNoticeSent = false;
@@ -162,8 +165,8 @@ namespace LibCheck.Forms {
                     EmailService.Queue(student, body, "Book Borrowed");
 
                     if (!Modules.AppContext.IsInAdminMode)
-                        Notifs.CreateNotification("Book Borrowed", 
-                                                  $"A student {Miscellaneous.GenerateFullName(student)} borrowed a book "+
+                        Notifs.CreateNotification("Book Borrowed",
+                                                  $"A student {Miscellaneous.GenerateFullName(student)} borrowed a book " +
                                                   $"{book.Title}.");
                     MessageBox.Show(this, "Book borrowed.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     DialogResult = DialogResult.Yes;
@@ -179,9 +182,9 @@ namespace LibCheck.Forms {
                         throw new InvalidOperationException("This book was borrowed by someone that supposed to return it.");
                 }
 
-                if (DateTime.Now > book.DateToReturn && 
+                if (DateTime.Now > book.DateToReturn &&
                     MessageBox.Show(this, "The student must pay an overdue fee before you proceed. Continue?"
-                                          , "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No) 
+                                          , "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
                     return;
 
                 book.StudentID = "(none)";

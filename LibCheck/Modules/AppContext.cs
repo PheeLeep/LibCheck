@@ -1,5 +1,4 @@
-﻿using LibCheck.Database.Tables;
-using LibCheck.Forms;
+﻿using LibCheck.Forms;
 using LibCheck.Modules.Security;
 
 namespace LibCheck.Modules {

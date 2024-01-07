@@ -74,7 +74,7 @@ namespace LibCheck.Forms.Admin {
                 book.Publisher = PublisherTextBox.Text;
                 book.DatePublished = DatePublishedDatePicker.Value;
                 book.Description = DescTextBox.Text;
-                book.Genre  = genreComboBox.Items[genreComboBox.SelectedIndex].ToString();
+                book.Genre = genreComboBox.Items[genreComboBox.SelectedIndex].ToString();
 
                 string operation = mode == DatabaseMode.Add ? "add" : "update";
                 string pastSucceed = mode == DatabaseMode.Add ? "added" : "updated";
@@ -90,7 +90,7 @@ namespace LibCheck.Forms.Admin {
                     DateOccurred = DateTime.Now,
                     ISBN = book.ISBN,
                     StudentID = "(none)",
-                    Category = mode == DatabaseMode.Add ? Records.RecordStatus.BookAdded : 
+                    Category = mode == DatabaseMode.Add ? Records.RecordStatus.BookAdded :
                                                           Records.RecordStatus.BookModified,
                     AdditionalContext = "(none)"
                 };

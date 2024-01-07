@@ -1,7 +1,6 @@
 ﻿using LibCheck.Database.Tables;
 using LibCheck.Modules;
 using LibCheck.Modules.Security;
-using static LibCheck.Modules.Miscellaneous;
 
 namespace LibCheck.Forms.Admin.UserControls {
     public partial class BooksDashboard : UserControl {

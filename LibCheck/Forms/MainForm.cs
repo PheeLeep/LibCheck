@@ -1,5 +1,4 @@
-﻿using LibCheck.Database.Tables;
-using LibCheck.Exceptions;
+﻿using LibCheck.Exceptions;
 using LibCheck.Forms.SearchTools;
 
 namespace LibCheck.Forms {

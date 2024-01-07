@@ -1,7 +1,7 @@
 ﻿namespace LibCheck.Exceptions {
     public class BookNotFoundException : InvalidOperationException {
 
-        public BookNotFoundException(string message, string? expectedISBN = "") 
+        public BookNotFoundException(string message, string? expectedISBN = "")
                : base($"{message} (Expected ISBN: {expectedISBN})") {
         }
 

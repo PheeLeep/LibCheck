@@ -25,6 +25,8 @@ namespace LibCheck.Forms.Admin.UserControls {
 
         internal void LoadItems() {
             notifPanel.Controls.Clear();
+            BooksLabel.Text = $"{Database.Database.Read<Books>(out _)}";
+            BooksLabel.Text = $"{Database.Database.Read<Students>(out _)}";
             // Get notifications
             if (Database.Database.Read(out List<Records>? infos,
                                         whereCond: $"Category = {(int)Records.RecordStatus.BookBorrowed}" +
@@ -56,6 +58,14 @@ namespace LibCheck.Forms.Admin.UserControls {
         private void ClearLogButton_Click(object sender, EventArgs e) {
             Notifs.Clear();
             LoadItems();
+        }
+
+        private void BackButton_Click(object sender, EventArgs e) {
+            MainPanel.BringToFront();
+        }
+
+        private void NotifControls_Click(object sender, EventArgs e) {
+            NotifPanelMain.BringToFront();
         }
     }
 }

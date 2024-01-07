@@ -1,7 +1,6 @@
 ﻿using LibCheck.Database.Tables;
 using LibCheck.Exceptions;
 using LibCheck.Modules;
-using System.Windows.Forms;
 
 namespace LibCheck.Forms {
     public partial class StudentInfo : Form {
@@ -67,7 +66,7 @@ namespace LibCheck.Forms {
             dataGridView1.Columns["SafeDateToReturn"].HeaderText = "Date to Return";
             dataGridView1.Columns["DateIssued"].Visible = true;
 
-           
+
 
         }
 

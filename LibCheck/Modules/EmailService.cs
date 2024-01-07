@@ -60,7 +60,7 @@ namespace LibCheck.Modules {
 
                                 Notifs.CreateNotification("Due Soon",
                                                           $"A student {Miscellaneous.GenerateFullName(s[0])} has an upcoming due " +
-                                                          $" for the book '{b.Title}' "+
+                                                          $" for the book '{b.Title}' " +
                                                           $"(Due Date: {b.DateToReturn?.ToString("dd/MM/yyyy")}).");
                             }
                         }
