@@ -23,7 +23,7 @@ namespace LibCheck.Forms.SearchTools {
         private readonly bool inModular;
         private bool isQRDetectionOngoing = false;
         private bool inSuspension = false;
-
+        private readonly object _lock = new object();
 
         internal SearchType Search { get; private set; }
 
@@ -143,7 +143,7 @@ namespace LibCheck.Forms.SearchTools {
                 videoSource = new VideoCaptureDevice(devs[i].MonikerString);
                 videoSource.NewFrame += VideoSource_NewFrame;
                 videoSource.Start();
-                Logger.Log(Logger.LogEnums.Info, $"Camera module started. Input: {videoInput}");
+                Logger.Log(Logger.LogEnums.Verbose, $"Camera module started. Input: {videoInput}");
                 return;
             }
 
@@ -152,55 +152,57 @@ namespace LibCheck.Forms.SearchTools {
 
         private void VideoSource_NewFrame(object sender, AForge.Video.NewFrameEventArgs eventArgs) {
             if (!IsHandleCreated) return;
-            if (DateTime.Now >= _lastUpdateTimeStamp.AddMilliseconds(MAX_UPDATE_TIME_MS)) {
-                if (eventArgs.Frame == null) {
-                    blackBmp ??= CreateBlankBmp();
-                    using (Bitmap oldBmp = (Bitmap)pictureBox1.Image)
-                        pictureBox1.Image = (Bitmap)blackBmp.Clone();
-                    return;
-                }
-                using (Bitmap bmp = AForge.Imaging.Image.Clone(eventArgs.Frame)) {
-                    GC.Collect();
-                    GC.WaitForPendingFinalizers();
-                    GC.Collect();
-
-                    try {
-                        _lastUpdateTimeStamp = DateTime.Now;
-                        pictureBox1.Image = null;
-                        pictureBox1.Image = AForge.Imaging.Image.Clone(bmp);
-                    } catch {
-                        // Ignore
+            lock (_lock) {
+                if (DateTime.Now >= _lastUpdateTimeStamp.AddMilliseconds(MAX_UPDATE_TIME_MS)) {
+                    if (eventArgs.Frame == null) {
+                        blackBmp ??= CreateBlankBmp();
+                        using (Bitmap oldBmp = (Bitmap)pictureBox1.Image)
+                            pictureBox1.Image = (Bitmap)blackBmp.Clone();
+                        return;
                     }
-
-                    if (!isQRDetectionOngoing) {
-                        isQRDetectionOngoing = true;
+                    using (Bitmap bmp = AForge.Imaging.Image.Clone(eventArgs.Frame)) {
+                        GC.Collect();
+                        GC.WaitForPendingFinalizers();
+                        GC.Collect();
 
                         try {
-                            Result r = reader.Decode(bmp);
-                            if (r == null) return;
+                            _lastUpdateTimeStamp = DateTime.Now;
+                            pictureBox1.Image = null;
+                            pictureBox1.Image = AForge.Imaging.Image.Clone(bmp);
+                        } catch {
+                            // Ignore
+                        }
 
-                            string[] arr = r.Text.Split('#', StringSplitOptions.RemoveEmptyEntries);
-                            if (arr.Length != 4 || !arr[0].Equals("LC") || !arr[1].Equals(Credentials.Librarian?.SchoolGUID) ||
-                                !int.TryParse(arr[2], out int typ)) return;
+                        if (!isQRDetectionOngoing) {
+                            isQRDetectionOngoing = true;
 
-                            switch (typ) {
-                                case 0:
-                                    QRCamModule_QRDetected(SearchType.Book, arr[3]);
-                                    break;
-                                case 1:
-                                    QRCamModule_QRDetected(SearchType.Student, arr[3]);
-                                    break;
-                                default:
-                                    return;
+                            try {
+                                Result r = reader.Decode(bmp);
+                                if (r == null) return;
+
+                                string[] arr = r.Text.Split('#', StringSplitOptions.RemoveEmptyEntries);
+                                if (arr.Length != 4 || !arr[0].Equals("LC") || !arr[1].Equals(Credentials.Librarian?.SchoolGUID) ||
+                                    !int.TryParse(arr[2], out int typ)) return;
+
+                                switch (typ) {
+                                    case 0:
+                                        QRCamModule_QRDetected(SearchType.Book, arr[3]);
+                                        break;
+                                    case 1:
+                                        QRCamModule_QRDetected(SearchType.Student, arr[3]);
+                                        break;
+                                    default:
+                                        return;
+                                }
+                            } catch (Exception ex) {
+                                Logger.Log(Logger.LogEnums.Warn, $"An error occurred during QR detection. ({ex.Message})");
+                            } finally {
+                                isQRDetectionOngoing = false;
                             }
-                        } catch (Exception ex) {
-                            Logger.Log(Logger.LogEnums.Warn, $"An error occurred during QR detection. ({ex.Message})");
-                        } finally {
-                            isQRDetectionOngoing = false;
                         }
                     }
-                }
 
+                }
             }
         }
 

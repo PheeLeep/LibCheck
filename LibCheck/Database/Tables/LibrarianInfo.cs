@@ -33,5 +33,6 @@ namespace LibCheck.Database.Tables {
 
         [NotNull]
         public double FeePerOverdueDay { get; set; }
+        public DateTime LastLoggedIn { get; set; }
     }
 }

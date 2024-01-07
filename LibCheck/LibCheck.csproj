@@ -20,7 +20,7 @@
     <PackageReference Include="AForge.Video" Version="2.2.5" />
     <PackageReference Include="AForge.Video.DirectShow" Version="2.2.5" />
     <PackageReference Include="Google.Apis.Auth" Version="1.64.0" />
-    <PackageReference Include="Google.Apis.Gmail.v1" Version="1.64.0.3231" />
+    <PackageReference Include="Google.Apis.Gmail.v1" Version="1.64.0.3287" />
     <PackageReference Include="MimeKit" Version="4.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />

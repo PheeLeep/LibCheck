@@ -37,6 +37,12 @@ namespace LibCheck.Database.Tables {
 
         public DateTime? DateToReturn { get; set; }
 
+        [Ignore]
+        public DateTime? SafeDateToReturn {
+            get => DateToReturn?.Date;
+            set => DateToReturn = value;
+        }
+
         [NotNull]
         public bool ThreeDayNoticeSent { get; set; } = false;
     }

@@ -33,20 +33,20 @@ namespace LibCheck.Modules {
                 Task.Delay(1000).Wait();
 
                 // Check for due.
-                if (Database.Database.Read(out List<Books>? books, whereCond: $"StudentID <> '(none)'") > 0 
+                if (Database.Database.Read(out List<Books>? books, whereCond: $"StudentID <> '(none)'") > 0
                         && books != null) {
 
                     DateTime currentDate = DateTime.Now;
                     foreach (Books b in books) {
                         if (b.DateToReturn != null) {
-                            if (Database.Database.Read(out List<Students>? s, whereCond: $"StudentID = '{b.StudentID}'") <= 0 
+                            if (Database.Database.Read(out List<Students>? s, whereCond: $"StudentID = '{b.StudentID}'") <= 0
                                 || s == null)
                                 continue;
 
                             DateTime dueDate = b.DateToReturn.Value;
-                            if (Miscellaneous.CalculateDateExcptSun(currentDate, dueDate) == 3 
+                            if (Miscellaneous.CalculateDateExcptSun(currentDate, dueDate) <= 3
                                 && !b.IsLostOrDamaged && !b.ThreeDayNoticeSent) {
-                                    b.ThreeDayNoticeSent = true;
+                                b.ThreeDayNoticeSent = true;
 
                                 string body = Properties.Resources.OngoingDueEmail
                                                        .Replace("%school%", Credentials.Librarian?.SchoolName)
@@ -54,10 +54,14 @@ namespace LibCheck.Modules {
                                                        .Replace("%title%", b.Title)
                                                        .Replace("%due%", b.DateToReturn?.ToString("dd/MM/yyyy"))
                                                        .Replace("%librarian%", Miscellaneous.GenerateFullName(Credentials.Librarian));
-                                
-                                if (!Queue(s[0], body, "Due Soon") || !Database.Database.Update(b)) 
+
+                                if (!Queue(s[0], body, "Due Soon") || !Database.Database.Update(b))
                                     Logger.Log(Logger.LogEnums.Error, "An error occurred while sending a due.");
 
+                                Notifs.CreateNotification("Due Soon",
+                                                          $"A student {Miscellaneous.GenerateFullName(s[0])} has an upcoming due " +
+                                                          $" for the book '{b.Title}' "+
+                                                          $"(Due Date: {b.DateToReturn?.ToString("dd/MM/yyyy")}).");
                             }
                         }
                     }

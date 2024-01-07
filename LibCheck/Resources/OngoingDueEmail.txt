@@ -1,6 +1,6 @@
 <p>Greetings,</p>
     <p>
-        This is to remind you that your due on the book <b>%title%</b> (<b>%isbn%</b>) is going near.
+        This is to remind you that your due on the book <b>%title%</b> (<b>%isbn%</b>) is coming soon.
         <br/>
         Please return the book to the librarian, on or before <b>%due%</b> to prevent overdue cost.
         <br/>

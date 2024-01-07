@@ -48,6 +48,7 @@ namespace LibCheck.Forms {
         }
         private void HomeButton_Click(object sender, EventArgs e) {
             ChangeDashboards(homeDashboard1);
+            homeDashboard1.LoadItems();
         }
 
         private void BooksButton_Click(object sender, EventArgs e) {

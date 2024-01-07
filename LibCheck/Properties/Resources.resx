@@ -178,6 +178,9 @@
   <data name="front_card" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\front_card.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BookBorrowedEmail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BookBorrowedEmail.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="icons8-compose-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-compose-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -196,6 +199,12 @@
   <data name="back_card" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\back_card.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="empty_trash_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\empty_trash_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OngoingDueEmail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\OngoingDueEmail.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="UpdateEmailTxt" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\UpdateEmailTxt.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
@@ -204,6 +213,9 @@
   </data>
   <data name="icons8-statistics-45" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-statistics-45.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8-bookreturned-45" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-bookreturned-45.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8-email-queue-45" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-email-queue-45.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -223,13 +235,7 @@
   <data name="icons8-compose-40" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-compose-40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="empty_trash_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\empty_trash_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BookBorrowedEmail" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BookBorrowedEmail.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="OngoingDueEmail" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\OngoingDueEmail.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="icons8-notification-45" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-notification-45.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
