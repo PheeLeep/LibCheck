@@ -1,4 +1,5 @@
 ﻿using LibCheck.Database.Tables;
+using ScottPlot;
 using System.Text;
 
 namespace LibCheck.Modules {
@@ -76,6 +77,12 @@ namespace LibCheck.Modules {
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
+        internal static DateTime CheckForSunday(DateTime dt, bool reverse = true) {
+            if (dt.DayOfWeek == DayOfWeek.Sunday)
+                return reverse ? dt.AddDays(-1) : dt.AddDays(1);
+            return dt;
+        }
+
         internal static int CalculateDateExcptSun(DateTime from, DateTime to) {
             int daysDifference = (int)(to - from).TotalDays;
 
@@ -103,5 +110,36 @@ namespace LibCheck.Modules {
 
             return $"{stringToRedact[0]}{new string('*', size)}{stringToRedact[^1]}";
         }
+
+        internal static void ConstructChart(FormsPlot fp, bool isScatter, double[][] values,
+                                            string[] xLabelArr, string title, string xLabel, string yLabel) {
+            fp.Plot.Clear();
+            fp.Refresh();
+
+            List<double> pos = new List<double>();
+            for (int i = 0; i < xLabelArr.Length; i++)
+                pos.Add(i);
+
+            if (!isScatter) {
+                if (values[0].Length == 0) return;
+                fp.Plot.AddBar(values[0], pos.ToArray());
+            } else {
+                fp.Plot.XAxis.ManualTickPositions(pos.ToArray(), xLabelArr);
+                for (int i = 0; i < values.Length; i++)
+                    fp.Plot.AddScatter(pos.ToArray(), values[i],
+                            label: i >= xLabelArr.Length ? "(unknown)" : xLabelArr[i]);
+            }
+
+            fp.Plot.XTicks(pos.ToArray(), xLabelArr);
+            fp.Plot.SetAxisLimits(yMin: 0);
+            fp.Plot.Title(title);
+            fp.Plot.Grid(enable: false);
+            fp.Plot.XLabel(xLabel);
+            fp.Plot.YLabel(yLabel);
+            if (isScatter) fp.Plot.Legend();
+            fp.Refresh();
+
+        }
+
     }
 }
