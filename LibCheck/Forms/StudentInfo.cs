@@ -20,12 +20,12 @@ namespace LibCheck.Forms {
             LoadItems();
         }
         private void LoadItems() {
-            Database.Database.Read(out List<Books>? l, "ISBN, Title, Author, DatePublished, DateToReturn",
-                                   whereCond: $"StudentID = '{student.StudentID}'");
+            Database.Database.Read(out List<Books>? l, "ISBN, Title, DateToReturn",
+                                   $"StudentID = '{student.StudentID}'");
 
             DateTime currentDate = DateTime.Now;
             DateTime bdate = student.BirthDate;
-            int age = 0;
+            int age;
             if (bdate.Month > currentDate.Month || (bdate.Month == currentDate.Month && bdate.Day > currentDate.Day)) {
                 age = currentDate.Year - bdate.Year - 1;
             } else {
@@ -40,15 +40,34 @@ namespace LibCheck.Forms {
             EmailAddressLabel.Text = $"Email Address: {student.EmailAddress}";
 
             dataGridView1.DataSource = l;
+
+            dataGridView1.Columns.Add("DateIssued", "Date Issued");
+            dataGridView1.Columns["DateIssued"].DisplayIndex = dataGridView1.Columns["SafeDateToReturn"].DisplayIndex - 1;
+
+            if (l != null) {
+                for (int i = 0; i < l.Count; i++) {
+                    Books b = l[i];
+                    if (Database.Database.Read(out List<Records>? records,
+                                                    whereCond: $"StudentID = '{student.StudentID}' " +
+                                                               $"AND ISBN = '{b.ISBN}' AND " +
+                                                               $"Category = {(int)Records.RecordStatus.BookBorrowed}") <= 0
+                                               || records == null) {
+                        dataGridView1.Rows[i].Cells["DateIssued"].Value = "(none)";
+                        continue;
+                    }
+                    dataGridView1.Rows[i].Cells["DateIssued"].Value = records[0].DateOccurred.ToString("dd/MM/yyyy");
+                }
+            }
+
             Miscellaneous.ResetDGVColumns(dataGridView1);
 
-            dataGridView1.Columns["ISBN"].Visible = true;
             dataGridView1.Columns["Title"].Visible = true;
-            dataGridView1.Columns["Author"].Visible = true;
-            dataGridView1.Columns["SafeDatePublished"].Visible = true;
-            dataGridView1.Columns["SafeDatePublished"].HeaderText = "Date Published";
             dataGridView1.Columns["SafeDateToReturn"].Visible = true;
             dataGridView1.Columns["SafeDateToReturn"].HeaderText = "Date to Return";
+            dataGridView1.Columns["DateIssued"].Visible = true;
+
+
+
         }
 
         private void ReturnBookButton_Click(object sender, EventArgs e) {

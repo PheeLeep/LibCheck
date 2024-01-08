@@ -126,12 +126,15 @@ namespace LibCheck.Properties {
         /// <summary>
         ///   Looks up a localized string similar to &lt;p&gt;Greetings,&lt;/p&gt;
         ///    &lt;p&gt;
-        ///        We notify you because you borrowed a book. Here&apos;s the information:
+        ///        We notify you because you borrowed a book in the library. Here&apos;s the information:
         ///        &lt;br/&gt;
         ///    &lt;/p&gt;
+        ///
         ///    &lt;p&gt;ISBN: &lt;b&gt;%isbn%&lt;/b&gt;&lt;/p&gt;
         ///    &lt;p&gt;Title: &lt;b&gt;%title%&lt;/b&gt;&lt;/p&gt;
         ///    &lt;p&gt;Author: &lt;b&gt;%author%&lt;/b&gt;&lt;/p&gt;
+        ///    &lt;p&gt;Date Borrowed: &lt;b&gt;%dateBorrow%&lt;/b&gt;&lt;/p&gt;
+        ///    &lt;br/&gt;
         ///
         ///    &lt;p&gt;
         ///        Please return the book on or before &lt;b&gt;%due%&lt;/b&gt; to prevent overdue cost. Thank you!
@@ -140,9 +143,7 @@ namespace LibCheck.Properties {
         ///    &lt;p&gt;
         ///        &lt;u&gt;%librarian%&lt;/u&gt;&lt;br/&gt;
         ///        Librarian in &lt;b&gt;%school%.&lt;/b&gt;
-        ///    &lt;/p&gt;
-        ///        
-        ///&lt;p style=&quot;text-align: center&quot;&gt;(Do not reply to this ema [rest of string was truncated]&quot;;.
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string BookBorrowedEmail {
             get {
@@ -253,6 +254,16 @@ namespace LibCheck.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_bookreturned_45 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-bookreturned-45", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_books_45 {
             get {
                 object obj = ResourceManager.GetObject("icons8-books-45", resourceCulture);
@@ -303,6 +314,36 @@ namespace LibCheck.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_graph_45 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-graph-45", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_hashtag_45 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-hashtag-45", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_history_45 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-history-45", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_home_45 {
             get {
                 object obj = ResourceManager.GetObject("icons8-home-45", resourceCulture);
@@ -316,6 +357,26 @@ namespace LibCheck.Properties {
         internal static System.Drawing.Bitmap icons8_log_45 {
             get {
                 object obj = ResourceManager.GetObject("icons8-log-45", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_notification_45 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-notification-45", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_search_32 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-search-32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -401,7 +462,20 @@ namespace LibCheck.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to &lt;p&gt;Greetings,&lt;/p&gt;
+        ///    &lt;p&gt;
+        ///        This is to remind you that your due on the book &lt;b&gt;%title%&lt;/b&gt; (&lt;b&gt;%isbn%&lt;/b&gt;) is coming soon.
+        ///        &lt;br/&gt;
+        ///        Please return the book to the librarian, on or before &lt;b&gt;%due%&lt;/b&gt; to prevent overdue cost.
+        ///        &lt;br/&gt;
+        ///        If you have any questions, please go to the library for further assistance.
+        ///    &lt;/p&gt;
+        ///    &lt;p&gt;
+        ///        &lt;u&gt;%librarian%&lt;/u&gt;&lt;br/&gt;
+        ///        Librarian in &lt;b&gt;%school%.&lt;/b&gt;
+        ///    &lt;/p&gt;
+        ///        
+        ///&lt;p style=&quot;text-align: center&quot;&gt;(Do not reply to this e [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string OngoingDueEmail {
             get {

@@ -44,7 +44,6 @@ namespace LibCheck.Database {
                 protectedByte = ProtectedData.Protect(Encoding.UTF8.GetBytes(CryptComp.ConvertToString(secString)),
                                                       null,
                                                       DataProtectionScope.CurrentUser);
-
                 Logger.Log(Logger.LogEnums.Info, "Database loaded");
             }
         }
@@ -149,7 +148,7 @@ namespace LibCheck.Database {
         internal static bool Delete<T>(string primaryKey) where T : new() {
             try {
                 CheckConn();
-                int? res = _conn?.Delete(_conn?.Delete<T>(primaryKey));
+                int? res = _conn?.Delete<T>(primaryKey);
                 if (!res.HasValue) throw new InvalidOperationException("DEL_SPECIFIC_FAILED");
                 Logger.Log(Logger.LogEnums.Info, $"SPECIFIC_DEL >> {res} row{(res != 1 ? "s" : "")} deleted.");
                 return res > 0;
@@ -159,6 +158,18 @@ namespace LibCheck.Database {
             }
         }
 
+        internal static bool DeleteAll<T>() where T : new() {
+            try {
+                CheckConn();
+                int? res = _conn?.DeleteAll<T>();
+                if (!res.HasValue) throw new InvalidOperationException("DEL_TABLE_DATA_FAILED");
+                Logger.Log(Logger.LogEnums.Info, $"DEL_TABLE_DATA >> {res} row{(res != 1 ? "s" : "")} deleted.");
+                return res > 0;
+            } catch (Exception ex) {
+                WriteError(ex.Message);
+                return false;
+            }
+        }
         private static void CheckConn() {
             if (!IsConnected) throw new InvalidOperationException("No connection established to the database.");
         }

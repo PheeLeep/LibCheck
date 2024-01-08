@@ -55,6 +55,7 @@ namespace LibCheck.Forms
             accountRecoveryToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
             aboutToolStripMenuItem = new ToolStripMenuItem();
+            statisticsDashboard1 = new StatisticsDashboard();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             StagePanel.SuspendLayout();
@@ -142,6 +143,7 @@ namespace LibCheck.Forms
             StatsButton.TabIndex = 3;
             StatsButton.Text = "Statistics";
             StatsButton.UseVisualStyleBackColor = true;
+            StatsButton.Click += StatsButton_Click;
             // 
             // StudentsButton
             // 
@@ -243,6 +245,7 @@ namespace LibCheck.Forms
             // StagePanel
             // 
             StagePanel.Controls.Add(homeDashboard1);
+            StagePanel.Controls.Add(statisticsDashboard1);
             StagePanel.Controls.Add(booksDashboard1);
             StagePanel.Controls.Add(studentsDashboard1);
             StagePanel.Controls.Add(emailDashboard1);
@@ -322,6 +325,15 @@ namespace LibCheck.Forms
             aboutToolStripMenuItem.Size = new Size(130, 24);
             aboutToolStripMenuItem.Text = "About";
             // 
+            // statisticsDashboard1
+            // 
+            statisticsDashboard1.BackColor = SystemColors.ActiveCaption;
+            statisticsDashboard1.Dock = DockStyle.Fill;
+            statisticsDashboard1.Location = new Point(0, 0);
+            statisticsDashboard1.Name = "statisticsDashboard1";
+            statisticsDashboard1.Size = new Size(860, 521);
+            statisticsDashboard1.TabIndex = 6;
+            // 
             // AdminForm
             // 
             AutoScaleDimensions = new SizeF(120F, 120F);
@@ -371,5 +383,6 @@ namespace LibCheck.Forms
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripMenuItem aboutToolStripMenuItem;
         private LogsDashboard logsDashboard1;
+        private StatisticsDashboard statisticsDashboard1;
     }
 }

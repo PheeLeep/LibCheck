@@ -3,7 +3,6 @@ using LibCheck.Exceptions;
 using LibCheck.Forms.SearchTools;
 using LibCheck.Modules;
 using LibCheck.Modules.Security;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace LibCheck.Forms
 {
@@ -35,16 +34,19 @@ namespace LibCheck.Forms
             }
         }
 
-        private void LoadStudBookInfo(Type t, string val)
-        {
-            if (t == typeof(Books))
-            {
-                if (Database.Database.Read(out List<Books>? bookInfo, whereCond: $"ISBN = '{val}'") <= 0 || bookInfo == null)
+        private void LoadStudBookInfo(Type t, string val) {
+            if (t == typeof(Books)) {
+                if (Database.Database.Read(out List<Books>? bookInfo, whereCond: $"ISBN = '{val}'") <= 0
+                    || bookInfo == null)
                     throw new BookNotFoundException(val);
                 if (bookInfo[0].IsLostOrDamaged)
-                    throw new InvalidOperationException("This book is currently lost or damaged.");
+                    throw new BookNotFoundException("This book is currently lost or damaged.");
 
                 book = bookInfo[0];
+
+                if (isBorrow && !string.IsNullOrWhiteSpace(book.StudentID) && !book.StudentID.Equals("(none)"))
+                    throw new BookNotFoundException("This book is currently borrowed.", book.ISBN);
+
                 ISBNTextBox.Text = book.ISBN;
                 BookTitleLabel.Text = $"Title: {book.Title}";
 
@@ -139,21 +141,20 @@ namespace LibCheck.Forms
             }
         }
 
-        private void ExecuteButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
+        private void ExecuteButton_Click(object sender, EventArgs e) {
+            try {
                 if (book == null || book.IsLostOrDamaged)
                     throw new InvalidOperationException("No book provided or it was damaged.");
                 if (student == null)
                     throw new InvalidOperationException("No student provided.");
 
-                if (!Modules.AppContext.Auth()) return;
-
-                if (isBorrow)
-                {
+                if (isBorrow) {
                     if (!string.IsNullOrWhiteSpace(book.StudentID) && !book.StudentID.Equals("(none)"))
                         throw new InvalidOperationException("This book is already borrowed by someone.");
+
+                    if (Database.Database.Read<Books>(out _, whereCond: $"StudentID = {student.StudentID}") == 3)
+                        throw new InvalidOperationException("This student reached its book borrowed limit.");
+
                     book.DateToReturn = DateBorrowDTP.Value;
                     book.StudentID = student.StudentID;
                     book.ThreeDayNoticeSent = false;
@@ -181,6 +182,11 @@ namespace LibCheck.Forms
                                                        .Replace("%due%", book.DateToReturn?.ToString("dd/MM/yyyy"))
                                                        .Replace("%librarian%", Miscellaneous.GenerateFullName(Credentials.Librarian));
                     EmailService.Queue(student, body, "Book Borrowed");
+
+                    if (!Modules.AppContext.IsInAdminMode)
+                        Notifs.CreateNotification("Book Borrowed",
+                                                  $"A student {Miscellaneous.GenerateFullName(student)} borrowed a book " +
+                                                  $"{book.Title}.");
                     MessageBox.Show(this, "Book borrowed.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     DialogResult = DialogResult.Yes;
                     Close();
@@ -218,6 +224,12 @@ namespace LibCheck.Forms
 
                 if (!Database.Database.Update(book) || !Database.Database.Insert(rReturn))
                     throw new InvalidOperationException("Unable to execute the database.");
+
+                if (!Modules.AppContext.IsInAdminMode)
+                    Notifs.CreateNotification("Book Return",
+                                              $"A student {Miscellaneous.GenerateFullName(student)} returned a book " +
+                                              $"{book.Title}.");
+
                 MessageBox.Show(this, "Book returned.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.Yes;
                 Close();

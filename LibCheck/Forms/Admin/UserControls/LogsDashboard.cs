@@ -6,6 +6,7 @@ namespace LibCheck.Forms.Admin.UserControls {
     public partial class LogsDashboard : UserControl {
 
         private DateTime? specificDate = null;
+        List<Logs>? tmplogs;
         public LogsDashboard() {
             InitializeComponent();
         }
@@ -22,12 +23,16 @@ namespace LibCheck.Forms.Admin.UserControls {
 
         internal void Reload() {
             dateTimePicker1.MaxDate = DateTime.MaxValue;
-            List<Logs>? tmplogs = AcquireLog();
-            List<Logs> logs = new List<Logs>();
+            tmplogs = AcquireLog();
 
             if (specificDate != null)
-                tmplogs = tmplogs?.FindAll(s => s.Date == specificDate);
+                tmplogs = tmplogs?.FindAll(s => s.Date.Date == specificDate.Value.Date);
 
+            ResetView();
+        }
+
+        private void ResetView() {
+            List<Logs> logs = new List<Logs>();
             if (tmplogs != null) {
                 logs.AddRange(tmplogs.FindAll(s => s.Level == LogEnums.Verbose && VerboseLabel.Checked));
                 logs.AddRange(tmplogs.FindAll(s => s.Level == LogEnums.Info && InfoLabel.Checked));
@@ -38,12 +43,12 @@ namespace LibCheck.Forms.Admin.UserControls {
             }
 
             dataGridView1.DataSource = logs;
-            Miscellaneous.ResetDGVColumns(dataGridView1, false) ;
-            VerboseLabel.Text = logs?.FindAll(s => s.Level == LogEnums.Verbose).Count.ToString();
-            InfoLabel.Text = logs?.FindAll(s => s.Level == LogEnums.Info).Count.ToString();
-            WarnCB.Text = logs?.FindAll(s => s.Level == LogEnums.Warn).Count.ToString();
-            ErrorCB.Text = logs?.FindAll(s => s.Level == LogEnums.Error).Count.ToString();
-            FatalLabel.Text = logs?.FindAll(s => s.Level == LogEnums.Fatal).Count.ToString();
+            Miscellaneous.ResetDGVColumns(dataGridView1, false);
+            VerboseLabel.Text = tmplogs?.FindAll(s => s.Level == LogEnums.Verbose).Count.ToString();
+            InfoLabel.Text = tmplogs?.FindAll(s => s.Level == LogEnums.Info).Count.ToString();
+            WarnCB.Text = tmplogs?.FindAll(s => s.Level == LogEnums.Warn).Count.ToString();
+            ErrorCB.Text = tmplogs?.FindAll(s => s.Level == LogEnums.Error).Count.ToString();
+            FatalLabel.Text = tmplogs?.FindAll(s => s.Level == LogEnums.Fatal).Count.ToString();
             groupBox1.Text = $"All logs{(specificDate == null ? "." : $" since {specificDate:dd/MM/yyyy}.")}";
 
             foreach (DataGridViewRow r in dataGridView1.Rows) {
@@ -73,6 +78,7 @@ namespace LibCheck.Forms.Admin.UserControls {
         }
 
         private void button1_Click(object sender, EventArgs e) {
+            specificDate = null;
             Reload();
         }
 
@@ -112,7 +118,7 @@ namespace LibCheck.Forms.Admin.UserControls {
         }
 
         private void CBoxCheckedChanged(object sender, EventArgs e) {
-            Reload();
+            ResetView();
         }
     }
 }

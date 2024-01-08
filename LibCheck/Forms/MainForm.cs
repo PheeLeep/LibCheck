@@ -34,7 +34,7 @@ namespace LibCheck.Forms {
                 Form? f = null;
                 switch (searchDiag.ResultSearchType) {
                     case SearchDialog.SearchType.Book:
-                        f = new BookInfo(searchDiag.Value);
+                        f = new BorrowReturnDialog(true, searchDiag.Value);
                         break;
                     case SearchDialog.SearchType.Student:
                         f = new StudentInfo(searchDiag.Value);

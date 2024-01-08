@@ -124,6 +124,7 @@ namespace LibCheck.Modules.Security {
                 conn.CreateTable<EmailQueue>();
                 conn.CreateTable<RecentEmail>();
                 conn.CreateTable<Records>();
+                conn.CreateTable<Notifs>();
                 conn.Insert(lInfo);
             }
             Logger.Log(Logger.LogEnums.Info, "Main database created.");
@@ -146,6 +147,7 @@ namespace LibCheck.Modules.Security {
             }
             token.Dispose();
             PleaseWait.SetPWDText("Done.");
+            Notifs.CreateNotification("Welcome to LibCheck!", ":D");
         }
 
         /// <summary>
@@ -238,6 +240,11 @@ namespace LibCheck.Modules.Security {
             return true;
         }
 
+        internal static void SetLastLoggedIn() {
+            if (Librarian == null || !LoggedIn || !AppContext.IsInAdminMode) return;
+            Librarian.LastLoggedIn = DateTime.Now;
+            Database.Database.Update(Librarian);
+        }
         private static void Penalize() {
             retries++;
             if (retries >= 5) {

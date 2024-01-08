@@ -12,7 +12,7 @@ namespace LibCheck.Database.Tables {
         public string? Author { get; set; }
 
         [NotNull]
-        public string? Genre { get; set; }  
+        public string? Genre { get; set; }
 
         [NotNull]
         public string? Publisher { get; set; }
@@ -36,6 +36,12 @@ namespace LibCheck.Database.Tables {
         public bool IsLostOrDamaged { get; set; }
 
         public DateTime? DateToReturn { get; set; }
+
+        [Ignore]
+        public DateTime? SafeDateToReturn {
+            get => DateToReturn?.Date;
+            set => DateToReturn = value;
+        }
 
         [NotNull]
         public bool ThreeDayNoticeSent { get; set; } = false;

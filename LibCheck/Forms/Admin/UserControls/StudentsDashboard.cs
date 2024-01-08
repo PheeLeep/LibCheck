@@ -1,16 +1,23 @@
 ﻿using LibCheck.Database.Tables;
+using LibCheck.Forms.SearchTools.UserControls;
+using LibCheck.Forms.SearchTools;
 using LibCheck.Modules;
 using LibCheck.Modules.Security;
 
-namespace LibCheck.Forms.Admin.UserControls {
-    public partial class StudentsDashboard : UserControl {
-        public StudentsDashboard() {
+namespace LibCheck.Forms.Admin.UserControls
+{
+    public partial class StudentsDashboard : UserControl
+    {
+        public StudentsDashboard()
+        {
             InitializeComponent();
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
         }
 
-        protected override CreateParams CreateParams {
-            get {
+        protected override CreateParams CreateParams
+        {
+            get
+            {
                 // Minimize form and control flickering.
                 CreateParams cp = base.CreateParams;
                 cp.ExStyle |= 0x02000000;
@@ -18,7 +25,8 @@ namespace LibCheck.Forms.Admin.UserControls {
             }
         }
 
-        internal new void Load() {
+        internal new void Load()
+        {
             CurrentlyBorrowedLabel.Text = Database.Database.Read(out List<Students>? infos).ToString();
             dataGridView1.DataSource = infos;
             Logger.Log(Logger.LogEnums.Verbose, $"{GetType().Name} info loaded.");
@@ -36,41 +44,53 @@ namespace LibCheck.Forms.Admin.UserControls {
             dataGridView1.Columns["GradeSection"].HeaderText = "Grade and Section";
         }
 
-        private void AddButton_Click(object sender, EventArgs e) {
-            using (StudentDialog bdg = new StudentDialog(Modules.Miscellaneous.DatabaseMode.Add)) {
-                if (bdg.ShowDialog(this) == DialogResult.OK) {
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            using (StudentDialog bdg = new StudentDialog(Modules.Miscellaneous.DatabaseMode.Add))
+            {
+                if (bdg.ShowDialog(this) == DialogResult.OK)
+                {
                     Load();
                 }
             }
         }
 
-        private void UpdateButton_Click(object sender, EventArgs e) {
-            try {
+        private void UpdateButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
                 if (dataGridView1.SelectedRows.Count != 1)
                     return;
                 string? id = dataGridView1.SelectedRows[0].Cells["StudentID"].Value.ToString();
                 if (string.IsNullOrWhiteSpace(id))
                     return;
-                using (StudentDialog bdg = new StudentDialog(Miscellaneous.DatabaseMode.Update, id)) {
-                    if (bdg.ShowDialog(this) == DialogResult.OK) {
+                using (StudentDialog bdg = new StudentDialog(Miscellaneous.DatabaseMode.Update, id))
+                {
+                    if (bdg.ShowDialog(this) == DialogResult.OK)
+                    {
                         Load();
                     }
                 }
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 Logger.Log(Logger.LogEnums.Error, $"Failed to update a student. ({ex.Message})");
                 MessageBox.Show(this, $"Failed to update.\nCause: {ex.Message}",
                                 "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
 
-        private void DeleteButton_Click(object sender, EventArgs e) {
-            try {
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
                 if (dataGridView1.SelectedRows.Count != 1)
                     return;
                 string? id = dataGridView1.SelectedRows[0].Cells["StudentID"].Value.ToString();
                 if (string.IsNullOrWhiteSpace(id))
                     return;
-                if (Database.Database.Read<Books>(out _, whereCond: $"StudentID = {id}") > 0) {
+                if (Database.Database.Read<Books>(out _, whereCond: $"StudentID = {id}") > 0)
+                {
                     Logger.Log(Logger.LogEnums.Error, $"Couldn't delete. There are remaining borrowed books.");
                     MessageBox.Show(this, $"Student {id} has some books that are currently borrowed.",
                                     "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
@@ -83,35 +103,44 @@ namespace LibCheck.Forms.Admin.UserControls {
 
                 if (!Database.Database.Delete<Students>(id))
                     throw new InvalidOperationException("Couldn't remove a student info from the database.");
-                Logger.Log(Logger.LogEnums.Warn, "Book was deleted. Reloading...");
+                Logger.Log(Logger.LogEnums.Warn, "Student info is deleted. Reloading...");
                 Load();
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 Logger.Log(Logger.LogEnums.Error, $"Failed to delete a student info. ({ex.Message})");
                 MessageBox.Show(this, $"Failed to delete.\nCause: {ex.Message}",
                                 "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
 
-        private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e) {
-            try {
+        private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
                 if (dataGridView1.SelectedRows.Count == 0)
                     return;
                 string? id = dataGridView1.SelectedRows[0].Cells["StudentID"].Value.ToString();
                 if (string.IsNullOrWhiteSpace(id))
                     return;
-                using (StudentInfo bdg = new StudentInfo(id)) {
-                    if (bdg.ShowDialog(this) == DialogResult.OK) {
+                using (StudentInfo bdg = new StudentInfo(id))
+                {
+                    if (bdg.ShowDialog(this) == DialogResult.OK)
+                    {
                         Load();
                     }
                 }
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 Logger.Log(Logger.LogEnums.Error, $"Failed to read a student info. ({ex.Message})");
                 MessageBox.Show(this, $"Failed to read.\nCause: {ex.Message}",
                                 "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
 
-        private void PrintLabel_Click(object sender, EventArgs e) {
+        private void PrintLabel_Click(object sender, EventArgs e)
+        {
             if (ParentForm == null) return;
             if (dataGridView1.SelectedRows.Count != 1)
                 return;
@@ -119,9 +148,11 @@ namespace LibCheck.Forms.Admin.UserControls {
             if (string.IsNullOrWhiteSpace(id))
                 return;
 
-            PleaseWait.RunInPleaseWait(ParentForm, () => {
+            PleaseWait.RunInPleaseWait(ParentForm, () =>
+            {
                 PleaseWait.SetPWDText("Please wait while generating QR...");
-                try {
+                try
+                {
 
                     if (Database.Database.Read(out List<Students>? s, whereCond: $"StudentID = '{id}'") <= 0 || s == null)
                         throw new InvalidOperationException("No data provided.");
@@ -129,9 +160,12 @@ namespace LibCheck.Forms.Admin.UserControls {
 
                     Bitmap frontCard = new Bitmap(Properties.Resources.front_card);
                     Bitmap backCard = new Bitmap(Properties.Resources.back_card);
-                    using (Font font = new Font("Century Gothic", 20)) {
-                        using (Bitmap qr = QRCamModule.GenerateQR($"LC#{Credentials.Librarian?.SchoolGUID}#1#{id}")) {
-                            using (Graphics g = Graphics.FromImage(frontCard)) {
+                    using (Font font = new Font("Century Gothic", 20))
+                    {
+                        using (Bitmap qr = QRCamModule.GenerateQR($"LC#{Credentials.Librarian?.SchoolGUID}#1#{id}"))
+                        {
+                            using (Graphics g = Graphics.FromImage(frontCard))
+                            {
                                 g.DrawImage(qr, new Point(47, 130));
                                 g.Flush();
 
@@ -150,7 +184,8 @@ namespace LibCheck.Forms.Admin.UserControls {
                                 g.Flush();
                             }
 
-                            using (Graphics g = Graphics.FromImage(backCard)) {
+                            using (Graphics g = Graphics.FromImage(backCard))
+                            {
                                 SizeF sIDSize = g.MeasureString(student.StudentID, font);
                                 PointF sIDPoint = new PointF(((182 + 840) / 2) - sIDSize.Width / 2, 138);
 
@@ -161,16 +196,55 @@ namespace LibCheck.Forms.Admin.UserControls {
                     }
                     PleaseWait.SetPWDText("Done.");
                     Logger.Log(Logger.LogEnums.Info, $"Student QR code printed.");
-                    Task.Factory.StartNew(() => {
+                    Task.Factory.StartNew(() =>
+                    {
                         Task.Delay(10).Wait();
                         Invoke(new Action(() => new LibCardDialogBox(frontCard, backCard).ShowDialog(this)));
                     });
-                } catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                     Logger.Log(Logger.LogEnums.Error, $"Failed to print a student info. ({ex.Message})");
                     MessageBox.Show(this, $"Failed to print.\nCause: {ex.Message}",
                                     "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }
             });
+        }
+
+        private void SearchButton_Click(object sender, EventArgs e)
+        {
+            if (Modules.AppContext.Current.MainForm is AdminForm af)
+            {
+                SearchWindow sw = new SearchWindow();
+                StudentsSearchUC hsuc = new StudentsSearchUC();
+                sw.Controls.Add(hsuc);
+                sw.SearchWhereCondition += Sw_SearchWhereCondition;
+                sw.FormClosing += (s, e) =>
+                {
+                    sw.SearchWhereCondition -= Sw_SearchWhereCondition;
+                    Sw_SearchWhereCondition("");
+                };
+                hsuc.Dock = DockStyle.Fill;
+                hsuc.CreateControl();
+                af.RegisterWindow(sw);
+                sw.Text = "Search Student.";
+                sw.Show(this);
+            }
+        }
+
+        private void Sw_SearchWhereCondition(string whereCond)
+        {
+            if (string.IsNullOrWhiteSpace(whereCond))
+            {
+                Load();
+                return;
+            }
+            if (!string.IsNullOrWhiteSpace(whereCond)
+                 && Database.Database.Read(out List<Students>? specRecords, whereCond: whereCond) >= 0
+                 && specRecords != null)
+            {
+                dataGridView1.DataSource = specRecords;
+            }
         }
     }
 }

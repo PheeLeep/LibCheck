@@ -10,7 +10,7 @@ namespace LibCheck.Database.Tables {
             BookBorrowed,
             BookReturned,
             BookMissingDamaged,
-            BookRestored
+            BookRestored,
         }
 
         [PrimaryKey, NotNull]

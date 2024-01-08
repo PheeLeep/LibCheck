@@ -118,6 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="CustomEmail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CustomEmail.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="icons8-hashtag-45" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-hashtag-45.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="back_to_50px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\back_to_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icons8-student-45" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-student-45.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -145,8 +154,8 @@
   <data name="LOGO-removebg-preview" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LOGO-removebg-preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="back_to_50px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\back_to_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8-graph-45" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-graph-45.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8-email-45" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-email-45.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -157,8 +166,8 @@
   <data name="info_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\info_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CustomEmail" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CustomEmail.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="icons8-history-45" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-history-45.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="error_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\error_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -178,6 +187,9 @@
   <data name="front_card" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\front_card.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BookBorrowedEmail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BookBorrowedEmail.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="icons8-compose-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-compose-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -196,6 +208,12 @@
   <data name="back_card" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\back_card.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="empty_trash_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\empty_trash_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OngoingDueEmail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\OngoingDueEmail.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="UpdateEmailTxt" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\UpdateEmailTxt.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
@@ -204,6 +222,9 @@
   </data>
   <data name="icons8-statistics-45" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-statistics-45.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8-bookreturned-45" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-bookreturned-45.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8-email-queue-45" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-email-queue-45.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -220,16 +241,13 @@
   <data name="bg" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bg.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icons8-notification-45" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-notification-45.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icons8-compose-40" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-compose-40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="empty_trash_32px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\empty_trash_32px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BookBorrowedEmail" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BookBorrowedEmail.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="OngoingDueEmail" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\OngoingDueEmail.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="icons8-search-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-search-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -1,8 +1,11 @@
 ﻿using LibCheck.Forms.Admin;
+using LibCheck.Forms.SearchTools;
 using LibCheck.Modules.Security;
 
 namespace LibCheck.Forms {
     public partial class AdminForm : Form {
+
+        private SearchWindow? window;
         public AdminForm() {
             InitializeComponent();
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
@@ -15,6 +18,14 @@ namespace LibCheck.Forms {
                 cp.ExStyle |= 0x02000000;
                 return cp;
             }
+        }
+
+        internal void RegisterWindow(SearchWindow window) {
+            if (this.window != null) {
+                this.window.Close();
+                this.window = null;
+            }
+            this.window = window;
         }
 
         private void AdminForm_Load(object sender, EventArgs e) {
@@ -40,18 +51,24 @@ namespace LibCheck.Forms {
             }
         }
 
-        private void ChangeDashboards(UserControl uc) {
-            if (StagePanel.Controls.GetChildIndex(uc) != 0) {
-                uc.BringToFront();
-                uc.Focus();
+        private bool ChangeDashboards(UserControl uc) {
+            if (StagePanel.Controls.GetChildIndex(uc) == 0) return false;
+            uc.BringToFront();
+            uc.Focus();
+            if (window != null) {
+                window.Close();
+                window = null;
             }
+            return true;
         }
         private void HomeButton_Click(object sender, EventArgs e) {
-            ChangeDashboards(homeDashboard1);
+            if (ChangeDashboards(homeDashboard1))
+                homeDashboard1.LoadItems();
         }
 
         private void BooksButton_Click(object sender, EventArgs e) {
-            ChangeDashboards(booksDashboard1);
+            if (ChangeDashboards(booksDashboard1))
+                booksDashboard1.Load();
         }
 
         private void AccountRecoveryButton_Click(object sender, EventArgs e) {
@@ -59,7 +76,8 @@ namespace LibCheck.Forms {
         }
 
         private void StudentsButton_Click(object sender, EventArgs e) {
-            ChangeDashboards(studentsDashboard1);
+            if (ChangeDashboards(studentsDashboard1))
+                studentsDashboard1.Load();
         }
 
         private void SettingsButton_MouseClick(object sender, MouseEventArgs e) {
@@ -81,7 +99,11 @@ namespace LibCheck.Forms {
 
         private void LogsButton_Click(object sender, EventArgs e) {
             ChangeDashboards(logsDashboard1);
-            logsDashboard1.Reload();
+        }
+
+        private void StatsButton_Click(object sender, EventArgs e) {
+            if (ChangeDashboards(statisticsDashboard1))
+                statisticsDashboard1.LoadData();
         }
     }
 }
