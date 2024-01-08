@@ -1,5 +1,6 @@
 ﻿using LibCheck.Database.Tables;
 using LibCheck.Forms.SearchTools;
+using LibCheck.Forms.SearchTools.UserControls;
 using static LibCheck.Modules.Miscellaneous;
 
 
@@ -24,6 +25,7 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
                     continue;
                 }
                 ((StatisticsDashboard)uc).LoadData();
+                TransactComboBox.SelectedIndex = 0;
                 break;
             }
         }
@@ -39,7 +41,6 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
             this.books = books;
 
             isLoading = false;
-            TransactComboBox.SelectedIndex = 0;
         }
 
         private void TransactComboBox_SelectedIndexChanged(object sender, EventArgs e) {
@@ -92,6 +93,7 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
         }
 
         private void SaveButton_Click(object sender, EventArgs e) {
+            if (Modules.AppContext.Current.MainForm == null) return;
             object? obj = dataGridView1.DataSource;
             if (obj == null) return;
             if (saveFileDialog1.ShowDialog(this) != DialogResult.OK) return;
@@ -117,6 +119,32 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
                     MessageBox.Show(this, ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }
             }));
+        }
+
+        private void SearchButton_Click(object sender, EventArgs e) {
+            if (Modules.AppContext.Current.MainForm is AdminForm af) {
+                SearchWindow sw = new SearchWindow();
+                HistorySearchUC hsuc = new HistorySearchUC();
+                sw.Controls.Add(hsuc);
+                sw.SearchWhereCondition += Sw_SearchWhereCondition;
+                sw.FormClosing += (s, e) => {
+                    sw.SearchWhereCondition -= Sw_SearchWhereCondition;
+                };
+                hsuc.Dock = DockStyle.Fill;
+                hsuc.CreateControl();
+                af.RegisterWindow(sw);
+                sw.Text = "Search History.";
+                sw.Show();
+            }
+        }
+
+        private void Sw_SearchWhereCondition(string whereCond) {
+            if (!string.IsNullOrWhiteSpace(whereCond)
+                 && Database.Database.Read(out List<Records>? specRecords, whereCond: whereCond) >= 0
+                 && specRecords != null) {
+                records = specRecords;
+                SelectData(from, to);
+            }
         }
     }
 }

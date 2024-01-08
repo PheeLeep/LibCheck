@@ -1,8 +1,11 @@
 ﻿using LibCheck.Forms.Admin;
+using LibCheck.Forms.SearchTools;
 using LibCheck.Modules.Security;
 
 namespace LibCheck.Forms {
     public partial class AdminForm : Form {
+
+        private SearchWindow? window;
         public AdminForm() {
             InitializeComponent();
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
@@ -15,6 +18,14 @@ namespace LibCheck.Forms {
                 cp.ExStyle |= 0x02000000;
                 return cp;
             }
+        }
+
+        internal void RegisterWindow(SearchWindow window) {
+            if (this.window != null) {
+                this.window.Close();
+                this.window = null;
+            }
+            this.window = window;
         }
 
         private void AdminForm_Load(object sender, EventArgs e) {
@@ -44,6 +55,10 @@ namespace LibCheck.Forms {
             if (StagePanel.Controls.GetChildIndex(uc) == 0) return false;
             uc.BringToFront();
             uc.Focus();
+            if (window != null) {
+                window.Close();
+                window = null;
+            }
             return true;
         }
         private void HomeButton_Click(object sender, EventArgs e) {

@@ -1,8 +1,5 @@
 ﻿using LibCheck.Database.Tables;
-using LibCheck.Forms.SearchTools;
 using LibCheck.Modules;
-using ScottPlot;
-using ScottPlot.Renderable;
 
 namespace LibCheck.Forms.Admin.UserControls {
     public partial class StatisticsDashboard : UserControl {

@@ -11,7 +11,6 @@ namespace LibCheck.Database.Tables {
             BookReturned,
             BookMissingDamaged,
             BookRestored,
-            BookOverdue
         }
 
         [PrimaryKey, NotNull]

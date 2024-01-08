@@ -9,12 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Forms\SearchTools\UserControls\**" />
-    <EmbeddedResource Remove="Forms\SearchTools\UserControls\**" />
-    <None Remove="Forms\SearchTools\UserControls\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AE.Net.Mail" Version="1.7.10" />
     <PackageReference Include="AForge.Imaging" Version="2.2.5" />
     <PackageReference Include="AForge.Video" Version="2.2.5" />
