@@ -91,7 +91,7 @@ namespace LibCheck.Forms.SearchTools.UserControls
 
         private void RadioButtonsCheckedChanged(object sender, EventArgs e)
         {
-             keywordTextBox.Clear();
+            keywordTextBox.Clear();
         }
 
         private void genreComboBox_SelectedIndexChanged(object sender, EventArgs e)

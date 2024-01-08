@@ -69,10 +69,10 @@
             BookRestoredCBox.AutoSize = true;
             BookRestoredCBox.Checked = true;
             BookRestoredCBox.CheckState = CheckState.Checked;
-            BookRestoredCBox.Location = new Point(43, 191);
+            BookRestoredCBox.Location = new Point(43, 216);
             BookRestoredCBox.Margin = new Padding(2);
             BookRestoredCBox.Name = "BookRestoredCBox";
-            BookRestoredCBox.Size = new Size(102, 19);
+            BookRestoredCBox.Size = new Size(125, 24);
             BookRestoredCBox.TabIndex = 2;
             BookRestoredCBox.Text = "Book Restored";
             BookRestoredCBox.UseVisualStyleBackColor = true;
@@ -83,10 +83,10 @@
             BookLDmgCBox.AutoSize = true;
             BookLDmgCBox.Checked = true;
             BookLDmgCBox.CheckState = CheckState.Checked;
-            BookLDmgCBox.Location = new Point(43, 167);
+            BookLDmgCBox.Location = new Point(43, 188);
             BookLDmgCBox.Margin = new Padding(2);
             BookLDmgCBox.Name = "BookLDmgCBox";
-            BookLDmgCBox.Size = new Size(127, 19);
+            BookLDmgCBox.Size = new Size(156, 24);
             BookLDmgCBox.TabIndex = 1;
             BookLDmgCBox.Text = "Book Lost/Damage";
             BookLDmgCBox.UseVisualStyleBackColor = true;
@@ -97,10 +97,10 @@
             BookBorrowedCBox.AutoSize = true;
             BookBorrowedCBox.Checked = true;
             BookBorrowedCBox.CheckState = CheckState.Checked;
-            BookBorrowedCBox.Location = new Point(43, 119);
+            BookBorrowedCBox.Location = new Point(43, 131);
             BookBorrowedCBox.Margin = new Padding(2);
             BookBorrowedCBox.Name = "BookBorrowedCBox";
-            BookBorrowedCBox.Size = new Size(107, 19);
+            BookBorrowedCBox.Size = new Size(131, 24);
             BookBorrowedCBox.TabIndex = 1;
             BookBorrowedCBox.Text = "Book Borrowed";
             BookBorrowedCBox.UseVisualStyleBackColor = true;
@@ -111,10 +111,10 @@
             BookReturnedCBox.AutoSize = true;
             BookReturnedCBox.Checked = true;
             BookReturnedCBox.CheckState = CheckState.Checked;
-            BookReturnedCBox.Location = new Point(43, 143);
+            BookReturnedCBox.Location = new Point(43, 160);
             BookReturnedCBox.Margin = new Padding(2);
             BookReturnedCBox.Name = "BookReturnedCBox";
-            BookReturnedCBox.Size = new Size(104, 19);
+            BookReturnedCBox.Size = new Size(126, 24);
             BookReturnedCBox.TabIndex = 0;
             BookReturnedCBox.Text = "Book Returned";
             BookReturnedCBox.UseVisualStyleBackColor = true;
@@ -125,10 +125,10 @@
             BookDelCBox.AutoSize = true;
             BookDelCBox.Checked = true;
             BookDelCBox.CheckState = CheckState.Checked;
-            BookDelCBox.Location = new Point(43, 95);
+            BookDelCBox.Location = new Point(43, 102);
             BookDelCBox.Margin = new Padding(2);
             BookDelCBox.Name = "BookDelCBox";
-            BookDelCBox.Size = new Size(96, 19);
+            BookDelCBox.Size = new Size(119, 24);
             BookDelCBox.TabIndex = 0;
             BookDelCBox.Text = "Book Deleted";
             BookDelCBox.UseVisualStyleBackColor = true;
@@ -139,10 +139,10 @@
             bookModCBox.AutoSize = true;
             bookModCBox.Checked = true;
             bookModCBox.CheckState = CheckState.Checked;
-            bookModCBox.Location = new Point(43, 73);
+            bookModCBox.Location = new Point(43, 72);
             bookModCBox.Margin = new Padding(2);
             bookModCBox.Name = "bookModCBox";
-            bookModCBox.Size = new Size(104, 19);
+            bookModCBox.Size = new Size(127, 24);
             bookModCBox.TabIndex = 1;
             bookModCBox.Text = "Book Modified";
             bookModCBox.UseVisualStyleBackColor = true;
@@ -153,10 +153,10 @@
             BookAddedCBox.AutoSize = true;
             BookAddedCBox.Checked = true;
             BookAddedCBox.CheckState = CheckState.Checked;
-            BookAddedCBox.Location = new Point(43, 49);
+            BookAddedCBox.Location = new Point(43, 42);
             BookAddedCBox.Margin = new Padding(2);
             BookAddedCBox.Name = "BookAddedCBox";
-            BookAddedCBox.Size = new Size(91, 19);
+            BookAddedCBox.Size = new Size(111, 24);
             BookAddedCBox.TabIndex = 0;
             BookAddedCBox.Text = "Book Added";
             BookAddedCBox.UseVisualStyleBackColor = true;
@@ -181,16 +181,16 @@
             keywordTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             keywordTextBox.Location = new Point(34, 48);
             keywordTextBox.Name = "keywordTextBox";
-            keywordTextBox.Size = new Size(254, 23);
+            keywordTextBox.Size = new Size(254, 27);
             keywordTextBox.TabIndex = 2;
             keywordTextBox.TextChanged += keywordTextBox_TextChanged;
             // 
             // StudentRB
             // 
             StudentRB.AutoSize = true;
-            StudentRB.Location = new Point(95, 85);
+            StudentRB.Location = new Point(104, 85);
             StudentRB.Name = "StudentRB";
-            StudentRB.Size = new Size(66, 19);
+            StudentRB.Size = new Size(78, 24);
             StudentRB.TabIndex = 1;
             StudentRB.Text = "Student";
             StudentRB.UseVisualStyleBackColor = true;
@@ -202,7 +202,7 @@
             BookRB.Checked = true;
             BookRB.Location = new Point(37, 85);
             BookRB.Name = "BookRB";
-            BookRB.Size = new Size(52, 19);
+            BookRB.Size = new Size(61, 24);
             BookRB.TabIndex = 1;
             BookRB.TabStop = true;
             BookRB.Text = "Book";
@@ -214,7 +214,7 @@
             BrowseButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             BrowseButton.Location = new Point(294, 47);
             BrowseButton.Name = "BrowseButton";
-            BrowseButton.Size = new Size(75, 23);
+            BrowseButton.Size = new Size(75, 28);
             BrowseButton.TabIndex = 0;
             BrowseButton.Text = "Scan";
             BrowseButton.UseVisualStyleBackColor = true;
@@ -227,6 +227,7 @@
             Controls.Add(groupBox1);
             Controls.Add(groupBox2);
             DoubleBuffered = true;
+            Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             Margin = new Padding(2);
             Name = "HistorySearchUC";
             Size = new Size(400, 411);
