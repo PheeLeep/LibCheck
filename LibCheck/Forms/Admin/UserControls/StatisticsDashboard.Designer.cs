@@ -24,11 +24,13 @@
         /// </summary>
         private void InitializeComponent() {
             doubleBufferedPanel1 = new Controls.DoubleBufferedPanel();
+            button1 = new Button();
             ChartsButton = new Button();
             TrendsButton = new Button();
             doubleBufferedPanel3 = new Controls.DoubleBufferedPanel();
             trendsStatistics1 = new Statistics.TrendsStatistics();
             transactStatistics1 = new Statistics.TransactStatistics();
+            historyStatistics1 = new Statistics.HistoryStatistics();
             doubleBufferedPanel1.SuspendLayout();
             doubleBufferedPanel3.SuspendLayout();
             SuspendLayout();
@@ -36,6 +38,7 @@
             // doubleBufferedPanel1
             // 
             doubleBufferedPanel1.BackColor = Color.FromArgb(128, 128, 255);
+            doubleBufferedPanel1.Controls.Add(button1);
             doubleBufferedPanel1.Controls.Add(ChartsButton);
             doubleBufferedPanel1.Controls.Add(TrendsButton);
             doubleBufferedPanel1.Dock = DockStyle.Top;
@@ -43,6 +46,22 @@
             doubleBufferedPanel1.Name = "doubleBufferedPanel1";
             doubleBufferedPanel1.Size = new Size(862, 50);
             doubleBufferedPanel1.TabIndex = 0;
+            // 
+            // button1
+            // 
+            button1.Dock = DockStyle.Left;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
+            button1.Image = Properties.Resources.icons8_history_45;
+            button1.ImageAlign = ContentAlignment.MiddleLeft;
+            button1.Location = new Point(338, 0);
+            button1.Name = "button1";
+            button1.Size = new Size(169, 50);
+            button1.TabIndex = 2;
+            button1.Text = "History";
+            button1.TextAlign = ContentAlignment.MiddleRight;
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // ChartsButton
             // 
@@ -79,6 +98,7 @@
             // doubleBufferedPanel3
             // 
             doubleBufferedPanel3.Controls.Add(trendsStatistics1);
+            doubleBufferedPanel3.Controls.Add(historyStatistics1);
             doubleBufferedPanel3.Controls.Add(transactStatistics1);
             doubleBufferedPanel3.Dock = DockStyle.Fill;
             doubleBufferedPanel3.Location = new Point(0, 50);
@@ -104,6 +124,15 @@
             transactStatistics1.Size = new Size(862, 472);
             transactStatistics1.TabIndex = 2;
             // 
+            // historyStatistics1
+            // 
+            historyStatistics1.BackColor = SystemColors.ActiveCaption;
+            historyStatistics1.Dock = DockStyle.Fill;
+            historyStatistics1.Location = new Point(0, 0);
+            historyStatistics1.Name = "historyStatistics1";
+            historyStatistics1.Size = new Size(862, 472);
+            historyStatistics1.TabIndex = 3;
+            // 
             // StatisticsDashboard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -128,5 +157,7 @@
         private Controls.DoubleBufferedPanel doubleBufferedPanel3;
         private Statistics.TrendsStatistics trendsStatistics1;
         private Statistics.TransactStatistics transactStatistics1;
+        private Button button1;
+        private Statistics.HistoryStatistics historyStatistics1;
     }
 }

@@ -159,8 +159,15 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
         }
 
         private void TrendsRefreshButton_Click(object sender, EventArgs e) {
-            if (Parent is not StatisticsDashboard) return;
-            ((StatisticsDashboard)Parent).LoadData();
+            Control? uc = Parent;
+            while (uc != null) {
+                if (uc is not StatisticsDashboard) {
+                    uc = uc.Parent;
+                    continue;
+                }
+                ((StatisticsDashboard)uc).LoadData();
+                break;
+            }
         }
     }
 }

@@ -112,7 +112,8 @@ namespace LibCheck.Modules {
         }
 
         internal static void ConstructChart(FormsPlot fp, bool isScatter, double[][] values,
-                                            string[] xLabelArr, string title, string xLabel, string yLabel) {
+                                            string[] xLabelArr, string title, string xLabel, string yLabel,
+                                            string[]? xScatterLabel = null) {
             fp.Plot.Clear();
             fp.Refresh();
 
@@ -127,7 +128,7 @@ namespace LibCheck.Modules {
                 fp.Plot.XAxis.ManualTickPositions(pos.ToArray(), xLabelArr);
                 for (int i = 0; i < values.Length; i++)
                     fp.Plot.AddScatter(pos.ToArray(), values[i],
-                            label: i >= xLabelArr.Length ? "(unknown)" : xLabelArr[i]);
+                            label: xScatterLabel == null || i >= xScatterLabel.Length ? "(unknown)" : xScatterLabel[i]);
             }
 
             fp.Plot.XTicks(pos.ToArray(), xLabelArr);

@@ -27,10 +27,10 @@
             ChartsPlot = new ScottPlot.FormsPlot();
             doubleBufferedPanel4 = new Controls.DoubleBufferedPanel();
             groupBox3 = new GroupBox();
+            ReturnCBox = new CheckBox();
+            BorrowCBox = new CheckBox();
             ChartsRefreshButton = new Button();
             TransactComboBox = new ComboBox();
-            BorrowCBox = new CheckBox();
-            ReturnCBox = new CheckBox();
             TransactionsPanel.SuspendLayout();
             doubleBufferedPanel4.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -80,6 +80,38 @@
             groupBox3.TabStop = false;
             groupBox3.Text = "Date Range";
             // 
+            // ReturnCBox
+            // 
+            ReturnCBox.Checked = true;
+            ReturnCBox.CheckState = CheckState.Checked;
+            ReturnCBox.Image = Properties.Resources.icons8_bookreturned_45;
+            ReturnCBox.ImageAlign = ContentAlignment.MiddleLeft;
+            ReturnCBox.Location = new Point(495, 26);
+            ReturnCBox.Name = "ReturnCBox";
+            ReturnCBox.Size = new Size(152, 61);
+            ReturnCBox.TabIndex = 5;
+            ReturnCBox.Text = "Return";
+            ReturnCBox.TextAlign = ContentAlignment.MiddleRight;
+            ReturnCBox.TextImageRelation = TextImageRelation.ImageBeforeText;
+            ReturnCBox.UseVisualStyleBackColor = true;
+            ReturnCBox.CheckedChanged += CheckBoxes_CheckedChanged;
+            // 
+            // BorrowCBox
+            // 
+            BorrowCBox.Checked = true;
+            BorrowCBox.CheckState = CheckState.Checked;
+            BorrowCBox.Image = Properties.Resources.icons8_book_borrowed_45;
+            BorrowCBox.ImageAlign = ContentAlignment.MiddleLeft;
+            BorrowCBox.Location = new Point(337, 26);
+            BorrowCBox.Name = "BorrowCBox";
+            BorrowCBox.Size = new Size(152, 61);
+            BorrowCBox.TabIndex = 5;
+            BorrowCBox.Text = "Borrow";
+            BorrowCBox.TextAlign = ContentAlignment.MiddleRight;
+            BorrowCBox.TextImageRelation = TextImageRelation.ImageBeforeText;
+            BorrowCBox.UseVisualStyleBackColor = true;
+            BorrowCBox.CheckedChanged += CheckBoxes_CheckedChanged;
+            // 
             // ChartsRefreshButton
             // 
             ChartsRefreshButton.BackColor = Color.Transparent;
@@ -105,34 +137,6 @@
             TransactComboBox.Size = new Size(255, 33);
             TransactComboBox.TabIndex = 0;
             TransactComboBox.SelectedIndexChanged += TransactComboBox_SelectedIndexChanged;
-            // 
-            // BorrowCBox
-            // 
-            BorrowCBox.Image = Properties.Resources.icons8_book_borrowed_45;
-            BorrowCBox.ImageAlign = ContentAlignment.MiddleLeft;
-            BorrowCBox.Location = new Point(337, 26);
-            BorrowCBox.Name = "BorrowCBox";
-            BorrowCBox.Size = new Size(152, 61);
-            BorrowCBox.TabIndex = 5;
-            BorrowCBox.Text = "Borrow";
-            BorrowCBox.TextAlign = ContentAlignment.MiddleRight;
-            BorrowCBox.TextImageRelation = TextImageRelation.ImageBeforeText;
-            BorrowCBox.UseVisualStyleBackColor = true;
-            BorrowCBox.CheckedChanged += CheckBoxes_CheckedChanged;
-            // 
-            // ReturnCBox
-            // 
-            ReturnCBox.Image = Properties.Resources.icons8_bookreturned_45;
-            ReturnCBox.ImageAlign = ContentAlignment.MiddleLeft;
-            ReturnCBox.Location = new Point(495, 26);
-            ReturnCBox.Name = "ReturnCBox";
-            ReturnCBox.Size = new Size(152, 61);
-            ReturnCBox.TabIndex = 5;
-            ReturnCBox.Text = "Return";
-            ReturnCBox.TextAlign = ContentAlignment.MiddleRight;
-            ReturnCBox.TextImageRelation = TextImageRelation.ImageBeforeText;
-            ReturnCBox.UseVisualStyleBackColor = true;
-            ReturnCBox.CheckedChanged += CheckBoxes_CheckedChanged;
             // 
             // TransactStatistics
             // 

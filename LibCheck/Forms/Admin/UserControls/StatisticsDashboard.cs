@@ -37,6 +37,7 @@ namespace LibCheck.Forms.Admin.UserControls {
 
             trendsStatistics1.LoadData(s, b, r);
             transactStatistics1.LoadData(s, b, r);
+            historyStatistics1.LoadData(s, b, r);
         }
 
         private void TrendsButton_Click(object sender, EventArgs e) {
@@ -45,6 +46,10 @@ namespace LibCheck.Forms.Admin.UserControls {
 
         private void TransactionsButton_Click(object sender, EventArgs e) {
             transactStatistics1.BringToFront();
+        }
+
+        private void button1_Click(object sender, EventArgs e) {
+            historyStatistics1.BringToFront();
         }
     }
 }

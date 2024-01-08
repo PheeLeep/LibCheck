@@ -2,9 +2,9 @@
 using LibCheck.Forms.SearchTools;
 using static LibCheck.Modules.Miscellaneous;
 
-namespace LibCheck.Forms.Admin.UserControls.Statistics {
-    public partial class TransactStatistics : UserControl {
 
+namespace LibCheck.Forms.Admin.UserControls.Statistics {
+    public partial class HistoryStatistics : UserControl {
         private List<Students> students = new List<Students>();
         private List<Books> books = new List<Books>();
         private List<Records> records = new List<Records>();
@@ -12,8 +12,7 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
 
         private DateTime from = CheckForSunday(DateTime.Now.AddDays(-7));
         private DateTime to = CheckForSunday(DateTime.Now);
-
-        public TransactStatistics() {
+        public HistoryStatistics() {
             InitializeComponent();
         }
 
@@ -75,41 +74,49 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
         }
 
         internal void SelectData(DateTime from, DateTime to) {
-            List<string> dateStrings = new List<string>();
-            List<double> borrowRates = new List<double>();
-            List<double> returnRates = new List<double>();
+            List<Records> specificRecord = new List<Records>();
 
-            DateTime dt = from;
+            specificRecord.AddRange(records.Where(r => r.DateOccurred.Date >= from.Date && r.DateOccurred <= to.Date));
+            specificRecord.Reverse();
+            dataGridView1.DataSource = specificRecord;
+            ResetDGVColumns(dataGridView1);
 
-            while (dt.Date <= to.Date) {
-                dateStrings.Add(dt.ToString("dd/MM/yyyy"));
-
-                borrowRates.Add(BorrowCBox.Checked ? records.Count(s => s.Category == Records.RecordStatus.BookBorrowed &&
-                                                   s.DateOccurred.Date == dt.Date) : 0);
-                returnRates.Add(ReturnCBox.Checked ? records.Count(s => s.Category == Records.RecordStatus.BookReturned &&
-                                                       s.DateOccurred.Date == dt.Date) : 0);
-
-                dt = dt.AddDays(1);
-                if (dt.DayOfWeek == DayOfWeek.Sunday)
-                    dt = dt.AddDays(1);
-            }
-
-            try {
-                Invoke(new Action(() => {
-
-                    string range = to.Date == from.Date ? "Today" : $"{from:dd/MM/yyyy}-{to:dd/MM/yyyy}";
-
-                    ConstructChart(ChartsPlot, true, new double[][] { borrowRates.ToArray(), returnRates.ToArray() },
-                                    dateStrings.ToArray(), $"Student's Rate Trend ({range})",
-                                    "Date", "Rate", new string[] { "Borrow", "Return" });
-                }));
-            } catch {
-                //Ignore.
-            }
+            dataGridView1.Columns["DateOccurred"].Visible = true;
+            dataGridView1.Columns["DateOccurred"].HeaderText = "Date";
+            dataGridView1.Columns["ISBN"].Visible = true;
+            dataGridView1.Columns["StudentID"].Visible = true;
+            dataGridView1.Columns["StudentID"].HeaderText = "Student ID";
+            dataGridView1.Columns["Category"].Visible = true;
+            dataGridView1.Columns["AdditionalContext"].Visible = true;
+            dataGridView1.Columns["AdditionalContext"].HeaderText = "Additional Context";
         }
 
-        private void CheckBoxes_CheckedChanged(object sender, EventArgs e) {
-            SelectData(from, to);
+        private void SaveButton_Click(object sender, EventArgs e) {
+            object? obj = dataGridView1.DataSource;
+            if (obj == null) return;
+            if (saveFileDialog1.ShowDialog(this) != DialogResult.OK) return;
+            PleaseWait.RunInPleaseWait(Modules.AppContext.Current.MainForm, new Action(() => {
+                try {
+                    List<Records> specificRecord = (List<Records>)obj;
+                    PleaseWait.SetPWDText("Saving...");
+                    using (StreamWriter sw = new StreamWriter(saveFileDialog1.FileName)) {
+                        sw.WriteLine("Date,ISBN,Student ID,Category,Additional Context");
+                        foreach (Records r in specificRecord) {
+                            sw.Write($"{r.DateOccurred:dd/MM/yyyy hh:mm:ss tt},");
+                            sw.Write($"{r.ISBN},");
+                            sw.Write($"{r.StudentID},");
+                            sw.Write($"{r.Category},");
+                            string? context = r.AdditionalContext;
+                            if (!string.IsNullOrWhiteSpace(context) && context.Contains(","))
+                                context = $"\"{context}\"";
+                            sw.WriteLine($"{context},");
+                        }
+                        sw.Flush();
+                    }
+                } catch (Exception ex) {
+                    MessageBox.Show(this, ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                }
+            }));
         }
     }
 }
