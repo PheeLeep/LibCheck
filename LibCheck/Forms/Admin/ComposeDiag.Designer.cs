@@ -1,5 +1,7 @@
-﻿namespace LibCheck.Forms.Admin {
-    partial class ComposeDiag {
+﻿namespace LibCheck.Forms.Admin
+{
+    partial class ComposeDiag
+    {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -9,8 +11,10 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing) {
-            if (disposing && (components != null)) {
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -22,7 +26,8 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {
+        private void InitializeComponent()
+        {
             groupBox1 = new GroupBox();
             SubjectTextBox = new TextBox();
             ToComboxBox = new ComboBox();
@@ -39,49 +44,56 @@
             // 
             // groupBox1
             // 
+            groupBox1.BackColor = Color.CornflowerBlue;
             groupBox1.Controls.Add(SubjectTextBox);
             groupBox1.Controls.Add(ToComboxBox);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(label1);
             groupBox1.Dock = DockStyle.Top;
             groupBox1.Location = new Point(0, 0);
+            groupBox1.Margin = new Padding(4);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(465, 121);
+            groupBox1.Padding = new Padding(4);
+            groupBox1.Size = new Size(581, 133);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Student";
             // 
             // SubjectTextBox
             // 
-            SubjectTextBox.Location = new Point(126, 71);
+            SubjectTextBox.Location = new Point(158, 78);
+            SubjectTextBox.Margin = new Padding(4);
             SubjectTextBox.Name = "SubjectTextBox";
-            SubjectTextBox.Size = new Size(315, 27);
+            SubjectTextBox.Size = new Size(393, 29);
             SubjectTextBox.TabIndex = 2;
             // 
             // ToComboxBox
             // 
             ToComboxBox.DropDownStyle = ComboBoxStyle.DropDownList;
             ToComboxBox.FormattingEnabled = true;
-            ToComboxBox.Location = new Point(126, 37);
+            ToComboxBox.Location = new Point(158, 40);
+            ToComboxBox.Margin = new Padding(4);
             ToComboxBox.Name = "ToComboxBox";
-            ToComboxBox.Size = new Size(315, 28);
+            ToComboxBox.Size = new Size(393, 30);
             ToComboxBox.TabIndex = 1;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(44, 74);
+            label2.Location = new Point(55, 81);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(61, 20);
+            label2.Size = new Size(90, 22);
             label2.TabIndex = 0;
             label2.Text = "Subject:";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(44, 40);
+            label1.Location = new Point(55, 44);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(28, 20);
+            label1.Size = new Size(40, 22);
             label1.TabIndex = 0;
             label1.Text = "To:";
             // 
@@ -89,9 +101,11 @@
             // 
             groupBox2.Controls.Add(BodyTextBox);
             groupBox2.Dock = DockStyle.Fill;
-            groupBox2.Location = new Point(0, 121);
+            groupBox2.Location = new Point(0, 133);
+            groupBox2.Margin = new Padding(4);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(465, 313);
+            groupBox2.Padding = new Padding(4);
+            groupBox2.Size = new Size(581, 345);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Text = "Text";
@@ -99,41 +113,49 @@
             // BodyTextBox
             // 
             BodyTextBox.Dock = DockStyle.Fill;
-            BodyTextBox.Location = new Point(3, 23);
+            BodyTextBox.Location = new Point(4, 26);
+            BodyTextBox.Margin = new Padding(4);
             BodyTextBox.Name = "BodyTextBox";
-            BodyTextBox.Size = new Size(459, 287);
+            BodyTextBox.Size = new Size(573, 315);
             BodyTextBox.TabIndex = 1;
             BodyTextBox.Text = "";
             // 
             // panel1
             // 
+            panel1.BackColor = SystemColors.ButtonFace;
             panel1.Controls.Add(ComposeBtn);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 434);
+            panel1.Location = new Point(0, 478);
+            panel1.Margin = new Padding(4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(465, 61);
+            panel1.Size = new Size(581, 67);
             panel1.TabIndex = 0;
             // 
             // ComposeBtn
             // 
-            ComposeBtn.Location = new Point(347, 17);
+            ComposeBtn.BackColor = Color.DodgerBlue;
+            ComposeBtn.ForeColor = Color.White;
+            ComposeBtn.Location = new Point(434, 18);
+            ComposeBtn.Margin = new Padding(4);
             ComposeBtn.Name = "ComposeBtn";
-            ComposeBtn.Size = new Size(94, 29);
+            ComposeBtn.Size = new Size(118, 32);
             ComposeBtn.TabIndex = 0;
             ComposeBtn.Text = "Compose";
-            ComposeBtn.UseVisualStyleBackColor = true;
+            ComposeBtn.UseVisualStyleBackColor = false;
             ComposeBtn.Click += ComposeLabel_Click;
             // 
             // ComposeDiag
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 22F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(465, 495);
+            ClientSize = new Size(581, 545);
             Controls.Add(groupBox2);
             Controls.Add(panel1);
             Controls.Add(groupBox1);
             DoubleBuffered = true;
+            Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(4);
             MaximizeBox = false;
             Name = "ComposeDiag";
             StartPosition = FormStartPosition.CenterScreen;

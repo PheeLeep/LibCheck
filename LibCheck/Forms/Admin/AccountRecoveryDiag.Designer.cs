@@ -1,5 +1,7 @@
-﻿namespace LibCheck.Forms.Admin {
-    partial class AccountRecoveryDiag {
+﻿namespace LibCheck.Forms.Admin
+{
+    partial class AccountRecoveryDiag
+    {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -9,8 +11,10 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing) {
-            if (disposing && (components != null)) {
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -22,7 +26,8 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {
+        private void InitializeComponent()
+        {
             label1 = new Label();
             panel1 = new Panel();
             RemoveButton = new Button();
@@ -32,7 +37,9 @@
             // 
             // label1
             // 
+            label1.BackColor = SystemColors.ActiveCaption;
             label1.Dock = DockStyle.Fill;
+            label1.Font = new Font("Consolas", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label1.Location = new Point(0, 0);
             label1.Name = "label1";
             label1.Size = new Size(588, 266);
@@ -42,6 +49,7 @@
             // 
             // panel1
             // 
+            panel1.BackColor = SystemColors.HotTrack;
             panel1.Controls.Add(RemoveButton);
             panel1.Controls.Add(GenerateButton);
             panel1.Dock = DockStyle.Bottom;
@@ -53,28 +61,36 @@
             // RemoveButton
             // 
             RemoveButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            RemoveButton.Location = new Point(154, 30);
+            RemoveButton.BackColor = Color.Red;
+            RemoveButton.FlatStyle = FlatStyle.Flat;
+            RemoveButton.Font = new Font("Consolas", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            RemoveButton.ForeColor = Color.White;
+            RemoveButton.Location = new Point(176, 30);
             RemoveButton.Name = "RemoveButton";
-            RemoveButton.Size = new Size(119, 36);
+            RemoveButton.Size = new Size(124, 36);
             RemoveButton.TabIndex = 5;
             RemoveButton.Text = "Remove";
-            RemoveButton.UseVisualStyleBackColor = true;
+            RemoveButton.UseVisualStyleBackColor = false;
             RemoveButton.Click += RemoveButton_Click;
             // 
             // GenerateButton
             // 
             GenerateButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            GenerateButton.BackColor = Color.LimeGreen;
+            GenerateButton.FlatStyle = FlatStyle.Flat;
+            GenerateButton.Font = new Font("Consolas", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            GenerateButton.ForeColor = Color.White;
             GenerateButton.Location = new Point(29, 30);
             GenerateButton.Name = "GenerateButton";
-            GenerateButton.Size = new Size(119, 36);
+            GenerateButton.Size = new Size(133, 36);
             GenerateButton.TabIndex = 4;
             GenerateButton.Text = "Register";
-            GenerateButton.UseVisualStyleBackColor = true;
+            GenerateButton.UseVisualStyleBackColor = false;
             GenerateButton.Click += GenerateButton_Click;
             // 
             // AccountRecoveryDiag
             // 
-            AutoScaleDimensions = new SizeF(120F, 120F);
+            AutoScaleDimensions = new SizeF(144F, 144F);
             AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(588, 367);
             Controls.Add(label1);

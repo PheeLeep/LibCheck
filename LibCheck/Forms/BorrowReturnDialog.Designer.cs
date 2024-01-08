@@ -1,5 +1,7 @@
-﻿namespace LibCheck.Forms {
-    partial class BorrowReturnDialog {
+﻿namespace LibCheck.Forms
+{
+    partial class BorrowReturnDialog
+    {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -9,8 +11,10 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing) {
-            if (disposing && (components != null)) {
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -22,7 +26,8 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {
+        private void InitializeComponent()
+        {
             BookGroupBox = new GroupBox();
             BookTitleLabel = new Label();
             BookBrowseBtn = new Button();
@@ -36,24 +41,25 @@
             panel1 = new Panel();
             ExecuteButton = new Button();
             OptionsPanel = new Panel();
-            ReturnPanel = new Panel();
-            ReturnLabel = new Label();
             BorrowPanel = new Panel();
             label2 = new Label();
             DateBorrowDTP = new DateTimePicker();
+            ReturnPanel = new Panel();
+            ReturnLabel = new Label();
             groupBox2 = new GroupBox();
             richTextBox1 = new RichTextBox();
             BookGroupBox.SuspendLayout();
             groupBox1.SuspendLayout();
             panel1.SuspendLayout();
             OptionsPanel.SuspendLayout();
-            ReturnPanel.SuspendLayout();
             BorrowPanel.SuspendLayout();
+            ReturnPanel.SuspendLayout();
             groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // BookGroupBox
             // 
+            BookGroupBox.BackColor = Color.CornflowerBlue;
             BookGroupBox.Controls.Add(BookTitleLabel);
             BookGroupBox.Controls.Add(BookBrowseBtn);
             BookGroupBox.Controls.Add(ISBNTextBox);
@@ -79,12 +85,15 @@
             // BookBrowseBtn
             // 
             BookBrowseBtn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            BookBrowseBtn.BackColor = Color.LimeGreen;
+            BookBrowseBtn.FlatStyle = FlatStyle.Flat;
+            BookBrowseBtn.ForeColor = Color.White;
             BookBrowseBtn.Location = new Point(416, 50);
             BookBrowseBtn.Name = "BookBrowseBtn";
             BookBrowseBtn.Size = new Size(109, 31);
             BookBrowseBtn.TabIndex = 2;
             BookBrowseBtn.Text = "Browse";
-            BookBrowseBtn.UseVisualStyleBackColor = true;
+            BookBrowseBtn.UseVisualStyleBackColor = false;
             BookBrowseBtn.Click += BookBrowseBtn_Click;
             // 
             // ISBNTextBox
@@ -93,7 +102,7 @@
             ISBNTextBox.Location = new Point(95, 50);
             ISBNTextBox.Name = "ISBNTextBox";
             ISBNTextBox.ReadOnly = true;
-            ISBNTextBox.Size = new Size(315, 31);
+            ISBNTextBox.Size = new Size(315, 33);
             ISBNTextBox.TabIndex = 1;
             // 
             // label1
@@ -101,17 +110,19 @@
             label1.AutoSize = true;
             label1.Location = new Point(35, 53);
             label1.Name = "label1";
-            label1.Size = new Size(54, 25);
+            label1.Size = new Size(72, 26);
             label1.TabIndex = 0;
             label1.Text = "ISBN:";
             // 
             // groupBox1
             // 
+            groupBox1.BackColor = Color.CornflowerBlue;
             groupBox1.Controls.Add(StudNameLabel);
             groupBox1.Controls.Add(StudBrowseBtn);
             groupBox1.Controls.Add(StudIDTextBox);
             groupBox1.Controls.Add(label3);
             groupBox1.Dock = DockStyle.Top;
+            groupBox1.ForeColor = Color.Black;
             groupBox1.Location = new Point(0, 147);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(537, 147);
@@ -132,12 +143,15 @@
             // StudBrowseBtn
             // 
             StudBrowseBtn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            StudBrowseBtn.BackColor = Color.LimeGreen;
+            StudBrowseBtn.FlatStyle = FlatStyle.Flat;
+            StudBrowseBtn.ForeColor = Color.White;
             StudBrowseBtn.Location = new Point(416, 50);
             StudBrowseBtn.Name = "StudBrowseBtn";
             StudBrowseBtn.Size = new Size(109, 31);
             StudBrowseBtn.TabIndex = 2;
             StudBrowseBtn.Text = "Browse";
-            StudBrowseBtn.UseVisualStyleBackColor = true;
+            StudBrowseBtn.UseVisualStyleBackColor = false;
             StudBrowseBtn.Click += StudBrowseBtn_Click;
             // 
             // StudIDTextBox
@@ -146,7 +160,7 @@
             StudIDTextBox.Location = new Point(95, 50);
             StudIDTextBox.Name = "StudIDTextBox";
             StudIDTextBox.ReadOnly = true;
-            StudIDTextBox.Size = new Size(315, 31);
+            StudIDTextBox.Size = new Size(315, 33);
             StudIDTextBox.TabIndex = 1;
             // 
             // label3
@@ -154,14 +168,16 @@
             label3.AutoSize = true;
             label3.Location = new Point(35, 53);
             label3.Name = "label3";
-            label3.Size = new Size(34, 25);
+            label3.Size = new Size(48, 26);
             label3.TabIndex = 0;
             label3.Text = "ID:";
             // 
             // panel1
             // 
+            panel1.BackColor = SystemColors.ButtonFace;
             panel1.Controls.Add(ExecuteButton);
             panel1.Dock = DockStyle.Bottom;
+            panel1.ForeColor = SystemColors.Control;
             panel1.Location = new Point(0, 607);
             panel1.Name = "panel1";
             panel1.Size = new Size(537, 71);
@@ -170,12 +186,15 @@
             // ExecuteButton
             // 
             ExecuteButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            ExecuteButton.Location = new Point(403, 24);
+            ExecuteButton.BackColor = Color.LimeGreen;
+            ExecuteButton.FlatStyle = FlatStyle.Flat;
+            ExecuteButton.ForeColor = Color.White;
+            ExecuteButton.Location = new Point(404, 18);
             ExecuteButton.Name = "ExecuteButton";
-            ExecuteButton.Size = new Size(109, 31);
+            ExecuteButton.Size = new Size(109, 37);
             ExecuteButton.TabIndex = 3;
             ExecuteButton.Text = "Borrow";
-            ExecuteButton.UseVisualStyleBackColor = true;
+            ExecuteButton.UseVisualStyleBackColor = false;
             ExecuteButton.Click += ExecuteButton_Click;
             // 
             // OptionsPanel
@@ -187,6 +206,35 @@
             OptionsPanel.Name = "OptionsPanel";
             OptionsPanel.Size = new Size(537, 114);
             OptionsPanel.TabIndex = 3;
+            // 
+            // BorrowPanel
+            // 
+            BorrowPanel.BackColor = Color.CornflowerBlue;
+            BorrowPanel.Controls.Add(label2);
+            BorrowPanel.Controls.Add(DateBorrowDTP);
+            BorrowPanel.Dock = DockStyle.Fill;
+            BorrowPanel.Location = new Point(0, 0);
+            BorrowPanel.Name = "BorrowPanel";
+            BorrowPanel.Size = new Size(537, 114);
+            BorrowPanel.TabIndex = 0;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Consolas", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(12, 16);
+            label2.Name = "label2";
+            label2.Size = new Size(516, 23);
+            label2.TabIndex = 1;
+            label2.Text = "Date to Return (max: 30 days, except sundays):";
+            // 
+            // DateBorrowDTP
+            // 
+            DateBorrowDTP.Location = new Point(81, 55);
+            DateBorrowDTP.Name = "DateBorrowDTP";
+            DateBorrowDTP.Size = new Size(316, 33);
+            DateBorrowDTP.TabIndex = 0;
+            DateBorrowDTP.ValueChanged += DateBorrowDTP_ValueChanged;
             // 
             // ReturnPanel
             // 
@@ -211,33 +259,6 @@
             ReturnLabel.Text = "Please scan the book first.";
             ReturnLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // BorrowPanel
-            // 
-            BorrowPanel.Controls.Add(label2);
-            BorrowPanel.Controls.Add(DateBorrowDTP);
-            BorrowPanel.Dock = DockStyle.Fill;
-            BorrowPanel.Location = new Point(0, 0);
-            BorrowPanel.Name = "BorrowPanel";
-            BorrowPanel.Size = new Size(537, 114);
-            BorrowPanel.TabIndex = 0;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(35, 15);
-            label2.Name = "label2";
-            label2.Size = new Size(380, 25);
-            label2.TabIndex = 1;
-            label2.Text = "Date to Return (max: 30 days, except sundays):";
-            // 
-            // DateBorrowDTP
-            // 
-            DateBorrowDTP.Location = new Point(81, 55);
-            DateBorrowDTP.Name = "DateBorrowDTP";
-            DateBorrowDTP.Size = new Size(316, 31);
-            DateBorrowDTP.TabIndex = 0;
-            DateBorrowDTP.ValueChanged += DateBorrowDTP_ValueChanged;
-            // 
             // groupBox2
             // 
             groupBox2.Controls.Add(richTextBox1);
@@ -253,15 +274,15 @@
             // 
             richTextBox1.Dock = DockStyle.Fill;
             richTextBox1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            richTextBox1.Location = new Point(3, 27);
+            richTextBox1.Location = new Point(3, 29);
             richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(531, 169);
+            richTextBox1.Size = new Size(531, 167);
             richTextBox1.TabIndex = 0;
             richTextBox1.Text = "";
             // 
             // BorrowReturnDialog
             // 
-            AutoScaleDimensions = new SizeF(120F, 120F);
+            AutoScaleDimensions = new SizeF(144F, 144F);
             AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(537, 678);
             Controls.Add(OptionsPanel);
@@ -270,7 +291,7 @@
             Controls.Add(groupBox1);
             Controls.Add(BookGroupBox);
             DoubleBuffered = true;
-            Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
+            Font = new Font("Consolas", 11F, FontStyle.Regular, GraphicsUnit.Point);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Margin = new Padding(4);
             MaximizeBox = false;
@@ -285,9 +306,9 @@
             groupBox1.PerformLayout();
             panel1.ResumeLayout(false);
             OptionsPanel.ResumeLayout(false);
-            ReturnPanel.ResumeLayout(false);
             BorrowPanel.ResumeLayout(false);
             BorrowPanel.PerformLayout();
+            ReturnPanel.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
             ResumeLayout(false);
         }

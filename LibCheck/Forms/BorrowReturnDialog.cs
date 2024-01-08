@@ -5,8 +5,10 @@ using LibCheck.Modules;
 using LibCheck.Modules.Security;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
-namespace LibCheck.Forms {
-    public partial class BorrowReturnDialog : Form {
+namespace LibCheck.Forms
+{
+    public partial class BorrowReturnDialog : Form
+    {
 
         private readonly bool lockISBNControls;
         private readonly bool lockStudIDControls;
@@ -16,22 +18,27 @@ namespace LibCheck.Forms {
 
         private readonly bool isBorrow;
 
-        public BorrowReturnDialog(bool isBorrow, string? isbn = "", string? studentID = "") {
+        public BorrowReturnDialog(bool isBorrow, string? isbn = "", string? studentID = "")
+        {
             InitializeComponent();
             this.isBorrow = isBorrow;
 
-            if (!string.IsNullOrWhiteSpace(isbn)) {
+            if (!string.IsNullOrWhiteSpace(isbn))
+            {
                 lockISBNControls = true;
                 LoadStudBookInfo(typeof(Books), isbn);
             }
-            if (!string.IsNullOrWhiteSpace(studentID)) {
+            if (!string.IsNullOrWhiteSpace(studentID))
+            {
                 lockStudIDControls = true;
                 LoadStudBookInfo(typeof(Students), studentID);
             }
         }
 
-        private void LoadStudBookInfo(Type t, string val) {
-            if (t == typeof(Books)) {
+        private void LoadStudBookInfo(Type t, string val)
+        {
+            if (t == typeof(Books))
+            {
                 if (Database.Database.Read(out List<Books>? bookInfo, whereCond: $"ISBN = '{val}'") <= 0 || bookInfo == null)
                     throw new BookNotFoundException(val);
                 if (bookInfo[0].IsLostOrDamaged)
@@ -41,19 +48,23 @@ namespace LibCheck.Forms {
                 ISBNTextBox.Text = book.ISBN;
                 BookTitleLabel.Text = $"Title: {book.Title}";
 
-                if (!string.IsNullOrWhiteSpace(book.StudentID) && !book.StudentID.Equals("(none)")) {
+                if (!string.IsNullOrWhiteSpace(book.StudentID) && !book.StudentID.Equals("(none)"))
+                {
                     if (book.DateToReturn == null) throw new InvalidOperationException("Illegal data found.");
 
                     DateTime currentDate = DateTime.Now;
                     DateTime dueDate = book.DateToReturn.Value;
 
-                    switch (Miscellaneous.CalculateDateExcptSun(currentDate, dueDate)) {
+                    switch (Miscellaneous.CalculateDateExcptSun(currentDate, dueDate))
+                    {
                         case int d when d < 3:
                             ReturnLabel.BackColor = Color.Red;
-                            if (d < 0) {
+                            if (d < 0)
+                            {
                                 int daysOverdue = Math.Abs(d);
                                 double? priceOverdue = (Credentials.Librarian?.FeePerOverdueDay * daysOverdue);
-                                if (priceOverdue.HasValue) {
+                                if (priceOverdue.HasValue)
+                                {
                                     ReturnLabel.Text = $"The student must pay P{priceOverdue} overdue fee when returning their book.";
                                     break;
                                 }
@@ -82,8 +93,10 @@ namespace LibCheck.Forms {
             StudNameLabel.Text = $"Name: {Miscellaneous.GenerateFullName(student, true)}";
         }
 
-        private void BorrowReturnDialog_Load(object sender, EventArgs e) {
-            if (isBorrow) {
+        private void BorrowReturnDialog_Load(object sender, EventArgs e)
+        {
+            if (isBorrow)
+            {
                 DateBorrowDTP.MinDate = DateTime.Now.AddDays(1);
                 if (DateBorrowDTP.MinDate.DayOfWeek == DayOfWeek.Sunday)
                     DateBorrowDTP.MinDate = DateBorrowDTP.MinDate.AddDays(1);
@@ -98,44 +111,55 @@ namespace LibCheck.Forms {
             ExecuteButton.Text = isBorrow ? "Borrow" : "Return";
         }
 
-        private void BookBrowseBtn_Click(object sender, EventArgs e) {
+        private void BookBrowseBtn_Click(object sender, EventArgs e)
+        {
             AcquireData(SearchDialog.SearchType.Book);
         }
 
-        private void StudBrowseBtn_Click(object sender, EventArgs e) {
+        private void StudBrowseBtn_Click(object sender, EventArgs e)
+        {
             AcquireData(SearchDialog.SearchType.Student);
         }
 
-        private void AcquireData(SearchDialog.SearchType t) {
+        private void AcquireData(SearchDialog.SearchType t)
+        {
             if (t == SearchDialog.SearchType.All) return;
-            using (SearchDialog sd = new SearchDialog(t, false)) {
+            using (SearchDialog sd = new SearchDialog(t, false))
+            {
                 sd.ShowDialog(this);
                 if (string.IsNullOrWhiteSpace(sd.Value)) return;
-                try {
+                try
+                {
                     LoadStudBookInfo(t == SearchDialog.SearchType.Student ? typeof(Students) : typeof(Books), sd.Value);
-                } catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                     MessageBox.Show(ex.Message);
                 }
             }
         }
 
-        private void ExecuteButton_Click(object sender, EventArgs e) {
-            try {
-                if (book == null || book.IsLostOrDamaged) 
+        private void ExecuteButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (book == null || book.IsLostOrDamaged)
                     throw new InvalidOperationException("No book provided or it was damaged.");
-                if (student == null) 
+                if (student == null)
                     throw new InvalidOperationException("No student provided.");
 
                 if (!Modules.AppContext.Auth()) return;
 
-                if (isBorrow) {
+                if (isBorrow)
+                {
                     if (!string.IsNullOrWhiteSpace(book.StudentID) && !book.StudentID.Equals("(none)"))
                         throw new InvalidOperationException("This book is already borrowed by someone.");
                     book.DateToReturn = DateBorrowDTP.Value;
                     book.StudentID = student.StudentID;
                     book.ThreeDayNoticeSent = false;
 
-                    Records rBorrow = new Records() {
+                    Records rBorrow = new Records()
+                    {
                         DateOccurred = DateTime.Now,
                         AdditionalContext = string.IsNullOrEmpty(richTextBox1.Text) ?
                                                     "(no additional context)" :
@@ -163,7 +187,8 @@ namespace LibCheck.Forms {
                     return;
                 }
 
-                if (!string.IsNullOrWhiteSpace(book.StudentID)) {
+                if (!string.IsNullOrWhiteSpace(book.StudentID))
+                {
                     if (book.StudentID.Equals("(none)"))
                         throw new InvalidOperationException("This book was not borrowed yet.");
 
@@ -171,16 +196,17 @@ namespace LibCheck.Forms {
                         throw new InvalidOperationException("This book was borrowed by someone that supposed to return it.");
                 }
 
-                if (DateTime.Now > book.DateToReturn && 
+                if (DateTime.Now > book.DateToReturn &&
                     MessageBox.Show(this, "The student must pay an overdue fee before you proceed. Continue?"
-                                          , "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No) 
+                                          , "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
                     return;
 
                 book.StudentID = "(none)";
                 book.DateToReturn = null;
                 book.ThreeDayNoticeSent = false;
 
-                Records rReturn = new Records() {
+                Records rReturn = new Records()
+                {
                     DateOccurred = DateTime.Now,
                     AdditionalContext = string.IsNullOrEmpty(richTextBox1.Text) ?
                                                    "(no additional context)" :
@@ -195,12 +221,15 @@ namespace LibCheck.Forms {
                 MessageBox.Show(this, "Book returned.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.Yes;
                 Close();
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message);
             }
         }
 
-        private void DateBorrowDTP_ValueChanged(object sender, EventArgs e) {
+        private void DateBorrowDTP_ValueChanged(object sender, EventArgs e)
+        {
             if (DateBorrowDTP.Value.DayOfWeek == DayOfWeek.Sunday)
                 DateBorrowDTP.Value = DateBorrowDTP.Value.AddDays(1);
 

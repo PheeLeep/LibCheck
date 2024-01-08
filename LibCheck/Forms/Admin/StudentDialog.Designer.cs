@@ -1,5 +1,7 @@
-﻿namespace LibCheck.Forms.Admin {
-    partial class StudentDialog {
+﻿namespace LibCheck.Forms.Admin
+{
+    partial class StudentDialog
+    {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -9,8 +11,10 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing) {
-            if (disposing && (components != null)) {
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -22,7 +26,8 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {
+        private void InitializeComponent()
+        {
             StudIDTextBox = new TextBox();
             label1 = new Label();
             label2 = new Label();
@@ -58,7 +63,7 @@
             StudIDTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             StudIDTextBox.Location = new Point(190, 37);
             StudIDTextBox.Name = "StudIDTextBox";
-            StudIDTextBox.Size = new Size(249, 29);
+            StudIDTextBox.Size = new Size(249, 31);
             StudIDTextBox.TabIndex = 5;
             StudIDTextBox.TextChanged += Controls_ValuesChanged;
             // 
@@ -67,7 +72,7 @@
             label1.AutoSize = true;
             label1.Location = new Point(26, 40);
             label1.Name = "label1";
-            label1.Size = new Size(95, 23);
+            label1.Size = new Size(131, 23);
             label1.TabIndex = 6;
             label1.Text = "Student ID:";
             // 
@@ -76,7 +81,7 @@
             label2.AutoSize = true;
             label2.Location = new Point(26, 75);
             label2.Name = "label2";
-            label2.Size = new Size(96, 23);
+            label2.Size = new Size(131, 23);
             label2.TabIndex = 8;
             label2.Text = "First Name:";
             // 
@@ -85,12 +90,13 @@
             FirstNameTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             FirstNameTextBox.Location = new Point(190, 72);
             FirstNameTextBox.Name = "FirstNameTextBox";
-            FirstNameTextBox.Size = new Size(249, 29);
+            FirstNameTextBox.Size = new Size(249, 31);
             FirstNameTextBox.TabIndex = 7;
             FirstNameTextBox.TextChanged += Controls_ValuesChanged;
             // 
             // groupBox1
             // 
+            groupBox1.BackColor = SystemColors.ActiveCaption;
             groupBox1.Controls.Add(DOBDatePicker);
             groupBox1.Controls.Add(label11);
             groupBox1.Controls.Add(FemaleRadioButton);
@@ -120,7 +126,7 @@
             DOBDatePicker.Format = DateTimePickerFormat.Short;
             DOBDatePicker.Location = new Point(190, 247);
             DOBDatePicker.Name = "DOBDatePicker";
-            DOBDatePicker.Size = new Size(143, 29);
+            DOBDatePicker.Size = new Size(143, 31);
             DOBDatePicker.TabIndex = 20;
             DOBDatePicker.ValueChanged += Controls_ValuesChanged;
             // 
@@ -129,7 +135,7 @@
             label11.AutoSize = true;
             label11.Location = new Point(26, 253);
             label11.Name = "label11";
-            label11.Size = new Size(49, 23);
+            label11.Size = new Size(54, 23);
             label11.TabIndex = 19;
             label11.Text = "DOB:";
             // 
@@ -138,7 +144,7 @@
             FemaleRadioButton.AutoSize = true;
             FemaleRadioButton.Location = new Point(264, 214);
             FemaleRadioButton.Name = "FemaleRadioButton";
-            FemaleRadioButton.Size = new Size(85, 27);
+            FemaleRadioButton.Size = new Size(101, 27);
             FemaleRadioButton.TabIndex = 18;
             FemaleRadioButton.TabStop = true;
             FemaleRadioButton.Text = "Female";
@@ -150,7 +156,7 @@
             MaleRadioButton.AutoSize = true;
             MaleRadioButton.Location = new Point(190, 214);
             MaleRadioButton.Name = "MaleRadioButton";
-            MaleRadioButton.Size = new Size(68, 27);
+            MaleRadioButton.Size = new Size(79, 27);
             MaleRadioButton.TabIndex = 17;
             MaleRadioButton.TabStop = true;
             MaleRadioButton.Text = "Male";
@@ -162,7 +168,7 @@
             label6.AutoSize = true;
             label6.Location = new Point(26, 216);
             label6.Name = "label6";
-            label6.Size = new Size(70, 23);
+            label6.Size = new Size(87, 23);
             label6.TabIndex = 16;
             label6.Text = "Gender:";
             // 
@@ -171,7 +177,7 @@
             label5.AutoSize = true;
             label5.Location = new Point(26, 180);
             label5.Name = "label5";
-            label5.Size = new Size(55, 23);
+            label5.Size = new Size(87, 23);
             label5.TabIndex = 15;
             label5.Text = "Suffix:";
             // 
@@ -180,7 +186,7 @@
             LastNameTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             LastNameTextBox.Location = new Point(190, 142);
             LastNameTextBox.Name = "LastNameTextBox";
-            LastNameTextBox.Size = new Size(249, 29);
+            LastNameTextBox.Size = new Size(249, 31);
             LastNameTextBox.TabIndex = 11;
             LastNameTextBox.TextChanged += Controls_ValuesChanged;
             // 
@@ -191,7 +197,7 @@
             SuffixCombobox.Items.AddRange(new object[] { "(none)", "JR.", "SR.", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X" });
             SuffixCombobox.Location = new Point(190, 177);
             SuffixCombobox.Name = "SuffixCombobox";
-            SuffixCombobox.Size = new Size(86, 29);
+            SuffixCombobox.Size = new Size(86, 31);
             SuffixCombobox.TabIndex = 14;
             SuffixCombobox.SelectedValueChanged += Controls_ValuesChanged;
             // 
@@ -200,7 +206,7 @@
             label4.AutoSize = true;
             label4.Location = new Point(26, 145);
             label4.Name = "label4";
-            label4.Size = new Size(95, 23);
+            label4.Size = new Size(120, 23);
             label4.TabIndex = 12;
             label4.Text = "Last Name:";
             // 
@@ -209,7 +215,7 @@
             MiddleNameTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             MiddleNameTextBox.Location = new Point(190, 107);
             MiddleNameTextBox.Name = "MiddleNameTextBox";
-            MiddleNameTextBox.Size = new Size(249, 29);
+            MiddleNameTextBox.Size = new Size(249, 31);
             MiddleNameTextBox.TabIndex = 9;
             MiddleNameTextBox.TextChanged += Controls_ValuesChanged;
             // 
@@ -218,12 +224,13 @@
             label3.AutoSize = true;
             label3.Location = new Point(26, 110);
             label3.Name = "label3";
-            label3.Size = new Size(158, 23);
+            label3.Size = new Size(208, 23);
             label3.TabIndex = 10;
             label3.Text = "Middle Name (opt):";
             // 
             // groupBox2
             // 
+            groupBox2.BackColor = SystemColors.ActiveCaption;
             groupBox2.Controls.Add(LevelComboBox);
             groupBox2.Controls.Add(EmailAddressTextBox);
             groupBox2.Controls.Add(label10);
@@ -244,7 +251,7 @@
             LevelComboBox.FormattingEnabled = true;
             LevelComboBox.Location = new Point(190, 37);
             LevelComboBox.Name = "LevelComboBox";
-            LevelComboBox.Size = new Size(249, 29);
+            LevelComboBox.Size = new Size(249, 31);
             LevelComboBox.TabIndex = 19;
             LevelComboBox.SelectedValueChanged += Controls_ValuesChanged;
             // 
@@ -253,7 +260,7 @@
             EmailAddressTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             EmailAddressTextBox.Location = new Point(190, 107);
             EmailAddressTextBox.Name = "EmailAddressTextBox";
-            EmailAddressTextBox.Size = new Size(249, 29);
+            EmailAddressTextBox.Size = new Size(249, 31);
             EmailAddressTextBox.TabIndex = 9;
             EmailAddressTextBox.TextChanged += Controls_ValuesChanged;
             // 
@@ -262,7 +269,7 @@
             label10.AutoSize = true;
             label10.Location = new Point(26, 110);
             label10.Name = "label10";
-            label10.Size = new Size(55, 23);
+            label10.Size = new Size(76, 23);
             label10.TabIndex = 10;
             label10.Text = "Email:";
             // 
@@ -271,7 +278,7 @@
             GradeSecTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             GradeSecTextBox.Location = new Point(190, 72);
             GradeSecTextBox.Name = "GradeSecTextBox";
-            GradeSecTextBox.Size = new Size(249, 29);
+            GradeSecTextBox.Size = new Size(249, 31);
             GradeSecTextBox.TabIndex = 7;
             GradeSecTextBox.TextChanged += Controls_ValuesChanged;
             // 
@@ -280,7 +287,7 @@
             label7.AutoSize = true;
             label7.Location = new Point(26, 40);
             label7.Name = "label7";
-            label7.Size = new Size(52, 23);
+            label7.Size = new Size(76, 23);
             label7.TabIndex = 8;
             label7.Text = "Level:";
             // 
@@ -289,12 +296,13 @@
             label12.AutoSize = true;
             label12.Location = new Point(26, 75);
             label12.Name = "label12";
-            label12.Size = new Size(155, 23);
+            label12.Size = new Size(208, 23);
             label12.TabIndex = 8;
             label12.Text = "Grade and Section:";
             // 
             // panel1
             // 
+            panel1.BackColor = Color.CornflowerBlue;
             panel1.Controls.Add(ConfirmButton);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 491);
@@ -305,24 +313,27 @@
             // ConfirmButton
             // 
             ConfirmButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            ConfirmButton.BackColor = Color.LimeGreen;
+            ConfirmButton.FlatStyle = FlatStyle.Flat;
+            ConfirmButton.ForeColor = Color.White;
             ConfirmButton.Location = new Point(331, 18);
             ConfirmButton.Name = "ConfirmButton";
             ConfirmButton.Size = new Size(107, 37);
             ConfirmButton.TabIndex = 1;
             ConfirmButton.Text = "Add";
-            ConfirmButton.UseVisualStyleBackColor = true;
+            ConfirmButton.UseVisualStyleBackColor = false;
             ConfirmButton.Click += ConfirmButton_Click;
             // 
             // StudentDialog
             // 
-            AutoScaleDimensions = new SizeF(120F, 120F);
+            AutoScaleDimensions = new SizeF(144F, 144F);
             AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(463, 560);
             Controls.Add(panel1);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             DoubleBuffered = true;
-            Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            Font = new Font("Consolas", 10F, FontStyle.Regular, GraphicsUnit.Point);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             MinimizeBox = false;
@@ -350,7 +361,7 @@
         private TextBox MiddleNameTextBox;
         private Label label3;
         private TextBox LastNameTextBox;
-        private Label label4; 
+        private Label label4;
         private ComboBox SuffixCombobox;
         private Label label5;
         private Label label6;

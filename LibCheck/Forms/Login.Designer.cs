@@ -26,7 +26,8 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {
+        private void InitializeComponent()
+        {
             LoginButton = new Button();
             label2 = new Label();
             usernameTextBox = new TextBox();
@@ -46,13 +47,13 @@
             // LoginButton
             // 
             LoginButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            LoginButton.BackColor = Color.DimGray;
+            LoginButton.BackColor = Color.MediumBlue;
             LoginButton.Enabled = false;
             LoginButton.FlatAppearance.BorderSize = 0;
             LoginButton.FlatStyle = FlatStyle.Flat;
-            LoginButton.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            LoginButton.Font = new Font("Consolas", 12F, FontStyle.Regular, GraphicsUnit.Point);
             LoginButton.ForeColor = SystemColors.ControlLightLight;
-            LoginButton.Location = new Point(105, 259);
+            LoginButton.Location = new Point(127, 269);
             LoginButton.Name = "LoginButton";
             LoginButton.Size = new Size(248, 44);
             LoginButton.TabIndex = 1;
@@ -64,9 +65,10 @@
             // 
             label2.Anchor = AnchorStyles.Top;
             label2.AutoSize = true;
-            label2.Location = new Point(30, 125);
+            label2.Font = new Font("Consolas", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(10, 124);
             label2.Name = "label2";
-            label2.Size = new Size(91, 23);
+            label2.Size = new Size(109, 23);
             label2.TabIndex = 2;
             label2.Text = "Username:";
             // 
@@ -75,7 +77,7 @@
             usernameTextBox.Anchor = AnchorStyles.Top;
             usernameTextBox.Location = new Point(127, 121);
             usernameTextBox.Name = "usernameTextBox";
-            usernameTextBox.Size = new Size(296, 30);
+            usernameTextBox.Size = new Size(296, 35);
             usernameTextBox.TabIndex = 3;
             usernameTextBox.TextChanged += TextBoxes_TextChanged;
             // 
@@ -83,9 +85,10 @@
             // 
             label3.Anchor = AnchorStyles.Top;
             label3.AutoSize = true;
-            label3.Location = new Point(30, 170);
+            label3.Font = new Font("Consolas", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(12, 174);
             label3.Name = "label3";
-            label3.Size = new Size(84, 23);
+            label3.Size = new Size(109, 23);
             label3.TabIndex = 2;
             label3.Text = "Password:";
             // 
@@ -94,7 +97,7 @@
             passwordTextBox.Anchor = AnchorStyles.Top;
             passwordTextBox.Location = new Point(127, 166);
             passwordTextBox.Name = "passwordTextBox";
-            passwordTextBox.Size = new Size(296, 30);
+            passwordTextBox.Size = new Size(296, 35);
             passwordTextBox.TabIndex = 3;
             passwordTextBox.UseSystemPasswordChar = true;
             passwordTextBox.TextChanged += TextBoxes_TextChanged;
@@ -105,7 +108,7 @@
             linkForgorPass.AutoSize = true;
             linkForgorPass.Location = new Point(280, 204);
             linkForgorPass.Name = "linkForgorPass";
-            linkForgorPass.Size = new Size(143, 23);
+            linkForgorPass.Size = new Size(174, 30);
             linkForgorPass.TabIndex = 4;
             linkForgorPass.TabStop = true;
             linkForgorPass.Text = "Forgot Password?";
@@ -115,10 +118,10 @@
             // 
             label1.Anchor = AnchorStyles.Top;
             label1.AutoSize = true;
-            label1.Font = new Font("Times New Roman", 22F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Font = new Font("Consolas", 22F, FontStyle.Bold, GraphicsUnit.Point);
             label1.Location = new Point(142, 41);
             label1.Name = "label1";
-            label1.Size = new Size(169, 42);
+            label1.Size = new Size(214, 51);
             label1.TabIndex = 0;
             label1.Text = "Welcome!";
             // 
@@ -173,7 +176,7 @@
             // 
             // Login
             // 
-            AutoScaleDimensions = new SizeF(120F, 120F);
+            AutoScaleDimensions = new SizeF(144F, 144F);
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = SystemColors.Window;
             ClientSize = new Size(852, 382);
