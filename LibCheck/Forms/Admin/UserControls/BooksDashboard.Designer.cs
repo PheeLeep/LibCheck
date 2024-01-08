@@ -26,7 +26,8 @@
         /// Required method for Designer support - do not modify 
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {
+        private void InitializeComponent()
+        {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BooksDashboard));
             panel1 = new Panel();
             PrintLabel = new Button();
@@ -35,12 +36,13 @@
             AddButton = new Button();
             dataGridView1 = new DataGridView();
             panel2 = new Panel();
+            label2 = new Label();
+            label1 = new Label();
             DamagedLabel = new Label();
             CurrentlyBorrowedLabel = new Label();
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
-            label1 = new Label();
-            label2 = new Label();
+            SearchButton = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel2.SuspendLayout();
@@ -51,14 +53,16 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.ActiveCaption;
+            panel1.Controls.Add(SearchButton);
             panel1.Controls.Add(PrintLabel);
             panel1.Controls.Add(DeleteButton);
             panel1.Controls.Add(UpdateButton);
             panel1.Controls.Add(AddButton);
             panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(0, 119);
+            panel1.Location = new Point(0, 95);
+            panel1.Margin = new Padding(2, 2, 2, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(862, 50);
+            panel1.Size = new Size(690, 40);
             panel1.TabIndex = 0;
             // 
             // PrintLabel
@@ -67,9 +71,10 @@
             PrintLabel.FlatAppearance.BorderSize = 0;
             PrintLabel.FlatStyle = FlatStyle.Flat;
             PrintLabel.Image = (Image)resources.GetObject("PrintLabel.Image");
-            PrintLabel.Location = new Point(807, 0);
+            PrintLabel.Location = new Point(646, 0);
+            PrintLabel.Margin = new Padding(2, 2, 2, 2);
             PrintLabel.Name = "PrintLabel";
-            PrintLabel.Size = new Size(55, 50);
+            PrintLabel.Size = new Size(44, 40);
             PrintLabel.TabIndex = 3;
             PrintLabel.UseVisualStyleBackColor = true;
             PrintLabel.Click += PrintLabel_Click;
@@ -80,9 +85,10 @@
             DeleteButton.FlatAppearance.BorderSize = 0;
             DeleteButton.FlatStyle = FlatStyle.Flat;
             DeleteButton.Image = (Image)resources.GetObject("DeleteButton.Image");
-            DeleteButton.Location = new Point(110, 0);
+            DeleteButton.Location = new Point(88, 0);
+            DeleteButton.Margin = new Padding(2, 2, 2, 2);
             DeleteButton.Name = "DeleteButton";
-            DeleteButton.Size = new Size(55, 50);
+            DeleteButton.Size = new Size(44, 40);
             DeleteButton.TabIndex = 2;
             DeleteButton.UseVisualStyleBackColor = true;
             DeleteButton.Click += DeleteButton_Click;
@@ -93,9 +99,10 @@
             UpdateButton.FlatAppearance.BorderSize = 0;
             UpdateButton.FlatStyle = FlatStyle.Flat;
             UpdateButton.Image = (Image)resources.GetObject("UpdateButton.Image");
-            UpdateButton.Location = new Point(55, 0);
+            UpdateButton.Location = new Point(44, 0);
+            UpdateButton.Margin = new Padding(2, 2, 2, 2);
             UpdateButton.Name = "UpdateButton";
-            UpdateButton.Size = new Size(55, 50);
+            UpdateButton.Size = new Size(44, 40);
             UpdateButton.TabIndex = 1;
             UpdateButton.UseVisualStyleBackColor = true;
             UpdateButton.Click += UpdateButton_Click;
@@ -107,8 +114,9 @@
             AddButton.FlatStyle = FlatStyle.Flat;
             AddButton.Image = (Image)resources.GetObject("AddButton.Image");
             AddButton.Location = new Point(0, 0);
+            AddButton.Margin = new Padding(2, 2, 2, 2);
             AddButton.Name = "AddButton";
-            AddButton.Size = new Size(55, 50);
+            AddButton.Size = new Size(44, 40);
             AddButton.TabIndex = 0;
             AddButton.UseVisualStyleBackColor = true;
             AddButton.Click += AddButton_Click;
@@ -122,13 +130,14 @@
             dataGridView1.BackgroundColor = SystemColors.ActiveCaption;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(0, 169);
+            dataGridView1.Location = new Point(0, 135);
+            dataGridView1.Margin = new Padding(2, 2, 2, 2);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 62;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(862, 353);
+            dataGridView1.Size = new Size(690, 283);
             dataGridView1.TabIndex = 1;
             dataGridView1.CellContentDoubleClick += dataGridView1_CellContentDoubleClick;
             // 
@@ -143,16 +152,40 @@
             panel2.Controls.Add(pictureBox1);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
+            panel2.Margin = new Padding(2, 2, 2, 2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(862, 119);
+            panel2.Size = new Size(690, 95);
             panel2.TabIndex = 4;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(295, 54);
+            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(178, 19);
+            label2.TabIndex = 2;
+            label2.Text = "Overdue, Lost, or Damaged";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(85, 54);
+            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(129, 19);
+            label1.TabIndex = 2;
+            label1.Text = "Currently Borrowed";
             // 
             // DamagedLabel
             // 
             DamagedLabel.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
-            DamagedLabel.Location = new Point(369, 22);
+            DamagedLabel.Location = new Point(295, 18);
+            DamagedLabel.Margin = new Padding(2, 0, 2, 0);
             DamagedLabel.Name = "DamagedLabel";
-            DamagedLabel.Size = new Size(189, 45);
+            DamagedLabel.Size = new Size(151, 36);
             DamagedLabel.TabIndex = 1;
             DamagedLabel.Text = "0";
             DamagedLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -160,9 +193,10 @@
             // CurrentlyBorrowedLabel
             // 
             CurrentlyBorrowedLabel.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
-            CurrentlyBorrowedLabel.Location = new Point(106, 22);
+            CurrentlyBorrowedLabel.Location = new Point(85, 18);
+            CurrentlyBorrowedLabel.Margin = new Padding(2, 0, 2, 0);
             CurrentlyBorrowedLabel.Name = "CurrentlyBorrowedLabel";
-            CurrentlyBorrowedLabel.Size = new Size(189, 45);
+            CurrentlyBorrowedLabel.Size = new Size(151, 36);
             CurrentlyBorrowedLabel.TabIndex = 1;
             CurrentlyBorrowedLabel.Text = "0";
             CurrentlyBorrowedLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -171,7 +205,8 @@
             // 
             pictureBox2.Image = Properties.Resources.icons8_book_damage_45;
             pictureBox2.InitialImage = null;
-            pictureBox2.Location = new Point(318, 22);
+            pictureBox2.Location = new Point(254, 18);
+            pictureBox2.Margin = new Padding(2, 2, 2, 2);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(45, 45);
             pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
@@ -182,43 +217,39 @@
             // 
             pictureBox1.Image = Properties.Resources.icons8_book_borrowed_45;
             pictureBox1.InitialImage = null;
-            pictureBox1.Location = new Point(55, 22);
+            pictureBox1.Location = new Point(44, 18);
+            pictureBox1.Margin = new Padding(2, 2, 2, 2);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(45, 45);
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
-            // label1
+            // SearchButton
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(106, 67);
-            label1.Name = "label1";
-            label1.Size = new Size(158, 23);
-            label1.TabIndex = 2;
-            label1.Text = "Currently Borrowed";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(369, 67);
-            label2.Name = "label2";
-            label2.Size = new Size(219, 23);
-            label2.TabIndex = 2;
-            label2.Text = "Overdue, Lost, or Damaged";
+            SearchButton.Dock = DockStyle.Right;
+            SearchButton.FlatAppearance.BorderSize = 0;
+            SearchButton.FlatStyle = FlatStyle.Flat;
+            SearchButton.Image = Properties.Resources.icons8_search_32;
+            SearchButton.Location = new Point(602, 0);
+            SearchButton.Margin = new Padding(2);
+            SearchButton.Name = "SearchButton";
+            SearchButton.Size = new Size(44, 40);
+            SearchButton.TabIndex = 4;
+            SearchButton.UseVisualStyleBackColor = true;
+            SearchButton.Click += SearchButton_Click;
             // 
             // BooksDashboard
             // 
-            AutoScaleDimensions = new SizeF(120F, 120F);
+            AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
             Controls.Add(dataGridView1);
             Controls.Add(panel1);
             Controls.Add(panel2);
             DoubleBuffered = true;
+            Margin = new Padding(2, 2, 2, 2);
             Name = "BooksDashboard";
-            Size = new Size(862, 522);
+            Size = new Size(690, 418);
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             panel2.ResumeLayout(false);
@@ -243,5 +274,6 @@
         private PictureBox pictureBox2;
         private Label label2;
         private Label label1;
+        private Button SearchButton;
     }
 }

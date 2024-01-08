@@ -129,12 +129,13 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
                 sw.SearchWhereCondition += Sw_SearchWhereCondition;
                 sw.FormClosing += (s, e) => {
                     sw.SearchWhereCondition -= Sw_SearchWhereCondition;
+                    Sw_SearchWhereCondition("");
                 };
                 hsuc.Dock = DockStyle.Fill;
                 hsuc.CreateControl();
                 af.RegisterWindow(sw);
                 sw.Text = "Search History.";
-                sw.Show();
+                sw.Show(this);
             }
         }
 

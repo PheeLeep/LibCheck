@@ -118,8 +118,6 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
                 // Ignore
             }
 
-
-
             foreach (string isbn in isbns) {
                 Books? b = books.FirstOrDefault(b => isbn.Equals(b.ISBN));
                 if (b == null) continue;
@@ -128,11 +126,11 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
                 bookNames.Add(b.Title);
                 borrowRates.Add(records.Count(s => !string.IsNullOrEmpty(s.ISBN) &&
                                                  s.Category == Records.RecordStatus.BookBorrowed &&
-                                                 s.DateOccurred >= from && s.DateOccurred <= to &&
+                                                 s.DateOccurred.Date >= from.Date && s.DateOccurred.Date <= to.Date &&
                                                  s.ISBN.Equals(b.ISBN)));
                 returnRates.Add(records.Count(s => !string.IsNullOrEmpty(s.ISBN) &&
                                                  s.Category == Records.RecordStatus.BookReturned &&
-                                                 s.DateOccurred >= from && s.DateOccurred <= to &&
+                                                 s.DateOccurred.Date >= from.Date && s.DateOccurred.Date <= to.Date &&
                                                  s.ISBN.Equals(b.ISBN)));
 
             }
