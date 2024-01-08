@@ -31,7 +31,6 @@
             BookDelCBox = new CheckBox();
             bookModCBox = new CheckBox();
             BookAddedCBox = new CheckBox();
-            groupBox2 = new GroupBox();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -45,9 +44,9 @@
             groupBox1.Controls.Add(bookModCBox);
             groupBox1.Controls.Add(BookAddedCBox);
             groupBox1.Dock = DockStyle.Fill;
-            groupBox1.Location = new Point(0, 154);
+            groupBox1.Location = new Point(0, 0);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(500, 360);
+            groupBox1.Size = new Size(500, 514);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Search By Category";
@@ -57,7 +56,7 @@
             BookRestoredCBox.AutoSize = true;
             BookRestoredCBox.Checked = true;
             BookRestoredCBox.CheckState = CheckState.Checked;
-            BookRestoredCBox.Location = new Point(51, 229);
+            BookRestoredCBox.Location = new Point(54, 257);
             BookRestoredCBox.Name = "BookRestoredCBox";
             BookRestoredCBox.Size = new Size(128, 24);
             BookRestoredCBox.TabIndex = 2;
@@ -70,7 +69,7 @@
             BookLDmgCBox.AutoSize = true;
             BookLDmgCBox.Checked = true;
             BookLDmgCBox.CheckState = CheckState.Checked;
-            BookLDmgCBox.Location = new Point(51, 199);
+            BookLDmgCBox.Location = new Point(54, 227);
             BookLDmgCBox.Name = "BookLDmgCBox";
             BookLDmgCBox.Size = new Size(159, 24);
             BookLDmgCBox.TabIndex = 1;
@@ -83,7 +82,7 @@
             BookBorrowedCBox.AutoSize = true;
             BookBorrowedCBox.Checked = true;
             BookBorrowedCBox.CheckState = CheckState.Checked;
-            BookBorrowedCBox.Location = new Point(51, 139);
+            BookBorrowedCBox.Location = new Point(54, 167);
             BookBorrowedCBox.Name = "BookBorrowedCBox";
             BookBorrowedCBox.Size = new Size(134, 24);
             BookBorrowedCBox.TabIndex = 1;
@@ -96,7 +95,7 @@
             BookReturnedCBox.AutoSize = true;
             BookReturnedCBox.Checked = true;
             BookReturnedCBox.CheckState = CheckState.Checked;
-            BookReturnedCBox.Location = new Point(51, 169);
+            BookReturnedCBox.Location = new Point(54, 197);
             BookReturnedCBox.Name = "BookReturnedCBox";
             BookReturnedCBox.Size = new Size(129, 24);
             BookReturnedCBox.TabIndex = 0;
@@ -109,7 +108,7 @@
             BookDelCBox.AutoSize = true;
             BookDelCBox.Checked = true;
             BookDelCBox.CheckState = CheckState.Checked;
-            BookDelCBox.Location = new Point(51, 109);
+            BookDelCBox.Location = new Point(54, 137);
             BookDelCBox.Name = "BookDelCBox";
             BookDelCBox.Size = new Size(122, 24);
             BookDelCBox.TabIndex = 0;
@@ -122,7 +121,7 @@
             bookModCBox.AutoSize = true;
             bookModCBox.Checked = true;
             bookModCBox.CheckState = CheckState.Checked;
-            bookModCBox.Location = new Point(51, 82);
+            bookModCBox.Location = new Point(54, 110);
             bookModCBox.Name = "bookModCBox";
             bookModCBox.Size = new Size(130, 24);
             bookModCBox.TabIndex = 1;
@@ -135,7 +134,7 @@
             BookAddedCBox.AutoSize = true;
             BookAddedCBox.Checked = true;
             BookAddedCBox.CheckState = CheckState.Checked;
-            BookAddedCBox.Location = new Point(51, 52);
+            BookAddedCBox.Location = new Point(54, 80);
             BookAddedCBox.Name = "BookAddedCBox";
             BookAddedCBox.Size = new Size(114, 24);
             BookAddedCBox.TabIndex = 0;
@@ -143,22 +142,11 @@
             BookAddedCBox.UseVisualStyleBackColor = true;
             BookAddedCBox.CheckedChanged += CBoxCheckChanged;
             // 
-            // groupBox2
-            // 
-            groupBox2.Dock = DockStyle.Top;
-            groupBox2.Location = new Point(0, 0);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(500, 154);
-            groupBox2.TabIndex = 1;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Search By Keyword";
-            // 
             // HistorySearchUC
             // 
             AutoScaleDimensions = new SizeF(120F, 120F);
             AutoScaleMode = AutoScaleMode.Dpi;
             Controls.Add(groupBox1);
-            Controls.Add(groupBox2);
             Name = "HistorySearchUC";
             Size = new Size(500, 514);
             groupBox1.ResumeLayout(false);
@@ -169,7 +157,6 @@
         #endregion
 
         private GroupBox groupBox1;
-        private GroupBox groupBox2;
         private CheckBox BookAddedCBox;
         private CheckBox bookModCBox;
         private CheckBox BookBorrowedCBox;
