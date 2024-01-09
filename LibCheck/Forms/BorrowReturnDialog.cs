@@ -49,8 +49,8 @@ namespace LibCheck.Forms {
                     if (book.DateToReturn == null)
                         throw new InvalidOperationException("Illegal data found.");
 
-                    DateTime currentDate = DateTime.Now;
-                    DateTime dueDate = book.DateToReturn.Value;
+                    DateTime currentDate = DateTime.Now.Date;
+                    DateTime dueDate = book.DateToReturn.Value.Date;
 
                     switch (Miscellaneous.CalculateDateExcptSun(currentDate, dueDate)) {
                         case int d when d < 3:
@@ -114,7 +114,7 @@ namespace LibCheck.Forms {
         private void AcquireData(SearchDialog.SearchType t) {
             if (t == SearchDialog.SearchType.All)
                 return;
-            using (SearchDialog sd = new SearchDialog(t, false, true)) {
+            using (SearchDialog sd = new SearchDialog(t, false, false)) {
                 sd.ShowDialog(this);
                 if (string.IsNullOrWhiteSpace(sd.Value))
                     return;

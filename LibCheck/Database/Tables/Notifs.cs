@@ -14,7 +14,7 @@ namespace LibCheck.Database.Tables {
         [NotNull]
         public string? Message { get; set; }
 
-        internal static void CreateNotification(string message, string caption) {
+        internal static void CreateNotification(string caption, string message) {
             if (!Credentials.LoggedIn) return;
             Notifs n = new Notifs() {
                 Date = DateTime.Now,

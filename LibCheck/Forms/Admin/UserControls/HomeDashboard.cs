@@ -45,8 +45,12 @@ namespace LibCheck.Forms.Admin.UserControls {
                 if (CheckNotifLatestCBox.Checked)
                     lists = lists.Where(s => s.Date >= Credentials.Librarian?.LastLoggedIn).ToList();
 
-                foreach (Notifs n in lists)
-                    notifs.Add(new NotifBar(n));
+                foreach (Notifs n in lists) {
+                    NotifBar nb = new NotifBar(n);
+                    notifs.Add(nb);
+                    nb.Dock = DockStyle.Top;
+                }
+
                 notifPanel.Controls.AddRange(notifs.ToArray());
                 notifs.Clear();
             }

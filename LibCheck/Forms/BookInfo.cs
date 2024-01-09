@@ -38,7 +38,7 @@ namespace LibCheck.Forms {
                 BorrowBookButton.Enabled = true;
                 if (!string.IsNullOrWhiteSpace(book.StudentID) && !book.StudentID.Equals("(none)")) {
                     OwnedLabel.Text = $"Currently owned by '{book.StudentID}'";
-                    if (DateTime.Now > book.DateToReturn)
+                    if (DateTime.Now.Date > book.SafeDateToReturn)
                         OwnedLabel.Text += " (OVERDUE)";
                 }
             }
