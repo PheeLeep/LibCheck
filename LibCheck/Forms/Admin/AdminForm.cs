@@ -71,26 +71,9 @@ namespace LibCheck.Forms {
                 booksDashboard1.Load();
         }
 
-        private void AccountRecoveryButton_Click(object sender, EventArgs e) {
-            new AccountRecoveryDiag().ShowDialog(this);
-        }
-
         private void StudentsButton_Click(object sender, EventArgs e) {
             if (ChangeDashboards(studentsDashboard1))
                 studentsDashboard1.Load();
-        }
-
-        private void SettingsButton_MouseClick(object sender, MouseEventArgs e) {
-            if (e.Button == MouseButtons.Left)
-                cMS1.Show(new Point(Cursor.Position.X, Cursor.Position.Y));
-        }
-
-        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e) {
-            new ChangePasswordDiag().ShowDialog(this);
-        }
-
-        private void accountRecoveryToolStripMenuItem_Click(object sender, EventArgs e) {
-            new AccountRecoveryDiag().ShowDialog(this);
         }
 
         private void EmailsButton_Click(object sender, EventArgs e) {
@@ -104,6 +87,10 @@ namespace LibCheck.Forms {
         private void StatsButton_Click(object sender, EventArgs e) {
             if (ChangeDashboards(statisticsDashboard1))
                 statisticsDashboard1.LoadData();
+        }
+
+        private void SettingsButton_Click(object sender, EventArgs e) {
+            new LibrarianOptions().ShowDialog(this);
         }
     }
 }

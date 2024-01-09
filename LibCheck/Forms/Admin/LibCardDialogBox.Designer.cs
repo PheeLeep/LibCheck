@@ -26,11 +26,9 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             panel1 = new Panel();
             SaveImageButton = new Button();
-            PrintQueueButton = new Button();
             panel2 = new Panel();
             groupBox2 = new GroupBox();
             BackPicBox = new PictureBox();
@@ -47,13 +45,13 @@
             // 
             // panel1
             // 
+            panel1.BackColor = Color.CornflowerBlue;
             panel1.Controls.Add(SaveImageButton);
-            panel1.Controls.Add(PrintQueueButton);
             panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(0, 572);
+            panel1.Location = new Point(0, 489);
             panel1.Margin = new Padding(4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(679, 95);
+            panel1.Size = new Size(559, 98);
             panel1.TabIndex = 4;
             // 
             // SaveImageButton
@@ -71,20 +69,6 @@
             SaveImageButton.UseVisualStyleBackColor = false;
             SaveImageButton.Click += SaveImageButton_Click;
             // 
-            // PrintQueueButton
-            // 
-            PrintQueueButton.BackColor = Color.FromArgb(0, 192, 0);
-            PrintQueueButton.FlatStyle = FlatStyle.Flat;
-            PrintQueueButton.Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            PrintQueueButton.ForeColor = Color.White;
-            PrintQueueButton.Location = new Point(216, 22);
-            PrintQueueButton.Margin = new Padding(4);
-            PrintQueueButton.Name = "PrintQueueButton";
-            PrintQueueButton.Size = new Size(207, 44);
-            PrintQueueButton.TabIndex = 2;
-            PrintQueueButton.Text = "Add to Print Queue";
-            PrintQueueButton.UseVisualStyleBackColor = false;
-            // 
             // panel2
             // 
             panel2.Controls.Add(groupBox2);
@@ -93,18 +77,18 @@
             panel2.Location = new Point(0, 0);
             panel2.Margin = new Padding(4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(679, 572);
+            panel2.Size = new Size(559, 489);
             panel2.TabIndex = 3;
             // 
             // groupBox2
             // 
             groupBox2.Controls.Add(BackPicBox);
             groupBox2.Dock = DockStyle.Fill;
-            groupBox2.Location = new Point(0, 286);
+            groupBox2.Location = new Point(0, 247);
             groupBox2.Margin = new Padding(4);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(4);
-            groupBox2.Size = new Size(679, 286);
+            groupBox2.Size = new Size(559, 242);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Text = "Back";
@@ -112,10 +96,10 @@
             // BackPicBox
             // 
             BackPicBox.Dock = DockStyle.Fill;
-            BackPicBox.Location = new Point(4, 26);
+            BackPicBox.Location = new Point(4, 22);
             BackPicBox.Margin = new Padding(4);
             BackPicBox.Name = "BackPicBox";
-            BackPicBox.Size = new Size(671, 256);
+            BackPicBox.Size = new Size(551, 216);
             BackPicBox.SizeMode = PictureBoxSizeMode.Zoom;
             BackPicBox.TabIndex = 1;
             BackPicBox.TabStop = false;
@@ -128,7 +112,7 @@
             groupBox1.Margin = new Padding(4);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(4);
-            groupBox1.Size = new Size(679, 286);
+            groupBox1.Size = new Size(559, 247);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Front";
@@ -136,10 +120,10 @@
             // FrontPicBox
             // 
             FrontPicBox.Dock = DockStyle.Fill;
-            FrontPicBox.Location = new Point(4, 26);
+            FrontPicBox.Location = new Point(4, 22);
             FrontPicBox.Margin = new Padding(4);
             FrontPicBox.Name = "FrontPicBox";
-            FrontPicBox.Size = new Size(671, 256);
+            FrontPicBox.Size = new Size(551, 221);
             FrontPicBox.SizeMode = PictureBoxSizeMode.Zoom;
             FrontPicBox.TabIndex = 1;
             FrontPicBox.TabStop = false;
@@ -150,9 +134,8 @@
             // 
             // LibCardDialogBox
             // 
-            AutoScaleDimensions = new SizeF(10F, 22F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(679, 667);
+            AutoScaleMode = AutoScaleMode.None;
+            ClientSize = new Size(559, 587);
             Controls.Add(panel1);
             Controls.Add(panel2);
             DoubleBuffered = true;
@@ -180,7 +163,6 @@
         #endregion
         private Panel panel1;
         private Button SaveImageButton;
-        private Button PrintQueueButton;
         private Panel panel2;
         private GroupBox groupBox2;
         private GroupBox groupBox1;

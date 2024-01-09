@@ -45,7 +45,5 @@ namespace LibCheck.Database.Tables {
 
         [NotNull]
         public bool ThreeDayNoticeSent { get; set; } = false;
-
-        public string? ImagePath { get; set; }  
     }
 }

@@ -207,12 +207,29 @@ namespace LibCheck.Forms.Admin.UserControls {
                 Load();
                 return;
             }
-            if (!string.IsNullOrWhiteSpace(whereCond)
-                 && Database.Database.Read(out List<Books>? specRecords, whereCond: whereCond) >= 0
+            if (Database.Database.Read(out List<Books>? specRecords, whereCond: whereCond) >= 0
                  && specRecords != null) {
                 dataGridView1.DataSource = specRecords;
             }
         }
 
+        private void SaveButton_Click(object sender, EventArgs e) {
+            if (Modules.AppContext.Current.MainForm == null)
+                return;
+            object? obj = dataGridView1.DataSource;
+            if (obj == null)
+                return;
+            if (saveFileDialog1.ShowDialog(this) != DialogResult.OK)
+                return;
+            PleaseWait.RunInPleaseWait(Modules.AppContext.Current.MainForm, new Action(() => {
+                try {
+                    List<Books> specificRecord = (List<Books>)obj;
+                    PleaseWait.SetPWDText("Saving...");
+                    Database.Database.ExportToCSV(specificRecord, saveFileDialog1.FileName);
+                } catch (Exception ex) {
+                    MessageBox.Show(this, ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                }
+            }));
+        }
     }
 }

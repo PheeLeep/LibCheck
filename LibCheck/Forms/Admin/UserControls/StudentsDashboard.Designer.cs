@@ -35,6 +35,8 @@
             label1 = new Label();
             CurrentlyBorrowedLabel = new Label();
             pictureBox1 = new PictureBox();
+            SaveButton = new Button();
+            saveFileDialog1 = new SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -63,6 +65,7 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.ActiveCaption;
+            panel1.Controls.Add(SaveButton);
             panel1.Controls.Add(SearchButton);
             panel1.Controls.Add(PrintLabel);
             panel1.Controls.Add(DeleteButton);
@@ -164,7 +167,7 @@
             label1.Location = new Point(85, 54);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(131, 19);
+            label1.Size = new Size(161, 23);
             label1.TabIndex = 2;
             label1.Text = "Students Registered";
             // 
@@ -190,6 +193,24 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
+            // 
+            // SaveButton
+            // 
+            SaveButton.Dock = DockStyle.Right;
+            SaveButton.FlatAppearance.BorderSize = 0;
+            SaveButton.FlatStyle = FlatStyle.Flat;
+            SaveButton.Image = Properties.Resources.save_32px;
+            SaveButton.Location = new Point(557, 0);
+            SaveButton.Margin = new Padding(2);
+            SaveButton.Name = "SaveButton";
+            SaveButton.Size = new Size(44, 40);
+            SaveButton.TabIndex = 9;
+            SaveButton.UseVisualStyleBackColor = true;
+            SaveButton.Click += SaveButton_Click;
+            // 
+            // saveFileDialog1
+            // 
+            saveFileDialog1.Filter = "Comma-separated values|*.csv";
             // 
             // StudentsDashboard
             // 
@@ -222,5 +243,7 @@
         private Label CurrentlyBorrowedLabel;
         private PictureBox pictureBox1;
         private Button SearchButton;
+        private Button SaveButton;
+        private SaveFileDialog saveFileDialog1;
     }
 }

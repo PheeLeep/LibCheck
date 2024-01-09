@@ -109,6 +109,13 @@ namespace LibCheck.Modules.Security {
             }
         }
 
+        internal static void UpdateLibrarianInfo(LibrarianInfo token) {
+            if (!LoggedIn || !AppContext.IsInAdminMode)
+                throw new InvalidOperationException("Access denied.");
+            Database.Database.Update(token);
+            Librarian = token;
+        }
+
         internal static void Register(LibrarianToken token, LibrarianInfo lInfo, SecureString key) {
             if (LoggedIn)
                 throw new InvalidOperationException("Access denied.");

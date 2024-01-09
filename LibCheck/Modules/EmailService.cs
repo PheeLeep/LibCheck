@@ -24,7 +24,6 @@ namespace LibCheck.Modules {
         }
         private static GmailService? service;
         private static readonly object _lock = new object();
-        private static readonly string _emailProvider = "libcheckemail@gmail.com";
         private static int _timeOut = 0;
         private static int _emailCount = 0;
 
@@ -179,6 +178,7 @@ namespace LibCheck.Modules {
                 return false;
             if (string.IsNullOrWhiteSpace(body)) return false;
             if (string.IsNullOrWhiteSpace(subject)) return false;
+            if (string.IsNullOrWhiteSpace(Credentials.Librarian?.LibraryEmail)) return false;
             lock (_lock) {
                 try {
 
@@ -189,7 +189,7 @@ namespace LibCheck.Modules {
                         },
                         Date = DateTime.Now
                     };
-                    msg.From.Add(new MailboxAddress("LibCheck Email Notifier", _emailProvider));
+                    msg.From.Add(new MailboxAddress("LibCheck Email Notifier", Credentials.Librarian?.LibraryEmail));
                     msg.To.Add(new MailboxAddress("", mailTo));
 
                     var Base64txt = Convert.ToBase64String(Encoding.UTF8.GetBytes(msg.ToString()))
@@ -200,7 +200,7 @@ namespace LibCheck.Modules {
                     Logger.Log(Logger.LogEnums.Verbose, $"Attempting to send an email to {Miscellaneous.Redact(mailTo)}...");
                     if (service?.Users.Messages.Send(new Google.Apis.Gmail.v1.Data.Message {
                         Raw = Base64txt
-                    }, _emailProvider).Execute() == null)
+                    }, Credentials.Librarian?.LibraryEmail).Execute() == null)
                         throw new InvalidOperationException("Sent failure! It might be due to internet connection or other factors.");
                     Logger.Log(Logger.LogEnums.Info, "Email sent.");
                     return true;

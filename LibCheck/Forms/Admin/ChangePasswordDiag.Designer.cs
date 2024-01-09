@@ -43,7 +43,7 @@
             ChangeButton.BackColor = Color.SeaShell;
             ChangeButton.Enabled = false;
             ChangeButton.Font = new Font("Sitka Banner", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            ChangeButton.Location = new Point(132, 353);
+            ChangeButton.Location = new Point(132, 374);
             ChangeButton.Name = "ChangeButton";
             ChangeButton.Size = new Size(203, 48);
             ChangeButton.TabIndex = 0;
@@ -123,11 +123,10 @@
             // 
             // ChangePasswordDiag
             // 
-            AutoScaleDimensions = new SizeF(120F, 120F);
-            AutoScaleMode = AutoScaleMode.Dpi;
+            AutoScaleMode = AutoScaleMode.None;
             BackgroundImage = Properties.Resources.bg;
             BackgroundImageLayout = ImageLayout.None;
-            ClientSize = new Size(461, 413);
+            ClientSize = new Size(461, 434);
             Controls.Add(label4);
             Controls.Add(retypePassTextBox);
             Controls.Add(label2);

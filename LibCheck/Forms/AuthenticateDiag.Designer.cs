@@ -106,8 +106,7 @@
             // 
             // AuthenticateDiag
             // 
-            AutoScaleDimensions = new SizeF(120F, 120F);
-            AutoScaleMode = AutoScaleMode.Dpi;
+            AutoScaleMode = AutoScaleMode.None;
             BackColor = SystemColors.ControlDarkDark;
             BackgroundImage = Properties.Resources.bg;
             BackgroundImageLayout = ImageLayout.Center;

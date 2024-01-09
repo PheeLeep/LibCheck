@@ -44,9 +44,9 @@
             groupBox3.Dock = DockStyle.Top;
             groupBox3.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox3.Location = new Point(0, 0);
-            groupBox3.Margin = new Padding(2, 2, 2, 2);
+            groupBox3.Margin = new Padding(2);
             groupBox3.Name = "groupBox3";
-            groupBox3.Padding = new Padding(2, 2, 2, 2);
+            groupBox3.Padding = new Padding(2);
             groupBox3.Size = new Size(690, 78);
             groupBox3.TabIndex = 2;
             groupBox3.TabStop = false;
@@ -61,7 +61,7 @@
             SearchButton.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
             SearchButton.Image = Properties.Resources.icons8_search_32;
             SearchButton.Location = new Point(364, 32);
-            SearchButton.Margin = new Padding(2, 2, 2, 2);
+            SearchButton.Margin = new Padding(2);
             SearchButton.Name = "SearchButton";
             SearchButton.Size = new Size(26, 26);
             SearchButton.TabIndex = 6;
@@ -77,7 +77,7 @@
             SaveButton.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
             SaveButton.Image = Properties.Resources.save_32px;
             SaveButton.Location = new Point(326, 32);
-            SaveButton.Margin = new Padding(2, 2, 2, 2);
+            SaveButton.Margin = new Padding(2);
             SaveButton.Name = "SaveButton";
             SaveButton.Size = new Size(26, 26);
             SaveButton.TabIndex = 5;
@@ -93,7 +93,7 @@
             ChartsRefreshButton.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
             ChartsRefreshButton.Image = Properties.Resources.refresh_32px;
             ChartsRefreshButton.Location = new Point(22, 34);
-            ChartsRefreshButton.Margin = new Padding(2, 2, 2, 2);
+            ChartsRefreshButton.Margin = new Padding(2);
             ChartsRefreshButton.Name = "ChartsRefreshButton";
             ChartsRefreshButton.Size = new Size(26, 26);
             ChartsRefreshButton.TabIndex = 4;
@@ -106,9 +106,9 @@
             TransactComboBox.FormattingEnabled = true;
             TransactComboBox.Items.AddRange(new object[] { "7 days", "14 days", "1 month", "All Time", "Custom" });
             TransactComboBox.Location = new Point(57, 34);
-            TransactComboBox.Margin = new Padding(2, 2, 2, 2);
+            TransactComboBox.Margin = new Padding(2);
             TransactComboBox.Name = "TransactComboBox";
-            TransactComboBox.Size = new Size(205, 27);
+            TransactComboBox.Size = new Size(205, 33);
             TransactComboBox.TabIndex = 0;
             TransactComboBox.SelectedIndexChanged += TransactComboBox_SelectedIndexChanged;
             // 
@@ -122,7 +122,7 @@
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Dock = DockStyle.Fill;
             dataGridView1.Location = new Point(0, 78);
-            dataGridView1.Margin = new Padding(2, 2, 2, 2);
+            dataGridView1.Margin = new Padding(2);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersVisible = false;
@@ -142,7 +142,7 @@
             BackColor = SystemColors.ActiveCaption;
             Controls.Add(dataGridView1);
             Controls.Add(groupBox3);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "HistoryStatistics";
             Size = new Size(690, 378);
             groupBox3.ResumeLayout(false);

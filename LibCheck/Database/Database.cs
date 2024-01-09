@@ -1,6 +1,8 @@
-﻿using LibCheck.Modules;
+﻿using LibCheck.Database.Tables;
+using LibCheck.Modules;
 using LibCheck.Modules.Security;
 using SQLite;
+using System.Data;
 using System.Diagnostics;
 using System.Reflection;
 using System.Security;
@@ -43,6 +45,7 @@ namespace LibCheck.Database {
                 protectedByte = ProtectedData.Protect(Encoding.UTF8.GetBytes(CryptComp.ConvertToString(secString)),
                                                       null,
                                                       DataProtectionScope.CurrentUser);
+                Debug.Print(CryptComp.ConvertToString(secString));
                 Logger.Log(Logger.LogEnums.Info, "Database loaded");
             }
         }
@@ -107,6 +110,7 @@ namespace LibCheck.Database {
 
         internal static bool Insert(object obj) {
             try {
+                if (obj is LibrarianInfo && !Modules.AppContext.IsInAdminMode) return false;
                 CheckConn();
                 int? res = _conn?.Insert(obj);
                 if (!res.HasValue) throw new InvalidOperationException("INSERT_FAILED");
@@ -120,6 +124,7 @@ namespace LibCheck.Database {
 
         internal static bool Update(object obj) {
             try {
+                if (obj is LibrarianInfo && !Modules.AppContext.IsInAdminMode) return false;
                 CheckConn();
                 int? res = _conn?.Update(obj);
                 if (!res.HasValue) throw new InvalidOperationException("UPDATE_FAILED");
@@ -133,6 +138,7 @@ namespace LibCheck.Database {
 
         internal static bool Delete(object obj) {
             try {
+                if (obj is LibrarianInfo && !Modules.AppContext.IsInAdminMode) return false;
                 CheckConn();
                 int? res = _conn?.Delete(obj);
                 if (!res.HasValue) throw new InvalidOperationException("DEL_GEN_FAILED");
@@ -146,6 +152,7 @@ namespace LibCheck.Database {
 
         internal static bool Delete<T>(string primaryKey) where T : new() {
             try {
+                if (typeof(T).Name.Equals(nameof(LibrarianInfo)) && !Modules.AppContext.IsInAdminMode) return false;
                 CheckConn();
                 int? res = _conn?.Delete<T>(primaryKey);
                 if (!res.HasValue) throw new InvalidOperationException("DEL_SPECIFIC_FAILED");
@@ -159,6 +166,7 @@ namespace LibCheck.Database {
 
         internal static bool DeleteAll<T>() where T : new() {
             try {
+                if (typeof(T).Name.Equals(nameof(LibrarianInfo)) && !Modules.AppContext.IsInAdminMode) return false;
                 CheckConn();
                 int? res = _conn?.DeleteAll<T>();
                 if (!res.HasValue) throw new InvalidOperationException("DEL_TABLE_DATA_FAILED");
@@ -169,6 +177,25 @@ namespace LibCheck.Database {
                 return false;
             }
         }
+
+
+        internal static void ExportToCSV<T>(List<T> list, string path, string[]? specificCols = null) {
+            using (StreamWriter sw = new StreamWriter(path)) {
+                sw.WriteLine(string.Join(',', typeof(T).GetProperties().Select(pN => QuoteCSVValue(pN.Name))));
+
+                foreach (T item in list) {
+                    sw.WriteLine(string.Join(',', typeof(T).GetProperties()
+                                                    .Select(pN => QuoteCSVValue(pN.GetValue(item)?.ToString()))));
+                }
+                sw.Flush();
+            }
+        }
+
+        private static string QuoteCSVValue(string? val) {
+            if (string.IsNullOrWhiteSpace(val)) return "";
+            return val.Contains(',') ? $"\"{val}\"" : val;
+        }
+
         private static void CheckConn() {
             if (!IsConnected) throw new InvalidOperationException("No connection established to the database.");
         }

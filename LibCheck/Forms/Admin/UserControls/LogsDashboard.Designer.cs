@@ -62,7 +62,7 @@
             panel2.Location = new Point(0, 0);
             panel2.Margin = new Padding(3, 2, 3, 2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(754, 89);
+            panel2.Size = new Size(795, 89);
             panel2.TabIndex = 6;
             // 
             // SaveButton
@@ -74,10 +74,10 @@
             SaveButton.FlatStyle = FlatStyle.Flat;
             SaveButton.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
             SaveButton.Image = Properties.Resources.save_32px;
-            SaveButton.Location = new Point(662, 26);
+            SaveButton.Location = new Point(707, 26);
             SaveButton.Margin = new Padding(3, 2, 3, 2);
             SaveButton.Name = "SaveButton";
-            SaveButton.Size = new Size(28, 24);
+            SaveButton.Size = new Size(32, 32);
             SaveButton.TabIndex = 3;
             SaveButton.UseVisualStyleBackColor = false;
             SaveButton.Click += SaveButton_Click;
@@ -91,10 +91,10 @@
             ClearLogButton.FlatStyle = FlatStyle.Flat;
             ClearLogButton.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
             ClearLogButton.Image = Properties.Resources.empty_trash_32px;
-            ClearLogButton.Location = new Point(695, 26);
+            ClearLogButton.Location = new Point(740, 26);
             ClearLogButton.Margin = new Padding(3, 2, 3, 2);
             ClearLogButton.Name = "ClearLogButton";
-            ClearLogButton.Size = new Size(28, 24);
+            ClearLogButton.Size = new Size(32, 32);
             ClearLogButton.TabIndex = 3;
             ClearLogButton.UseVisualStyleBackColor = false;
             ClearLogButton.Click += ClearLogButton_Click;
@@ -108,10 +108,10 @@
             RefreshButton.FlatStyle = FlatStyle.Flat;
             RefreshButton.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
             RefreshButton.Image = Properties.Resources.refresh_32px;
-            RefreshButton.Location = new Point(622, 26);
+            RefreshButton.Location = new Point(667, 26);
             RefreshButton.Margin = new Padding(3, 2, 3, 2);
             RefreshButton.Name = "RefreshButton";
-            RefreshButton.Size = new Size(28, 24);
+            RefreshButton.Size = new Size(32, 32);
             RefreshButton.TabIndex = 3;
             RefreshButton.UseVisualStyleBackColor = false;
             RefreshButton.Click += RefreshButton_Click;
@@ -120,9 +120,9 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(93, 19);
+            label1.Location = new Point(96, 19);
             label1.Name = "label1";
-            label1.Size = new Size(453, 21);
+            label1.Size = new Size(567, 28);
             label1.TabIndex = 2;
             label1.Text = "Logs are automatically been written to the disk while in runtime.";
             // 
@@ -144,11 +144,11 @@
             groupBox1.Controls.Add(panel3);
             groupBox1.Dock = DockStyle.Fill;
             groupBox1.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            groupBox1.Location = new Point(0, 109);
+            groupBox1.Location = new Point(0, 116);
             groupBox1.Margin = new Padding(3, 2, 3, 2);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(3, 2, 3, 2);
-            groupBox1.Size = new Size(754, 283);
+            groupBox1.Size = new Size(795, 279);
             groupBox1.TabIndex = 7;
             groupBox1.TabStop = false;
             groupBox1.Text = "All Logs";
@@ -162,14 +162,14 @@
             dataGridView1.BackgroundColor = SystemColors.ActiveCaption;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(3, 57);
+            dataGridView1.Location = new Point(3, 61);
             dataGridView1.Margin = new Padding(3, 2, 3, 2);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 62;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(748, 224);
+            dataGridView1.Size = new Size(789, 216);
             dataGridView1.TabIndex = 8;
             dataGridView1.VirtualMode = true;
             // 
@@ -182,10 +182,10 @@
             panel3.Controls.Add(InfoLabel);
             panel3.Controls.Add(VerboseLabel);
             panel3.Dock = DockStyle.Top;
-            panel3.Location = new Point(3, 22);
+            panel3.Location = new Point(3, 26);
             panel3.Margin = new Padding(3, 2, 3, 2);
             panel3.Name = "panel3";
-            panel3.Size = new Size(748, 35);
+            panel3.Size = new Size(789, 35);
             panel3.TabIndex = 10;
             // 
             // FatalLabel
@@ -283,7 +283,7 @@
             panel1.Location = new Point(0, 89);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(754, 20);
+            panel1.Size = new Size(795, 27);
             panel1.TabIndex = 9;
             // 
             // button1
@@ -297,7 +297,7 @@
             button1.Location = new Point(200, 0);
             button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
-            button1.Size = new Size(96, 20);
+            button1.Size = new Size(96, 27);
             button1.TabIndex = 4;
             button1.Text = "Reset";
             button1.UseVisualStyleBackColor = false;
@@ -310,7 +310,7 @@
             dateTimePicker1.Location = new Point(88, 0);
             dateTimePicker1.Margin = new Padding(3, 2, 3, 2);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(112, 23);
+            dateTimePicker1.Size = new Size(112, 27);
             dateTimePicker1.TabIndex = 1;
             dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
             // 
@@ -320,7 +320,7 @@
             label2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label2.Location = new Point(0, 0);
             label2.Name = "label2";
-            label2.Size = new Size(88, 20);
+            label2.Size = new Size(88, 27);
             label2.TabIndex = 0;
             label2.Text = "Select Date:";
             label2.TextAlign = ContentAlignment.MiddleCenter;
@@ -337,7 +337,7 @@
             Controls.Add(panel2);
             Margin = new Padding(3, 2, 3, 2);
             Name = "LogsDashboard";
-            Size = new Size(754, 392);
+            Size = new Size(795, 395);
             Load += LogsDashboard_Load;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();

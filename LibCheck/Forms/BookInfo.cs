@@ -1,6 +1,7 @@
 ﻿using LibCheck.Database.Tables;
 using LibCheck.Exceptions;
 using LibCheck.Modules;
+using LibCheck.Modules.Security;
 using Microsoft.VisualBasic;
 
 namespace LibCheck.Forms {
@@ -30,13 +31,11 @@ namespace LibCheck.Forms {
 
             if (book.IsLostOrDamaged) {
                 BorrowBookButton.Enabled = false;
-                MarkAsDamageButton.Text = "MarkRet";
                 OwnedLabel.Text = "This book is known lost or damaged.";
                 if (!string.IsNullOrWhiteSpace(book.StudentID) && !book.StudentID.Equals("(none)"))
                     OwnedLabel.Text += $" (Last owner: {book.StudentID})";
             } else {
                 BorrowBookButton.Enabled = true;
-                MarkAsDamageButton.Text = "MarkLDmg";
                 if (!string.IsNullOrWhiteSpace(book.StudentID) && !book.StudentID.Equals("(none)")) {
                     OwnedLabel.Text = $"Currently owned by '{book.StudentID}'";
                     if (DateTime.Now > book.DateToReturn)
@@ -50,8 +49,13 @@ namespace LibCheck.Forms {
             DatePubLabel.Text = $"Date Published: {book.DatePublished:MMMM dd, yyyy}";
             GenreLabel.Text = $"Genre: {book.Genre}";
             richTextBox1.Text = book.Description;
-            if (!string.IsNullOrWhiteSpace(book.ImagePath)) {
-                pictureBox1.Image = Image.FromFile($"{EnvVars.MainPath.FullName}\\book_images\\{book.ImagePath}");
+            string path = Path.Combine(EnvVars.BookImages.FullName, $"{Credentials.Librarian?.SchoolGUID}-{book.ISBN}.jpg");
+            if (File.Exists(path)) {
+                try {
+                    pictureBox1.Image = Image.FromFile(path);
+                } catch (Exception ex) {
+                    Logger.Log(Logger.LogEnums.Warn, $"Failed to load image. ({ex.Message})");
+                }
             }
             BorrowBookButton.Visible = !string.IsNullOrWhiteSpace(book.StudentID) && book.StudentID.Equals("(none)");
 

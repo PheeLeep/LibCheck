@@ -29,21 +29,21 @@
             panel2 = new Panel();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
-            ReturnBookButton = new Button();
             dataGridView1 = new DataGridView();
+            panel3 = new Panel();
+            ReturnBookButton = new Button();
             tabPage2 = new TabPage();
             EmailAddressLabel = new Label();
             DOBLabel = new Label();
             GenderLabel = new Label();
             LevelGradeSecLabel = new Label();
-            panel3 = new Panel();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            tabPage2.SuspendLayout();
             panel3.SuspendLayout();
+            tabPage2.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -87,7 +87,7 @@
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(0, 149);
             panel2.Name = "panel2";
-            panel2.Size = new Size(720, 361);
+            panel2.Size = new Size(720, 228);
             panel2.TabIndex = 2;
             // 
             // tabControl1
@@ -98,7 +98,7 @@
             tabControl1.Location = new Point(0, 0);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(720, 361);
+            tabControl1.Size = new Size(720, 228);
             tabControl1.TabIndex = 1;
             // 
             // tabPage1
@@ -108,23 +108,10 @@
             tabPage1.Location = new Point(4, 34);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(712, 323);
+            tabPage1.Size = new Size(712, 190);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Books Borrowed";
             tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // ReturnBookButton
-            // 
-            ReturnBookButton.BackColor = Color.Lime;
-            ReturnBookButton.Dock = DockStyle.Right;
-            ReturnBookButton.FlatStyle = FlatStyle.Flat;
-            ReturnBookButton.Location = new Point(470, 0);
-            ReturnBookButton.Name = "ReturnBookButton";
-            ReturnBookButton.Size = new Size(236, 32);
-            ReturnBookButton.TabIndex = 3;
-            ReturnBookButton.Text = "Return Book";
-            ReturnBookButton.UseVisualStyleBackColor = false;
-            ReturnBookButton.Click += ReturnBookButton_Click;
             // 
             // dataGridView1
             // 
@@ -141,8 +128,31 @@
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 62;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(706, 285);
+            dataGridView1.Size = new Size(706, 152);
             dataGridView1.TabIndex = 2;
+            // 
+            // panel3
+            // 
+            panel3.BackColor = Color.Navy;
+            panel3.Controls.Add(ReturnBookButton);
+            panel3.Dock = DockStyle.Top;
+            panel3.Location = new Point(3, 3);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(706, 32);
+            panel3.TabIndex = 3;
+            // 
+            // ReturnBookButton
+            // 
+            ReturnBookButton.BackColor = Color.Lime;
+            ReturnBookButton.Dock = DockStyle.Right;
+            ReturnBookButton.FlatStyle = FlatStyle.Flat;
+            ReturnBookButton.Location = new Point(530, 0);
+            ReturnBookButton.Name = "ReturnBookButton";
+            ReturnBookButton.Size = new Size(176, 32);
+            ReturnBookButton.TabIndex = 3;
+            ReturnBookButton.Text = "Return Book";
+            ReturnBookButton.UseVisualStyleBackColor = false;
+            ReturnBookButton.Click += ReturnBookButton_Click;
             // 
             // tabPage2
             // 
@@ -150,10 +160,10 @@
             tabPage2.Controls.Add(DOBLabel);
             tabPage2.Controls.Add(GenderLabel);
             tabPage2.Controls.Add(LevelGradeSecLabel);
-            tabPage2.Location = new Point(4, 29);
+            tabPage2.Location = new Point(4, 34);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(712, 328);
+            tabPage2.Size = new Size(712, 190);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Information";
             tabPage2.UseVisualStyleBackColor = true;
@@ -166,6 +176,7 @@
             EmailAddressLabel.Size = new Size(128, 25);
             EmailAddressLabel.TabIndex = 4;
             EmailAddressLabel.Text = "Email Address:";
+            EmailAddressLabel.DoubleClick += EmailAddressLabel_DoubleClick;
             // 
             // DOBLabel
             // 
@@ -194,21 +205,10 @@
             LevelGradeSecLabel.TabIndex = 2;
             LevelGradeSecLabel.Text = "Level, Grade and Section:";
             // 
-            // panel3
-            // 
-            panel3.BackColor = Color.Navy;
-            panel3.Controls.Add(ReturnBookButton);
-            panel3.Dock = DockStyle.Top;
-            panel3.Location = new Point(3, 3);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(706, 32);
-            panel3.TabIndex = 3;
-            // 
             // StudentInfo
             // 
-            AutoScaleDimensions = new SizeF(120F, 120F);
-            AutoScaleMode = AutoScaleMode.Dpi;
-            ClientSize = new Size(720, 510);
+            AutoScaleMode = AutoScaleMode.None;
+            ClientSize = new Size(720, 377);
             Controls.Add(panel2);
             Controls.Add(panel1);
             DoubleBuffered = true;
@@ -219,15 +219,16 @@
             Name = "StudentInfo";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "StudentInfo";
+            FormClosing += StudentInfo_FormClosing;
             Load += StudentInfo_Load;
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            panel3.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
-            panel3.ResumeLayout(false);
             ResumeLayout(false);
         }
 

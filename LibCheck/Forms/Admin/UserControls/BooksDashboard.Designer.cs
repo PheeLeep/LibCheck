@@ -25,6 +25,7 @@
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BooksDashboard));
             panel1 = new Panel();
+            SaveButton = new Button();
             SearchButton = new Button();
             PrintLabel = new Button();
             DeleteButton = new Button();
@@ -38,6 +39,7 @@
             CurrentlyBorrowedLabel = new Label();
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
+            saveFileDialog1 = new SaveFileDialog();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel2.SuspendLayout();
@@ -48,6 +50,7 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.ActiveCaption;
+            panel1.Controls.Add(SaveButton);
             panel1.Controls.Add(SearchButton);
             panel1.Controls.Add(PrintLabel);
             panel1.Controls.Add(DeleteButton);
@@ -59,6 +62,20 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(690, 40);
             panel1.TabIndex = 0;
+            // 
+            // SaveButton
+            // 
+            SaveButton.Dock = DockStyle.Right;
+            SaveButton.FlatAppearance.BorderSize = 0;
+            SaveButton.FlatStyle = FlatStyle.Flat;
+            SaveButton.Image = Properties.Resources.save_32px;
+            SaveButton.Location = new Point(558, 0);
+            SaveButton.Margin = new Padding(2);
+            SaveButton.Name = "SaveButton";
+            SaveButton.Size = new Size(44, 40);
+            SaveButton.TabIndex = 5;
+            SaveButton.UseVisualStyleBackColor = true;
+            SaveButton.Click += SaveButton_Click;
             // 
             // SearchButton
             // 
@@ -170,10 +187,10 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(295, 54);
+            label2.Location = new Point(304, 54);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(178, 19);
+            label2.Size = new Size(219, 23);
             label2.TabIndex = 2;
             label2.Text = "Overdue, Lost, or Damaged";
             // 
@@ -181,20 +198,20 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(85, 54);
+            label1.Location = new Point(91, 54);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(129, 19);
+            label1.Size = new Size(158, 23);
             label1.TabIndex = 2;
             label1.Text = "Currently Borrowed";
             // 
             // DamagedLabel
             // 
             DamagedLabel.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
-            DamagedLabel.Location = new Point(295, 18);
+            DamagedLabel.Location = new Point(303, 18);
             DamagedLabel.Margin = new Padding(2, 0, 2, 0);
             DamagedLabel.Name = "DamagedLabel";
-            DamagedLabel.Size = new Size(151, 36);
+            DamagedLabel.Size = new Size(148, 36);
             DamagedLabel.TabIndex = 1;
             DamagedLabel.Text = "0";
             DamagedLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -202,10 +219,10 @@
             // CurrentlyBorrowedLabel
             // 
             CurrentlyBorrowedLabel.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
-            CurrentlyBorrowedLabel.Location = new Point(85, 18);
+            CurrentlyBorrowedLabel.Location = new Point(93, 18);
             CurrentlyBorrowedLabel.Margin = new Padding(2, 0, 2, 0);
             CurrentlyBorrowedLabel.Name = "CurrentlyBorrowedLabel";
-            CurrentlyBorrowedLabel.Size = new Size(151, 36);
+            CurrentlyBorrowedLabel.Size = new Size(143, 36);
             CurrentlyBorrowedLabel.TabIndex = 1;
             CurrentlyBorrowedLabel.Text = "0";
             CurrentlyBorrowedLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -233,6 +250,10 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
+            // 
+            // saveFileDialog1
+            // 
+            saveFileDialog1.Filter = "Comma-separated values|*.csv";
             // 
             // BooksDashboard
             // 
@@ -268,6 +289,8 @@
         private PictureBox pictureBox2;
         private Label label2;
         private Label label1;
+        private Button SaveButton;
         private Button SearchButton;
+        private SaveFileDialog saveFileDialog1;
     }
 }

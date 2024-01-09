@@ -28,10 +28,10 @@
         }
 
         /// <summary>
-        /// A <see cref="DirectoryInfo"/> containing the crash logs folder.
+        /// A <see cref="DirectoryInfo"/> containing the book images folder.
         /// </summary>
-        internal static DirectoryInfo LogsDirectory {
-            get => new DirectoryInfo(Path.Combine(_mainPath, "logs"));
+        internal static DirectoryInfo BookImages {
+            get => new DirectoryInfo(Path.Combine(_mainPath, "book_images"));
         }
     }
 }

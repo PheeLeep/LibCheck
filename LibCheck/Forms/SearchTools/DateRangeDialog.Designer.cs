@@ -79,8 +79,7 @@
             // 
             // DateRangeDialog
             // 
-            AutoScaleDimensions = new SizeF(120F, 120F);
-            AutoScaleMode = AutoScaleMode.Dpi;
+            AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(454, 176);
             Controls.Add(button1);
             Controls.Add(ToDateTimePicker);

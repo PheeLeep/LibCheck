@@ -61,6 +61,12 @@ namespace LibCheck.Forms {
                         return;
                     }
                     break;
+                case Panel p when p.Name.Equals(LibEmailPanel.Name):
+                    if (string.IsNullOrEmpty(EmailTextBox.Text) || !Regexes.IsValidEmail(EmailTextBox.Text, out _)) {
+                        MessageBox.Show(this, "Invalid library email.", "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                        return;
+                    }
+                    break;
                 case Panel p when p.Name.Equals(BasicInfoPanel.Name):
                     if (!Regexes.IsValidAlphanumSpace(FNameTxtBox.Text)) {
                         MessageBox.Show(this, "Invalid first name.", "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
@@ -149,6 +155,7 @@ namespace LibCheck.Forms {
             nextPanels.Push(FinishPanel);
             nextPanels.Push(BasicInfoPanel);
             nextPanels.Push(PasswordPanel);
+            nextPanels.Push(LibEmailPanel);
             nextPanels.Push(UsernamePanel);
             nextPanels.Push(SchoolPanel);
         }

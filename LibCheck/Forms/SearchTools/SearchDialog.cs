@@ -24,17 +24,18 @@ namespace LibCheck.Forms.SearchTools {
         private bool isQRDetectionOngoing = false;
         private bool inSuspension = false;
         private readonly object _lock = new object();
-
+        private bool disableManual;
         internal SearchType Search { get; private set; }
 
         internal SearchType ResultSearchType { get; private set; }
         internal string Value { get; private set; } = string.Empty;
 
-        public SearchDialog(SearchType t, bool inModular) {
+        public SearchDialog(SearchType t, bool inModular, bool disableManual) {
             InitializeComponent();
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             Search = t;
             this.inModular = inModular;
+            this.disableManual = disableManual;
 
             if (inModular) {
                 ControlBox = false;
@@ -84,6 +85,13 @@ namespace LibCheck.Forms.SearchTools {
             InitializeSearchTypeUI();
 
             camComboBox.SelectedIndex = 0;
+
+            if (disableManual) {
+                linkLabel1.Dispose();
+                foreach (Control c in AltPanel.Controls)
+                    c.Dispose();
+                AltPanel.Dispose();
+            }
         }
 
         private void InitializeCameraComboBox() {

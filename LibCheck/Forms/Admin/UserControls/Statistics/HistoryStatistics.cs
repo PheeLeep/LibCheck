@@ -105,20 +105,7 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
                 try {
                     List<Records> specificRecord = (List<Records>)obj;
                     PleaseWait.SetPWDText("Saving...");
-                    using (StreamWriter sw = new StreamWriter(saveFileDialog1.FileName)) {
-                        sw.WriteLine("Date,ISBN,Student ID,Category,Additional Context");
-                        foreach (Records r in specificRecord) {
-                            sw.Write($"{r.DateOccurred:dd/MM/yyyy hh:mm:ss tt},");
-                            sw.Write($"{r.ISBN},");
-                            sw.Write($"{r.StudentID},");
-                            sw.Write($"{r.Category},");
-                            string? context = r.AdditionalContext;
-                            if (!string.IsNullOrWhiteSpace(context) && context.Contains(","))
-                                context = $"\"{context}\"";
-                            sw.WriteLine($"{context},");
-                        }
-                        sw.Flush();
-                    }
+                    Database.Database.ExportToCSV(specificRecord, saveFileDialog1.FileName);
                 } catch (Exception ex) {
                     MessageBox.Show(this, ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }

@@ -8,7 +8,7 @@ namespace LibCheck.Forms {
         public MainForm() {
             InitializeComponent();
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            searchDiag = new SearchDialog(SearchDialog.SearchType.All, true);
+            searchDiag = new SearchDialog(SearchDialog.SearchType.All, true, false);
         }
 
         protected override CreateParams CreateParams {

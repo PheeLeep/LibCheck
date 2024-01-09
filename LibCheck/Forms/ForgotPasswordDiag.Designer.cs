@@ -26,8 +26,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             retypePassTextBox = new TextBox();
             label2 = new Label();
             newPassTextBox = new TextBox();
@@ -42,7 +41,7 @@
             // 
             retypePassTextBox.Location = new Point(31, 300);
             retypePassTextBox.Name = "retypePassTextBox";
-            retypePassTextBox.Size = new Size(408, 36);
+            retypePassTextBox.Size = new Size(408, 31);
             retypePassTextBox.TabIndex = 20;
             retypePassTextBox.UseSystemPasswordChar = true;
             retypePassTextBox.TextChanged += passwordTextBoxes_TextChanged;
@@ -55,7 +54,7 @@
             label2.ForeColor = Color.White;
             label2.Location = new Point(31, 270);
             label2.Name = "label2";
-            label2.Size = new Size(216, 26);
+            label2.Size = new Size(180, 22);
             label2.TabIndex = 19;
             label2.Text = "Re-type Password:";
             // 
@@ -63,7 +62,7 @@
             // 
             newPassTextBox.Location = new Point(31, 227);
             newPassTextBox.Name = "newPassTextBox";
-            newPassTextBox.Size = new Size(408, 36);
+            newPassTextBox.Size = new Size(408, 31);
             newPassTextBox.TabIndex = 18;
             newPassTextBox.UseSystemPasswordChar = true;
             newPassTextBox.TextChanged += passwordTextBoxes_TextChanged;
@@ -76,7 +75,7 @@
             label1.ForeColor = Color.White;
             label1.Location = new Point(31, 197);
             label1.Name = "label1";
-            label1.Size = new Size(168, 26);
+            label1.Size = new Size(140, 22);
             label1.TabIndex = 17;
             label1.Text = "New Password:";
             // 
@@ -85,7 +84,7 @@
             recoveryTextBox.Location = new Point(207, 123);
             recoveryTextBox.MaxLength = 6;
             recoveryTextBox.Name = "recoveryTextBox";
-            recoveryTextBox.Size = new Size(172, 36);
+            recoveryTextBox.Size = new Size(172, 31);
             recoveryTextBox.TabIndex = 16;
             recoveryTextBox.TextAlign = HorizontalAlignment.Center;
             recoveryTextBox.TextChanged += passwordTextBoxes_TextChanged;
@@ -97,7 +96,7 @@
             label3.ForeColor = Color.White;
             label3.Location = new Point(31, 125);
             label3.Name = "label3";
-            label3.Size = new Size(165, 30);
+            label3.Size = new Size(134, 25);
             label3.TabIndex = 15;
             label3.Text = "Recovery Code:";
             // 
@@ -131,8 +130,7 @@
             // 
             // ForgotPasswordDiag
             // 
-            AutoScaleDimensions = new SizeF(144F, 144F);
-            AutoScaleMode = AutoScaleMode.Dpi;
+            AutoScaleMode = AutoScaleMode.None;
             BackColor = SystemColors.Control;
             BackgroundImage = Properties.Resources.bg;
             ClientSize = new Size(464, 414);

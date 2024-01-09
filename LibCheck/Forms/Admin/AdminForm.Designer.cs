@@ -29,7 +29,6 @@ namespace LibCheck.Forms
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminForm));
             SettingsButton = new Button();
             panel1 = new Panel();
@@ -46,21 +45,14 @@ namespace LibCheck.Forms
             studentsDashboard1 = new StudentsDashboard();
             panel2 = new Panel();
             StagePanel = new Panel();
+            statisticsDashboard1 = new StatisticsDashboard();
             emailDashboard1 = new EmailDashboard();
             logsDashboard1 = new LogsDashboard();
             panel3 = new Panel();
-            cMS1 = new ContextMenuStrip(components);
-            securityToolStripMenuItem = new ToolStripMenuItem();
-            changePasswordToolStripMenuItem = new ToolStripMenuItem();
-            accountRecoveryToolStripMenuItem = new ToolStripMenuItem();
-            toolStripSeparator1 = new ToolStripSeparator();
-            aboutToolStripMenuItem = new ToolStripMenuItem();
-            statisticsDashboard1 = new StatisticsDashboard();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             StagePanel.SuspendLayout();
             panel3.SuspendLayout();
-            cMS1.SuspendLayout();
             SuspendLayout();
             // 
             // SettingsButton
@@ -77,7 +69,7 @@ namespace LibCheck.Forms
             SettingsButton.Size = new Size(32, 32);
             SettingsButton.TabIndex = 2;
             SettingsButton.UseVisualStyleBackColor = false;
-            SettingsButton.MouseClick += SettingsButton_MouseClick;
+            SettingsButton.Click += SettingsButton_Click;
             // 
             // panel1
             // 
@@ -113,7 +105,6 @@ namespace LibCheck.Forms
             AccountRecoveryButton.TabIndex = 4;
             AccountRecoveryButton.Text = "Account Recovery";
             AccountRecoveryButton.UseVisualStyleBackColor = true;
-            AccountRecoveryButton.Click += AccountRecoveryButton_Click;
             // 
             // EmailsButton
             // 
@@ -220,6 +211,7 @@ namespace LibCheck.Forms
             // 
             booksDashboard1.Dock = DockStyle.Fill;
             booksDashboard1.Location = new Point(0, 0);
+            booksDashboard1.Margin = new Padding(2);
             booksDashboard1.Name = "booksDashboard1";
             booksDashboard1.Size = new Size(860, 521);
             booksDashboard1.TabIndex = 1;
@@ -228,6 +220,7 @@ namespace LibCheck.Forms
             // 
             studentsDashboard1.Dock = DockStyle.Fill;
             studentsDashboard1.Location = new Point(0, 0);
+            studentsDashboard1.Margin = new Padding(2);
             studentsDashboard1.Name = "studentsDashboard1";
             studentsDashboard1.Size = new Size(860, 521);
             studentsDashboard1.TabIndex = 2;
@@ -256,10 +249,21 @@ namespace LibCheck.Forms
             StagePanel.Size = new Size(860, 521);
             StagePanel.TabIndex = 4;
             // 
+            // statisticsDashboard1
+            // 
+            statisticsDashboard1.BackColor = SystemColors.ActiveCaption;
+            statisticsDashboard1.Dock = DockStyle.Fill;
+            statisticsDashboard1.Location = new Point(0, 0);
+            statisticsDashboard1.Margin = new Padding(3, 2, 3, 2);
+            statisticsDashboard1.Name = "statisticsDashboard1";
+            statisticsDashboard1.Size = new Size(860, 521);
+            statisticsDashboard1.TabIndex = 6;
+            // 
             // emailDashboard1
             // 
             emailDashboard1.Dock = DockStyle.Fill;
             emailDashboard1.Location = new Point(0, 0);
+            emailDashboard1.Margin = new Padding(2);
             emailDashboard1.Name = "emailDashboard1";
             emailDashboard1.Size = new Size(860, 521);
             emailDashboard1.TabIndex = 5;
@@ -268,6 +272,7 @@ namespace LibCheck.Forms
             // 
             logsDashboard1.Dock = DockStyle.Fill;
             logsDashboard1.Location = new Point(0, 0);
+            logsDashboard1.Margin = new Padding(3, 2, 3, 2);
             logsDashboard1.Name = "logsDashboard1";
             logsDashboard1.Size = new Size(860, 521);
             logsDashboard1.TabIndex = 4;
@@ -286,58 +291,9 @@ namespace LibCheck.Forms
             panel3.Size = new Size(242, 521);
             panel3.TabIndex = 4;
             // 
-            // cMS1
-            // 
-            cMS1.ImageScalingSize = new Size(20, 20);
-            cMS1.Items.AddRange(new ToolStripItem[] { securityToolStripMenuItem, toolStripSeparator1, aboutToolStripMenuItem });
-            cMS1.Name = "contextMenuStrip1";
-            cMS1.Size = new Size(131, 58);
-            // 
-            // securityToolStripMenuItem
-            // 
-            securityToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { changePasswordToolStripMenuItem, accountRecoveryToolStripMenuItem });
-            securityToolStripMenuItem.Name = "securityToolStripMenuItem";
-            securityToolStripMenuItem.Size = new Size(130, 24);
-            securityToolStripMenuItem.Text = "Security";
-            // 
-            // changePasswordToolStripMenuItem
-            // 
-            changePasswordToolStripMenuItem.Name = "changePasswordToolStripMenuItem";
-            changePasswordToolStripMenuItem.Size = new Size(210, 26);
-            changePasswordToolStripMenuItem.Text = "Change Password";
-            changePasswordToolStripMenuItem.Click += changePasswordToolStripMenuItem_Click;
-            // 
-            // accountRecoveryToolStripMenuItem
-            // 
-            accountRecoveryToolStripMenuItem.Name = "accountRecoveryToolStripMenuItem";
-            accountRecoveryToolStripMenuItem.Size = new Size(210, 26);
-            accountRecoveryToolStripMenuItem.Text = "Account Recovery";
-            accountRecoveryToolStripMenuItem.Click += accountRecoveryToolStripMenuItem_Click;
-            // 
-            // toolStripSeparator1
-            // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(127, 6);
-            // 
-            // aboutToolStripMenuItem
-            // 
-            aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(130, 24);
-            aboutToolStripMenuItem.Text = "About";
-            // 
-            // statisticsDashboard1
-            // 
-            statisticsDashboard1.BackColor = SystemColors.ActiveCaption;
-            statisticsDashboard1.Dock = DockStyle.Fill;
-            statisticsDashboard1.Location = new Point(0, 0);
-            statisticsDashboard1.Name = "statisticsDashboard1";
-            statisticsDashboard1.Size = new Size(860, 521);
-            statisticsDashboard1.TabIndex = 6;
-            // 
             // AdminForm
             // 
-            AutoScaleDimensions = new SizeF(120F, 120F);
-            AutoScaleMode = AutoScaleMode.Dpi;
+            AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(1102, 623);
             Controls.Add(panel2);
             Controls.Add(panel1);
@@ -345,7 +301,7 @@ namespace LibCheck.Forms
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "AdminForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Admin Mode";
+            Text = "Librarian Mode | LibCheck";
             FormClosing += AdminForm_FormClosing;
             Load += AdminForm_Load;
             panel1.ResumeLayout(false);
@@ -353,7 +309,6 @@ namespace LibCheck.Forms
             panel2.ResumeLayout(false);
             StagePanel.ResumeLayout(false);
             panel3.ResumeLayout(false);
-            cMS1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -375,13 +330,7 @@ namespace LibCheck.Forms
         private Panel panel3;
         private Button AccountRecoveryButton;
         private Admin.UserControls.StudentsDashboard studentsDashboard1;
-        private ContextMenuStrip cMS1;
-        private ToolStripMenuItem securityToolStripMenuItem;
-        private ToolStripMenuItem changePasswordToolStripMenuItem;
-        private ToolStripMenuItem accountRecoveryToolStripMenuItem;
         private EmailDashboard emailDashboard1;
-        private ToolStripSeparator toolStripSeparator1;
-        private ToolStripMenuItem aboutToolStripMenuItem;
         private LogsDashboard logsDashboard1;
         private StatisticsDashboard statisticsDashboard1;
     }

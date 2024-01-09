@@ -15,7 +15,8 @@ namespace LibCheck.Forms.SearchTools.UserControls {
         }
 
         private void BrowseButton_Click(object sender, EventArgs e) {
-            using (SearchDialog sd = new SearchDialog(BookRB.Checked ? SearchDialog.SearchType.Book : SearchDialog.SearchType.Student, false)) {
+            using (SearchDialog sd = new SearchDialog(BookRB.Checked ? SearchDialog.SearchType.Book : SearchDialog.SearchType.Student,
+                                                        false, true)) {
                 sd.ShowDialog(this);
                 if (string.IsNullOrWhiteSpace(sd.Value))
                     return;

@@ -1,6 +1,4 @@
-﻿using LibCheck.Database.Tables;
-using LibCheck.Modules;
-using System.Text;
+﻿using System.Text;
 
 namespace LibCheck.Forms.SearchTools.UserControls {
     public partial class BooksSearchUC : UserControl {
@@ -13,7 +11,7 @@ namespace LibCheck.Forms.SearchTools.UserControls {
         private void BrowseButton_Click(object sender, EventArgs e) {
             if (!IsbnRB.Checked)
                 return;
-            using (SearchDialog sd = new SearchDialog(SearchDialog.SearchType.Book, false)) {
+            using (SearchDialog sd = new SearchDialog(SearchDialog.SearchType.Book, false, true)) {
                 sd.ShowDialog(this);
                 if (string.IsNullOrWhiteSpace(sd.Value))
                     return;

@@ -26,8 +26,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             groupBox1 = new GroupBox();
             SubjectTextBox = new TextBox();
             ToComboxBox = new ComboBox();
@@ -64,7 +63,7 @@
             SubjectTextBox.Location = new Point(158, 78);
             SubjectTextBox.Margin = new Padding(4);
             SubjectTextBox.Name = "SubjectTextBox";
-            SubjectTextBox.Size = new Size(393, 29);
+            SubjectTextBox.Size = new Size(393, 25);
             SubjectTextBox.TabIndex = 2;
             // 
             // ToComboxBox
@@ -74,7 +73,7 @@
             ToComboxBox.Location = new Point(158, 40);
             ToComboxBox.Margin = new Padding(4);
             ToComboxBox.Name = "ToComboxBox";
-            ToComboxBox.Size = new Size(393, 30);
+            ToComboxBox.Size = new Size(393, 26);
             ToComboxBox.TabIndex = 1;
             // 
             // label2
@@ -83,7 +82,7 @@
             label2.Location = new Point(55, 81);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(90, 22);
+            label2.Size = new Size(72, 18);
             label2.TabIndex = 0;
             label2.Text = "Subject:";
             // 
@@ -93,7 +92,7 @@
             label1.Location = new Point(55, 44);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(40, 22);
+            label1.Size = new Size(32, 18);
             label1.TabIndex = 0;
             label1.Text = "To:";
             // 
@@ -105,7 +104,7 @@
             groupBox2.Margin = new Padding(4);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(4);
-            groupBox2.Size = new Size(581, 345);
+            groupBox2.Size = new Size(581, 218);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Text = "Text";
@@ -113,10 +112,10 @@
             // BodyTextBox
             // 
             BodyTextBox.Dock = DockStyle.Fill;
-            BodyTextBox.Location = new Point(4, 26);
+            BodyTextBox.Location = new Point(4, 22);
             BodyTextBox.Margin = new Padding(4);
             BodyTextBox.Name = "BodyTextBox";
-            BodyTextBox.Size = new Size(573, 315);
+            BodyTextBox.Size = new Size(573, 192);
             BodyTextBox.TabIndex = 1;
             BodyTextBox.Text = "";
             // 
@@ -125,7 +124,7 @@
             panel1.BackColor = SystemColors.ButtonFace;
             panel1.Controls.Add(ComposeBtn);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 478);
+            panel1.Location = new Point(0, 351);
             panel1.Margin = new Padding(4);
             panel1.Name = "panel1";
             panel1.Size = new Size(581, 67);
@@ -134,6 +133,7 @@
             // ComposeBtn
             // 
             ComposeBtn.BackColor = Color.DodgerBlue;
+            ComposeBtn.FlatStyle = FlatStyle.Flat;
             ComposeBtn.ForeColor = Color.White;
             ComposeBtn.Location = new Point(434, 18);
             ComposeBtn.Margin = new Padding(4);
@@ -146,9 +146,8 @@
             // 
             // ComposeDiag
             // 
-            AutoScaleDimensions = new SizeF(10F, 22F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(581, 545);
+            AutoScaleMode = AutoScaleMode.None;
+            ClientSize = new Size(581, 418);
             Controls.Add(groupBox2);
             Controls.Add(panel1);
             Controls.Add(groupBox1);

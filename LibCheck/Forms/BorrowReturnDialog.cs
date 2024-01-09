@@ -114,7 +114,7 @@ namespace LibCheck.Forms {
         private void AcquireData(SearchDialog.SearchType t) {
             if (t == SearchDialog.SearchType.All)
                 return;
-            using (SearchDialog sd = new SearchDialog(t, false)) {
+            using (SearchDialog sd = new SearchDialog(t, false, true)) {
                 sd.ShowDialog(this);
                 if (string.IsNullOrWhiteSpace(sd.Value))
                     return;

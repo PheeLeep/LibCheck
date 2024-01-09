@@ -1,5 +1,4 @@
-﻿using LibCheck.Modules;
-using System.Text;
+﻿using System.Text;
 
 namespace LibCheck.Forms.SearchTools.UserControls {
     public partial class StudentsSearchUC : UserControl {
@@ -18,7 +17,7 @@ namespace LibCheck.Forms.SearchTools.UserControls {
         private void ScanButton_Click(object sender, EventArgs e) {
             if (!StudentIDRB.Checked)
                 return;
-            using (SearchDialog sd = new SearchDialog(SearchDialog.SearchType.Student, false)) {
+            using (SearchDialog sd = new SearchDialog(SearchDialog.SearchType.Student, false, true)) {
                 sd.ShowDialog(this);
                 if (string.IsNullOrWhiteSpace(sd.Value))
                     return;

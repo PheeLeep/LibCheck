@@ -231,7 +231,7 @@
             // StudentsSearchUC
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
-            AutoScaleMode = AutoScaleMode.Dpi;
+            AutoScaleMode = AutoScaleMode.None;
             Controls.Add(groupBox1);
             Controls.Add(groupBox2);
             Controls.Add(groupBox3);

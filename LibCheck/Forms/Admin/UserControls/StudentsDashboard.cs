@@ -1,6 +1,6 @@
 ﻿using LibCheck.Database.Tables;
-using LibCheck.Forms.SearchTools.UserControls;
 using LibCheck.Forms.SearchTools;
+using LibCheck.Forms.SearchTools.UserControls;
 using LibCheck.Modules;
 using LibCheck.Modules.Security;
 
@@ -72,7 +72,7 @@ namespace LibCheck.Forms.Admin.UserControls {
                 string? id = dataGridView1.SelectedRows[0].Cells["StudentID"].Value.ToString();
                 if (string.IsNullOrWhiteSpace(id))
                     return;
-                if (Database.Database.Read<Books>(out _, whereCond: $"StudentID = {id}") > 0) {
+                if (Database.Database.Read<Books>(out _, whereCond: $"StudentID = '{id}'") > 0) {
                     Logger.Log(Logger.LogEnums.Error, $"Couldn't delete. There are remaining borrowed books.");
                     MessageBox.Show(this, $"Student {id} has some books that are currently borrowed.",
                                     "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
@@ -204,6 +204,25 @@ namespace LibCheck.Forms.Admin.UserControls {
                  && specRecords != null) {
                 dataGridView1.DataSource = specRecords;
             }
+        }
+
+        private void SaveButton_Click(object sender, EventArgs e) {
+            if (Modules.AppContext.Current.MainForm == null)
+                return;
+            object? obj = dataGridView1.DataSource;
+            if (obj == null)
+                return;
+            if (saveFileDialog1.ShowDialog(this) != DialogResult.OK)
+                return;
+            PleaseWait.RunInPleaseWait(Modules.AppContext.Current.MainForm, new Action(() => {
+                try {
+                    List<Students> specificRecord = (List<Students>)obj;
+                    PleaseWait.SetPWDText("Saving...");
+                    Database.Database.ExportToCSV(specificRecord, saveFileDialog1.FileName);
+                } catch (Exception ex) {
+                    MessageBox.Show(this, ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                }
+            }));
         }
     }
 }

@@ -59,7 +59,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(816, 230);
+            panel1.Size = new Size(639, 230);
             panel1.TabIndex = 0;
             // 
             // TitleLabel
@@ -69,7 +69,7 @@
             TitleLabel.ForeColor = Color.White;
             TitleLabel.Location = new Point(161, 0);
             TitleLabel.Name = "TitleLabel";
-            TitleLabel.Size = new Size(655, 148);
+            TitleLabel.Size = new Size(478, 126);
             TitleLabel.TabIndex = 1;
             TitleLabel.Text = "---";
             TitleLabel.TextAlign = ContentAlignment.BottomLeft;
@@ -79,9 +79,9 @@
             OwnedLabel.Dock = DockStyle.Bottom;
             OwnedLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             OwnedLabel.ForeColor = Color.White;
-            OwnedLabel.Location = new Point(161, 148);
+            OwnedLabel.Location = new Point(161, 126);
             OwnedLabel.Name = "OwnedLabel";
-            OwnedLabel.Size = new Size(655, 42);
+            OwnedLabel.Size = new Size(478, 42);
             OwnedLabel.TabIndex = 0;
             OwnedLabel.Text = "---";
             OwnedLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -92,9 +92,9 @@
             panel3.Controls.Add(BorrowBookButton);
             panel3.Controls.Add(MarkAsDamageButton);
             panel3.Dock = DockStyle.Bottom;
-            panel3.Location = new Point(161, 190);
+            panel3.Location = new Point(161, 168);
             panel3.Name = "panel3";
-            panel3.Size = new Size(655, 40);
+            panel3.Size = new Size(478, 62);
             panel3.TabIndex = 2;
             // 
             // BorrowBookButton
@@ -102,11 +102,11 @@
             BorrowBookButton.BackColor = Color.Lime;
             BorrowBookButton.Dock = DockStyle.Right;
             BorrowBookButton.FlatStyle = FlatStyle.Flat;
-            BorrowBookButton.Location = new Point(467, 0);
+            BorrowBookButton.Image = Properties.Resources.icons8_book_borrowed_45;
+            BorrowBookButton.Location = new Point(290, 0);
             BorrowBookButton.Name = "BorrowBookButton";
-            BorrowBookButton.Size = new Size(94, 40);
+            BorrowBookButton.Size = new Size(94, 62);
             BorrowBookButton.TabIndex = 0;
-            BorrowBookButton.Text = "Borrow";
             BorrowBookButton.UseVisualStyleBackColor = false;
             BorrowBookButton.Click += BorrowBookButton_Click;
             // 
@@ -116,11 +116,11 @@
             MarkAsDamageButton.Dock = DockStyle.Right;
             MarkAsDamageButton.FlatStyle = FlatStyle.Flat;
             MarkAsDamageButton.ForeColor = Color.White;
-            MarkAsDamageButton.Location = new Point(561, 0);
+            MarkAsDamageButton.Image = Properties.Resources.icons8_book_damage_45;
+            MarkAsDamageButton.Location = new Point(384, 0);
             MarkAsDamageButton.Name = "MarkAsDamageButton";
-            MarkAsDamageButton.Size = new Size(94, 40);
+            MarkAsDamageButton.Size = new Size(94, 62);
             MarkAsDamageButton.TabIndex = 2;
-            MarkAsDamageButton.Text = "Damage";
             MarkAsDamageButton.UseVisualStyleBackColor = false;
             MarkAsDamageButton.Click += MarkAsDamageButton_Click;
             // 
@@ -140,7 +140,7 @@
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(0, 230);
             panel2.Name = "panel2";
-            panel2.Size = new Size(816, 373);
+            panel2.Size = new Size(639, 247);
             panel2.TabIndex = 0;
             // 
             // tabControl1
@@ -151,16 +151,16 @@
             tabControl1.Location = new Point(0, 0);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(816, 373);
+            tabControl1.Size = new Size(639, 247);
             tabControl1.TabIndex = 1;
             // 
             // tabPage1
             // 
             tabPage1.Controls.Add(richTextBox1);
-            tabPage1.Location = new Point(4, 28);
+            tabPage1.Location = new Point(4, 34);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(808, 341);
+            tabPage1.Size = new Size(631, 209);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Description";
             tabPage1.UseVisualStyleBackColor = true;
@@ -171,7 +171,7 @@
             richTextBox1.Location = new Point(3, 3);
             richTextBox1.Name = "richTextBox1";
             richTextBox1.ReadOnly = true;
-            richTextBox1.Size = new Size(802, 335);
+            richTextBox1.Size = new Size(625, 203);
             richTextBox1.TabIndex = 0;
             richTextBox1.Text = "";
             // 
@@ -182,10 +182,10 @@
             tabPage2.Controls.Add(ISBNLabel);
             tabPage2.Controls.Add(AuthorLabel);
             tabPage2.Controls.Add(PublisherLabel);
-            tabPage2.Location = new Point(4, 24);
+            tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(808, 345);
+            tabPage2.Size = new Size(631, 214);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Information";
             tabPage2.UseVisualStyleBackColor = true;
@@ -195,7 +195,7 @@
             GenreLabel.AutoSize = true;
             GenreLabel.Location = new Point(35, 156);
             GenreLabel.Name = "GenreLabel";
-            GenreLabel.Size = new Size(51, 20);
+            GenreLabel.Size = new Size(62, 25);
             GenreLabel.TabIndex = 5;
             GenreLabel.Text = "Genre:";
             // 
@@ -204,7 +204,7 @@
             DatePubLabel.AutoSize = true;
             DatePubLabel.Location = new Point(35, 127);
             DatePubLabel.Name = "DatePubLabel";
-            DatePubLabel.Size = new Size(112, 20);
+            DatePubLabel.Size = new Size(135, 25);
             DatePubLabel.TabIndex = 4;
             DatePubLabel.Text = "Date Published:";
             // 
@@ -213,7 +213,7 @@
             ISBNLabel.AutoSize = true;
             ISBNLabel.Location = new Point(35, 32);
             ISBNLabel.Name = "ISBNLabel";
-            ISBNLabel.Size = new Size(44, 20);
+            ISBNLabel.Size = new Size(54, 25);
             ISBNLabel.TabIndex = 3;
             ISBNLabel.Text = "ISBN:";
             // 
@@ -222,7 +222,7 @@
             AuthorLabel.AutoSize = true;
             AuthorLabel.Location = new Point(35, 64);
             AuthorLabel.Name = "AuthorLabel";
-            AuthorLabel.Size = new Size(73, 20);
+            AuthorLabel.Size = new Size(91, 25);
             AuthorLabel.TabIndex = 1;
             AuthorLabel.Text = "Author/s: ";
             // 
@@ -231,15 +231,14 @@
             PublisherLabel.AutoSize = true;
             PublisherLabel.Location = new Point(35, 96);
             PublisherLabel.Name = "PublisherLabel";
-            PublisherLabel.Size = new Size(72, 20);
+            PublisherLabel.Size = new Size(88, 25);
             PublisherLabel.TabIndex = 2;
             PublisherLabel.Text = "Publisher:";
             // 
             // BookInfo
             // 
-            AutoScaleDimensions = new SizeF(96F, 96F);
-            AutoScaleMode = AutoScaleMode.Dpi;
-            ClientSize = new Size(816, 603);
+            AutoScaleMode = AutoScaleMode.None;
+            ClientSize = new Size(639, 477);
             Controls.Add(panel2);
             Controls.Add(panel1);
             DoubleBuffered = true;

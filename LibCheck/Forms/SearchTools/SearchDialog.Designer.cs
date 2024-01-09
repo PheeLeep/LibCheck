@@ -260,8 +260,7 @@
             // 
             // SearchDialog
             // 
-            AutoScaleDimensions = new SizeF(120F, 120F);
-            AutoScaleMode = AutoScaleMode.Dpi;
+            AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.Blue;
             ClientSize = new Size(866, 468);
             Controls.Add(doubleBufferedPanel4);

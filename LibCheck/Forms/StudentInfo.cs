@@ -1,11 +1,13 @@
 ﻿using LibCheck.Database.Tables;
 using LibCheck.Exceptions;
+using LibCheck.Forms.Admin;
 using LibCheck.Modules;
 
 namespace LibCheck.Forms {
     public partial class StudentInfo : Form {
         private readonly Students student;
 
+        private ComposeDiag? _diag;
         public StudentInfo(string studentID) {
             InitializeComponent();
             if (string.IsNullOrWhiteSpace(studentID) ||
@@ -77,6 +79,30 @@ namespace LibCheck.Forms {
             } catch (Exception ex) {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void EmailAddressLabel_DoubleClick(object sender, EventArgs e) {
+            if (_diag != null) {
+                _diag.BringToFront();
+                _diag.WindowState = FormWindowState.Normal;
+                _diag.Focus();
+                return;
+            }
+            if (!Modules.AppContext.Auth() || MessageBox.Show(this, "Please use this feature responsibly! " +
+                                                            "This will record what you're typing and unable to delete!", "",
+                                                            MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+                return;
+
+            _diag = new ComposeDiag();
+            _diag.FormClosed += (g, e) => {
+                _diag = null;
+            };
+            _diag.Show();
+        }
+
+        private void StudentInfo_FormClosing(object sender, FormClosingEventArgs e) {
+            if (_diag != null)
+                _diag.Close();
         }
     }
 }

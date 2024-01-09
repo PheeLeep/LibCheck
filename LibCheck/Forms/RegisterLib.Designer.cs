@@ -29,6 +29,18 @@
             PrevButton = new Button();
             NextButton = new Button();
             StagePanel = new Panel();
+            LibEmailPanel = new Panel();
+            EmailTextBox = new TextBox();
+            label7 = new Label();
+            label20 = new Label();
+            PasswordPanel = new Panel();
+            label19 = new Label();
+            passReTypeTxtBox = new TextBox();
+            label18 = new Label();
+            ShowPassButton = new Button();
+            passTxtBox = new TextBox();
+            label5 = new Label();
+            label6 = new Label();
             BasicInfoPanel = new Panel();
             label15 = new Label();
             BDatePicker = new DateTimePicker();
@@ -42,14 +54,6 @@
             FNameTxtBox = new TextBox();
             label9 = new Label();
             label10 = new Label();
-            PasswordPanel = new Panel();
-            label19 = new Label();
-            passReTypeTxtBox = new TextBox();
-            label18 = new Label();
-            ShowPassButton = new Button();
-            passTxtBox = new TextBox();
-            label5 = new Label();
-            label6 = new Label();
             FinishPanel = new Panel();
             label16 = new Label();
             label17 = new Label();
@@ -65,8 +69,9 @@
             label1 = new Label();
             LowerPanel.SuspendLayout();
             StagePanel.SuspendLayout();
-            BasicInfoPanel.SuspendLayout();
+            LibEmailPanel.SuspendLayout();
             PasswordPanel.SuspendLayout();
+            BasicInfoPanel.SuspendLayout();
             FinishPanel.SuspendLayout();
             UsernamePanel.SuspendLayout();
             SchoolPanel.SuspendLayout();
@@ -91,7 +96,7 @@
             DescLabel.AutoSize = true;
             DescLabel.Location = new Point(27, 47);
             DescLabel.Name = "DescLabel";
-            DescLabel.Size = new Size(64, 18);
+            DescLabel.Size = new Size(80, 22);
             DescLabel.TabIndex = 3;
             DescLabel.Text = "Welcome";
             // 
@@ -100,7 +105,7 @@
             BulletProgressLabel.AutoSize = true;
             BulletProgressLabel.Location = new Point(27, 22);
             BulletProgressLabel.Name = "BulletProgressLabel";
-            BulletProgressLabel.Size = new Size(16, 18);
+            BulletProgressLabel.Size = new Size(20, 22);
             BulletProgressLabel.TabIndex = 2;
             BulletProgressLabel.Text = "•";
             // 
@@ -138,8 +143,9 @@
             // StagePanel
             // 
             StagePanel.BackgroundImage = Properties.Resources.bg;
-            StagePanel.Controls.Add(BasicInfoPanel);
+            StagePanel.Controls.Add(LibEmailPanel);
             StagePanel.Controls.Add(PasswordPanel);
+            StagePanel.Controls.Add(BasicInfoPanel);
             StagePanel.Controls.Add(FinishPanel);
             StagePanel.Controls.Add(UsernamePanel);
             StagePanel.Controls.Add(SchoolPanel);
@@ -149,6 +155,133 @@
             StagePanel.Name = "StagePanel";
             StagePanel.Size = new Size(833, 389);
             StagePanel.TabIndex = 1;
+            // 
+            // LibEmailPanel
+            // 
+            LibEmailPanel.BackColor = Color.Transparent;
+            LibEmailPanel.Controls.Add(EmailTextBox);
+            LibEmailPanel.Controls.Add(label7);
+            LibEmailPanel.Controls.Add(label20);
+            LibEmailPanel.Dock = DockStyle.Fill;
+            LibEmailPanel.Location = new Point(0, 0);
+            LibEmailPanel.Name = "LibEmailPanel";
+            LibEmailPanel.Size = new Size(833, 389);
+            LibEmailPanel.TabIndex = 7;
+            LibEmailPanel.Tag = "Email";
+            // 
+            // EmailTextBox
+            // 
+            EmailTextBox.Location = new Point(90, 158);
+            EmailTextBox.MaxLength = 64;
+            EmailTextBox.Name = "EmailTextBox";
+            EmailTextBox.Size = new Size(550, 29);
+            EmailTextBox.TabIndex = 2;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(51, 92);
+            label7.Name = "label7";
+            label7.Size = new Size(500, 22);
+            label7.TabIndex = 1;
+            label7.Text = "Make sure the email you're using is recognizable.";
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            label20.Location = new Point(45, 39);
+            label20.Name = "label20";
+            label20.Size = new Size(341, 41);
+            label20.TabIndex = 0;
+            label20.Text = "Setup the Library's Email";
+            // 
+            // PasswordPanel
+            // 
+            PasswordPanel.BackColor = Color.Transparent;
+            PasswordPanel.Controls.Add(label19);
+            PasswordPanel.Controls.Add(passReTypeTxtBox);
+            PasswordPanel.Controls.Add(label18);
+            PasswordPanel.Controls.Add(ShowPassButton);
+            PasswordPanel.Controls.Add(passTxtBox);
+            PasswordPanel.Controls.Add(label5);
+            PasswordPanel.Controls.Add(label6);
+            PasswordPanel.Dock = DockStyle.Fill;
+            PasswordPanel.Location = new Point(0, 0);
+            PasswordPanel.Name = "PasswordPanel";
+            PasswordPanel.Size = new Size(833, 389);
+            PasswordPanel.TabIndex = 2;
+            PasswordPanel.Tag = "Setup Password";
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Location = new Point(90, 230);
+            label19.Name = "label19";
+            label19.Size = new Size(220, 22);
+            label19.TabIndex = 6;
+            label19.Text = "Re-type New Password:";
+            // 
+            // passReTypeTxtBox
+            // 
+            passReTypeTxtBox.Location = new Point(90, 258);
+            passReTypeTxtBox.MaxLength = 64;
+            passReTypeTxtBox.Name = "passReTypeTxtBox";
+            passReTypeTxtBox.Size = new Size(550, 29);
+            passReTypeTxtBox.TabIndex = 5;
+            passReTypeTxtBox.UseSystemPasswordChar = true;
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Location = new Point(90, 153);
+            label18.Name = "label18";
+            label18.Size = new Size(140, 22);
+            label18.TabIndex = 4;
+            label18.Text = "New Password:";
+            // 
+            // ShowPassButton
+            // 
+            ShowPassButton.BackColor = SystemColors.ScrollBar;
+            ShowPassButton.FlatAppearance.BorderSize = 0;
+            ShowPassButton.FlatStyle = FlatStyle.Flat;
+            ShowPassButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            ShowPassButton.Image = Properties.Resources.Reg_ShowPass;
+            ShowPassButton.Location = new Point(651, 181);
+            ShowPassButton.Name = "ShowPassButton";
+            ShowPassButton.Size = new Size(50, 32);
+            ShowPassButton.TabIndex = 3;
+            ShowPassButton.UseVisualStyleBackColor = false;
+            ShowPassButton.MouseDown += ShowPassButton_MouseDown;
+            ShowPassButton.MouseUp += ShowPassButton_MouseUp;
+            // 
+            // passTxtBox
+            // 
+            passTxtBox.Location = new Point(90, 181);
+            passTxtBox.MaxLength = 64;
+            passTxtBox.Name = "passTxtBox";
+            passTxtBox.Size = new Size(550, 29);
+            passTxtBox.TabIndex = 2;
+            passTxtBox.UseSystemPasswordChar = true;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(51, 92);
+            label5.Name = "label5";
+            label5.Size = new Size(540, 22);
+            label5.TabIndex = 1;
+            label5.Text = "Setup your password. (at least 8 characters required)";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.Location = new Point(45, 39);
+            label6.Name = "label6";
+            label6.Size = new Size(295, 41);
+            label6.TabIndex = 0;
+            label6.Text = "Setup Your Password";
             // 
             // BasicInfoPanel
             // 
@@ -178,16 +311,16 @@
             label15.BackColor = Color.Transparent;
             label15.Location = new Point(297, 214);
             label15.Name = "label15";
-            label15.Size = new Size(96, 18);
+            label15.Size = new Size(80, 22);
             label15.TabIndex = 12;
-            label15.Text = "Birth Date:";
+            label15.Text = "Gender:";
             // 
             // BDatePicker
             // 
             BDatePicker.Format = DateTimePickerFormat.Short;
             BDatePicker.Location = new Point(51, 242);
             BDatePicker.Name = "BDatePicker";
-            BDatePicker.Size = new Size(240, 25);
+            BDatePicker.Size = new Size(240, 29);
             BDatePicker.TabIndex = 11;
             // 
             // GenderCBox
@@ -197,7 +330,7 @@
             GenderCBox.Items.AddRange(new object[] { "Male", "Female" });
             GenderCBox.Location = new Point(297, 244);
             GenderCBox.Name = "GenderCBox";
-            GenderCBox.Size = new Size(240, 26);
+            GenderCBox.Size = new Size(240, 30);
             GenderCBox.TabIndex = 10;
             // 
             // label14
@@ -206,7 +339,7 @@
             label14.BackColor = Color.Transparent;
             label14.Location = new Point(51, 214);
             label14.Name = "label14";
-            label14.Size = new Size(96, 18);
+            label14.Size = new Size(120, 22);
             label14.TabIndex = 9;
             label14.Text = "Birth Date:";
             // 
@@ -216,7 +349,7 @@
             label13.BackColor = Color.Transparent;
             label13.Location = new Point(543, 141);
             label13.Name = "label13";
-            label13.Size = new Size(176, 18);
+            label13.Size = new Size(220, 22);
             label13.TabIndex = 7;
             label13.Text = "Last Name (Required):";
             // 
@@ -224,7 +357,7 @@
             // 
             LNameTxtBox.Location = new Point(543, 169);
             LNameTxtBox.Name = "LNameTxtBox";
-            LNameTxtBox.Size = new Size(240, 25);
+            LNameTxtBox.Size = new Size(240, 29);
             LNameTxtBox.TabIndex = 6;
             // 
             // label12
@@ -233,7 +366,7 @@
             label12.BackColor = Color.Transparent;
             label12.Location = new Point(297, 141);
             label12.Name = "label12";
-            label12.Size = new Size(104, 18);
+            label12.Size = new Size(130, 22);
             label12.TabIndex = 5;
             label12.Text = "Middle Name:";
             // 
@@ -241,7 +374,7 @@
             // 
             MNameTxtBox.Location = new Point(297, 169);
             MNameTxtBox.Name = "MNameTxtBox";
-            MNameTxtBox.Size = new Size(240, 25);
+            MNameTxtBox.Size = new Size(240, 29);
             MNameTxtBox.TabIndex = 4;
             // 
             // label11
@@ -250,7 +383,7 @@
             label11.BackColor = Color.Transparent;
             label11.Location = new Point(48, 141);
             label11.Name = "label11";
-            label11.Size = new Size(184, 18);
+            label11.Size = new Size(230, 22);
             label11.TabIndex = 3;
             label11.Text = "First Name (Required):";
             // 
@@ -258,7 +391,7 @@
             // 
             FNameTxtBox.Location = new Point(51, 169);
             FNameTxtBox.Name = "FNameTxtBox";
-            FNameTxtBox.Size = new Size(240, 25);
+            FNameTxtBox.Size = new Size(240, 29);
             FNameTxtBox.TabIndex = 2;
             // 
             // label9
@@ -267,7 +400,7 @@
             label9.BackColor = Color.Transparent;
             label9.Location = new Point(51, 92);
             label9.Name = "label9";
-            label9.Size = new Size(312, 18);
+            label9.Size = new Size(390, 22);
             label9.TabIndex = 1;
             label9.Text = "This requires for knowing who you are.";
             // 
@@ -278,96 +411,9 @@
             label10.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             label10.Location = new Point(45, 39);
             label10.Name = "label10";
-            label10.Size = new Size(239, 32);
+            label10.Size = new Size(296, 41);
             label10.TabIndex = 0;
             label10.Text = "Setup Your Basic Info";
-            // 
-            // PasswordPanel
-            // 
-            PasswordPanel.BackColor = Color.Transparent;
-            PasswordPanel.Controls.Add(label19);
-            PasswordPanel.Controls.Add(passReTypeTxtBox);
-            PasswordPanel.Controls.Add(label18);
-            PasswordPanel.Controls.Add(ShowPassButton);
-            PasswordPanel.Controls.Add(passTxtBox);
-            PasswordPanel.Controls.Add(label5);
-            PasswordPanel.Controls.Add(label6);
-            PasswordPanel.Dock = DockStyle.Fill;
-            PasswordPanel.Location = new Point(0, 0);
-            PasswordPanel.Name = "PasswordPanel";
-            PasswordPanel.Size = new Size(833, 389);
-            PasswordPanel.TabIndex = 2;
-            PasswordPanel.Tag = "Setup Password";
-            // 
-            // label19
-            // 
-            label19.AutoSize = true;
-            label19.Location = new Point(90, 230);
-            label19.Name = "label19";
-            label19.Size = new Size(176, 18);
-            label19.TabIndex = 6;
-            label19.Text = "Re-type New Password:";
-            // 
-            // passReTypeTxtBox
-            // 
-            passReTypeTxtBox.Location = new Point(90, 258);
-            passReTypeTxtBox.MaxLength = 64;
-            passReTypeTxtBox.Name = "passReTypeTxtBox";
-            passReTypeTxtBox.Size = new Size(550, 25);
-            passReTypeTxtBox.TabIndex = 5;
-            passReTypeTxtBox.UseSystemPasswordChar = true;
-            // 
-            // label18
-            // 
-            label18.AutoSize = true;
-            label18.Location = new Point(90, 153);
-            label18.Name = "label18";
-            label18.Size = new Size(112, 18);
-            label18.TabIndex = 4;
-            label18.Text = "New Password:";
-            // 
-            // ShowPassButton
-            // 
-            ShowPassButton.BackColor = SystemColors.ScrollBar;
-            ShowPassButton.FlatAppearance.BorderSize = 0;
-            ShowPassButton.FlatStyle = FlatStyle.Flat;
-            ShowPassButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            ShowPassButton.Image = Properties.Resources.Reg_ShowPass;
-            ShowPassButton.Location = new Point(651, 181);
-            ShowPassButton.Name = "ShowPassButton";
-            ShowPassButton.Size = new Size(50, 32);
-            ShowPassButton.TabIndex = 3;
-            ShowPassButton.UseVisualStyleBackColor = false;
-            ShowPassButton.MouseDown += ShowPassButton_MouseDown;
-            ShowPassButton.MouseUp += ShowPassButton_MouseUp;
-            // 
-            // passTxtBox
-            // 
-            passTxtBox.Location = new Point(90, 181);
-            passTxtBox.MaxLength = 64;
-            passTxtBox.Name = "passTxtBox";
-            passTxtBox.Size = new Size(550, 25);
-            passTxtBox.TabIndex = 2;
-            passTxtBox.UseSystemPasswordChar = true;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(51, 92);
-            label5.Name = "label5";
-            label5.Size = new Size(432, 18);
-            label5.TabIndex = 1;
-            label5.Text = "Setup your password. (at least 8 characters required)";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.Location = new Point(45, 39);
-            label6.Name = "label6";
-            label6.Size = new Size(234, 32);
-            label6.TabIndex = 0;
-            label6.Text = "Setup Your Password";
             // 
             // FinishPanel
             // 
@@ -387,7 +433,7 @@
             label16.AutoSize = true;
             label16.Location = new Point(51, 92);
             label16.Name = "label16";
-            label16.Size = new Size(656, 18);
+            label16.Size = new Size(820, 22);
             label16.TabIndex = 1;
             label16.Text = "You're now ready to use LibCheck! Click Finish to setup, login, and ready to go! ";
             // 
@@ -397,7 +443,7 @@
             label17.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             label17.Location = new Point(45, 39);
             label17.Name = "label17";
-            label17.Size = new Size(162, 32);
+            label17.Size = new Size(200, 41);
             label17.TabIndex = 0;
             label17.Text = "You're All Set!";
             // 
@@ -419,7 +465,7 @@
             usernameTxtBox.Location = new Point(90, 158);
             usernameTxtBox.MaxLength = 64;
             usernameTxtBox.Name = "usernameTxtBox";
-            usernameTxtBox.Size = new Size(550, 25);
+            usernameTxtBox.Size = new Size(550, 29);
             usernameTxtBox.TabIndex = 2;
             // 
             // label3
@@ -427,7 +473,7 @@
             label3.AutoSize = true;
             label3.Location = new Point(51, 92);
             label3.Name = "label3";
-            label3.Size = new Size(320, 18);
+            label3.Size = new Size(400, 22);
             label3.TabIndex = 1;
             label3.Text = "Setup your own username as a librarian.";
             // 
@@ -437,7 +483,7 @@
             label4.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             label4.Location = new Point(45, 39);
             label4.Name = "label4";
-            label4.Size = new Size(244, 32);
+            label4.Size = new Size(304, 41);
             label4.TabIndex = 0;
             label4.Text = "Setup Your Username";
             // 
@@ -458,7 +504,7 @@
             SchoolNameTextBox.Location = new Point(90, 158);
             SchoolNameTextBox.MaxLength = 64;
             SchoolNameTextBox.Name = "SchoolNameTextBox";
-            SchoolNameTextBox.Size = new Size(550, 25);
+            SchoolNameTextBox.Size = new Size(550, 29);
             SchoolNameTextBox.TabIndex = 2;
             // 
             // label8
@@ -467,7 +513,7 @@
             label8.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             label8.Location = new Point(45, 39);
             label8.Name = "label8";
-            label8.Size = new Size(273, 32);
+            label8.Size = new Size(338, 41);
             label8.TabIndex = 0;
             label8.Text = "Enter Your School Name";
             // 
@@ -499,14 +545,13 @@
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             label1.Location = new Point(45, 39);
             label1.Name = "label1";
-            label1.Size = new Size(120, 32);
+            label1.Size = new Size(151, 41);
             label1.TabIndex = 0;
             label1.Text = "Welcome!";
             // 
             // RegisterLib
             // 
-            AutoScaleDimensions = new SizeF(96F, 96F);
-            AutoScaleMode = AutoScaleMode.Dpi;
+            AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(224, 224, 224);
             ClientSize = new Size(833, 483);
             Controls.Add(StagePanel);
@@ -525,10 +570,12 @@
             LowerPanel.ResumeLayout(false);
             LowerPanel.PerformLayout();
             StagePanel.ResumeLayout(false);
-            BasicInfoPanel.ResumeLayout(false);
-            BasicInfoPanel.PerformLayout();
+            LibEmailPanel.ResumeLayout(false);
+            LibEmailPanel.PerformLayout();
             PasswordPanel.ResumeLayout(false);
             PasswordPanel.PerformLayout();
+            BasicInfoPanel.ResumeLayout(false);
+            BasicInfoPanel.PerformLayout();
             FinishPanel.ResumeLayout(false);
             FinishPanel.PerformLayout();
             UsernamePanel.ResumeLayout(false);
@@ -582,5 +629,9 @@
         private Panel SchoolPanel;
         private TextBox SchoolNameTextBox;
         private Label label8;
+        private Panel LibEmailPanel;
+        private TextBox EmailTextBox;
+        private Label label7;
+        private Label label20;
     }
 }
