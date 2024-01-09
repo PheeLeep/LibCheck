@@ -1,7 +1,5 @@
-﻿namespace LibCheck.Forms
-{
-    partial class BorrowReturnDialog
-    {
+﻿namespace LibCheck.Forms {
+    partial class BorrowReturnDialog {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -11,10 +9,8 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,8 +22,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             BookGroupBox = new GroupBox();
             BookTitleLabel = new Label();
             BookBrowseBtn = new Button();
@@ -102,7 +97,7 @@
             ISBNTextBox.Location = new Point(95, 50);
             ISBNTextBox.Name = "ISBNTextBox";
             ISBNTextBox.ReadOnly = true;
-            ISBNTextBox.Size = new Size(315, 33);
+            ISBNTextBox.Size = new Size(315, 25);
             ISBNTextBox.TabIndex = 1;
             // 
             // label1
@@ -110,7 +105,7 @@
             label1.AutoSize = true;
             label1.Location = new Point(35, 53);
             label1.Name = "label1";
-            label1.Size = new Size(72, 26);
+            label1.Size = new Size(48, 18);
             label1.TabIndex = 0;
             label1.Text = "ISBN:";
             // 
@@ -160,7 +155,7 @@
             StudIDTextBox.Location = new Point(95, 50);
             StudIDTextBox.Name = "StudIDTextBox";
             StudIDTextBox.ReadOnly = true;
-            StudIDTextBox.Size = new Size(315, 33);
+            StudIDTextBox.Size = new Size(315, 25);
             StudIDTextBox.TabIndex = 1;
             // 
             // label3
@@ -168,7 +163,7 @@
             label3.AutoSize = true;
             label3.Location = new Point(35, 53);
             label3.Name = "label3";
-            label3.Size = new Size(48, 26);
+            label3.Size = new Size(32, 18);
             label3.TabIndex = 0;
             label3.Text = "ID:";
             // 
@@ -224,7 +219,7 @@
             label2.Font = new Font("Consolas", 10F, FontStyle.Regular, GraphicsUnit.Point);
             label2.Location = new Point(12, 16);
             label2.Name = "label2";
-            label2.Size = new Size(516, 23);
+            label2.Size = new Size(376, 17);
             label2.TabIndex = 1;
             label2.Text = "Date to Return (max: 30 days, except sundays):";
             // 
@@ -232,7 +227,7 @@
             // 
             DateBorrowDTP.Location = new Point(81, 55);
             DateBorrowDTP.Name = "DateBorrowDTP";
-            DateBorrowDTP.Size = new Size(316, 33);
+            DateBorrowDTP.Size = new Size(316, 25);
             DateBorrowDTP.TabIndex = 0;
             DateBorrowDTP.ValueChanged += DateBorrowDTP_ValueChanged;
             // 
@@ -274,16 +269,15 @@
             // 
             richTextBox1.Dock = DockStyle.Fill;
             richTextBox1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            richTextBox1.Location = new Point(3, 29);
+            richTextBox1.Location = new Point(3, 21);
             richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(531, 167);
+            richTextBox1.Size = new Size(531, 175);
             richTextBox1.TabIndex = 0;
             richTextBox1.Text = "";
             // 
             // BorrowReturnDialog
             // 
-            AutoScaleDimensions = new SizeF(144F, 144F);
-            AutoScaleMode = AutoScaleMode.Dpi;
+            AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(537, 678);
             Controls.Add(OptionsPanel);
             Controls.Add(groupBox2);

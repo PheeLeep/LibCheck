@@ -1,5 +1,6 @@
 ﻿using LibCheck.Database.Tables;
 using LibCheck.Exceptions;
+using LibCheck.Modules;
 using Microsoft.VisualBasic;
 
 namespace LibCheck.Forms {
@@ -49,7 +50,9 @@ namespace LibCheck.Forms {
             DatePubLabel.Text = $"Date Published: {book.DatePublished:MMMM dd, yyyy}";
             GenreLabel.Text = $"Genre: {book.Genre}";
             richTextBox1.Text = book.Description;
-
+            if (!string.IsNullOrWhiteSpace(book.ImagePath)) {
+                pictureBox1.Image = Image.FromFile($"{EnvVars.MainPath.FullName}\\book_images\\{book.ImagePath}");
+            }
             BorrowBookButton.Visible = !string.IsNullOrWhiteSpace(book.StudentID) && book.StudentID.Equals("(none)");
 
         }
@@ -63,7 +66,8 @@ namespace LibCheck.Forms {
         }
 
         private void MarkAsDamageButton_Click(object sender, EventArgs e) {
-            if (book == null || !Modules.AppContext.Auth()) return;
+            if (book == null || !Modules.AppContext.Auth())
+                return;
             string msg = book.IsLostOrDamaged ? "Make sure the book was found or replaced a new copy before you proceed. Continue?"
                                               : "This will mark as lost or damaged and marked violated to the student who are " +
                                                 "currently borrowed. Continue?";
@@ -102,6 +106,10 @@ namespace LibCheck.Forms {
             } catch (Exception ex) {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void BookInfo_FormClosing(object sender, FormClosingEventArgs e) {
+            pictureBox1.Image?.Dispose();
         }
     }
 }

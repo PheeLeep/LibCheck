@@ -1,7 +1,5 @@
-﻿namespace LibCheck.Forms
-{
-    partial class Login
-    {
+﻿namespace LibCheck.Forms {
+    partial class Login {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -11,10 +9,8 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,8 +22,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             LoginButton = new Button();
             label2 = new Label();
             usernameTextBox = new TextBox();
@@ -68,7 +63,7 @@
             label2.Font = new Font("Consolas", 10F, FontStyle.Regular, GraphicsUnit.Point);
             label2.Location = new Point(10, 124);
             label2.Name = "label2";
-            label2.Size = new Size(109, 23);
+            label2.Size = new Size(80, 17);
             label2.TabIndex = 2;
             label2.Text = "Username:";
             // 
@@ -77,7 +72,7 @@
             usernameTextBox.Anchor = AnchorStyles.Top;
             usernameTextBox.Location = new Point(127, 121);
             usernameTextBox.Name = "usernameTextBox";
-            usernameTextBox.Size = new Size(296, 35);
+            usernameTextBox.Size = new Size(296, 26);
             usernameTextBox.TabIndex = 3;
             usernameTextBox.TextChanged += TextBoxes_TextChanged;
             // 
@@ -88,7 +83,7 @@
             label3.Font = new Font("Consolas", 10F, FontStyle.Regular, GraphicsUnit.Point);
             label3.Location = new Point(12, 174);
             label3.Name = "label3";
-            label3.Size = new Size(109, 23);
+            label3.Size = new Size(80, 17);
             label3.TabIndex = 2;
             label3.Text = "Password:";
             // 
@@ -97,7 +92,7 @@
             passwordTextBox.Anchor = AnchorStyles.Top;
             passwordTextBox.Location = new Point(127, 166);
             passwordTextBox.Name = "passwordTextBox";
-            passwordTextBox.Size = new Size(296, 35);
+            passwordTextBox.Size = new Size(296, 26);
             passwordTextBox.TabIndex = 3;
             passwordTextBox.UseSystemPasswordChar = true;
             passwordTextBox.TextChanged += TextBoxes_TextChanged;
@@ -108,7 +103,7 @@
             linkForgorPass.AutoSize = true;
             linkForgorPass.Location = new Point(280, 204);
             linkForgorPass.Name = "linkForgorPass";
-            linkForgorPass.Size = new Size(174, 30);
+            linkForgorPass.Size = new Size(118, 19);
             linkForgorPass.TabIndex = 4;
             linkForgorPass.TabStop = true;
             linkForgorPass.Text = "Forgot Password?";
@@ -121,7 +116,7 @@
             label1.Font = new Font("Consolas", 22F, FontStyle.Bold, GraphicsUnit.Point);
             label1.Location = new Point(142, 41);
             label1.Name = "label1";
-            label1.Size = new Size(214, 51);
+            label1.Size = new Size(143, 36);
             label1.TabIndex = 0;
             label1.Text = "Welcome!";
             // 
@@ -176,8 +171,7 @@
             // 
             // Login
             // 
-            AutoScaleDimensions = new SizeF(144F, 144F);
-            AutoScaleMode = AutoScaleMode.Dpi;
+            AutoScaleMode = AutoScaleMode.None;
             BackColor = SystemColors.Window;
             ClientSize = new Size(852, 382);
             Controls.Add(panel2);

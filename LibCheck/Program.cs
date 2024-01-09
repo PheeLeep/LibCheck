@@ -28,6 +28,9 @@ namespace LibCheck {
                 }
             });
 
+            if (Environment.OSVersion.Version.Major >= 6)
+                WinNatives.SetProcessDPIAware();
+
             try {
                 t.Start();
                 Application.Run(Modules.AppContext.Current);

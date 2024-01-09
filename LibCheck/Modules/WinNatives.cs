@@ -30,6 +30,9 @@ namespace LibCheck.Modules {
         [DllImport("KERNEL32.DLL", EntryPoint = "RtlZeroMemory")]
         public static extern bool ZeroMemory(IntPtr Destination, int Length);
 
+        [DllImport("user32.dll")]
+        internal static extern bool SetProcessDPIAware();
+
         internal const uint GENERIC_ALL = 0x10000000;
     }
 }

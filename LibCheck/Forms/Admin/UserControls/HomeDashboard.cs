@@ -26,7 +26,7 @@ namespace LibCheck.Forms.Admin.UserControls {
         internal void LoadItems() {
             notifPanel.Controls.Clear();
             BooksLabel.Text = $"{Database.Database.Read<Books>(out _)}";
-            BooksLabel.Text = $"{Database.Database.Read<Students>(out _)}";
+            StudentsLabel.Text = $"{Database.Database.Read<Students>(out _)}";
             // Get notifications
             if (Database.Database.Read(out List<Records>? infos,
                                         whereCond: $"Category = {(int)Records.RecordStatus.BookBorrowed}" +
@@ -44,6 +44,7 @@ namespace LibCheck.Forms.Admin.UserControls {
 
                 if (CheckNotifLatestCBox.Checked)
                     lists = lists.Where(s => s.Date >= Credentials.Librarian?.LastLoggedIn).ToList();
+
                 foreach (Notifs n in lists)
                     notifs.Add(new NotifBar(n));
                 notifPanel.Controls.AddRange(notifs.ToArray());

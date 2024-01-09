@@ -1,7 +1,5 @@
-﻿namespace LibCheck.Forms.Admin.UserControls
-{
-    partial class StatisticsDashboard
-    {
+﻿namespace LibCheck.Forms.Admin.UserControls {
+    partial class StatisticsDashboard {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -11,10 +9,8 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,8 +22,7 @@
         /// Required method for Designer support - do not modify 
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             doubleBufferedPanel3 = new Controls.DoubleBufferedPanel();
             trendsStatistics1 = new Statistics.TrendsStatistics();
             historyStatistics1 = new Statistics.HistoryStatistics();
@@ -148,8 +143,7 @@
             // 
             // StatisticsDashboard
             // 
-            AutoScaleDimensions = new SizeF(96F, 96F);
-            AutoScaleMode = AutoScaleMode.Dpi;
+            AutoScaleMode = AutoScaleMode.None;
             BackColor = SystemColors.ActiveCaption;
             Controls.Add(doubleBufferedPanel3);
             Controls.Add(doubleBufferedPanel1);

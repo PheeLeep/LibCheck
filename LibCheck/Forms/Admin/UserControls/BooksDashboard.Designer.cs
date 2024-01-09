@@ -1,7 +1,5 @@
-﻿namespace LibCheck.Forms.Admin.UserControls
-{
-    partial class BooksDashboard
-    {
+﻿namespace LibCheck.Forms.Admin.UserControls {
+    partial class BooksDashboard {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -11,10 +9,8 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,10 +22,10 @@
         /// Required method for Designer support - do not modify 
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BooksDashboard));
             panel1 = new Panel();
+            SearchButton = new Button();
             PrintLabel = new Button();
             DeleteButton = new Button();
             UpdateButton = new Button();
@@ -42,7 +38,6 @@
             CurrentlyBorrowedLabel = new Label();
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
-            SearchButton = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel2.SuspendLayout();
@@ -60,10 +55,24 @@
             panel1.Controls.Add(AddButton);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 95);
-            panel1.Margin = new Padding(2, 2, 2, 2);
+            panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
             panel1.Size = new Size(690, 40);
             panel1.TabIndex = 0;
+            // 
+            // SearchButton
+            // 
+            SearchButton.Dock = DockStyle.Right;
+            SearchButton.FlatAppearance.BorderSize = 0;
+            SearchButton.FlatStyle = FlatStyle.Flat;
+            SearchButton.Image = Properties.Resources.icons8_search_32;
+            SearchButton.Location = new Point(602, 0);
+            SearchButton.Margin = new Padding(2);
+            SearchButton.Name = "SearchButton";
+            SearchButton.Size = new Size(44, 40);
+            SearchButton.TabIndex = 4;
+            SearchButton.UseVisualStyleBackColor = true;
+            SearchButton.Click += SearchButton_Click;
             // 
             // PrintLabel
             // 
@@ -72,7 +81,7 @@
             PrintLabel.FlatStyle = FlatStyle.Flat;
             PrintLabel.Image = (Image)resources.GetObject("PrintLabel.Image");
             PrintLabel.Location = new Point(646, 0);
-            PrintLabel.Margin = new Padding(2, 2, 2, 2);
+            PrintLabel.Margin = new Padding(2);
             PrintLabel.Name = "PrintLabel";
             PrintLabel.Size = new Size(44, 40);
             PrintLabel.TabIndex = 3;
@@ -86,7 +95,7 @@
             DeleteButton.FlatStyle = FlatStyle.Flat;
             DeleteButton.Image = (Image)resources.GetObject("DeleteButton.Image");
             DeleteButton.Location = new Point(88, 0);
-            DeleteButton.Margin = new Padding(2, 2, 2, 2);
+            DeleteButton.Margin = new Padding(2);
             DeleteButton.Name = "DeleteButton";
             DeleteButton.Size = new Size(44, 40);
             DeleteButton.TabIndex = 2;
@@ -100,7 +109,7 @@
             UpdateButton.FlatStyle = FlatStyle.Flat;
             UpdateButton.Image = (Image)resources.GetObject("UpdateButton.Image");
             UpdateButton.Location = new Point(44, 0);
-            UpdateButton.Margin = new Padding(2, 2, 2, 2);
+            UpdateButton.Margin = new Padding(2);
             UpdateButton.Name = "UpdateButton";
             UpdateButton.Size = new Size(44, 40);
             UpdateButton.TabIndex = 1;
@@ -114,7 +123,7 @@
             AddButton.FlatStyle = FlatStyle.Flat;
             AddButton.Image = (Image)resources.GetObject("AddButton.Image");
             AddButton.Location = new Point(0, 0);
-            AddButton.Margin = new Padding(2, 2, 2, 2);
+            AddButton.Margin = new Padding(2);
             AddButton.Name = "AddButton";
             AddButton.Size = new Size(44, 40);
             AddButton.TabIndex = 0;
@@ -131,7 +140,7 @@
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Dock = DockStyle.Fill;
             dataGridView1.Location = new Point(0, 135);
-            dataGridView1.Margin = new Padding(2, 2, 2, 2);
+            dataGridView1.Margin = new Padding(2);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersVisible = false;
@@ -152,7 +161,7 @@
             panel2.Controls.Add(pictureBox1);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
-            panel2.Margin = new Padding(2, 2, 2, 2);
+            panel2.Margin = new Padding(2);
             panel2.Name = "panel2";
             panel2.Size = new Size(690, 95);
             panel2.TabIndex = 4;
@@ -206,7 +215,7 @@
             pictureBox2.Image = Properties.Resources.icons8_book_damage_45;
             pictureBox2.InitialImage = null;
             pictureBox2.Location = new Point(254, 18);
-            pictureBox2.Margin = new Padding(2, 2, 2, 2);
+            pictureBox2.Margin = new Padding(2);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(45, 45);
             pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
@@ -218,36 +227,21 @@
             pictureBox1.Image = Properties.Resources.icons8_book_borrowed_45;
             pictureBox1.InitialImage = null;
             pictureBox1.Location = new Point(44, 18);
-            pictureBox1.Margin = new Padding(2, 2, 2, 2);
+            pictureBox1.Margin = new Padding(2);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(45, 45);
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
-            // SearchButton
-            // 
-            SearchButton.Dock = DockStyle.Right;
-            SearchButton.FlatAppearance.BorderSize = 0;
-            SearchButton.FlatStyle = FlatStyle.Flat;
-            SearchButton.Image = Properties.Resources.icons8_search_32;
-            SearchButton.Location = new Point(602, 0);
-            SearchButton.Margin = new Padding(2);
-            SearchButton.Name = "SearchButton";
-            SearchButton.Size = new Size(44, 40);
-            SearchButton.TabIndex = 4;
-            SearchButton.UseVisualStyleBackColor = true;
-            SearchButton.Click += SearchButton_Click;
-            // 
             // BooksDashboard
             // 
-            AutoScaleDimensions = new SizeF(96F, 96F);
-            AutoScaleMode = AutoScaleMode.Dpi;
+            AutoScaleMode = AutoScaleMode.None;
             Controls.Add(dataGridView1);
             Controls.Add(panel1);
             Controls.Add(panel2);
             DoubleBuffered = true;
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "BooksDashboard";
             Size = new Size(690, 418);
             panel1.ResumeLayout(false);

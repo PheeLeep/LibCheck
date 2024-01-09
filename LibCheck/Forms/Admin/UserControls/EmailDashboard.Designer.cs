@@ -46,26 +46,29 @@
             panel2.Controls.Add(pictureBox1);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
+            panel2.Margin = new Padding(2, 2, 2, 2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(862, 119);
+            panel2.Size = new Size(690, 95);
             panel2.TabIndex = 5;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(106, 67);
+            label1.Location = new Point(85, 54);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(139, 23);
+            label1.Size = new Size(112, 19);
             label1.TabIndex = 2;
             label1.Text = "Emails on Queue";
             // 
             // EmailQueueLabel
             // 
             EmailQueueLabel.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
-            EmailQueueLabel.Location = new Point(106, 22);
+            EmailQueueLabel.Location = new Point(85, 18);
+            EmailQueueLabel.Margin = new Padding(2, 0, 2, 0);
             EmailQueueLabel.Name = "EmailQueueLabel";
-            EmailQueueLabel.Size = new Size(189, 45);
+            EmailQueueLabel.Size = new Size(151, 36);
             EmailQueueLabel.TabIndex = 1;
             EmailQueueLabel.Text = "0";
             EmailQueueLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -74,7 +77,8 @@
             // 
             pictureBox1.Image = Properties.Resources.icons8_email_queue_45;
             pictureBox1.InitialImage = null;
-            pictureBox1.Location = new Point(55, 22);
+            pictureBox1.Location = new Point(44, 18);
+            pictureBox1.Margin = new Padding(2, 2, 2, 2);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(45, 45);
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
@@ -90,13 +94,14 @@
             dataGridView1.BackgroundColor = SystemColors.ActiveCaption;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(3, 27);
+            dataGridView1.Location = new Point(2, 22);
+            dataGridView1.Margin = new Padding(2, 2, 2, 2);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 62;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(856, 323);
+            dataGridView1.Size = new Size(686, 259);
             dataGridView1.TabIndex = 7;
             dataGridView1.CellContentDoubleClick += dataGridView1_CellContentDoubleClick;
             // 
@@ -105,9 +110,10 @@
             panel1.BackColor = SystemColors.ActiveCaption;
             panel1.Controls.Add(ComposeButton);
             panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(0, 119);
+            panel1.Location = new Point(0, 95);
+            panel1.Margin = new Padding(2, 2, 2, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(862, 50);
+            panel1.Size = new Size(690, 40);
             panel1.TabIndex = 6;
             // 
             // ComposeButton
@@ -117,8 +123,9 @@
             ComposeButton.FlatStyle = FlatStyle.Flat;
             ComposeButton.Image = Properties.Resources.icons8_compose_40;
             ComposeButton.Location = new Point(0, 0);
+            ComposeButton.Margin = new Padding(2, 2, 2, 2);
             ComposeButton.Name = "ComposeButton";
-            ComposeButton.Size = new Size(55, 50);
+            ComposeButton.Size = new Size(44, 40);
             ComposeButton.TabIndex = 0;
             ComposeButton.UseVisualStyleBackColor = true;
             ComposeButton.Click += ComposeButton_Click;
@@ -129,23 +136,25 @@
             groupBox1.Controls.Add(dataGridView1);
             groupBox1.Dock = DockStyle.Fill;
             groupBox1.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            groupBox1.Location = new Point(0, 169);
+            groupBox1.Location = new Point(0, 135);
+            groupBox1.Margin = new Padding(2, 2, 2, 2);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(862, 353);
+            groupBox1.Padding = new Padding(2, 2, 2, 2);
+            groupBox1.Size = new Size(690, 283);
             groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
             groupBox1.Text = "Recent Emails";
             // 
             // EmailDashboard
             // 
-            AutoScaleDimensions = new SizeF(120F, 120F);
-            AutoScaleMode = AutoScaleMode.Dpi;
+            AutoScaleMode = AutoScaleMode.None;
             Controls.Add(groupBox1);
             Controls.Add(panel1);
             Controls.Add(panel2);
             DoubleBuffered = true;
+            Margin = new Padding(2, 2, 2, 2);
             Name = "EmailDashboard";
-            Size = new Size(862, 522);
+            Size = new Size(690, 418);
             Load += EmailDashboard_Load;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();

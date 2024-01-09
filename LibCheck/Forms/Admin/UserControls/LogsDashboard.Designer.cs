@@ -60,8 +60,9 @@
             panel2.Controls.Add(pictureBox1);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 0);
+            panel2.Margin = new Padding(3, 2, 3, 2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(862, 119);
+            panel2.Size = new Size(754, 89);
             panel2.TabIndex = 6;
             // 
             // SaveButton
@@ -73,9 +74,10 @@
             SaveButton.FlatStyle = FlatStyle.Flat;
             SaveButton.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
             SaveButton.Image = Properties.Resources.save_32px;
-            SaveButton.Location = new Point(756, 35);
+            SaveButton.Location = new Point(662, 26);
+            SaveButton.Margin = new Padding(3, 2, 3, 2);
             SaveButton.Name = "SaveButton";
-            SaveButton.Size = new Size(32, 32);
+            SaveButton.Size = new Size(28, 24);
             SaveButton.TabIndex = 3;
             SaveButton.UseVisualStyleBackColor = false;
             SaveButton.Click += SaveButton_Click;
@@ -89,9 +91,10 @@
             ClearLogButton.FlatStyle = FlatStyle.Flat;
             ClearLogButton.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
             ClearLogButton.Image = Properties.Resources.empty_trash_32px;
-            ClearLogButton.Location = new Point(794, 35);
+            ClearLogButton.Location = new Point(695, 26);
+            ClearLogButton.Margin = new Padding(3, 2, 3, 2);
             ClearLogButton.Name = "ClearLogButton";
-            ClearLogButton.Size = new Size(32, 32);
+            ClearLogButton.Size = new Size(28, 24);
             ClearLogButton.TabIndex = 3;
             ClearLogButton.UseVisualStyleBackColor = false;
             ClearLogButton.Click += ClearLogButton_Click;
@@ -105,9 +108,10 @@
             RefreshButton.FlatStyle = FlatStyle.Flat;
             RefreshButton.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
             RefreshButton.Image = Properties.Resources.refresh_32px;
-            RefreshButton.Location = new Point(711, 35);
+            RefreshButton.Location = new Point(622, 26);
+            RefreshButton.Margin = new Padding(3, 2, 3, 2);
             RefreshButton.Name = "RefreshButton";
-            RefreshButton.Size = new Size(32, 32);
+            RefreshButton.Size = new Size(28, 24);
             RefreshButton.TabIndex = 3;
             RefreshButton.UseVisualStyleBackColor = false;
             RefreshButton.Click += RefreshButton_Click;
@@ -116,9 +120,9 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(106, 25);
+            label1.Location = new Point(93, 19);
             label1.Name = "label1";
-            label1.Size = new Size(567, 28);
+            label1.Size = new Size(453, 21);
             label1.TabIndex = 2;
             label1.Text = "Logs are automatically been written to the disk while in runtime.";
             // 
@@ -126,7 +130,8 @@
             // 
             pictureBox1.Image = Properties.Resources.icons8_log_45;
             pictureBox1.InitialImage = null;
-            pictureBox1.Location = new Point(55, 22);
+            pictureBox1.Location = new Point(48, 16);
+            pictureBox1.Margin = new Padding(3, 2, 3, 2);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(45, 45);
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
@@ -139,9 +144,11 @@
             groupBox1.Controls.Add(panel3);
             groupBox1.Dock = DockStyle.Fill;
             groupBox1.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            groupBox1.Location = new Point(0, 145);
+            groupBox1.Location = new Point(0, 109);
+            groupBox1.Margin = new Padding(3, 2, 3, 2);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(862, 377);
+            groupBox1.Padding = new Padding(3, 2, 3, 2);
+            groupBox1.Size = new Size(754, 283);
             groupBox1.TabIndex = 7;
             groupBox1.TabStop = false;
             groupBox1.Text = "All Logs";
@@ -155,13 +162,14 @@
             dataGridView1.BackgroundColor = SystemColors.ActiveCaption;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(3, 61);
+            dataGridView1.Location = new Point(3, 57);
+            dataGridView1.Margin = new Padding(3, 2, 3, 2);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 62;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(856, 313);
+            dataGridView1.Size = new Size(748, 224);
             dataGridView1.TabIndex = 8;
             dataGridView1.VirtualMode = true;
             // 
@@ -174,9 +182,10 @@
             panel3.Controls.Add(InfoLabel);
             panel3.Controls.Add(VerboseLabel);
             panel3.Dock = DockStyle.Top;
-            panel3.Location = new Point(3, 27);
+            panel3.Location = new Point(3, 22);
+            panel3.Margin = new Padding(3, 2, 3, 2);
             panel3.Name = "panel3";
-            panel3.Size = new Size(856, 34);
+            panel3.Size = new Size(748, 35);
             panel3.TabIndex = 10;
             // 
             // FatalLabel
@@ -186,9 +195,10 @@
             FatalLabel.Dock = DockStyle.Left;
             FatalLabel.Image = Properties.Resources.radioactive_24px;
             FatalLabel.ImageAlign = ContentAlignment.MiddleLeft;
-            FatalLabel.Location = new Point(400, 0);
+            FatalLabel.Location = new Point(352, 0);
+            FatalLabel.Margin = new Padding(3, 2, 3, 2);
             FatalLabel.Name = "FatalLabel";
-            FatalLabel.Size = new Size(100, 34);
+            FatalLabel.Size = new Size(88, 35);
             FatalLabel.TabIndex = 14;
             FatalLabel.Text = "0";
             FatalLabel.TextAlign = ContentAlignment.MiddleRight;
@@ -202,9 +212,10 @@
             ErrorCB.Dock = DockStyle.Left;
             ErrorCB.Image = Properties.Resources.cancel_24px;
             ErrorCB.ImageAlign = ContentAlignment.MiddleLeft;
-            ErrorCB.Location = new Point(300, 0);
+            ErrorCB.Location = new Point(264, 0);
+            ErrorCB.Margin = new Padding(3, 2, 3, 2);
             ErrorCB.Name = "ErrorCB";
-            ErrorCB.Size = new Size(100, 34);
+            ErrorCB.Size = new Size(88, 35);
             ErrorCB.TabIndex = 13;
             ErrorCB.Text = "0";
             ErrorCB.TextAlign = ContentAlignment.MiddleRight;
@@ -218,9 +229,10 @@
             WarnCB.Dock = DockStyle.Left;
             WarnCB.Image = Properties.Resources.error_24px;
             WarnCB.ImageAlign = ContentAlignment.MiddleLeft;
-            WarnCB.Location = new Point(200, 0);
+            WarnCB.Location = new Point(176, 0);
+            WarnCB.Margin = new Padding(3, 2, 3, 2);
             WarnCB.Name = "WarnCB";
-            WarnCB.Size = new Size(100, 34);
+            WarnCB.Size = new Size(88, 35);
             WarnCB.TabIndex = 12;
             WarnCB.Text = "0";
             WarnCB.TextAlign = ContentAlignment.MiddleRight;
@@ -234,9 +246,10 @@
             InfoLabel.Dock = DockStyle.Left;
             InfoLabel.Image = Properties.Resources.info_24px;
             InfoLabel.ImageAlign = ContentAlignment.MiddleLeft;
-            InfoLabel.Location = new Point(100, 0);
+            InfoLabel.Location = new Point(88, 0);
+            InfoLabel.Margin = new Padding(3, 2, 3, 2);
             InfoLabel.Name = "InfoLabel";
-            InfoLabel.Size = new Size(100, 34);
+            InfoLabel.Size = new Size(88, 35);
             InfoLabel.TabIndex = 11;
             InfoLabel.Text = "0";
             InfoLabel.TextAlign = ContentAlignment.MiddleRight;
@@ -251,8 +264,9 @@
             VerboseLabel.Image = Properties.Resources.audio_24px;
             VerboseLabel.ImageAlign = ContentAlignment.MiddleLeft;
             VerboseLabel.Location = new Point(0, 0);
+            VerboseLabel.Margin = new Padding(3, 2, 3, 2);
             VerboseLabel.Name = "VerboseLabel";
-            VerboseLabel.Size = new Size(100, 34);
+            VerboseLabel.Size = new Size(88, 35);
             VerboseLabel.TabIndex = 10;
             VerboseLabel.Text = "0";
             VerboseLabel.TextAlign = ContentAlignment.MiddleRight;
@@ -266,9 +280,10 @@
             panel1.Controls.Add(dateTimePicker1);
             panel1.Controls.Add(label2);
             panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(0, 119);
+            panel1.Location = new Point(0, 89);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(862, 26);
+            panel1.Size = new Size(754, 20);
             panel1.TabIndex = 9;
             // 
             // button1
@@ -279,9 +294,10 @@
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            button1.Location = new Point(228, 0);
+            button1.Location = new Point(200, 0);
+            button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
-            button1.Size = new Size(110, 26);
+            button1.Size = new Size(96, 20);
             button1.TabIndex = 4;
             button1.Text = "Reset";
             button1.UseVisualStyleBackColor = false;
@@ -291,9 +307,10 @@
             // 
             dateTimePicker1.Dock = DockStyle.Left;
             dateTimePicker1.Format = DateTimePickerFormat.Short;
-            dateTimePicker1.Location = new Point(100, 0);
+            dateTimePicker1.Location = new Point(88, 0);
+            dateTimePicker1.Margin = new Padding(3, 2, 3, 2);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(128, 27);
+            dateTimePicker1.Size = new Size(112, 23);
             dateTimePicker1.TabIndex = 1;
             dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
             // 
@@ -303,7 +320,7 @@
             label2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             label2.Location = new Point(0, 0);
             label2.Name = "label2";
-            label2.Size = new Size(100, 26);
+            label2.Size = new Size(88, 20);
             label2.TabIndex = 0;
             label2.Text = "Select Date:";
             label2.TextAlign = ContentAlignment.MiddleCenter;
@@ -314,13 +331,13 @@
             // 
             // LogsDashboard
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
             Controls.Add(groupBox1);
             Controls.Add(panel1);
             Controls.Add(panel2);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "LogsDashboard";
-            Size = new Size(862, 522);
+            Size = new Size(754, 392);
             Load += LogsDashboard_Load;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();

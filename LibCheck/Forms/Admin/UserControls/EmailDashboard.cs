@@ -79,7 +79,8 @@ namespace LibCheck.Forms.Admin.UserControls {
 
         private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e) {
             try {
-                if (!isLoaded || dataGridView1.DataSource == null || e.RowIndex < 0) return;
+                if (!isLoaded || dataGridView1.DataSource == null || e.RowIndex < 0)
+                    return;
                 List<RecentEmail> recentEmails = (List<RecentEmail>)dataGridView1.DataSource;
                 using (ComposeDiag cd = new ComposeDiag(recentEmails[e.RowIndex])) {
                     cd.ShowDialog();

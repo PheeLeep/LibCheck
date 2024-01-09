@@ -3,22 +3,18 @@ using LibCheck.Modules;
 using LibCheck.Modules.Security;
 using static LibCheck.Modules.Miscellaneous;
 
-namespace LibCheck.Forms.Admin
-{
-    public partial class StudentDialog : Form
-    {
+namespace LibCheck.Forms.Admin {
+    public partial class StudentDialog : Form {
 
         private Students student = new Students();
         private bool _isEdited = false;
         private DatabaseMode mode;
 
-        public StudentDialog(DatabaseMode mode, string studentID = "")
-        {
+        public StudentDialog(DatabaseMode mode, string studentID = "") {
             InitializeComponent();
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             this.mode = mode;
-            if (mode != DatabaseMode.Add)
-            {
+            if (mode != DatabaseMode.Add) {
                 if (string.IsNullOrWhiteSpace(studentID) ||
                     Database.Database.Read(out List<Students>? l, whereCond: $"StudentID = '{studentID}'") <= 0 ||
                     l == null)
@@ -28,10 +24,8 @@ namespace LibCheck.Forms.Admin
             }
         }
 
-        protected override CreateParams CreateParams
-        {
-            get
-            {
+        protected override CreateParams CreateParams {
+            get {
                 // Minimize form and control flickering.
                 CreateParams cp = base.CreateParams;
                 cp.ExStyle |= 0x02000000;
@@ -39,23 +33,19 @@ namespace LibCheck.Forms.Admin
             }
         }
 
-        private void StudentDialog_Load(object sender, EventArgs e)
-        {
+        private void StudentDialog_Load(object sender, EventArgs e) {
             LevelComboBox.Items.AddRange(Levels);
             SuffixCombobox.SelectedIndex = 0;
             MaleRadioButton.Checked = true;
             DOBDatePicker.MaxDate = DateTime.Today;
             LevelComboBox.SelectedIndex = 0;
 
-            if (mode == DatabaseMode.Read)
-            {
-                foreach (Control control in Controls)
-                {
-                    if (control is not GroupBox gb) continue;
-                    foreach (Control c2 in gb.Controls)
-                    {
-                        switch (c2)
-                        {
+            if (mode == DatabaseMode.Read) {
+                foreach (Control control in Controls) {
+                    if (control is not GroupBox gb)
+                        continue;
+                    foreach (Control c2 in gb.Controls) {
+                        switch (c2) {
                             case Control c when c is TextBox txtbox:
                                 txtbox.ReadOnly = true;
                                 break;
@@ -73,8 +63,7 @@ namespace LibCheck.Forms.Admin
                 }
             }
 
-            if (mode != DatabaseMode.Add)
-            {
+            if (mode != DatabaseMode.Add) {
                 StudIDTextBox.ReadOnly = true;
                 StudIDTextBox.Text = student.StudentID;
                 FirstNameTextBox.Text = student.FirstName;
@@ -92,40 +81,35 @@ namespace LibCheck.Forms.Admin
                 _isEdited = false;
             }
         }
-        private void Controls_ValuesChanged(object sender, EventArgs e)
-        {
+        private void Controls_ValuesChanged(object sender, EventArgs e) {
             if (!_isEdited)
                 _isEdited = true;
         }
 
-        private void SetComboboxIndexByVal(ComboBox cb, string? val)
-        {
-            if (cb.Items.Count == 0 || string.IsNullOrWhiteSpace(val)) return;
+        private void SetComboboxIndexByVal(ComboBox cb, string? val) {
+            if (cb.Items.Count == 0 || string.IsNullOrWhiteSpace(val))
+                return;
             int idx = cb.Items.IndexOf(val);
-            if (idx == -1) idx = 0;
+            if (idx == -1)
+                idx = 0;
             cb.SelectedIndex = idx;
         }
 
-        private void ConfirmButton_Click(object sender, EventArgs e)
-        {
-            if (_isEdited)
-            {
-                if (!CheckInformation()) return;
+        private void ConfirmButton_Click(object sender, EventArgs e) {
+            if (_isEdited) {
+                if (!CheckInformation())
+                    return;
                 bool isEmailChanged = false;
 
-                if (mode == DatabaseMode.Update)
-                {
+                if (mode == DatabaseMode.Update) {
                     if (!string.IsNullOrWhiteSpace(student.EmailAddress)
                         && !student.EmailAddress.Equals(EmailAddressTextBox.Text)
                         && MessageBox.Show(this, "Changing student's email address will discard the previous. Continue?",
                                         "Changing Email", MessageBoxButtons.YesNo,
-                                        MessageBoxIcon.Exclamation) == DialogResult.No)
-                    {
+                                        MessageBoxIcon.Exclamation) == DialogResult.No) {
                         EmailAddressTextBox.Text = student.EmailAddress;
                         return;
-                    }
-                    else
-                    {
+                    } else {
                         isEmailChanged = true;
                     }
                 }
@@ -143,8 +127,7 @@ namespace LibCheck.Forms.Admin
 
 
                 if (!(mode == DatabaseMode.Add ? Database.Database.Insert(student)
-                                               : Database.Database.Update(student)))
-                {
+                                               : Database.Database.Update(student))) {
                     Logger.Log(Logger.LogEnums.Error, "Failed to add/update student information.");
                     MessageBox.Show(this, "Failed to add or update student information.",
                                     "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
@@ -157,16 +140,13 @@ namespace LibCheck.Forms.Admin
 
                 string body;
 
-                if (mode == DatabaseMode.Add)
-                {
+                if (mode == DatabaseMode.Add) {
                     body = Properties.Resources.AddEmailTxt.Replace("%school%", Credentials.Librarian?.SchoolName)
                                                            .Replace("%stID%", student.StudentID)
                                                            .Replace("%name%", GenerateFullName(student))
                                                            .Replace("%librarian%", GenerateFullName(Credentials.Librarian));
                     EmailService.Queue(student, body, "Welcome to LibCheck!");
-                }
-                else if (mode == DatabaseMode.Update && isEmailChanged)
-                {
+                } else if (mode == DatabaseMode.Update && isEmailChanged) {
                     body = Properties.Resources.UpdateEmailTxt.Replace("%school%", Credentials.Librarian?.SchoolName)
                                                            .Replace("%stID%", student.StudentID)
                                                            .Replace("%name%", GenerateFullName(student))
@@ -179,10 +159,8 @@ namespace LibCheck.Forms.Admin
             }
         }
 
-        private bool CheckInformation()
-        {
-            try
-            {
+        private bool CheckInformation() {
+            try {
                 if (string.IsNullOrWhiteSpace(StudIDTextBox.Text)
                     || !Regexes.IsValidStudentID(StudIDTextBox.Text))
                     throw new InvalidOperationException("Invalid Student ID.");
@@ -213,9 +191,7 @@ namespace LibCheck.Forms.Admin
                     throw new InvalidOperationException("The email was already registered by someone.");
 
                 return true;
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 MessageBox.Show(this, ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 return false;
             }

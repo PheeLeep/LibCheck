@@ -21,7 +21,8 @@ namespace LibCheck.Forms.Admin.UserControls {
 
         private void button1_Click(object sender, EventArgs e) {
             Dispose();
-            if (n != null) Notifs.DeleteLog(n);
+            if (n != null)
+                Notifs.DeleteLog(n);
         }
 
         private void NotifBar_Load(object sender, EventArgs e) {

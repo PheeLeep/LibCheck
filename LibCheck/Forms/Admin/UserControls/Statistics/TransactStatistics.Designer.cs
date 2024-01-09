@@ -42,17 +42,18 @@
             TransactionsPanel.Controls.Add(doubleBufferedPanel4);
             TransactionsPanel.Dock = DockStyle.Fill;
             TransactionsPanel.Location = new Point(0, 0);
+            TransactionsPanel.Margin = new Padding(2, 2, 2, 2);
             TransactionsPanel.Name = "TransactionsPanel";
-            TransactionsPanel.Size = new Size(862, 472);
+            TransactionsPanel.Size = new Size(690, 378);
             TransactionsPanel.TabIndex = 3;
             // 
             // ChartsPlot
             // 
             ChartsPlot.Dock = DockStyle.Fill;
-            ChartsPlot.Location = new Point(0, 98);
-            ChartsPlot.Margin = new Padding(5, 4, 5, 4);
+            ChartsPlot.Location = new Point(0, 78);
+            ChartsPlot.Margin = new Padding(4, 3, 4, 3);
             ChartsPlot.Name = "ChartsPlot";
-            ChartsPlot.Size = new Size(862, 374);
+            ChartsPlot.Size = new Size(690, 300);
             ChartsPlot.TabIndex = 1;
             // 
             // doubleBufferedPanel4
@@ -61,8 +62,9 @@
             doubleBufferedPanel4.Controls.Add(groupBox3);
             doubleBufferedPanel4.Dock = DockStyle.Top;
             doubleBufferedPanel4.Location = new Point(0, 0);
+            doubleBufferedPanel4.Margin = new Padding(2, 2, 2, 2);
             doubleBufferedPanel4.Name = "doubleBufferedPanel4";
-            doubleBufferedPanel4.Size = new Size(862, 98);
+            doubleBufferedPanel4.Size = new Size(690, 78);
             doubleBufferedPanel4.TabIndex = 0;
             // 
             // groupBox3
@@ -74,8 +76,10 @@
             groupBox3.Dock = DockStyle.Top;
             groupBox3.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox3.Location = new Point(0, 0);
+            groupBox3.Margin = new Padding(2, 2, 2, 2);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(862, 98);
+            groupBox3.Padding = new Padding(2, 2, 2, 2);
+            groupBox3.Size = new Size(690, 78);
             groupBox3.TabIndex = 1;
             groupBox3.TabStop = false;
             groupBox3.Text = "Date Range";
@@ -86,9 +90,10 @@
             ReturnCBox.CheckState = CheckState.Checked;
             ReturnCBox.Image = Properties.Resources.icons8_bookreturned_45;
             ReturnCBox.ImageAlign = ContentAlignment.MiddleLeft;
-            ReturnCBox.Location = new Point(495, 26);
+            ReturnCBox.Location = new Point(396, 21);
+            ReturnCBox.Margin = new Padding(2, 2, 2, 2);
             ReturnCBox.Name = "ReturnCBox";
-            ReturnCBox.Size = new Size(152, 61);
+            ReturnCBox.Size = new Size(122, 49);
             ReturnCBox.TabIndex = 5;
             ReturnCBox.Text = "Return";
             ReturnCBox.TextAlign = ContentAlignment.MiddleRight;
@@ -102,9 +107,10 @@
             BorrowCBox.CheckState = CheckState.Checked;
             BorrowCBox.Image = Properties.Resources.icons8_book_borrowed_45;
             BorrowCBox.ImageAlign = ContentAlignment.MiddleLeft;
-            BorrowCBox.Location = new Point(337, 26);
+            BorrowCBox.Location = new Point(270, 21);
+            BorrowCBox.Margin = new Padding(2, 2, 2, 2);
             BorrowCBox.Name = "BorrowCBox";
-            BorrowCBox.Size = new Size(152, 61);
+            BorrowCBox.Size = new Size(122, 49);
             BorrowCBox.TabIndex = 5;
             BorrowCBox.Text = "Borrow";
             BorrowCBox.TextAlign = ContentAlignment.MiddleRight;
@@ -120,9 +126,10 @@
             ChartsRefreshButton.FlatStyle = FlatStyle.Flat;
             ChartsRefreshButton.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
             ChartsRefreshButton.Image = Properties.Resources.refresh_32px;
-            ChartsRefreshButton.Location = new Point(28, 42);
+            ChartsRefreshButton.Location = new Point(22, 34);
+            ChartsRefreshButton.Margin = new Padding(2, 2, 2, 2);
             ChartsRefreshButton.Name = "ChartsRefreshButton";
-            ChartsRefreshButton.Size = new Size(32, 32);
+            ChartsRefreshButton.Size = new Size(26, 26);
             ChartsRefreshButton.TabIndex = 4;
             ChartsRefreshButton.UseVisualStyleBackColor = false;
             ChartsRefreshButton.Click += ChartsRefreshButton_Click;
@@ -132,20 +139,21 @@
             TransactComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             TransactComboBox.FormattingEnabled = true;
             TransactComboBox.Items.AddRange(new object[] { "7 days", "14 days", "1 month", "All Time", "Custom" });
-            TransactComboBox.Location = new Point(71, 42);
+            TransactComboBox.Location = new Point(57, 34);
+            TransactComboBox.Margin = new Padding(2, 2, 2, 2);
             TransactComboBox.Name = "TransactComboBox";
-            TransactComboBox.Size = new Size(255, 33);
+            TransactComboBox.Size = new Size(205, 27);
             TransactComboBox.TabIndex = 0;
             TransactComboBox.SelectedIndexChanged += TransactComboBox_SelectedIndexChanged;
             // 
             // TransactStatistics
             // 
-            AutoScaleDimensions = new SizeF(120F, 120F);
-            AutoScaleMode = AutoScaleMode.Dpi;
+            AutoScaleMode = AutoScaleMode.None;
             BackColor = SystemColors.ActiveCaption;
             Controls.Add(TransactionsPanel);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "TransactStatistics";
-            Size = new Size(862, 472);
+            Size = new Size(690, 378);
             TransactionsPanel.ResumeLayout(false);
             doubleBufferedPanel4.ResumeLayout(false);
             groupBox3.ResumeLayout(false);

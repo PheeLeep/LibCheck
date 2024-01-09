@@ -1,7 +1,5 @@
-﻿namespace LibCheck.Forms
-{
-    partial class PleaseWaitDialog
-    {
+﻿namespace LibCheck.Forms {
+    partial class PleaseWaitDialog {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -11,10 +9,8 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -37,19 +33,22 @@
             // label1
             // 
             label1.Dock = DockStyle.Fill;
-            label1.Location = new Point(72, 0);
+            label1.Location = new Point(63, 0);
             label1.Name = "label1";
-            label1.Size = new Size(339, 133);
+            label1.Size = new Size(297, 100);
             label1.TabIndex = 0;
             label1.Text = "Test";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // pictureBox1
             // 
+            pictureBox1.Dock = DockStyle.Fill;
             pictureBox1.Image = Properties.Resources.hourglass_64px;
-            pictureBox1.Location = new Point(4, 32);
+            pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Margin = new Padding(3, 2, 3, 2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(64, 64);
+            pictureBox1.Size = new Size(63, 100);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
             // 
@@ -58,20 +57,22 @@
             panel1.Controls.Add(pictureBox1);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(72, 133);
+            panel1.Size = new Size(63, 100);
             panel1.TabIndex = 2;
             // 
             // PleaseWaitDialog
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(411, 133);
+            ClientSize = new Size(360, 100);
             ControlBox = false;
             Controls.Add(label1);
             Controls.Add(panel1);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedDialog;
+            Margin = new Padding(3, 2, 3, 2);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "PleaseWaitDialog";

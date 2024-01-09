@@ -1,7 +1,5 @@
-﻿namespace LibCheck.Forms.SearchTools.UserControls
-{
-    partial class StudentsSearchUC
-    {
+﻿namespace LibCheck.Forms.SearchTools.UserControls {
+    partial class StudentsSearchUC {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -11,10 +9,8 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,8 +22,7 @@
         /// Required method for Designer support - do not modify 
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             groupBox1 = new GroupBox();
             LevelComboBox = new ComboBox();
             LevelCBox = new CheckBox();
@@ -40,8 +35,12 @@
             FNameRB = new RadioButton();
             StudentIDRB = new RadioButton();
             keywordTextBox = new TextBox();
+            groupBox3 = new GroupBox();
+            CategoryRB = new RadioButton();
+            KeywordRB = new RadioButton();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -52,11 +51,12 @@
             groupBox1.Controls.Add(FemaleCBox);
             groupBox1.Controls.Add(MaleCBox);
             groupBox1.Dock = DockStyle.Fill;
-            groupBox1.Location = new Point(0, 133);
+            groupBox1.Enabled = false;
+            groupBox1.Location = new Point(0, 252);
             groupBox1.Margin = new Padding(2);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(2);
-            groupBox1.Size = new Size(400, 278);
+            groupBox1.Size = new Size(400, 159);
             groupBox1.TabIndex = 6;
             groupBox1.TabStop = false;
             groupBox1.Text = "Search By Category";
@@ -69,7 +69,7 @@
             LevelComboBox.FormattingEnabled = true;
             LevelComboBox.Location = new Point(99, 79);
             LevelComboBox.Name = "LevelComboBox";
-            LevelComboBox.Size = new Size(213, 28);
+            LevelComboBox.Size = new Size(213, 27);
             LevelComboBox.TabIndex = 17;
             LevelComboBox.SelectedIndexChanged += LevelComboBox_SelectedIndexChanged;
             // 
@@ -130,12 +130,12 @@
             groupBox2.Controls.Add(StudentIDRB);
             groupBox2.Controls.Add(keywordTextBox);
             groupBox2.Dock = DockStyle.Top;
-            groupBox2.Location = new Point(0, 0);
+            groupBox2.Location = new Point(0, 119);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(400, 133);
             groupBox2.TabIndex = 7;
             groupBox2.TabStop = false;
-            groupBox2.Text = "Search Keyword";
+            groupBox2.Text = "Search By Keyword";
             // 
             // ScanButton
             // 
@@ -192,14 +192,51 @@
             keywordTextBox.TabIndex = 2;
             keywordTextBox.TextChanged += keywordTextBox_TextChanged;
             // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(CategoryRB);
+            groupBox3.Controls.Add(KeywordRB);
+            groupBox3.Dock = DockStyle.Top;
+            groupBox3.Location = new Point(0, 0);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(400, 119);
+            groupBox3.TabIndex = 18;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Search Criteria";
+            // 
+            // CategoryRB
+            // 
+            CategoryRB.AutoSize = true;
+            CategoryRB.Location = new Point(34, 66);
+            CategoryRB.Name = "CategoryRB";
+            CategoryRB.Size = new Size(155, 24);
+            CategoryRB.TabIndex = 5;
+            CategoryRB.Text = "Search by Category";
+            CategoryRB.UseVisualStyleBackColor = true;
+            CategoryRB.CheckedChanged += CriteriaRB_CheckedChanged;
+            // 
+            // KeywordRB
+            // 
+            KeywordRB.AutoSize = true;
+            KeywordRB.Checked = true;
+            KeywordRB.Location = new Point(34, 36);
+            KeywordRB.Name = "KeywordRB";
+            KeywordRB.Size = new Size(153, 24);
+            KeywordRB.TabIndex = 4;
+            KeywordRB.TabStop = true;
+            KeywordRB.Text = "Search by Keyword";
+            KeywordRB.UseVisualStyleBackColor = true;
+            KeywordRB.CheckedChanged += CriteriaRB_CheckedChanged;
+            // 
             // StudentsSearchUC
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
             Controls.Add(groupBox1);
             Controls.Add(groupBox2);
+            Controls.Add(groupBox3);
             DoubleBuffered = true;
-            Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             Name = "StudentsSearchUC";
             Size = new Size(400, 411);
             Load += StudentsSearchUC_Load;
@@ -207,6 +244,8 @@
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -224,5 +263,8 @@
         private ComboBox LevelComboBox;
         private CheckBox LevelCBox;
         private Button ScanButton;
+        private GroupBox groupBox3;
+        private RadioButton CategoryRB;
+        private RadioButton KeywordRB;
     }
 }

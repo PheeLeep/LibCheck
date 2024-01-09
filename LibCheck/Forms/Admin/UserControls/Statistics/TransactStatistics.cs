@@ -44,7 +44,8 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
         }
 
         private void TransactComboBox_SelectedIndexChanged(object sender, EventArgs e) {
-            if (isLoading) return;
+            if (isLoading)
+                return;
 
             to = CheckForSunday(DateTime.Now);
             switch (TransactComboBox.SelectedIndex) {

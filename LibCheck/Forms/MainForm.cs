@@ -28,7 +28,8 @@ namespace LibCheck.Forms {
 
         private void SearchDiag_ValueDetected() {
             try {
-                if (string.IsNullOrWhiteSpace(searchDiag.Value)) return;
+                if (string.IsNullOrWhiteSpace(searchDiag.Value))
+                    return;
                 searchDiag.SuspendOp(false);
                 timer2.Enabled = false;
                 Form? f = null;

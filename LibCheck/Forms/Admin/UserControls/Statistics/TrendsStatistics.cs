@@ -49,7 +49,8 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
         }
 
         private void cboxDateRange_SelectedIndexChanged(object sender, EventArgs e) {
-            if (isLoading) return;
+            if (isLoading)
+                return;
 
             to = CheckForSunday(DateTime.Now);
             switch (TrendsDateRangeCBox.SelectedIndex) {
@@ -82,7 +83,8 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
             SelectData(from, to);
         }
         private void BooksCListBox_ItemCheck(object? sender, ItemCheckEventArgs e) {
-            if (isLoading) return;
+            if (isLoading)
+                return;
             SelectData(from, to);
         }
 
@@ -109,7 +111,8 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
                     for (int i = 0; i < booksCListBox.Items.Count; i++) {
                         if (booksCListBox.GetItemChecked(i)) {
                             string? text = booksCListBox.Items[i].ToString();
-                            if (string.IsNullOrWhiteSpace(text)) continue;
+                            if (string.IsNullOrWhiteSpace(text))
+                                continue;
                             isbns.Add(text.Split(" ")[0]);
                         }
                     }
@@ -120,9 +123,11 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
 
             foreach (string isbn in isbns) {
                 Books? b = books.FirstOrDefault(b => isbn.Equals(b.ISBN));
-                if (b == null) continue;
+                if (b == null)
+                    continue;
 
-                if (string.IsNullOrWhiteSpace(b.Title)) continue;
+                if (string.IsNullOrWhiteSpace(b.Title))
+                    continue;
                 bookNames.Add(b.Title);
                 borrowRates.Add(records.Count(s => !string.IsNullOrEmpty(s.ISBN) &&
                                                  s.Category == Records.RecordStatus.BookBorrowed &&

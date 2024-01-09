@@ -1,7 +1,5 @@
-﻿namespace LibCheck.Forms
-{
-    partial class MainForm
-    {
+﻿namespace LibCheck.Forms {
+    partial class MainForm {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -11,10 +9,8 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -43,9 +39,10 @@
             TimeLabel.AutoSize = true;
             TimeLabel.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             TimeLabel.ForeColor = Color.White;
-            TimeLabel.Location = new Point(40, 16);
+            TimeLabel.Location = new Point(32, 13);
+            TimeLabel.Margin = new Padding(2, 0, 2, 0);
             TimeLabel.Name = "TimeLabel";
-            TimeLabel.Size = new Size(136, 31);
+            TimeLabel.Size = new Size(113, 25);
             TimeLabel.TabIndex = 0;
             TimeLabel.Text = "00:00:00 PM";
             // 
@@ -58,9 +55,10 @@
             ShowAdminButton.Font = new Font("Bell MT", 9F, FontStyle.Bold, GraphicsUnit.Point);
             ShowAdminButton.ForeColor = SystemColors.ActiveCaptionText;
             ShowAdminButton.Image = Properties.Resources.Librarian_Settings;
-            ShowAdminButton.Location = new Point(901, 11);
+            ShowAdminButton.Location = new Point(721, 9);
+            ShowAdminButton.Margin = new Padding(2, 2, 2, 2);
             ShowAdminButton.Name = "ShowAdminButton";
-            ShowAdminButton.Size = new Size(60, 60);
+            ShowAdminButton.Size = new Size(48, 48);
             ShowAdminButton.TabIndex = 1;
             ShowAdminButton.UseVisualStyleBackColor = false;
             ShowAdminButton.Click += ShowAdminButton_Click;
@@ -74,9 +72,9 @@
             panel1.Controls.Add(TimeLabel);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
-            panel1.Margin = new Padding(3, 2, 3, 2);
+            panel1.Margin = new Padding(2, 2, 2, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(986, 88);
+            panel1.Size = new Size(790, 71);
             panel1.TabIndex = 4;
             // 
             // DateLabel
@@ -84,9 +82,10 @@
             DateLabel.AutoSize = true;
             DateLabel.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             DateLabel.ForeColor = Color.White;
-            DateLabel.Location = new Point(40, 45);
+            DateLabel.Location = new Point(32, 36);
+            DateLabel.Margin = new Padding(2, 0, 2, 0);
             DateLabel.Name = "DateLabel";
-            DateLabel.Size = new Size(161, 25);
+            DateLabel.Size = new Size(131, 20);
             DateLabel.TabIndex = 2;
             DateLabel.Text = "mm DD/MM/YYYY";
             // 
@@ -99,9 +98,10 @@
             // StagePanel
             // 
             StagePanel.Dock = DockStyle.Fill;
-            StagePanel.Location = new Point(0, 88);
+            StagePanel.Location = new Point(0, 71);
+            StagePanel.Margin = new Padding(2, 2, 2, 2);
             StagePanel.Name = "StagePanel";
-            StagePanel.Size = new Size(986, 490);
+            StagePanel.Size = new Size(790, 398);
             StagePanel.TabIndex = 7;
             // 
             // timer2
@@ -112,16 +112,15 @@
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(120F, 120F);
-            AutoScaleMode = AutoScaleMode.Dpi;
+            AutoScaleMode = AutoScaleMode.Inherit;
             BackColor = Color.Navy;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(986, 578);
+            ClientSize = new Size(790, 469);
             Controls.Add(StagePanel);
             Controls.Add(panel1);
             DoubleBuffered = true;
-            Margin = new Padding(3, 2, 3, 2);
-            MinimumSize = new Size(1004, 625);
+            Margin = new Padding(2, 2, 2, 2);
+            MinimumSize = new Size(806, 508);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "LibCheck";

@@ -1,7 +1,5 @@
-﻿namespace LibCheck.Forms.SearchTools.UserControls
-{
-    partial class HistorySearchUC
-    {
+﻿namespace LibCheck.Forms.SearchTools.UserControls {
+    partial class HistorySearchUC {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -11,10 +9,8 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,8 +22,7 @@
         /// Required method for Designer support - do not modify 
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             groupBox1 = new GroupBox();
             BookRestoredCBox = new CheckBox();
             BookLDmgCBox = new CheckBox();
@@ -41,8 +36,12 @@
             StudentRB = new RadioButton();
             BookRB = new RadioButton();
             BrowseButton = new Button();
+            groupBox3 = new GroupBox();
+            CategoryRB = new RadioButton();
+            KeywordRB = new RadioButton();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -55,11 +54,12 @@
             groupBox1.Controls.Add(bookModCBox);
             groupBox1.Controls.Add(BookAddedCBox);
             groupBox1.Dock = DockStyle.Fill;
-            groupBox1.Location = new Point(0, 131);
+            groupBox1.Enabled = false;
+            groupBox1.Location = new Point(0, 234);
             groupBox1.Margin = new Padding(2);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(2);
-            groupBox1.Size = new Size(400, 280);
+            groupBox1.Size = new Size(400, 177);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Search By Category";
@@ -69,7 +69,7 @@
             BookRestoredCBox.AutoSize = true;
             BookRestoredCBox.Checked = true;
             BookRestoredCBox.CheckState = CheckState.Checked;
-            BookRestoredCBox.Location = new Point(43, 216);
+            BookRestoredCBox.Location = new Point(210, 126);
             BookRestoredCBox.Margin = new Padding(2);
             BookRestoredCBox.Name = "BookRestoredCBox";
             BookRestoredCBox.Size = new Size(125, 24);
@@ -83,7 +83,7 @@
             BookLDmgCBox.AutoSize = true;
             BookLDmgCBox.Checked = true;
             BookLDmgCBox.CheckState = CheckState.Checked;
-            BookLDmgCBox.Location = new Point(43, 188);
+            BookLDmgCBox.Location = new Point(210, 98);
             BookLDmgCBox.Margin = new Padding(2);
             BookLDmgCBox.Name = "BookLDmgCBox";
             BookLDmgCBox.Size = new Size(156, 24);
@@ -97,7 +97,7 @@
             BookBorrowedCBox.AutoSize = true;
             BookBorrowedCBox.Checked = true;
             BookBorrowedCBox.CheckState = CheckState.Checked;
-            BookBorrowedCBox.Location = new Point(43, 131);
+            BookBorrowedCBox.Location = new Point(210, 41);
             BookBorrowedCBox.Margin = new Padding(2);
             BookBorrowedCBox.Name = "BookBorrowedCBox";
             BookBorrowedCBox.Size = new Size(131, 24);
@@ -111,7 +111,7 @@
             BookReturnedCBox.AutoSize = true;
             BookReturnedCBox.Checked = true;
             BookReturnedCBox.CheckState = CheckState.Checked;
-            BookReturnedCBox.Location = new Point(43, 160);
+            BookReturnedCBox.Location = new Point(210, 70);
             BookReturnedCBox.Margin = new Padding(2);
             BookReturnedCBox.Name = "BookReturnedCBox";
             BookReturnedCBox.Size = new Size(126, 24);
@@ -169,9 +169,9 @@
             groupBox2.Controls.Add(BookRB);
             groupBox2.Controls.Add(BrowseButton);
             groupBox2.Dock = DockStyle.Top;
-            groupBox2.Location = new Point(0, 0);
+            groupBox2.Location = new Point(0, 119);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(400, 131);
+            groupBox2.Size = new Size(400, 115);
             groupBox2.TabIndex = 3;
             groupBox2.TabStop = false;
             groupBox2.Text = "Search Keyword";
@@ -179,7 +179,7 @@
             // keywordTextBox
             // 
             keywordTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            keywordTextBox.Location = new Point(34, 48);
+            keywordTextBox.Location = new Point(34, 36);
             keywordTextBox.Name = "keywordTextBox";
             keywordTextBox.Size = new Size(254, 27);
             keywordTextBox.TabIndex = 2;
@@ -188,7 +188,7 @@
             // StudentRB
             // 
             StudentRB.AutoSize = true;
-            StudentRB.Location = new Point(104, 85);
+            StudentRB.Location = new Point(104, 73);
             StudentRB.Name = "StudentRB";
             StudentRB.Size = new Size(78, 24);
             StudentRB.TabIndex = 1;
@@ -200,7 +200,7 @@
             // 
             BookRB.AutoSize = true;
             BookRB.Checked = true;
-            BookRB.Location = new Point(37, 85);
+            BookRB.Location = new Point(37, 73);
             BookRB.Name = "BookRB";
             BookRB.Size = new Size(61, 24);
             BookRB.TabIndex = 1;
@@ -212,7 +212,7 @@
             // BrowseButton
             // 
             BrowseButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            BrowseButton.Location = new Point(294, 47);
+            BrowseButton.Location = new Point(294, 35);
             BrowseButton.Name = "BrowseButton";
             BrowseButton.Size = new Size(75, 28);
             BrowseButton.TabIndex = 0;
@@ -220,12 +220,49 @@
             BrowseButton.UseVisualStyleBackColor = true;
             BrowseButton.Click += BrowseButton_Click;
             // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(CategoryRB);
+            groupBox3.Controls.Add(KeywordRB);
+            groupBox3.Dock = DockStyle.Top;
+            groupBox3.Location = new Point(0, 0);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(400, 119);
+            groupBox3.TabIndex = 19;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Search Criteria";
+            // 
+            // CategoryRB
+            // 
+            CategoryRB.AutoSize = true;
+            CategoryRB.Location = new Point(34, 66);
+            CategoryRB.Name = "CategoryRB";
+            CategoryRB.Size = new Size(155, 24);
+            CategoryRB.TabIndex = 5;
+            CategoryRB.Text = "Search by Category";
+            CategoryRB.UseVisualStyleBackColor = true;
+            CategoryRB.CheckedChanged += CriteriaRB_CheckedChanged;
+            // 
+            // KeywordRB
+            // 
+            KeywordRB.AutoSize = true;
+            KeywordRB.Checked = true;
+            KeywordRB.Location = new Point(34, 36);
+            KeywordRB.Name = "KeywordRB";
+            KeywordRB.Size = new Size(153, 24);
+            KeywordRB.TabIndex = 4;
+            KeywordRB.TabStop = true;
+            KeywordRB.Text = "Search by Keyword";
+            KeywordRB.UseVisualStyleBackColor = true;
+            KeywordRB.CheckedChanged += CriteriaRB_CheckedChanged;
+            // 
             // HistorySearchUC
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
             Controls.Add(groupBox1);
             Controls.Add(groupBox2);
+            Controls.Add(groupBox3);
             DoubleBuffered = true;
             Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             Margin = new Padding(2);
@@ -235,6 +272,8 @@
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -253,5 +292,8 @@
         private RadioButton StudentRB;
         private RadioButton BookRB;
         private Button BrowseButton;
+        private GroupBox groupBox3;
+        private RadioButton CategoryRB;
+        private RadioButton KeywordRB;
     }
 }

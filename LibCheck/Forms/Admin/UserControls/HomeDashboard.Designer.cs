@@ -98,7 +98,7 @@
             NBBLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             NBBLabel.Location = new Point(69, 35);
             NBBLabel.Name = "NBBLabel";
-            NBBLabel.Size = new Size(38, 46);
+            NBBLabel.Size = new Size(32, 37);
             NBBLabel.TabIndex = 1;
             NBBLabel.Text = "0";
             // 
@@ -108,7 +108,7 @@
             label1.AutoSize = true;
             label1.Location = new Point(21, 99);
             label1.Name = "label1";
-            label1.Size = new Size(201, 25);
+            label1.Size = new Size(160, 20);
             label1.TabIndex = 0;
             label1.Text = "Books Borrowed today";
             // 
@@ -139,7 +139,7 @@
             NBRLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             NBRLabel.Location = new Point(69, 35);
             NBRLabel.Name = "NBRLabel";
-            NBRLabel.Size = new Size(38, 46);
+            NBRLabel.Size = new Size(32, 37);
             NBRLabel.TabIndex = 2;
             NBRLabel.Text = "0";
             // 
@@ -149,7 +149,7 @@
             label2.AutoSize = true;
             label2.Location = new Point(21, 99);
             label2.Name = "label2";
-            label2.Size = new Size(195, 25);
+            label2.Size = new Size(155, 20);
             label2.TabIndex = 1;
             label2.Text = "Books Returned today";
             // 
@@ -193,7 +193,7 @@
             NotifsLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             NotifsLabel.Location = new Point(69, 35);
             NotifsLabel.Name = "NotifsLabel";
-            NotifsLabel.Size = new Size(38, 46);
+            NotifsLabel.Size = new Size(32, 37);
             NotifsLabel.TabIndex = 2;
             NotifsLabel.Text = "0";
             NotifsLabel.Click += NotifControls_Click;
@@ -204,7 +204,7 @@
             label4.AutoSize = true;
             label4.Location = new Point(21, 99);
             label4.Name = "label4";
-            label4.Size = new Size(119, 25);
+            label4.Size = new Size(94, 20);
             label4.TabIndex = 1;
             label4.Text = "Notifications";
             label4.Click += NotifControls_Click;
@@ -252,7 +252,7 @@
             CheckNotifLatestCBox.Location = new Point(37, 0);
             CheckNotifLatestCBox.Name = "CheckNotifLatestCBox";
             CheckNotifLatestCBox.Padding = new Padding(10, 0, 0, 0);
-            CheckNotifLatestCBox.Size = new Size(253, 42);
+            CheckNotifLatestCBox.Size = new Size(203, 42);
             CheckNotifLatestCBox.TabIndex = 0;
             CheckNotifLatestCBox.Text = "Check Latest Notification";
             CheckNotifLatestCBox.UseVisualStyleBackColor = true;
@@ -300,7 +300,7 @@
             doubleBufferedPanel2.Controls.Add(panel5);
             doubleBufferedPanel2.Controls.Add(panel6);
             doubleBufferedPanel2.Dock = DockStyle.Top;
-            doubleBufferedPanel2.Location = new Point(3, 28);
+            doubleBufferedPanel2.Location = new Point(3, 23);
             doubleBufferedPanel2.Name = "doubleBufferedPanel2";
             doubleBufferedPanel2.Size = new Size(854, 132);
             doubleBufferedPanel2.TabIndex = 2;
@@ -332,7 +332,7 @@
             StudentsLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             StudentsLabel.Location = new Point(69, 35);
             StudentsLabel.Name = "StudentsLabel";
-            StudentsLabel.Size = new Size(38, 46);
+            StudentsLabel.Size = new Size(32, 37);
             StudentsLabel.TabIndex = 2;
             StudentsLabel.Text = "0";
             // 
@@ -342,7 +342,7 @@
             label7.AutoSize = true;
             label7.Location = new Point(21, 99);
             label7.Name = "label7";
-            label7.Size = new Size(84, 25);
+            label7.Size = new Size(66, 20);
             label7.TabIndex = 1;
             label7.Text = "Students";
             // 
@@ -373,7 +373,7 @@
             BooksLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             BooksLabel.Location = new Point(69, 35);
             BooksLabel.Name = "BooksLabel";
-            BooksLabel.Size = new Size(38, 46);
+            BooksLabel.Size = new Size(32, 37);
             BooksLabel.TabIndex = 1;
             BooksLabel.Text = "0";
             // 
@@ -383,7 +383,7 @@
             label9.AutoSize = true;
             label9.Location = new Point(21, 99);
             label9.Name = "label9";
-            label9.Size = new Size(62, 25);
+            label9.Size = new Size(49, 20);
             label9.TabIndex = 0;
             label9.Text = "Books";
             // 
@@ -399,8 +399,7 @@
             // 
             // HomeDashboard
             // 
-            AutoScaleDimensions = new SizeF(120F, 120F);
-            AutoScaleMode = AutoScaleMode.Dpi;
+            AutoScaleMode = AutoScaleMode.None;
             BackColor = SystemColors.ActiveCaption;
             Controls.Add(MainPanel);
             Controls.Add(NotifPanelMain);

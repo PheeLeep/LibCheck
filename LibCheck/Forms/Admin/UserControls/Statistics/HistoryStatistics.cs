@@ -44,7 +44,8 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
         }
 
         private void TransactComboBox_SelectedIndexChanged(object sender, EventArgs e) {
-            if (isLoading) return;
+            if (isLoading)
+                return;
 
             to = CheckForSunday(DateTime.Now);
             switch (TransactComboBox.SelectedIndex) {
@@ -93,10 +94,13 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
         }
 
         private void SaveButton_Click(object sender, EventArgs e) {
-            if (Modules.AppContext.Current.MainForm == null) return;
+            if (Modules.AppContext.Current.MainForm == null)
+                return;
             object? obj = dataGridView1.DataSource;
-            if (obj == null) return;
-            if (saveFileDialog1.ShowDialog(this) != DialogResult.OK) return;
+            if (obj == null)
+                return;
+            if (saveFileDialog1.ShowDialog(this) != DialogResult.OK)
+                return;
             PleaseWait.RunInPleaseWait(Modules.AppContext.Current.MainForm, new Action(() => {
                 try {
                     List<Records> specificRecord = (List<Records>)obj;

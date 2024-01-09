@@ -98,7 +98,8 @@ namespace LibCheck.Forms.Admin.UserControls {
 
         private void SaveButton_Click(object sender, EventArgs e) {
             if (ParentForm == null || dataGridView1.DataSource == null ||
-                SFD.ShowDialog(this) != DialogResult.OK) return;
+                SFD.ShowDialog(this) != DialogResult.OK)
+                return;
             List<Logs> logs = (List<Logs>)dataGridView1.DataSource;
 
             PleaseWait.RunInPleaseWait(ParentForm, new Action(() => {

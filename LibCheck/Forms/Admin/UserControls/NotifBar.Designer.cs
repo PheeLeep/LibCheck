@@ -34,9 +34,10 @@
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            button1.Location = new Point(819, 0);
+            button1.Location = new Point(716, 0);
+            button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
-            button1.Size = new Size(41, 85);
+            button1.Size = new Size(36, 64);
             button1.TabIndex = 0;
             button1.Text = "X";
             button1.UseVisualStyleBackColor = true;
@@ -48,7 +49,7 @@
             CaptionLabel.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
             CaptionLabel.Location = new Point(0, 0);
             CaptionLabel.Name = "CaptionLabel";
-            CaptionLabel.Size = new Size(819, 37);
+            CaptionLabel.Size = new Size(716, 28);
             CaptionLabel.TabIndex = 1;
             CaptionLabel.Text = "(title)";
             CaptionLabel.TextAlign = ContentAlignment.MiddleLeft;
@@ -58,24 +59,24 @@
             TextLabel.AutoEllipsis = true;
             TextLabel.Dock = DockStyle.Fill;
             TextLabel.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            TextLabel.Location = new Point(0, 37);
+            TextLabel.Location = new Point(0, 28);
             TextLabel.Name = "TextLabel";
-            TextLabel.Size = new Size(819, 48);
+            TextLabel.Size = new Size(716, 36);
             TextLabel.TabIndex = 2;
             TextLabel.Text = "label1";
             TextLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // NotifBar
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(128, 128, 255);
             Controls.Add(TextLabel);
             Controls.Add(CaptionLabel);
             Controls.Add(button1);
             DoubleBuffered = true;
+            Margin = new Padding(3, 2, 3, 2);
             Name = "NotifBar";
-            Size = new Size(860, 85);
+            Size = new Size(752, 64);
             Load += NotifBar_Load;
             ResumeLayout(false);
         }
