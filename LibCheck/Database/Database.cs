@@ -45,7 +45,7 @@ namespace LibCheck.Database {
                 protectedByte = ProtectedData.Protect(Encoding.UTF8.GetBytes(CryptComp.ConvertToString(secString)),
                                                       null,
                                                       DataProtectionScope.CurrentUser);
-                Debug.Print(CryptComp.ConvertToString(secString));
+
                 Logger.Log(Logger.LogEnums.Info, "Database loaded");
             }
         }
