@@ -25,8 +25,13 @@ namespace LibCheck.Forms.Admin.UserControls {
             EmailService.EmailQueueChanged += EmailService_EmailQueueChanged;
             EmailQueueLabel.Text = EmailService.EmailQueueCount.ToString();
             CheckRecentEmails();
+            CheckEmailValidation();
             isLoaded = true;
             Logger.Log(Logger.LogEnums.Verbose, $"{GetType().Name} info loaded.");
+        }
+
+        private void CheckEmailValidation() {
+            EmailSignUpButton.Visible = !EmailService.IsInitialized;
         }
 
         private void EmailDashboard_Disposed(object? sender, EventArgs e) {
@@ -90,6 +95,24 @@ namespace LibCheck.Forms.Admin.UserControls {
                 MessageBox.Show(this, $"Failed to read email.\nCause: {ex.Message}",
                                 "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
+        }
+
+        private void EmailSignUpButton_Click(object sender, EventArgs e) {
+            PleaseWait.RunInPleaseWait(Modules.AppContext.Current.MainForm, new Action(() => {
+                try {
+                    PleaseWait.SetPWDText("Authorizing the email service... If the sign in does not take in a minute, it will cancel.");
+                    EmailService.Initialize();
+                } catch (AggregateException) {
+                    Invoke(new Action(() => {
+                        MessageBox.Show(this, "Failed to login for email service. Please try again later.",
+                                        "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }));
+                } finally {
+                    Invoke(new Action(() => {
+                        CheckEmailValidation();
+                    }));
+                }
+            }));
         }
     }
 }

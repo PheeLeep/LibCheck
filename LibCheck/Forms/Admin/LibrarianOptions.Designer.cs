@@ -55,16 +55,16 @@
             panel2 = new Panel();
             linkLabel2 = new LinkLabel();
             linkLabel1 = new LinkLabel();
+            MitLinkLabel = new LinkLabel();
+            linkLabel3 = new LinkLabel();
             PheeLeepLabel = new LinkLabel();
+            label7 = new Label();
+            label6 = new Label();
             label5 = new Label();
             label4 = new Label();
             label3 = new Label();
             SchoolNameLabel = new Label();
             pictureBox1 = new PictureBox();
-            label6 = new Label();
-            label7 = new Label();
-            linkLabel3 = new LinkLabel();
-            MitLinkLabel = new LinkLabel();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -423,20 +423,44 @@
             linkLabel2.AutoSize = true;
             linkLabel2.Location = new Point(223, 71);
             linkLabel2.Name = "linkLabel2";
-            linkLabel2.Size = new Size(30, 23);
+            linkLabel2.Size = new Size(112, 23);
             linkLabel2.TabIndex = 3;
             linkLabel2.TabStop = true;
-            linkLabel2.Text = "    ";
+            linkLabel2.Text = "CAMIILA0508";
+            linkLabel2.LinkClicked += linkLabel2_LinkClicked;
             // 
             // linkLabel1
             // 
             linkLabel1.AutoSize = true;
             linkLabel1.Location = new Point(223, 43);
             linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(30, 23);
+            linkLabel1.Size = new Size(62, 23);
             linkLabel1.TabIndex = 3;
             linkLabel1.TabStop = true;
-            linkLabel1.Text = "    ";
+            linkLabel1.Text = "ajaxel8";
+            linkLabel1.LinkClicked += linkLabel1_LinkClicked;
+            // 
+            // MitLinkLabel
+            // 
+            MitLinkLabel.AutoSize = true;
+            MitLinkLabel.Location = new Point(193, 140);
+            MitLinkLabel.Name = "MitLinkLabel";
+            MitLinkLabel.Size = new Size(99, 23);
+            MitLinkLabel.TabIndex = 3;
+            MitLinkLabel.TabStop = true;
+            MitLinkLabel.Text = "MIT License";
+            MitLinkLabel.LinkClicked += MitLinkLabel_LinkClicked;
+            // 
+            // linkLabel3
+            // 
+            linkLabel3.AutoSize = true;
+            linkLabel3.Location = new Point(223, 115);
+            linkLabel3.Name = "linkLabel3";
+            linkLabel3.Size = new Size(91, 23);
+            linkLabel3.TabIndex = 3;
+            linkLabel3.TabStop = true;
+            linkLabel3.Text = "(click here)";
+            linkLabel3.LinkClicked += linkLabel3_LinkClicked;
             // 
             // PheeLeepLabel
             // 
@@ -448,6 +472,24 @@
             PheeLeepLabel.TabStop = true;
             PheeLeepLabel.Text = "PheeLeep";
             PheeLeepLabel.LinkClicked += PheeLeepLabel_LinkClicked;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(49, 140);
+            label7.Name = "label7";
+            label7.Size = new Size(151, 23);
+            label7.TabIndex = 2;
+            label7.Text = "This repo is under ";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(49, 115);
+            label6.Name = "label6";
+            label6.Size = new Size(88, 23);
+            label6.TabIndex = 2;
+            label6.Text = "Repo Link:";
             // 
             // label5
             // 
@@ -497,46 +539,6 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(49, 115);
-            label6.Name = "label6";
-            label6.Size = new Size(88, 23);
-            label6.TabIndex = 2;
-            label6.Text = "Repo Link:";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(49, 140);
-            label7.Name = "label7";
-            label7.Size = new Size(151, 23);
-            label7.TabIndex = 2;
-            label7.Text = "This repo is under ";
-            // 
-            // linkLabel3
-            // 
-            linkLabel3.AutoSize = true;
-            linkLabel3.Location = new Point(223, 115);
-            linkLabel3.Name = "linkLabel3";
-            linkLabel3.Size = new Size(91, 23);
-            linkLabel3.TabIndex = 3;
-            linkLabel3.TabStop = true;
-            linkLabel3.Text = "(click here)";
-            linkLabel3.LinkClicked += linkLabel3_LinkClicked;
-            // 
-            // MitLinkLabel
-            // 
-            MitLinkLabel.AutoSize = true;
-            MitLinkLabel.Location = new Point(193, 140);
-            MitLinkLabel.Name = "MitLinkLabel";
-            MitLinkLabel.Size = new Size(99, 23);
-            MitLinkLabel.TabIndex = 3;
-            MitLinkLabel.TabStop = true;
-            MitLinkLabel.Text = "MIT License";
-            MitLinkLabel.LinkClicked += MitLinkLabel_LinkClicked;
             // 
             // LibrarianOptions
             // 

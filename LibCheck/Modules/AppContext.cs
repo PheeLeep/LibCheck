@@ -33,8 +33,6 @@ namespace LibCheck.Modules {
             if (!Database.Database.IsConnected)
                 throw new InvalidOperationException("Database is not connected.");
 
-            EmailService.Initialize();
-
             _mainForm = new MainForm();
             MainForm = _mainForm;
             _mainForm.Show();

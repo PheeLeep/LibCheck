@@ -185,5 +185,13 @@ namespace LibCheck.Forms.Admin {
         private void MitLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
             StartProcess("https://github.com/PheeLeep/LibCheck/blob/master/LICENSE.txt");
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            StartProcess("https://github.com/ajaxel8/");
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+            StartProcess("https://github.com/CAMIILA0508/");
+        }
     }
 }

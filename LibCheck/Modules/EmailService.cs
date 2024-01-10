@@ -3,6 +3,7 @@ using Google.Apis.Gmail.v1;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using LibCheck.Database.Tables;
+using LibCheck.Forms;
 using LibCheck.Modules.Security;
 using MimeKit;
 using System.Text;
@@ -95,39 +96,49 @@ namespace LibCheck.Modules {
         });
 
         internal static bool IsInitialized { get => service != null; }
+
         internal static void Initialize() {
             lock (_lock) {
-                try {
-                    if (IsInitialized) return;
-                    if (!Database.Database.IsConnected)
-                        throw new InvalidOperationException("Database must be connected before the email service.");
-                    Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+                CancellationTokenSource s = new CancellationTokenSource();
+                s.CancelAfter(60000);
+                Initialize(s.Token);
+            }
+        }
 
-                    string[] scopes = { GmailService.Scope.GmailSend };
-                    FileInfo clientFile = new FileInfo(Path.Combine(EnvVars.CredentialsInfo.FullName, "gmailclient.json"));
+        private static void Initialize(CancellationToken ct) {
+            try {
+                if (IsInitialized) return;
+                if (!Database.Database.IsConnected)
+                    throw new InvalidOperationException("Database must be connected before the email service.");
+                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-                    if (!clientFile.Exists)
-                        throw new FileNotFoundException("Email credentials not found!", clientFile.FullName);
+                string[] scopes = { GmailService.Scope.GmailSend };
+                FileInfo clientFile = new FileInfo(Path.Combine(EnvVars.CredentialsInfo.FullName, "gmailclient.json"));
 
-                    using (var stream = new FileStream(clientFile.FullName, FileMode.Open, FileAccess.Read)) {
-                        Logger.Log(Logger.LogEnums.Verbose, "Loading up the email credential.");
+                if (!clientFile.Exists)
+                    throw new FileNotFoundException("Email credentials not found!", clientFile.FullName);
 
-                        FileDataStore fds = new FileDataStore(EnvVars.CredentialsInfo.FullName, true);
-                        var creds = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStream(stream).Secrets,
-                                                                             scopes,
-                                                                             "user",
-                                                                             CancellationToken.None,
-                                                                             fds).Result;
-                        Logger.Log(Logger.LogEnums.Verbose, "Initializing email service...");
-                        service = new GmailService(new BaseClientService.Initializer {
-                            HttpClientInitializer = creds,
-                        });
-                        _loopTask.Start();
-                        Logger.Log(Logger.LogEnums.Info, "Email service initialized.");
-                    }
-                } catch (Exception ex) {
-                    CrashControl.SCRAM(ex);
+                using (var stream = new FileStream(clientFile.FullName, FileMode.Open, FileAccess.Read)) {
+                    Logger.Log(Logger.LogEnums.Verbose, "Loading up the email credential.");
+
+                    FileDataStore fds = new FileDataStore(EnvVars.CredentialsInfo.FullName, true);
+                    Logger.Log(Logger.LogEnums.Verbose, "Authorizing...");
+                    var creds = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStream(stream).Secrets,
+                                                                         scopes,
+                                                                         "user",
+                                                                         ct,
+                                                                         fds).Result;
+
+                    Logger.Log(Logger.LogEnums.Verbose, "Initializing email service...");
+                    service = new GmailService(new BaseClientService.Initializer {
+                        HttpClientInitializer = creds,
+                    });
+                    _loopTask.Start();
+                    Logger.Log(Logger.LogEnums.Info, "Email service initialized.");
                 }
+            }  catch (Exception ex) {
+                if (ex is AggregateException) throw;
+                CrashControl.SCRAM(ex);
             }
         }
 
