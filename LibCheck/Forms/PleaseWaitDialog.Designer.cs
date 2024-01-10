@@ -26,8 +26,11 @@
             label1 = new Label();
             pictureBox1 = new PictureBox();
             panel1 = new Panel();
+            panel2 = new Panel();
+            CancelBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -35,7 +38,7 @@
             label1.Dock = DockStyle.Fill;
             label1.Location = new Point(72, 0);
             label1.Name = "label1";
-            label1.Size = new Size(339, 133);
+            label1.Size = new Size(339, 100);
             label1.TabIndex = 0;
             label1.Text = "Test";
             label1.TextAlign = ContentAlignment.MiddleCenter;
@@ -60,12 +63,32 @@
             panel1.Size = new Size(72, 133);
             panel1.TabIndex = 2;
             // 
+            // panel2
+            // 
+            panel2.Controls.Add(CancelBtn);
+            panel2.Dock = DockStyle.Bottom;
+            panel2.Location = new Point(72, 100);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(339, 33);
+            panel2.TabIndex = 3;
+            // 
+            // CancelBtn
+            // 
+            CancelBtn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            CancelBtn.Location = new Point(255, 5);
+            CancelBtn.Name = "CancelBtn";
+            CancelBtn.Size = new Size(75, 23);
+            CancelBtn.TabIndex = 0;
+            CancelBtn.Text = "Cancel";
+            CancelBtn.UseVisualStyleBackColor = true;
+            // 
             // PleaseWaitDialog
             // 
             AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(411, 133);
             ControlBox = false;
             Controls.Add(label1);
+            Controls.Add(panel2);
             Controls.Add(panel1);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -80,6 +103,7 @@
             Load += PleaseWaitDialog_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel1.ResumeLayout(false);
+            panel2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -88,5 +112,7 @@
         private Label label1;
         private PictureBox pictureBox1;
         private Panel panel1;
+        private Panel panel2;
+        private Button CancelBtn;
     }
 }

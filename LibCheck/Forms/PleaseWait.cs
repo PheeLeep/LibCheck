@@ -16,7 +16,7 @@
         /// </summary>
         /// <param name="motherForm">A mother form to use for invocation.</param>
         /// <param name="a">A provided method.</param>
-        internal static void RunInPleaseWait(Form motherForm, Action a) {
+        internal static void RunInPleaseWait(Form motherForm, Action a, EventHandler? cancelHandler = null) {
             if (IsRunning) return;
             IsRunning = true;
 
@@ -26,7 +26,7 @@
                 // This task separates to prevent 'hang'-like response.
                 Task.Factory.StartNew(() => {
                     motherForm.Invoke(new Action(() => {
-                        pwd ??= new PleaseWaitDialog();
+                        pwd ??= new PleaseWaitDialog(cancelHandler);
                         pwd.CreateControl();
                         pwd.ShowDialog(motherForm);
                         pwd = null;

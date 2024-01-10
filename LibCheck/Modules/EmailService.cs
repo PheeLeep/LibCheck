@@ -97,15 +97,7 @@ namespace LibCheck.Modules {
 
         internal static bool IsInitialized { get => service != null; }
 
-        internal static void Initialize() {
-            lock (_lock) {
-                CancellationTokenSource s = new CancellationTokenSource();
-                s.CancelAfter(60000);
-                Initialize(s.Token);
-            }
-        }
-
-        private static void Initialize(CancellationToken ct) {
+        internal static void Initialize(CancellationToken ct) {
             try {
                 if (IsInitialized) return;
                 if (!Database.Database.IsConnected)

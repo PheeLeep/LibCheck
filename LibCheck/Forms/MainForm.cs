@@ -27,17 +27,6 @@ namespace LibCheck.Forms {
             SetDateTime();
             StagePanel.Controls.Add(searchDiag);
             searchDiag.Show();
-            PleaseWait.RunInPleaseWait(this, new Action(() => {
-                try {
-                    PleaseWait.SetPWDText("Authorizing the email service... If the sign in does not take in a minute, it will cancel.");
-                    EmailService.Initialize();
-                } catch (AggregateException) {
-                    Invoke(new Action(() => {
-                        MessageBox.Show(this, "Failed to login for email service. Please try again later.", 
-                                        "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }));
-                }
-            }));
         }
 
         private void SearchDiag_ValueDetected() {
