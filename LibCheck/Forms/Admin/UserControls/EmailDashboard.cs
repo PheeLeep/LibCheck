@@ -20,14 +20,17 @@ namespace LibCheck.Forms.Admin.UserControls {
             }
         }
 
-        private void EmailDashboard_Load(object sender, EventArgs e) {
-            Disposed += EmailDashboard_Disposed;
-            EmailService.EmailQueueChanged += EmailService_EmailQueueChanged;
+        internal void LoadItems() {
             EmailQueueLabel.Text = EmailService.EmailQueueCount.ToString();
             CheckRecentEmails();
             CheckEmailValidation();
             isLoaded = true;
             Logger.Log(Logger.LogEnums.Verbose, $"{GetType().Name} info loaded.");
+        }
+        private void EmailDashboard_Load(object sender, EventArgs e) {
+            Disposed += EmailDashboard_Disposed;
+            EmailService.EmailQueueChanged += EmailService_EmailQueueChanged;
+            LoadItems();
         }
 
         private void CheckEmailValidation() {

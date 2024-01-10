@@ -51,7 +51,7 @@
             TrendsPanel.Controls.Add(doubleBufferedPanel2);
             TrendsPanel.Dock = DockStyle.Fill;
             TrendsPanel.Location = new Point(0, 0);
-            TrendsPanel.Margin = new Padding(2, 2, 2, 2);
+            TrendsPanel.Margin = new Padding(2);
             TrendsPanel.Name = "TrendsPanel";
             TrendsPanel.Size = new Size(690, 378);
             TrendsPanel.TabIndex = 2;
@@ -62,7 +62,7 @@
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Dock = DockStyle.Fill;
             tabControl1.Location = new Point(270, 0);
-            tabControl1.Margin = new Padding(2, 2, 2, 2);
+            tabControl1.Margin = new Padding(2);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(420, 378);
@@ -72,9 +72,9 @@
             // 
             tabPage1.Controls.Add(BorrowPlot);
             tabPage1.Location = new Point(4, 24);
-            tabPage1.Margin = new Padding(2, 2, 2, 2);
+            tabPage1.Margin = new Padding(2);
             tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(2, 2, 2, 2);
+            tabPage1.Padding = new Padding(2);
             tabPage1.Size = new Size(412, 350);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Borrow Rate";
@@ -94,10 +94,10 @@
             // 
             tabPage2.Controls.Add(ReturnPlot);
             tabPage2.Location = new Point(4, 24);
-            tabPage2.Margin = new Padding(2, 2, 2, 2);
+            tabPage2.Margin = new Padding(2);
             tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(2, 2, 2, 2);
-            tabPage2.Size = new Size(411, 350);
+            tabPage2.Padding = new Padding(2);
+            tabPage2.Size = new Size(412, 350);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Return Rate";
             tabPage2.UseVisualStyleBackColor = true;
@@ -109,7 +109,7 @@
             ReturnPlot.Location = new Point(2, 2);
             ReturnPlot.Margin = new Padding(4, 3, 4, 3);
             ReturnPlot.Name = "ReturnPlot";
-            ReturnPlot.Size = new Size(407, 346);
+            ReturnPlot.Size = new Size(408, 346);
             ReturnPlot.TabIndex = 1;
             // 
             // doubleBufferedPanel2
@@ -119,7 +119,7 @@
             doubleBufferedPanel2.Controls.Add(groupBox1);
             doubleBufferedPanel2.Dock = DockStyle.Left;
             doubleBufferedPanel2.Location = new Point(0, 0);
-            doubleBufferedPanel2.Margin = new Padding(2, 2, 2, 2);
+            doubleBufferedPanel2.Margin = new Padding(2);
             doubleBufferedPanel2.Name = "doubleBufferedPanel2";
             doubleBufferedPanel2.Size = new Size(270, 378);
             doubleBufferedPanel2.TabIndex = 1;
@@ -131,9 +131,9 @@
             groupBox2.Dock = DockStyle.Fill;
             groupBox2.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox2.Location = new Point(0, 78);
-            groupBox2.Margin = new Padding(2, 2, 2, 2);
+            groupBox2.Margin = new Padding(2);
             groupBox2.Name = "groupBox2";
-            groupBox2.Padding = new Padding(2, 2, 2, 2);
+            groupBox2.Padding = new Padding(2);
             groupBox2.Size = new Size(270, 300);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
@@ -144,7 +144,7 @@
             booksCListBox.Dock = DockStyle.Fill;
             booksCListBox.FormattingEnabled = true;
             booksCListBox.Location = new Point(2, 46);
-            booksCListBox.Margin = new Padding(2, 2, 2, 2);
+            booksCListBox.Margin = new Padding(2);
             booksCListBox.Name = "booksCListBox";
             booksCListBox.Size = new Size(266, 252);
             booksCListBox.TabIndex = 1;
@@ -154,7 +154,7 @@
             checkBox1.AutoSize = true;
             checkBox1.Dock = DockStyle.Top;
             checkBox1.Location = new Point(2, 22);
-            checkBox1.Margin = new Padding(2, 2, 2, 2);
+            checkBox1.Margin = new Padding(2);
             checkBox1.Name = "checkBox1";
             checkBox1.Size = new Size(266, 24);
             checkBox1.TabIndex = 0;
@@ -169,9 +169,9 @@
             groupBox1.Dock = DockStyle.Top;
             groupBox1.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox1.Location = new Point(0, 0);
-            groupBox1.Margin = new Padding(2, 2, 2, 2);
+            groupBox1.Margin = new Padding(2);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(2, 2, 2, 2);
+            groupBox1.Padding = new Padding(2);
             groupBox1.Size = new Size(270, 78);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
@@ -186,7 +186,7 @@
             TrendsRefreshButton.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
             TrendsRefreshButton.Image = Properties.Resources.refresh_32px;
             TrendsRefreshButton.Location = new Point(18, 34);
-            TrendsRefreshButton.Margin = new Padding(2, 2, 2, 2);
+            TrendsRefreshButton.Margin = new Padding(2);
             TrendsRefreshButton.Name = "TrendsRefreshButton";
             TrendsRefreshButton.Size = new Size(26, 26);
             TrendsRefreshButton.TabIndex = 4;
@@ -197,9 +197,9 @@
             // 
             TrendsDateRangeCBox.DropDownStyle = ComboBoxStyle.DropDownList;
             TrendsDateRangeCBox.FormattingEnabled = true;
-            TrendsDateRangeCBox.Items.AddRange(new object[] { "Today", "7 days", "14 days", "1 month", "All Time", "Custom" });
+            TrendsDateRangeCBox.Items.AddRange(new object[] { "Today", "7 days", "14 days", "1 month", "Custom" });
             TrendsDateRangeCBox.Location = new Point(52, 34);
-            TrendsDateRangeCBox.Margin = new Padding(2, 2, 2, 2);
+            TrendsDateRangeCBox.Margin = new Padding(2);
             TrendsDateRangeCBox.Name = "TrendsDateRangeCBox";
             TrendsDateRangeCBox.Size = new Size(205, 27);
             TrendsDateRangeCBox.TabIndex = 0;
@@ -211,7 +211,7 @@
             BackColor = SystemColors.ActiveCaption;
             Controls.Add(TrendsPanel);
             DoubleBuffered = true;
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "TrendsStatistics";
             Size = new Size(690, 378);
             TrendsPanel.ResumeLayout(false);

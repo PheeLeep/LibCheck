@@ -77,7 +77,8 @@ namespace LibCheck.Forms {
         }
 
         private void EmailsButton_Click(object sender, EventArgs e) {
-            ChangeDashboards(emailDashboard1);
+            if (ChangeDashboards(emailDashboard1))
+                emailDashboard1.LoadItems();
         }
 
         private void LogsButton_Click(object sender, EventArgs e) {

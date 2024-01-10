@@ -138,11 +138,11 @@
             // 
             TransactComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             TransactComboBox.FormattingEnabled = true;
-            TransactComboBox.Items.AddRange(new object[] { "7 days", "14 days", "1 month", "All Time", "Custom" });
+            TransactComboBox.Items.AddRange(new object[] { "7 days", "14 days", "1 month", "Custom" });
             TransactComboBox.Location = new Point(57, 34);
             TransactComboBox.Margin = new Padding(2);
             TransactComboBox.Name = "TransactComboBox";
-            TransactComboBox.Size = new Size(205, 33);
+            TransactComboBox.Size = new Size(205, 27);
             TransactComboBox.TabIndex = 0;
             TransactComboBox.SelectedIndexChanged += TransactComboBox_SelectedIndexChanged;
             // 

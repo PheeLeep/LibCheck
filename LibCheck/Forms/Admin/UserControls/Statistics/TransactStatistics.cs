@@ -68,9 +68,6 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
                 case 2:
                     from = CheckForSunday(DateTime.Now.AddDays(-30));
                     break;
-                case 3:
-                    from = CheckForSunday(DateTime.Now.AddDays(-7));
-                    break;
             }
             SelectData(from, to);
         }

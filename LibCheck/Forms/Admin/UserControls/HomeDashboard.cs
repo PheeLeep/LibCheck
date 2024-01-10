@@ -32,10 +32,10 @@ namespace LibCheck.Forms.Admin.UserControls {
                                         whereCond: $"Category = {(int)Records.RecordStatus.BookBorrowed}" +
                                                    $" OR Category = {(int)Records.RecordStatus.BookReturned}") >= 0
                                         && infos != null) {
-                NBRLabel.Text = $"{infos.Count(s => s.DateOccurred == DateTime.Now &&
+                NBRLabel.Text = $"{infos.Count(s => s.DateOccurred.Date == DateTime.Now.Date &&
                                                     s.Category == Records.RecordStatus.BookReturned)}";
 
-                NBBLabel.Text = $"{infos.Count(s => s.DateOccurred == DateTime.Now &&
+                NBBLabel.Text = $"{infos.Count(s => s.DateOccurred.Date == DateTime.Now.Date &&
                                                   s.Category == Records.RecordStatus.BookBorrowed)}";
                 NotifsLabel.Text = $"{Notifs.Count()}";
                 List<NotifBar> notifs = new List<NotifBar>();

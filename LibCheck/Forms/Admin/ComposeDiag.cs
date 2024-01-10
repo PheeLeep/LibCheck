@@ -43,6 +43,17 @@ namespace LibCheck.Forms.Admin {
             }
         }
 
+        internal void SetSpecificEmail(string? emailAdd) {
+            if (string.IsNullOrWhiteSpace(emailAdd))
+                return;
+            List<Students>sR = students.Where(s => !string.IsNullOrWhiteSpace(s.EmailAddress) && s.EmailAddress.Equals(s.EmailAddress)).ToList();
+            if (sR.Count != 1)
+                return;
+            Students s = sR[0];
+            ToComboxBox.SelectedIndex = ToComboxBox.Items.IndexOf($"{s.EmailAddress} ({Miscellaneous.GenerateFullName(s)})");
+            ToComboxBox.Enabled = false;
+        }
+
         private void ComposeLabel_Click(object sender, EventArgs e) {
             if (recent != null) {
                 Close();

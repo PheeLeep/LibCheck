@@ -98,6 +98,7 @@ namespace LibCheck.Forms {
                 _diag = null;
             };
             _diag.Show();
+            _diag.SetSpecificEmail(student.EmailAddress);
         }
 
         private void StudentInfo_FormClosing(object sender, FormClosingEventArgs e) {

@@ -93,7 +93,8 @@ namespace LibCheck.Forms {
                         IsFemale = GenderCBox.SelectedIndex == 1,
                         FeePerOverdueDay = 5.00,
                         SchoolGUID = Guid.NewGuid().ToString(),
-                        SchoolName = SchoolNameTextBox.Text
+                        SchoolName = SchoolNameTextBox.Text,
+                        LibraryEmail = EmailTextBox.Text
                     };
 
                     byte[] salt = CryptComp.GenerateRNGBytes();
@@ -129,7 +130,7 @@ namespace LibCheck.Forms {
                             }
                         } catch (Exception ex) {
                             Invoke(new Action(() => {
-                                MessageBox.Show(this, $"{ex.Message}", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show(this, $"{ex.Message}", "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                             }));
                         }
                     }));

@@ -68,9 +68,6 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
                 case 2:
                     from = CheckForSunday(DateTime.Now.AddDays(-30));
                     break;
-                case 3:
-                    from = CheckForSunday(DateTime.Now.AddDays(-7));
-                    break;
             }
             SelectData(from, to);
         }
@@ -78,7 +75,7 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
         internal void SelectData(DateTime from, DateTime to) {
             List<Records> specificRecord = new List<Records>();
 
-            specificRecord.AddRange(records.Where(r => r.DateOccurred.Date >= from.Date && r.DateOccurred <= to.Date));
+            specificRecord.AddRange(records.Where(r => r.DateOccurred.Date >= from.Date && r.DateOccurred.Date <= to.Date));
             specificRecord.Reverse();
             dataGridView1.DataSource = specificRecord;
             ResetDGVColumns(dataGridView1);
