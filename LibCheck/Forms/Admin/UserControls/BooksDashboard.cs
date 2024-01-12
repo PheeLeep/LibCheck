@@ -47,6 +47,8 @@ namespace LibCheck.Forms.Admin.UserControls {
                 dataGridView1.Columns["Title"].Visible = true;
                 dataGridView1.Columns["Author"].Visible = true;
                 dataGridView1.Columns["Genre"].Visible = true;
+                dataGridView1.Columns["StudentID"].Visible = true;
+                dataGridView1.Columns["StudentID"].HeaderText = "Owner";
                 dataGridView1.Columns["SafeDatePublished"].Visible = true;
                 dataGridView1.Columns["SafeDatePublished"].HeaderText = "Date Published";
             }
@@ -114,6 +116,16 @@ namespace LibCheck.Forms.Admin.UserControls {
 
                 if (!Database.Database.Delete<Books>(isbn) || !Database.Database.Insert(r))
                     throw new InvalidOperationException("Couldn't remove a book from the database.");
+
+                string path = Path.Combine(EnvVars.BookImages.FullName, $"{Credentials.Librarian?.SchoolGUID}-{isbn}.jpg");
+                if (File.Exists(path)) {
+                    try {
+                        pictureBox1.Image = Image.FromFile(path);
+                    } catch (Exception ex) {
+                        Logger.Log(Logger.LogEnums.Warn, $"Failed to load image. ({ex.Message})");
+                    }
+                }
+
                 Logger.Log(Logger.LogEnums.Warn, "Book was deleted. Reloading...");
                 Load();
             } catch (Exception ex) {

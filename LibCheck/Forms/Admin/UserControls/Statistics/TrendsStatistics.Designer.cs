@@ -30,9 +30,13 @@
             tabPage2 = new TabPage();
             ReturnPlot = new ScottPlot.FormsPlot();
             doubleBufferedPanel2 = new Controls.DoubleBufferedPanel();
-            groupBox2 = new GroupBox();
+            tabControl2 = new TabControl();
+            tabPage3 = new TabPage();
             booksCListBox = new CheckedListBox();
             checkBox1 = new CheckBox();
+            tabPage4 = new TabPage();
+            studentsCheckListBox = new CheckedListBox();
+            checkBox2 = new CheckBox();
             groupBox1 = new GroupBox();
             TrendsRefreshButton = new Button();
             TrendsDateRangeCBox = new ComboBox();
@@ -41,7 +45,9 @@
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
             doubleBufferedPanel2.SuspendLayout();
-            groupBox2.SuspendLayout();
+            tabControl2.SuspendLayout();
+            tabPage3.SuspendLayout();
+            tabPage4.SuspendLayout();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -115,7 +121,7 @@
             // doubleBufferedPanel2
             // 
             doubleBufferedPanel2.BackColor = Color.FromArgb(128, 128, 255);
-            doubleBufferedPanel2.Controls.Add(groupBox2);
+            doubleBufferedPanel2.Controls.Add(tabControl2);
             doubleBufferedPanel2.Controls.Add(groupBox1);
             doubleBufferedPanel2.Dock = DockStyle.Left;
             doubleBufferedPanel2.Location = new Point(0, 0);
@@ -124,43 +130,88 @@
             doubleBufferedPanel2.Size = new Size(270, 378);
             doubleBufferedPanel2.TabIndex = 1;
             // 
-            // groupBox2
+            // tabControl2
             // 
-            groupBox2.Controls.Add(booksCListBox);
-            groupBox2.Controls.Add(checkBox1);
-            groupBox2.Dock = DockStyle.Fill;
-            groupBox2.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            groupBox2.Location = new Point(0, 78);
-            groupBox2.Margin = new Padding(2);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Padding = new Padding(2);
-            groupBox2.Size = new Size(270, 300);
-            groupBox2.TabIndex = 1;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Books";
+            tabControl2.Controls.Add(tabPage3);
+            tabControl2.Controls.Add(tabPage4);
+            tabControl2.Dock = DockStyle.Fill;
+            tabControl2.Location = new Point(0, 78);
+            tabControl2.Name = "tabControl2";
+            tabControl2.SelectedIndex = 0;
+            tabControl2.Size = new Size(270, 300);
+            tabControl2.TabIndex = 2;
+            tabControl2.SelectedIndexChanged += tabControl2_SelectedIndexChanged;
+            // 
+            // tabPage3
+            // 
+            tabPage3.Controls.Add(booksCListBox);
+            tabPage3.Controls.Add(checkBox1);
+            tabPage3.Location = new Point(4, 24);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Padding = new Padding(3);
+            tabPage3.Size = new Size(262, 272);
+            tabPage3.TabIndex = 0;
+            tabPage3.Text = "Books";
+            tabPage3.UseVisualStyleBackColor = true;
             // 
             // booksCListBox
             // 
             booksCListBox.Dock = DockStyle.Fill;
             booksCListBox.FormattingEnabled = true;
-            booksCListBox.Location = new Point(2, 46);
+            booksCListBox.Location = new Point(3, 22);
             booksCListBox.Margin = new Padding(2);
             booksCListBox.Name = "booksCListBox";
-            booksCListBox.Size = new Size(266, 252);
+            booksCListBox.Size = new Size(256, 247);
             booksCListBox.TabIndex = 1;
             // 
             // checkBox1
             // 
             checkBox1.AutoSize = true;
             checkBox1.Dock = DockStyle.Top;
-            checkBox1.Location = new Point(2, 22);
+            checkBox1.Location = new Point(3, 3);
             checkBox1.Margin = new Padding(2);
             checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(266, 24);
+            checkBox1.Size = new Size(256, 19);
             checkBox1.TabIndex = 0;
             checkBox1.Text = "All Books";
             checkBox1.UseVisualStyleBackColor = true;
             checkBox1.CheckedChanged += checkBox1_CheckedChanged;
+            // 
+            // tabPage4
+            // 
+            tabPage4.Controls.Add(studentsCheckListBox);
+            tabPage4.Controls.Add(checkBox2);
+            tabPage4.Location = new Point(4, 24);
+            tabPage4.Name = "tabPage4";
+            tabPage4.Padding = new Padding(3);
+            tabPage4.Size = new Size(262, 272);
+            tabPage4.TabIndex = 1;
+            tabPage4.Text = "Students";
+            tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // studentsCheckListBox
+            // 
+            studentsCheckListBox.Dock = DockStyle.Fill;
+            studentsCheckListBox.FormattingEnabled = true;
+            studentsCheckListBox.Location = new Point(3, 22);
+            studentsCheckListBox.Margin = new Padding(2);
+            studentsCheckListBox.Name = "studentsCheckListBox";
+            studentsCheckListBox.Size = new Size(256, 247);
+            studentsCheckListBox.TabIndex = 3;
+            studentsCheckListBox.ItemCheck += BooksCListBox_ItemCheck;
+            // 
+            // checkBox2
+            // 
+            checkBox2.AutoSize = true;
+            checkBox2.Dock = DockStyle.Top;
+            checkBox2.Location = new Point(3, 3);
+            checkBox2.Margin = new Padding(2);
+            checkBox2.Name = "checkBox2";
+            checkBox2.Size = new Size(256, 19);
+            checkBox2.TabIndex = 2;
+            checkBox2.Text = "All Students";
+            checkBox2.UseVisualStyleBackColor = true;
+            checkBox2.CheckedChanged += checkBox2_CheckedChanged;
             // 
             // groupBox1
             // 
@@ -219,8 +270,11 @@
             tabPage1.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
             doubleBufferedPanel2.ResumeLayout(false);
-            groupBox2.ResumeLayout(false);
-            groupBox2.PerformLayout();
+            tabControl2.ResumeLayout(false);
+            tabPage3.ResumeLayout(false);
+            tabPage3.PerformLayout();
+            tabPage4.ResumeLayout(false);
+            tabPage4.PerformLayout();
             groupBox1.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -234,11 +288,15 @@
         private TabPage tabPage2;
         private ScottPlot.FormsPlot ReturnPlot;
         private Controls.DoubleBufferedPanel doubleBufferedPanel2;
-        private GroupBox groupBox2;
         private CheckedListBox booksCListBox;
         private CheckBox checkBox1;
         private GroupBox groupBox1;
         private Button TrendsRefreshButton;
         private ComboBox TrendsDateRangeCBox;
+        private TabControl tabControl2;
+        private TabPage tabPage3;
+        private TabPage tabPage4;
+        private CheckedListBox studentsCheckListBox;
+        private CheckBox checkBox2;
     }
 }

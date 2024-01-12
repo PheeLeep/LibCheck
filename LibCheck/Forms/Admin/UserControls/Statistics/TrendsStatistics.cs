@@ -29,6 +29,7 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
 
         internal void LoadData(List<Students> students, List<Books> books, List<Records> records) {
             booksCListBox.Items.Clear();
+            studentsCheckListBox.Items.Clear();
             this.records.Clear();
             this.records = records;
 
@@ -42,10 +43,17 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
                 booksCListBox.Items.Add($"{books[i].ISBN} ({books[i].Title})");
             for (int i = 0; i < booksCListBox.Items.Count; i++)
                 booksCListBox.SetItemChecked(i, true);
+
+            for (int i = 0; i < students.Count; i++)
+                studentsCheckListBox.Items.Add($"{students[i].StudentID} ({GenerateFullName(students[i])})");
+            for (int i = 0; i < studentsCheckListBox.Items.Count; i++)
+                studentsCheckListBox.SetItemChecked(i, true);
+
             checkBox1.Checked = true;
+            checkBox2.Checked = true;
 
             isLoading = false;
-            TrendsDateRangeCBox.SelectedIndex = 0;
+            tabControl2.SelectedIndex = 0;
         }
 
         private void cboxDateRange_SelectedIndexChanged(object sender, EventArgs e) {
@@ -97,20 +105,79 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
         }
 
         internal void SelectData(DateTime from, DateTime to) {
-            List<string> bookNames = new List<string>();
             List<double> borrowRates = new List<double>();
             List<double> returnRates = new List<double>();
+            if (tabControl2.SelectedTab == tabPage3) {
+                List<string> bookNames = new List<string>();
 
-            List<string> isbns = new List<string>();
+                List<string> isbns = new List<string>();
+
+                try {
+                    Invoke(new Action(() => {
+                        for (int i = 0; i < booksCListBox.Items.Count; i++) {
+                            if (booksCListBox.GetItemChecked(i)) {
+                                string? text = booksCListBox.Items[i].ToString();
+                                if (string.IsNullOrWhiteSpace(text))
+                                    continue;
+                                isbns.Add(text.Split(" ")[0]);
+                            }
+                        }
+                    }));
+                } catch {
+                    // Ignore
+                }
+
+                foreach (string isbn in isbns) {
+                    Books? b = books.FirstOrDefault(b => isbn.Equals(b.ISBN));
+                    if (b == null)
+                        continue;
+
+                    if (string.IsNullOrWhiteSpace(b.Title))
+                        continue;
+                    bookNames.Add(b.Title);
+                    borrowRates.Add(records.Count(s => !string.IsNullOrEmpty(s.ISBN) &&
+                                                     s.Category == Records.RecordStatus.BookBorrowed &&
+                                                     s.DateOccurred.Date >= from.Date && s.DateOccurred.Date <= to.Date &&
+                                                     s.ISBN.Equals(b.ISBN)));
+                    returnRates.Add(records.Count(s => !string.IsNullOrEmpty(s.ISBN) &&
+                                                     s.Category == Records.RecordStatus.BookReturned &&
+                                                     s.DateOccurred.Date >= from.Date && s.DateOccurred.Date <= to.Date &&
+                                                     s.ISBN.Equals(b.ISBN)));
+
+                }
+
+
+
+                try {
+                    Invoke(new Action(() => {
+
+                        string range = to.Date == from.Date ? "Today" : $"{from:dd/MM/yyyy}-{to:dd/MM/yyyy}";
+
+                        ConstructChart(BorrowPlot, false, new double[][] { borrowRates.ToArray() },
+                                        bookNames.ToArray(), $"Borrow Rate Trend ({range})",
+                                        "Books", "Borrow Rate");
+
+                        ConstructChart(ReturnPlot, false, new double[][] { returnRates.ToArray() },
+                                       bookNames.ToArray(), $"Return Rate Trend ({range})",
+                                        "Books", "Borrow Rate");
+
+                    }));
+                } catch {
+                    // Ignore
+                }
+                return;
+            }
+            List<string> studentNames = new List<string>();
+            List<string> sIDs = new List<string>();
 
             try {
                 Invoke(new Action(() => {
-                    for (int i = 0; i < booksCListBox.Items.Count; i++) {
-                        if (booksCListBox.GetItemChecked(i)) {
-                            string? text = booksCListBox.Items[i].ToString();
+                    for (int i = 0; i < studentsCheckListBox.Items.Count; i++) {
+                        if (studentsCheckListBox.GetItemChecked(i)) {
+                            string? text = studentsCheckListBox.Items[i].ToString();
                             if (string.IsNullOrWhiteSpace(text))
                                 continue;
-                            isbns.Add(text.Split(" ")[0]);
+                            sIDs.Add(text.Split(" ")[0]);
                         }
                     }
                 }));
@@ -118,22 +185,20 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
                 // Ignore
             }
 
-            foreach (string isbn in isbns) {
-                Books? b = books.FirstOrDefault(b => isbn.Equals(b.ISBN));
-                if (b == null)
+            foreach (string sID in sIDs) {
+                Students? ss = students.FirstOrDefault(b => !string.IsNullOrWhiteSpace(b.StudentID) && b.StudentID.Equals(sID));
+                if (ss == null)
                     continue;
 
-                if (string.IsNullOrWhiteSpace(b.Title))
-                    continue;
-                bookNames.Add(b.Title);
-                borrowRates.Add(records.Count(s => !string.IsNullOrEmpty(s.ISBN) &&
+                studentNames.Add(GenerateFullName(ss));
+                borrowRates.Add(records.Count(s => !string.IsNullOrEmpty(s.StudentID) &&
                                                  s.Category == Records.RecordStatus.BookBorrowed &&
                                                  s.DateOccurred.Date >= from.Date && s.DateOccurred.Date <= to.Date &&
-                                                 s.ISBN.Equals(b.ISBN)));
-                returnRates.Add(records.Count(s => !string.IsNullOrEmpty(s.ISBN) &&
+                                                 s.StudentID.Equals(ss.StudentID)));
+                returnRates.Add(records.Count(s => !string.IsNullOrEmpty(s.StudentID) &&
                                                  s.Category == Records.RecordStatus.BookReturned &&
                                                  s.DateOccurred.Date >= from.Date && s.DateOccurred.Date <= to.Date &&
-                                                 s.ISBN.Equals(b.ISBN)));
+                                                 s.StudentID.Equals(ss.StudentID)));
 
             }
 
@@ -145,17 +210,18 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
                     string range = to.Date == from.Date ? "Today" : $"{from:dd/MM/yyyy}-{to:dd/MM/yyyy}";
 
                     ConstructChart(BorrowPlot, false, new double[][] { borrowRates.ToArray() },
-                                    bookNames.ToArray(), $"Borrow Rate Trend ({range})",
-                                    "Books", "Borrow Rate");
+                                    studentNames.ToArray(), $"Borrow Rate Trend ({range})",
+                                    "Students", "Borrow Rate");
 
                     ConstructChart(ReturnPlot, false, new double[][] { returnRates.ToArray() },
-                                   bookNames.ToArray(), $"Return Rate Trend ({range})",
-                                    "Books", "Borrow Rate");
+                                   studentNames.ToArray(), $"Return Rate Trend ({range})",
+                                    "Students", "Borrow Rate");
 
                 }));
             } catch {
                 // Ignore
             }
+
         }
 
         private void TrendsRefreshButton_Click(object sender, EventArgs e) {
@@ -167,6 +233,21 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
                 }
                 ((StatisticsDashboard)uc).LoadData();
                 break;
+            }
+        }
+
+        private void tabControl2_SelectedIndexChanged(object sender, EventArgs e) {
+            cboxDateRange_SelectedIndexChanged(sender, e);
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e) {
+            studentsCheckListBox.Enabled = !checkBox2.Checked;
+            if (checkBox2.Checked && studentsCheckListBox.CheckedItems.Count != students.Count) {
+                isLoading = true;
+                for (int i = 0; i < studentsCheckListBox.Items.Count; i++)
+                    studentsCheckListBox.SetItemChecked(i, true);
+                isLoading = false;
+                SelectData(from, to);
             }
         }
     }

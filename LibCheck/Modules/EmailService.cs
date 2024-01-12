@@ -36,7 +36,7 @@ namespace LibCheck.Modules {
                 if (Database.Database.Read(out List<Books>? books, whereCond: $"StudentID <> '(none)'") > 0
                         && books != null) {
 
-                    DateTime currentDate = DateTime.Now;
+                    DateTime currentDate = DateTime.Now.Date;
                     foreach (Books b in books) {
                         if (b.DateToReturn != null) {
                             if (Database.Database.Read(out List<Students>? s, whereCond: $"StudentID = '{b.StudentID}'") <= 0

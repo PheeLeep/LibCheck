@@ -24,14 +24,14 @@
         /// </summary>
         private void InitializeComponent() {
             BookGroupBox = new GroupBox();
+            ISBNComboBox = new ComboBox();
             BookTitleLabel = new Label();
             BookBrowseBtn = new Button();
-            ISBNTextBox = new TextBox();
             label1 = new Label();
             groupBox1 = new GroupBox();
+            studIDComboBox = new ComboBox();
             StudNameLabel = new Label();
             StudBrowseBtn = new Button();
-            StudIDTextBox = new TextBox();
             label3 = new Label();
             panel1 = new Panel();
             ExecuteButton = new Button();
@@ -55,9 +55,9 @@
             // BookGroupBox
             // 
             BookGroupBox.BackColor = Color.CornflowerBlue;
+            BookGroupBox.Controls.Add(ISBNComboBox);
             BookGroupBox.Controls.Add(BookTitleLabel);
             BookGroupBox.Controls.Add(BookBrowseBtn);
-            BookGroupBox.Controls.Add(ISBNTextBox);
             BookGroupBox.Controls.Add(label1);
             BookGroupBox.Dock = DockStyle.Top;
             BookGroupBox.Location = new Point(0, 0);
@@ -66,6 +66,16 @@
             BookGroupBox.TabIndex = 0;
             BookGroupBox.TabStop = false;
             BookGroupBox.Text = "Book";
+            // 
+            // ISBNComboBox
+            // 
+            ISBNComboBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            ISBNComboBox.FormattingEnabled = true;
+            ISBNComboBox.Location = new Point(95, 50);
+            ISBNComboBox.Name = "ISBNComboBox";
+            ISBNComboBox.Size = new Size(315, 26);
+            ISBNComboBox.TabIndex = 4;
+            ISBNComboBox.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // BookTitleLabel
             // 
@@ -91,15 +101,6 @@
             BookBrowseBtn.UseVisualStyleBackColor = false;
             BookBrowseBtn.Click += BookBrowseBtn_Click;
             // 
-            // ISBNTextBox
-            // 
-            ISBNTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            ISBNTextBox.Location = new Point(95, 50);
-            ISBNTextBox.Name = "ISBNTextBox";
-            ISBNTextBox.ReadOnly = true;
-            ISBNTextBox.Size = new Size(315, 25);
-            ISBNTextBox.TabIndex = 1;
-            // 
             // label1
             // 
             label1.AutoSize = true;
@@ -112,9 +113,9 @@
             // groupBox1
             // 
             groupBox1.BackColor = Color.CornflowerBlue;
+            groupBox1.Controls.Add(studIDComboBox);
             groupBox1.Controls.Add(StudNameLabel);
             groupBox1.Controls.Add(StudBrowseBtn);
-            groupBox1.Controls.Add(StudIDTextBox);
             groupBox1.Controls.Add(label3);
             groupBox1.Dock = DockStyle.Top;
             groupBox1.ForeColor = Color.Black;
@@ -124,6 +125,16 @@
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             groupBox1.Text = "Student";
+            // 
+            // studIDComboBox
+            // 
+            studIDComboBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            studIDComboBox.FormattingEnabled = true;
+            studIDComboBox.Location = new Point(95, 50);
+            studIDComboBox.Name = "studIDComboBox";
+            studIDComboBox.Size = new Size(315, 26);
+            studIDComboBox.TabIndex = 4;
+            studIDComboBox.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // StudNameLabel
             // 
@@ -148,15 +159,6 @@
             StudBrowseBtn.Text = "Browse";
             StudBrowseBtn.UseVisualStyleBackColor = false;
             StudBrowseBtn.Click += StudBrowseBtn_Click;
-            // 
-            // StudIDTextBox
-            // 
-            StudIDTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            StudIDTextBox.Location = new Point(95, 50);
-            StudIDTextBox.Name = "StudIDTextBox";
-            StudIDTextBox.ReadOnly = true;
-            StudIDTextBox.Size = new Size(315, 25);
-            StudIDTextBox.TabIndex = 1;
             // 
             // label3
             // 
@@ -311,13 +313,11 @@
 
         private GroupBox BookGroupBox;
         private Label label1;
-        private TextBox ISBNTextBox;
         private Button BookBrowseBtn;
         private Label BookTitleLabel;
         private GroupBox groupBox1;
         private Label StudNameLabel;
         private Button StudBrowseBtn;
-        private TextBox StudIDTextBox;
         private Label label3;
         private Panel panel1;
         private Button ExecuteButton;
@@ -329,5 +329,7 @@
         private Label ReturnLabel;
         private GroupBox groupBox2;
         private RichTextBox richTextBox1;
+        private ComboBox ISBNComboBox;
+        private ComboBox studIDComboBox;
     }
 }

@@ -78,16 +78,6 @@ namespace LibCheck.Forms.Admin {
                 if (!CheckInformation())
                     return;
 
-                string path = Path.Combine(EnvVars.BookImages.FullName, $"{Credentials.Librarian?.SchoolGUID}-{book.ISBN}.jpg");
-
-                if (mode == DatabaseMode.Update && _onPBoxChanged && File.Exists(path)) {
-                    try {
-                        File.Delete(path);
-                    } catch (Exception ex) {
-                        Logger.Log(Logger.LogEnums.Warn, $"Failed to delete image. ({ex.Message})");
-                    }
-                }
-
                 book.ISBN = ISBNTextBox.Text;
                 book.Title = TitleTextBox.Text;
                 book.Author = AuthorTextBox.Text;
@@ -96,8 +86,20 @@ namespace LibCheck.Forms.Admin {
                 book.Description = DescTextBox.Text;
                 book.Genre = genreComboBox.Items[genreComboBox.SelectedIndex].ToString();
 
+
+                string path = Path.Combine(EnvVars.BookImages.FullName, $"{Credentials.Librarian?.SchoolGUID}-{book.ISBN}.jpg");
+
                 if (_onPBoxChanged) {
                     try {
+
+                        if (File.Exists(path)) {
+                            try {
+                                File.Delete(path);
+                            } catch (Exception ex) {
+                                Logger.Log(Logger.LogEnums.Warn, $"Failed to delete image. ({ex.Message})");
+                            }
+                        }
+
                         if (!EnvVars.BookImages.Exists)
                             EnvVars.BookImages.Create();
                         pictureBox1.Image?.Save(path, System.Drawing.Imaging.ImageFormat.Jpeg);
@@ -167,7 +169,8 @@ namespace LibCheck.Forms.Admin {
         }
 
         private void RemoveImageButton_Click(object sender, EventArgs e) {
-            if (pictureBox1.Image == null) return;
+            if (pictureBox1.Image == null)
+                return;
             pictureBox1.Image.Dispose();
             pictureBox1.Image = null;
             _onPBoxChanged = true;

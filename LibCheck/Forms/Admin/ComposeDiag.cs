@@ -46,7 +46,7 @@ namespace LibCheck.Forms.Admin {
         internal void SetSpecificEmail(string? emailAdd) {
             if (string.IsNullOrWhiteSpace(emailAdd))
                 return;
-            List<Students>sR = students.Where(s => !string.IsNullOrWhiteSpace(s.EmailAddress) && s.EmailAddress.Equals(s.EmailAddress)).ToList();
+            List<Students>sR = students.Where(s => !string.IsNullOrWhiteSpace(s.EmailAddress) && s.EmailAddress.Equals(emailAdd)).ToList();
             if (sR.Count != 1)
                 return;
             Students s = sR[0];

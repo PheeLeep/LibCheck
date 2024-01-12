@@ -82,7 +82,8 @@ namespace LibCheck.Forms {
         }
 
         private void LogsButton_Click(object sender, EventArgs e) {
-            ChangeDashboards(logsDashboard1);
+            if (ChangeDashboards(logsDashboard1))
+                logsDashboard1.Reload();
         }
 
         private void StatsButton_Click(object sender, EventArgs e) {

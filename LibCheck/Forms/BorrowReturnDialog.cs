@@ -19,6 +19,14 @@ namespace LibCheck.Forms {
             InitializeComponent();
             this.isBorrow = isBorrow;
 
+            if (Database.Database.Read(out List<Books>? books, whereCond: $"StudentID = '{(isBorrow ? "(none)" : studentID)}'") >= 0 && books != null)
+                foreach (Books book in books)
+                    ISBNComboBox.Items.Add(book.ISBN);
+
+            if (Database.Database.Read(out List<Students>? students) >= 0 && students != null)
+                foreach (Students student in students)
+                    studIDComboBox.Items.Add(student.StudentID);
+
             if (!string.IsNullOrWhiteSpace(isbn)) {
                 lockISBNControls = true;
                 LoadStudBookInfo(typeof(Books), isbn);
@@ -42,10 +50,11 @@ namespace LibCheck.Forms {
                 if (isBorrow && !string.IsNullOrWhiteSpace(book.StudentID) && !book.StudentID.Equals("(none)"))
                     throw new BookNotFoundException("This book is currently borrowed.", book.ISBN);
 
-                ISBNTextBox.Text = book.ISBN;
+                ISBNComboBox.Text = book.ISBN;
                 BookTitleLabel.Text = $"Title: {book.Title}";
 
-                if (!string.IsNullOrWhiteSpace(book.StudentID) && !book.StudentID.Equals("(none)")) {
+                if (!string.IsNullOrWhiteSpace(book.StudentID) && !book.StudentID.Equals("(none)") &&
+                     book.StudentID.Equals(student?.StudentID)) {
                     if (book.DateToReturn == null)
                         throw new InvalidOperationException("Illegal data found.");
 
@@ -83,7 +92,7 @@ namespace LibCheck.Forms {
             if (Database.Database.Read(out List<Students>? studInfo, whereCond: $"StudentID = '{val}'") <= 0 || studInfo == null)
                 throw new StudentNotFoundException(val);
             student = studInfo[0];
-            StudIDTextBox.Text = student.StudentID;
+            studIDComboBox.Text = student.StudentID;
             StudNameLabel.Text = $"Name: {Miscellaneous.GenerateFullName(student, true)}";
         }
 
@@ -114,7 +123,7 @@ namespace LibCheck.Forms {
         private void AcquireData(SearchDialog.SearchType t) {
             if (t == SearchDialog.SearchType.All)
                 return;
-            using (SearchDialog sd = new SearchDialog(t, false, false)) {
+            using (SearchDialog sd = new SearchDialog(t, false, true)) {
                 sd.ShowDialog(this);
                 if (string.IsNullOrWhiteSpace(sd.Value))
                     return;
@@ -137,7 +146,7 @@ namespace LibCheck.Forms {
                     if (!string.IsNullOrWhiteSpace(book.StudentID) && !book.StudentID.Equals("(none)"))
                         throw new InvalidOperationException("This book is already borrowed by someone.");
 
-                    if (Database.Database.Read<Books>(out _, whereCond: $"StudentID = {student.StudentID}") == 3)
+                    if (Database.Database.Read<Books>(out _, whereCond: $"StudentID = '{student.StudentID}'") == 3)
                         throw new InvalidOperationException("This student reached its book borrowed limit.");
 
                     book.DateToReturn = DateBorrowDTP.Value;
@@ -185,7 +194,7 @@ namespace LibCheck.Forms {
                         throw new InvalidOperationException("This book was borrowed by someone that supposed to return it.");
                 }
 
-                if (DateTime.Now > book.DateToReturn &&
+                if (DateTime.Now.Date > book.SafeDateToReturn &&
                     MessageBox.Show(this, "The student must pay an overdue fee before you proceed. Continue?"
                                           , "", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
                     return;
@@ -224,6 +233,25 @@ namespace LibCheck.Forms {
             if (DateBorrowDTP.Value.DayOfWeek == DayOfWeek.Sunday)
                 DateBorrowDTP.Value = DateBorrowDTP.Value.AddDays(1);
 
+        }
+
+        private void TextBoxes_TextChanged(object sender, EventArgs e) {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) {
+            if (sender is ComboBox tx && tx.Enabled) {
+                SearchDialog.SearchType t = tx.Name.Equals(ISBNComboBox.Name) ? SearchDialog.SearchType.Book :
+                                                                                SearchDialog.SearchType.Student;
+
+                try {
+                    LoadStudBookInfo(t == SearchDialog.SearchType.Student ? typeof(Students) : typeof(Books), tx.Text);
+                } catch {
+                    // Ignore
+                    string s = t == SearchDialog.SearchType.Book ? "Title: " : "Name: ";
+                    (t == SearchDialog.SearchType.Book ? BookTitleLabel : StudNameLabel).Text = s;
+                }
+            }
         }
     }
 }
