@@ -96,7 +96,7 @@ namespace LibCheck.Forms {
             if (book.IsLostOrDamaged && !string.IsNullOrWhiteSpace(book.StudentID) && !book.StudentID.Equals("(none)"))
                 r.StudentID = book.StudentID;
 
-            if (!Database.Database.Update(book) || !Database.Database.Update(r)) {
+            if (!Database.Database.Update(book) || !Database.Database.Insert(r)) {
                 MessageBox.Show(this, "Failed to mark/unmark the book.", "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 return;
             }
