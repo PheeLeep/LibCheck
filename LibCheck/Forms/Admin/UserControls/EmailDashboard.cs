@@ -101,24 +101,7 @@ namespace LibCheck.Forms.Admin.UserControls {
         }
 
         private void EmailSignUpButton_Click(object sender, EventArgs e) {
-            CancellationTokenSource sauce = new CancellationTokenSource();
-            void cancelAct(object? s, EventArgs ea) {
-                if (!sauce.IsCancellationRequested)
-                    sauce.Cancel();
-            }
-
-            PleaseWait.RunInPleaseWait(Modules.AppContext.Current.MainForm, new Action(() => {
-                try {
-                    PleaseWait.SetPWDText("Authorizing the email service... If the sign in does not take in a minute, it will cancel.");
-                    EmailService.Initialize(sauce.Token);
-                } catch (AggregateException) {
-                    this.Invoke(new Action(() => {
-                        MessageBox.Show(this, "Failed to login for email service. Please try again later.",
-                                        "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }));
-             
-                }
-            }), cancelAct);
+            EmailService.Initialize(Modules.AppContext.Current.MainForm);
         }
     }
 }

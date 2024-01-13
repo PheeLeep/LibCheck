@@ -114,10 +114,10 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
                 SearchWindow sw = new SearchWindow();
                 HistorySearchUC hsuc = new HistorySearchUC();
                 sw.Controls.Add(hsuc);
-                sw.SearchWhereCondition += Sw_SearchWhereCondition;
+                sw.SearchWhereCondition += Sw_SearchWhereCondition; 
                 sw.FormClosing += (s, e) => {
                     sw.SearchWhereCondition -= Sw_SearchWhereCondition;
-                    Sw_SearchWhereCondition("");
+                    Sw_SearchWhereCondition(null);
                 };
                 hsuc.Dock = DockStyle.Fill;
                 hsuc.CreateControl();
@@ -127,11 +127,9 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
             }
         }
 
-        private void Sw_SearchWhereCondition(string whereCond) {
-            if (!string.IsNullOrWhiteSpace(whereCond)
-                 && Database.Database.Read(out List<Records>? specRecords, whereCond: whereCond) >= 0
-                 && specRecords != null) {
-                records = specRecords;
+        private void Sw_SearchWhereCondition(object? list) {
+            if (list is List<Records>) {
+                dataGridView1.DataSource = list;
                 SelectData(from, to);
             }
         }

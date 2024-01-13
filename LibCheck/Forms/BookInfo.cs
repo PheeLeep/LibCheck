@@ -23,8 +23,13 @@ namespace LibCheck.Forms {
         private void LoadInfo() {
             if (string.IsNullOrWhiteSpace(isbn))
                 throw new BookNotFoundException();
-            if (Database.Database.Read(out List<Books>? infos, whereCond: $"ISBN = '{isbn}'") <= 0 || infos == null)
+            if (Database.Database.Read(out List<Books>? infos) <= 0 || infos == null)
                 throw new BookNotFoundException(isbn);
+
+            infos = infos.Where(info => isbn.Equals(info.ISBN)).ToList();
+            if (infos.Count == 0)
+                throw new BookNotFoundException(isbn);
+
             book = infos[0];
             Text = TitleLabel.Text = book.Title;
             OwnedLabel.Text = "No student is currently owned by this book.";

@@ -19,13 +19,17 @@ namespace LibCheck.Forms {
             InitializeComponent();
             this.isBorrow = isBorrow;
 
-            if (Database.Database.Read(out List<Books>? books, whereCond: $"StudentID = '{(isBorrow ? "(none)" : studentID)}'") >= 0 && books != null)
-                foreach (Books book in books)
-                    ISBNComboBox.Items.Add(book.ISBN);
+            if (Database.Database.Read(out List<Books>? books) >= 0 && books != null) {
+                books = books.Where(b => !string.IsNullOrWhiteSpace(b.StudentID) &&
+                                         b.StudentID.Equals(isBorrow ? "(none)" : studentID)).ToList();
+
+                foreach (Books b in books)
+                    ISBNComboBox.Items.Add(b.ISBN);
+            }
 
             if (Database.Database.Read(out List<Students>? students) >= 0 && students != null)
-                foreach (Students student in students)
-                    studIDComboBox.Items.Add(student.StudentID);
+                foreach (Students sd in students)
+                    studIDComboBox.Items.Add(sd.StudentID);
 
             if (!string.IsNullOrWhiteSpace(isbn)) {
                 lockISBNControls = true;
@@ -39,10 +43,11 @@ namespace LibCheck.Forms {
 
         private void LoadStudBookInfo(Type t, string val) {
             if (t == typeof(Books)) {
-                if (Database.Database.Read(out List<Books>? bookInfo, whereCond: $"ISBN = '{val}'") <= 0
-                    || bookInfo == null)
+                if (Database.Database.Read(out List<Books>? bookInfo) <= 0 || bookInfo == null)
                     throw new BookNotFoundException(val);
-                if (bookInfo[0].IsLostOrDamaged)
+                bookInfo = bookInfo.Where(b => val.Equals(b.ISBN)).ToList();
+
+                if (bookInfo.Count > 0 && bookInfo[0].IsLostOrDamaged)
                     throw new BookNotFoundException("This book is currently lost or damaged.");
 
                 book = bookInfo[0];
@@ -89,7 +94,10 @@ namespace LibCheck.Forms {
                 return;
             }
 
-            if (Database.Database.Read(out List<Students>? studInfo, whereCond: $"StudentID = '{val}'") <= 0 || studInfo == null)
+            if (Database.Database.Read(out List<Students>? studInfo) <= 0 || studInfo == null)
+                throw new StudentNotFoundException(val);
+            studInfo = studInfo.Where(s => val.Equals(s.StudentID)).ToList();
+            if (studInfo.Count == 0)
                 throw new StudentNotFoundException(val);
             student = studInfo[0];
             studIDComboBox.Text = student.StudentID;
@@ -146,7 +154,8 @@ namespace LibCheck.Forms {
                     if (!string.IsNullOrWhiteSpace(book.StudentID) && !book.StudentID.Equals("(none)"))
                         throw new InvalidOperationException("This book is already borrowed by someone.");
 
-                    if (Database.Database.Read<Books>(out _, whereCond: $"StudentID = '{student.StudentID}'") == 3)
+                    if (Database.Database.Read(out List<Books>? books) > 0 && books != null &&
+                        books.Count(b => !string.IsNullOrWhiteSpace(b.StudentID) && b.StudentID.Equals(student.StudentID)) == 3)
                         throw new InvalidOperationException("This student reached its book borrowed limit.");
 
                     book.DateToReturn = DateBorrowDTP.Value;
@@ -232,10 +241,6 @@ namespace LibCheck.Forms {
         private void DateBorrowDTP_ValueChanged(object sender, EventArgs e) {
             if (DateBorrowDTP.Value.DayOfWeek == DayOfWeek.Sunday)
                 DateBorrowDTP.Value = DateBorrowDTP.Value.AddDays(1);
-
-        }
-
-        private void TextBoxes_TextChanged(object sender, EventArgs e) {
 
         }
 

@@ -267,6 +267,7 @@
             Margin = new Padding(2);
             Name = "HistorySearchUC";
             Size = new Size(400, 411);
+            Load += HistorySearchUC_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);

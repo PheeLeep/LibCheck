@@ -72,7 +72,8 @@ namespace LibCheck.Forms.Admin.UserControls {
                 string? id = dataGridView1.SelectedRows[0].Cells["StudentID"].Value.ToString();
                 if (string.IsNullOrWhiteSpace(id))
                     return;
-                if (Database.Database.Read<Books>(out _, whereCond: $"StudentID = '{id}'") > 0) {
+                if (Database.Database.Read(out List<Books>? b) > 0 && b != null && b.Any(bb => id.Equals(bb.StudentID))) {
+
                     Logger.Log(Logger.LogEnums.Error, $"Couldn't delete. There are remaining borrowed books.");
                     MessageBox.Show(this, $"Student {id} has some books that are currently borrowed.",
                                     "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
@@ -126,8 +127,13 @@ namespace LibCheck.Forms.Admin.UserControls {
                 PleaseWait.SetPWDText("Please wait while generating QR...");
                 try {
 
-                    if (Database.Database.Read(out List<Students>? s, whereCond: $"StudentID = '{id}'") <= 0 || s == null)
+                    if (Database.Database.Read(out List<Students>? s) <= 0 || s == null)
                         throw new InvalidOperationException("No data provided.");
+
+                    s = s.Where(ss => id.Equals(ss.StudentID)).ToList();
+                    if (s.Count != 1)
+                        throw new InvalidOperationException("No data provided.");
+
                     Students student = s[0];
 
                     Bitmap frontCard = new Bitmap(Properties.Resources.front_card);
@@ -194,16 +200,12 @@ namespace LibCheck.Forms.Admin.UserControls {
             }
         }
 
-        private void Sw_SearchWhereCondition(string whereCond) {
-            if (string.IsNullOrWhiteSpace(whereCond)) {
+        private void Sw_SearchWhereCondition(object? list) {
+            if (list is not List<Students>) {
                 Load();
                 return;
             }
-            if (!string.IsNullOrWhiteSpace(whereCond)
-                 && Database.Database.Read(out List<Students>? specRecords, whereCond: whereCond) >= 0
-                 && specRecords != null) {
-                dataGridView1.DataSource = specRecords;
-            }
+            dataGridView1.DataSource = list;
         }
 
         private void SaveButton_Click(object sender, EventArgs e) {

@@ -28,9 +28,9 @@
             // SearchWindow
             // 
             AutoScaleMode = AutoScaleMode.None;
-            ClientSize = new Size(384, 372);
+            ClientSize = new Size(384, 477);
             DoubleBuffered = true;
-            Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
+            Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;

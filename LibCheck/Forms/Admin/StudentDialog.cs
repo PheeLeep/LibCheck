@@ -15,11 +15,13 @@ namespace LibCheck.Forms.Admin {
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             this.mode = mode;
             if (mode != DatabaseMode.Add) {
-                if (string.IsNullOrWhiteSpace(studentID) ||
-                    Database.Database.Read(out List<Students>? l, whereCond: $"StudentID = '{studentID}'") <= 0 ||
+                if (string.IsNullOrWhiteSpace(studentID) ||  Database.Database.Read(out List<Students>? l) <= 0 ||
                     l == null)
                     throw new InvalidOperationException("No Student ID provided.");
+                l = l.Where(os => studentID.Equals(os.StudentID)).ToList();
 
+                if (l.Count == 0)
+                    throw new InvalidOperationException("No Student ID provided.");
                 student = l[0];
             }
         }
@@ -185,9 +187,11 @@ namespace LibCheck.Forms.Admin {
                     || !Regexes.IsValidEmail(EmailAddressTextBox.Text, out _))
                     throw new InvalidOperationException("Invalid Email Address.");
 
-                if (Database.Database.Read(out List<Students>? s, whereCond: $"EmailAddress = '{EmailAddressTextBox.Text}'") > 0
-                    && s != null && s.Any(s => !string.IsNullOrWhiteSpace(s.StudentID) &&
-                    !s.StudentID.Equals(StudIDTextBox.Text)))
+                if (Database.Database.Read(out List<Students>? s) > 0 && s != null && 
+                    s.Any(s => !string.IsNullOrWhiteSpace(s.EmailAddress) &&
+                               s.EmailAddress.Equals(EmailAddressTextBox.Text) &&
+                               !string.IsNullOrWhiteSpace(s.StudentID) &&
+                               !s.StudentID.Equals(StudIDTextBox.Text)))
                     throw new InvalidOperationException("The email was already registered by someone.");
 
                 return true;

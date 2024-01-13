@@ -13,11 +13,13 @@ namespace LibCheck.Forms.Admin {
             students = new List<Students>();
             recent = re;
             if (recent != null) {
-                if (Database.Database.Read(out List<Students>? oldStudent,
-                                           whereCond: $"StudentID = '{recent.StudentID}'") <= 0
-                                           || oldStudent == null)
+                if (Database.Database.Read(out List<Students>? oldStudent) <= 0 || oldStudent == null)
                     throw new InvalidOperationException("No students found.");
-                students = oldStudent;
+                students = oldStudent.Where(os => !string.IsNullOrWhiteSpace(os.StudentID) &&
+                                                  os.StudentID.Equals(recent.StudentID)).ToList();
+
+                if (students.Count == 0)
+                    throw new InvalidOperationException("No students found.");
                 return;
             }
             if (Database.Database.Read(out List<Students>? tmpStudent) <= 0 || tmpStudent == null)

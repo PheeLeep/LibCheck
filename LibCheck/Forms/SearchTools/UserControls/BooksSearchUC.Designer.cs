@@ -64,7 +64,7 @@
             BookLDmgCbox.Location = new Point(34, 63);
             BookLDmgCbox.Margin = new Padding(2);
             BookLDmgCbox.Name = "BookLDmgCbox";
-            BookLDmgCbox.Size = new Size(165, 24);
+            BookLDmgCbox.Size = new Size(187, 27);
             BookLDmgCbox.TabIndex = 14;
             BookLDmgCbox.Text = "Book Lost/Damaged";
             BookLDmgCbox.UseVisualStyleBackColor = true;
@@ -76,7 +76,7 @@
             BookBorrowedCBox.Location = new Point(34, 33);
             BookBorrowedCBox.Margin = new Padding(2);
             BookBorrowedCBox.Name = "BookBorrowedCBox";
-            BookBorrowedCBox.Size = new Size(131, 24);
+            BookBorrowedCBox.Size = new Size(148, 27);
             BookBorrowedCBox.TabIndex = 13;
             BookBorrowedCBox.Text = "Book Borrowed";
             BookBorrowedCBox.UseVisualStyleBackColor = true;
@@ -90,7 +90,7 @@
             genreComboBox.FormattingEnabled = true;
             genreComboBox.Location = new Point(72, 117);
             genreComboBox.Name = "genreComboBox";
-            genreComboBox.Size = new Size(250, 28);
+            genreComboBox.Size = new Size(250, 31);
             genreComboBox.TabIndex = 12;
             genreComboBox.SelectedIndexChanged += genreComboBox_SelectedIndexChanged;
             // 
@@ -100,7 +100,7 @@
             GenreCBox.Location = new Point(34, 91);
             GenreCBox.Margin = new Padding(2);
             GenreCBox.Name = "GenreCBox";
-            GenreCBox.Size = new Size(67, 24);
+            GenreCBox.Size = new Size(78, 27);
             GenreCBox.TabIndex = 0;
             GenreCBox.Text = "Genre";
             GenreCBox.UseVisualStyleBackColor = true;
@@ -135,9 +135,9 @@
             // AuthorRB
             // 
             AuthorRB.AutoSize = true;
-            AuthorRB.Location = new Point(161, 68);
+            AuthorRB.Location = new Point(179, 72);
             AuthorRB.Name = "AuthorRB";
-            AuthorRB.Size = new Size(72, 24);
+            AuthorRB.Size = new Size(84, 27);
             AuthorRB.TabIndex = 5;
             AuthorRB.Text = "Author";
             AuthorRB.UseVisualStyleBackColor = true;
@@ -146,9 +146,9 @@
             // TitleRB
             // 
             TitleRB.AutoSize = true;
-            TitleRB.Location = new Point(99, 68);
+            TitleRB.Location = new Point(110, 72);
             TitleRB.Name = "TitleRB";
-            TitleRB.Size = new Size(56, 24);
+            TitleRB.Size = new Size(63, 27);
             TitleRB.TabIndex = 3;
             TitleRB.Text = "Title";
             TitleRB.UseVisualStyleBackColor = true;
@@ -158,9 +158,9 @@
             // 
             IsbnRB.AutoSize = true;
             IsbnRB.Checked = true;
-            IsbnRB.Location = new Point(34, 68);
+            IsbnRB.Location = new Point(34, 72);
             IsbnRB.Name = "IsbnRB";
-            IsbnRB.Size = new Size(59, 24);
+            IsbnRB.Size = new Size(68, 27);
             IsbnRB.TabIndex = 4;
             IsbnRB.TabStop = true;
             IsbnRB.Text = "ISBN";
@@ -172,7 +172,7 @@
             keywordTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             keywordTextBox.Location = new Point(34, 39);
             keywordTextBox.Name = "keywordTextBox";
-            keywordTextBox.Size = new Size(262, 27);
+            keywordTextBox.Size = new Size(262, 30);
             keywordTextBox.TabIndex = 2;
             keywordTextBox.TextChanged += keywordTextBox_TextChanged;
             // 
@@ -193,7 +193,7 @@
             CategoryRB.AutoSize = true;
             CategoryRB.Location = new Point(34, 66);
             CategoryRB.Name = "CategoryRB";
-            CategoryRB.Size = new Size(155, 24);
+            CategoryRB.Size = new Size(179, 27);
             CategoryRB.TabIndex = 5;
             CategoryRB.Text = "Search by Category";
             CategoryRB.UseVisualStyleBackColor = true;
@@ -205,7 +205,7 @@
             KeywordRB.Checked = true;
             KeywordRB.Location = new Point(34, 36);
             KeywordRB.Name = "KeywordRB";
-            KeywordRB.Size = new Size(153, 24);
+            KeywordRB.Size = new Size(175, 27);
             KeywordRB.TabIndex = 4;
             KeywordRB.TabStop = true;
             KeywordRB.Text = "Search by Keyword";
@@ -218,7 +218,7 @@
             Controls.Add(groupBox1);
             Controls.Add(groupBox2);
             Controls.Add(groupBox3);
-            Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             Name = "BooksSearchUC";
             Size = new Size(400, 411);
             Load += BooksSearchUC_Load;

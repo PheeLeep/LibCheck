@@ -90,9 +90,12 @@ namespace LibCheck.Forms.Admin.UserControls {
                 string? isbn = dataGridView1.SelectedRows[0].Cells["ISBN"].Value.ToString();
                 if (string.IsNullOrWhiteSpace(isbn))
                     return;
-                if (Database.Database.Read(out List<Books>? b, whereCond: $"ISBN = '{isbn}'") != 1
-                    || b == null)
+                if (Database.Database.Read(out List<Books>? b) < 1 || b == null)
                     return;
+
+                b = b.Where(os => isbn.Equals(os.ISBN)).ToList();
+
+                if (b.Count == 0) return;
 
                 Books br = b[0];
                 if (!string.IsNullOrWhiteSpace(br.StudentID) && !br.StudentID.Equals("(none)")) {
@@ -201,10 +204,10 @@ namespace LibCheck.Forms.Admin.UserControls {
                 SearchWindow sw = new SearchWindow();
                 BooksSearchUC hsuc = new BooksSearchUC();
                 sw.Controls.Add(hsuc);
-                sw.SearchWhereCondition += Sw_SearchWhereCondition;
+                sw.SearchWhereCondition += Sw_SearchWhereCondition; 
                 sw.FormClosing += (s, e) => {
                     sw.SearchWhereCondition -= Sw_SearchWhereCondition;
-                    Sw_SearchWhereCondition("");
+                    Sw_SearchWhereCondition(null);
                 };
                 hsuc.Dock = DockStyle.Fill;
                 hsuc.CreateControl();
@@ -214,15 +217,12 @@ namespace LibCheck.Forms.Admin.UserControls {
             }
         }
 
-        private void Sw_SearchWhereCondition(string whereCond) {
-            if (string.IsNullOrWhiteSpace(whereCond)) {
+        private void Sw_SearchWhereCondition(object? list) {
+            if (list is not List<Books>) {
                 Load();
                 return;
             }
-            if (Database.Database.Read(out List<Books>? specRecords, whereCond: whereCond) >= 0
-                 && specRecords != null) {
-                dataGridView1.DataSource = specRecords;
-            }
+            dataGridView1.DataSource = list;
         }
 
         private void SaveButton_Click(object sender, EventArgs e) {

@@ -28,7 +28,6 @@ namespace LibCheck.Forms {
             StagePanel.Controls.Add(searchDiag);
             searchDiag.Show();
         }
-
         private void SearchDiag_ValueDetected() {
             try {
                 if (string.IsNullOrWhiteSpace(searchDiag.Value))
