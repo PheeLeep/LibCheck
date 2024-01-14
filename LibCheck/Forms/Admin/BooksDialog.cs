@@ -3,19 +3,23 @@ using LibCheck.Modules;
 using LibCheck.Modules.Security;
 using static LibCheck.Modules.Miscellaneous;
 
-namespace LibCheck.Forms.Admin {
-    public partial class BooksDialog : Form {
+namespace LibCheck.Forms.Admin
+{
+    public partial class BooksDialog : Form
+    {
 
         private Books book = new Books();
         private DatabaseMode mode;
         private bool _isEdited = false;
         private bool _onPBoxChanged = false;
 
-        public BooksDialog(DatabaseMode mode, string isbn = "") {
+        public BooksDialog(DatabaseMode mode, string isbn = "")
+        {
             InitializeComponent();
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             this.mode = mode;
-            if (mode != DatabaseMode.Add) {
+            if (mode != DatabaseMode.Add)
+            {
                 if (string.IsNullOrWhiteSpace(isbn) || Database.Database.Read(out List<Books>? r,
                                                                               whereCond: $"ISBN = '{isbn}'") < 1)
                     throw new InvalidOperationException("No ISBN provided.");
@@ -26,8 +30,10 @@ namespace LibCheck.Forms.Admin {
             }
         }
 
-        protected override CreateParams CreateParams {
-            get {
+        protected override CreateParams CreateParams
+        {
+            get
+            {
                 // Minimize form and control flickering.
                 CreateParams cp = base.CreateParams;
                 cp.ExStyle |= 0x02000000;
@@ -35,11 +41,13 @@ namespace LibCheck.Forms.Admin {
             }
         }
 
-        private void BooksDialog_Load(object sender, EventArgs e) {
+        private void BooksDialog_Load(object sender, EventArgs e)
+        {
             genreComboBox.Items.AddRange(Genres);
             genreComboBox.SelectedIndex = 0;
 
-            if (mode == DatabaseMode.Read) {
+            if (mode == DatabaseMode.Read)
+            {
                 TitleTextBox.ReadOnly = true;
                 AuthorTextBox.ReadOnly = true;
                 PublisherTextBox.ReadOnly = true;
@@ -47,7 +55,8 @@ namespace LibCheck.Forms.Admin {
                 DatePublishedDatePicker.Enabled = false;
             }
 
-            if (mode != DatabaseMode.Add) {
+            if (mode != DatabaseMode.Add)
+            {
                 int idx = genreComboBox.Items.IndexOf(book.Genre);
                 if (idx == -1)
                     idx = genreComboBox.Items.Count - 1;
@@ -73,8 +82,10 @@ namespace LibCheck.Forms.Admin {
             book.StudentID = "(none)";
         }
 
-        private void ConfirmButton_Click(object sender, EventArgs e) {
-            if (_isEdited) {
+        private void ConfirmButton_Click(object sender, EventArgs e)
+        {
+            if (_isEdited)
+            {
                 if (!CheckInformation())
                     return;
 
@@ -89,13 +100,19 @@ namespace LibCheck.Forms.Admin {
 
                 string path = Path.Combine(EnvVars.BookImages.FullName, $"{Credentials.Librarian?.SchoolGUID}-{book.ISBN}.jpg");
 
-                if (_onPBoxChanged) {
-                    try {
+                if (_onPBoxChanged)
+                {
+                    try
+                    {
 
-                        if (File.Exists(path)) {
-                            try {
+                        if (File.Exists(path))
+                        {
+                            try
+                            {
                                 File.Delete(path);
-                            } catch (Exception ex) {
+                            }
+                            catch (Exception ex)
+                            {
                                 Logger.Log(Logger.LogEnums.Warn, $"Failed to delete image. ({ex.Message})");
                             }
                         }
@@ -103,7 +120,9 @@ namespace LibCheck.Forms.Admin {
                         if (!EnvVars.BookImages.Exists)
                             EnvVars.BookImages.Create();
                         pictureBox1.Image?.Save(path, System.Drawing.Imaging.ImageFormat.Jpeg);
-                    } catch (Exception ex) {
+                    }
+                    catch (Exception ex)
+                    {
                         Logger.Log(Logger.LogEnums.Warn, $"Failed to copy image. ({ex.Message})");
                     }
                 }
@@ -111,14 +130,16 @@ namespace LibCheck.Forms.Admin {
                 string operation = mode == DatabaseMode.Add ? "add" : "update";
                 string pastSucceed = mode == DatabaseMode.Add ? "added" : "updated";
                 if (!(mode == DatabaseMode.Add ? Database.Database.Insert(book)
-                                               : Database.Database.Update(book))) {
+                                               : Database.Database.Update(book)))
+                {
                     Logger.Log(Logger.LogEnums.Error, $"Failed to {operation} book information.");
                     MessageBox.Show(this, $"Failed to {operation} book information.",
                                     "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     return;
                 }
 
-                Records r = new Records() {
+                Records r = new Records()
+                {
                     DateOccurred = DateTime.Now,
                     ISBN = book.ISBN,
                     StudentID = "(none)",
@@ -135,13 +156,16 @@ namespace LibCheck.Forms.Admin {
             Close();
         }
 
-        private void Controls_ValuesChanged(object sender, EventArgs e) {
+        private void Controls_ValuesChanged(object sender, EventArgs e)
+        {
             if (!_isEdited)
                 _isEdited = true;
         }
 
-        private bool CheckInformation() {
-            try {
+        private bool CheckInformation()
+        {
+            try
+            {
                 if (!Regexes.IsValidISBN(ISBNTextBox.Text.Replace("-", "")))
                     throw new InvalidOperationException("Invalid ISBN provided.");
                 if (string.IsNullOrWhiteSpace(TitleTextBox.Text))
@@ -153,13 +177,16 @@ namespace LibCheck.Forms.Admin {
                 if (string.IsNullOrWhiteSpace(DescTextBox.Text))
                     DescTextBox.Text = "(no information provided.)";
                 return true;
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 MessageBox.Show(this, ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 return false;
             }
         }
 
-        private void AddImgButton_Click(object sender, EventArgs e) {
+        private void AddImgButton_Click(object sender, EventArgs e)
+        {
             if (openFileDialog1.ShowDialog(this) != DialogResult.OK)
                 return;
             pictureBox1.Image?.Dispose();
@@ -168,7 +195,8 @@ namespace LibCheck.Forms.Admin {
             _isEdited = true;
         }
 
-        private void RemoveImageButton_Click(object sender, EventArgs e) {
+        private void RemoveImageButton_Click(object sender, EventArgs e)
+        {
             if (pictureBox1.Image == null)
                 return;
             pictureBox1.Image.Dispose();
@@ -177,7 +205,8 @@ namespace LibCheck.Forms.Admin {
             _isEdited = true;
         }
 
-        private void BooksDialog_FormClosing(object sender, FormClosingEventArgs e) {
+        private void BooksDialog_FormClosing(object sender, FormClosingEventArgs e)
+        {
             pictureBox1.Image?.Dispose();
         }
     }

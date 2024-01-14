@@ -1,5 +1,7 @@
-﻿namespace LibCheck.Forms {
-    partial class StudentInfo {
+﻿namespace LibCheck.Forms
+{
+    partial class StudentInfo
+    {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -9,8 +11,10 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing) {
-            if (disposing && (components != null)) {
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -22,7 +26,8 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {
+        private void InitializeComponent()
+        {
             panel1 = new Panel();
             StudentLabel = new Label();
             StudentIDLabel = new Label();
@@ -105,10 +110,10 @@
             // 
             tabPage1.Controls.Add(dataGridView1);
             tabPage1.Controls.Add(panel3);
-            tabPage1.Location = new Point(4, 34);
+            tabPage1.Location = new Point(4, 39);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(712, 190);
+            tabPage1.Size = new Size(712, 185);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Books Borrowed";
             tabPage1.UseVisualStyleBackColor = true;
@@ -128,7 +133,7 @@
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 62;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(706, 152);
+            dataGridView1.Size = new Size(706, 147);
             dataGridView1.TabIndex = 2;
             // 
             // panel3
@@ -146,6 +151,7 @@
             ReturnBookButton.BackColor = Color.Lime;
             ReturnBookButton.Dock = DockStyle.Right;
             ReturnBookButton.FlatStyle = FlatStyle.Flat;
+            ReturnBookButton.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             ReturnBookButton.Location = new Point(530, 0);
             ReturnBookButton.Name = "ReturnBookButton";
             ReturnBookButton.Size = new Size(176, 32);
@@ -160,10 +166,10 @@
             tabPage2.Controls.Add(DOBLabel);
             tabPage2.Controls.Add(GenderLabel);
             tabPage2.Controls.Add(LevelGradeSecLabel);
-            tabPage2.Location = new Point(4, 34);
+            tabPage2.Location = new Point(4, 39);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(712, 190);
+            tabPage2.Size = new Size(712, 185);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Information";
             tabPage2.UseVisualStyleBackColor = true;
@@ -173,7 +179,7 @@
             EmailAddressLabel.AutoSize = true;
             EmailAddressLabel.Location = new Point(38, 130);
             EmailAddressLabel.Name = "EmailAddressLabel";
-            EmailAddressLabel.Size = new Size(128, 25);
+            EmailAddressLabel.Size = new Size(153, 30);
             EmailAddressLabel.TabIndex = 4;
             EmailAddressLabel.Text = "Email Address:";
             EmailAddressLabel.DoubleClick += EmailAddressLabel_DoubleClick;
@@ -183,7 +189,7 @@
             DOBLabel.AutoSize = true;
             DOBLabel.Location = new Point(38, 35);
             DOBLabel.Name = "DOBLabel";
-            DOBLabel.Size = new Size(94, 25);
+            DOBLabel.Size = new Size(114, 30);
             DOBLabel.TabIndex = 3;
             DOBLabel.Text = "Birth Date:";
             // 
@@ -192,7 +198,7 @@
             GenderLabel.AutoSize = true;
             GenderLabel.Location = new Point(38, 67);
             GenderLabel.Name = "GenderLabel";
-            GenderLabel.Size = new Size(73, 25);
+            GenderLabel.Size = new Size(90, 30);
             GenderLabel.TabIndex = 1;
             GenderLabel.Text = "Gender:";
             // 
@@ -201,7 +207,7 @@
             LevelGradeSecLabel.AutoSize = true;
             LevelGradeSecLabel.Location = new Point(38, 99);
             LevelGradeSecLabel.Name = "LevelGradeSecLabel";
-            LevelGradeSecLabel.Size = new Size(209, 25);
+            LevelGradeSecLabel.Size = new Size(257, 30);
             LevelGradeSecLabel.TabIndex = 2;
             LevelGradeSecLabel.Text = "Level, Grade and Section:";
             // 

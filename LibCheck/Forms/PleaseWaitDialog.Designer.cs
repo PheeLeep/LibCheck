@@ -1,5 +1,7 @@
-﻿namespace LibCheck.Forms {
-    partial class PleaseWaitDialog {
+﻿namespace LibCheck.Forms
+{
+    partial class PleaseWaitDialog
+    {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -9,8 +11,10 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing) {
-            if (disposing && (components != null)) {
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -22,7 +26,8 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {
+        private void InitializeComponent()
+        {
             label1 = new Label();
             pictureBox1 = new PictureBox();
             panel1 = new Panel();
@@ -75,6 +80,7 @@
             // CancelBtn
             // 
             CancelBtn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            CancelBtn.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             CancelBtn.Location = new Point(255, 5);
             CancelBtn.Name = "CancelBtn";
             CancelBtn.Size = new Size(75, 23);

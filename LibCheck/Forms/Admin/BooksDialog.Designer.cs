@@ -1,5 +1,7 @@
-﻿namespace LibCheck.Forms.Admin {
-    partial class BooksDialog {
+﻿namespace LibCheck.Forms.Admin
+{
+    partial class BooksDialog
+    {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -9,8 +11,10 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing) {
-            if (disposing && (components != null)) {
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -22,7 +26,8 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {
+        private void InitializeComponent()
+        {
             ConfirmButton = new Button();
             ISBNTextBox = new TextBox();
             label1 = new Label();
@@ -75,7 +80,7 @@
             ISBNTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             ISBNTextBox.Location = new Point(24, 44);
             ISBNTextBox.Name = "ISBNTextBox";
-            ISBNTextBox.Size = new Size(335, 29);
+            ISBNTextBox.Size = new Size(335, 33);
             ISBNTextBox.TabIndex = 1;
             ISBNTextBox.TextChanged += Controls_ValuesChanged;
             // 
@@ -84,7 +89,7 @@
             label1.AutoSize = true;
             label1.Location = new Point(24, 21);
             label1.Name = "label1";
-            label1.Size = new Size(51, 23);
+            label1.Size = new Size(58, 28);
             label1.TabIndex = 2;
             label1.Text = "ISBN:";
             // 
@@ -93,7 +98,7 @@
             label2.AutoSize = true;
             label2.Location = new Point(24, 86);
             label2.Name = "label2";
-            label2.Size = new Size(46, 23);
+            label2.Size = new Size(53, 28);
             label2.TabIndex = 4;
             label2.Text = "Title:";
             // 
@@ -102,7 +107,7 @@
             TitleTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             TitleTextBox.Location = new Point(24, 109);
             TitleTextBox.Name = "TitleTextBox";
-            TitleTextBox.Size = new Size(335, 29);
+            TitleTextBox.Size = new Size(335, 33);
             TitleTextBox.TabIndex = 3;
             TitleTextBox.TextChanged += Controls_ValuesChanged;
             // 
@@ -111,7 +116,7 @@
             label3.AutoSize = true;
             label3.Location = new Point(24, 149);
             label3.Name = "label3";
-            label3.Size = new Size(67, 23);
+            label3.Size = new Size(77, 28);
             label3.TabIndex = 6;
             label3.Text = "Author:";
             // 
@@ -120,7 +125,7 @@
             AuthorTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             AuthorTextBox.Location = new Point(23, 172);
             AuthorTextBox.Name = "AuthorTextBox";
-            AuthorTextBox.Size = new Size(335, 29);
+            AuthorTextBox.Size = new Size(335, 33);
             AuthorTextBox.TabIndex = 5;
             AuthorTextBox.TextChanged += Controls_ValuesChanged;
             // 
@@ -151,10 +156,10 @@
             tabPage1.Controls.Add(label1);
             tabPage1.Controls.Add(label2);
             tabPage1.Controls.Add(TitleTextBox);
-            tabPage1.Location = new Point(4, 30);
+            tabPage1.Location = new Point(4, 37);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(385, 444);
+            tabPage1.Size = new Size(385, 437);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Information";
             // 
@@ -165,7 +170,7 @@
             genreComboBox.FormattingEnabled = true;
             genreComboBox.Location = new Point(90, 282);
             genreComboBox.Name = "genreComboBox";
-            genreComboBox.Size = new Size(269, 29);
+            genreComboBox.Size = new Size(269, 36);
             genreComboBox.TabIndex = 11;
             genreComboBox.SelectedIndexChanged += Controls_ValuesChanged;
             // 
@@ -175,7 +180,7 @@
             DatePublishedDatePicker.Format = DateTimePickerFormat.Short;
             DatePublishedDatePicker.Location = new Point(152, 343);
             DatePublishedDatePicker.Name = "DatePublishedDatePicker";
-            DatePublishedDatePicker.Size = new Size(143, 29);
+            DatePublishedDatePicker.Size = new Size(143, 33);
             DatePublishedDatePicker.TabIndex = 10;
             DatePublishedDatePicker.ValueChanged += Controls_ValuesChanged;
             // 
@@ -184,7 +189,7 @@
             label5.AutoSize = true;
             label5.Location = new Point(24, 348);
             label5.Name = "label5";
-            label5.Size = new Size(129, 23);
+            label5.Size = new Size(147, 28);
             label5.TabIndex = 9;
             label5.Text = "Date Published:";
             // 
@@ -193,7 +198,7 @@
             label6.AutoSize = true;
             label6.Location = new Point(24, 285);
             label6.Name = "label6";
-            label6.Size = new Size(60, 23);
+            label6.Size = new Size(68, 28);
             label6.TabIndex = 8;
             label6.Text = "Genre:";
             // 
@@ -202,7 +207,7 @@
             label4.AutoSize = true;
             label4.Location = new Point(24, 213);
             label4.Name = "label4";
-            label4.Size = new Size(84, 23);
+            label4.Size = new Size(96, 28);
             label4.TabIndex = 8;
             label4.Text = "Publisher:";
             // 
@@ -211,17 +216,17 @@
             PublisherTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             PublisherTextBox.Location = new Point(23, 236);
             PublisherTextBox.Name = "PublisherTextBox";
-            PublisherTextBox.Size = new Size(335, 29);
+            PublisherTextBox.Size = new Size(335, 33);
             PublisherTextBox.TabIndex = 7;
             PublisherTextBox.TextChanged += Controls_ValuesChanged;
             // 
             // tabPage3
             // 
             tabPage3.Controls.Add(DescTextBox);
-            tabPage3.Location = new Point(4, 29);
+            tabPage3.Location = new Point(4, 34);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(385, 445);
+            tabPage3.Size = new Size(385, 440);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Description";
             tabPage3.UseVisualStyleBackColor = true;
@@ -232,7 +237,7 @@
             DescTextBox.Location = new Point(3, 3);
             DescTextBox.Multiline = true;
             DescTextBox.Name = "DescTextBox";
-            DescTextBox.Size = new Size(379, 439);
+            DescTextBox.Size = new Size(379, 434);
             DescTextBox.TabIndex = 0;
             DescTextBox.TextChanged += Controls_ValuesChanged;
             // 
@@ -240,10 +245,10 @@
             // 
             tabPage2.Controls.Add(pictureBox1);
             tabPage2.Controls.Add(panel3);
-            tabPage2.Location = new Point(4, 30);
+            tabPage2.Location = new Point(4, 37);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(385, 444);
+            tabPage2.Size = new Size(385, 437);
             tabPage2.TabIndex = 3;
             tabPage2.Text = "Image";
             tabPage2.UseVisualStyleBackColor = true;
@@ -253,7 +258,7 @@
             pictureBox1.Dock = DockStyle.Fill;
             pictureBox1.Location = new Point(3, 3);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(379, 393);
+            pictureBox1.Size = new Size(379, 386);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 3;
             pictureBox1.TabStop = false;
@@ -263,7 +268,7 @@
             panel3.Controls.Add(RemoveImageButton);
             panel3.Controls.Add(AddImgButton);
             panel3.Dock = DockStyle.Bottom;
-            panel3.Location = new Point(3, 396);
+            panel3.Location = new Point(3, 389);
             panel3.Name = "panel3";
             panel3.Size = new Size(379, 45);
             panel3.TabIndex = 2;
