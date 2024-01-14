@@ -25,14 +25,15 @@ namespace LibCheck.Database.Tables {
                 Logger.Log(Logger.LogEnums.Warn, "Failed to create a notification.");
         }
 
-        internal static int Count(string whereCond = "") {
+        internal static int Count(bool getLatest = false) {
             if (!Credentials.LoggedIn) return 0;
-            return GetNotifications(whereCond).Length;
+            Notifs[] nfs = GetNotifications();
+            return getLatest ? nfs.Count(nf => nf.Date >= Credentials.Librarian?.LastLoggedIn.Date) : nfs.Length;
         }
 
-        internal static Notifs[] GetNotifications(string whereCond = "") {
+        internal static Notifs[] GetNotifications() {
             if (!Credentials.LoggedIn) return Array.Empty<Notifs>();
-            if (Database.Read(out List<Notifs>? notifs, whereCond: whereCond) <= 0 || notifs == null)
+            if (Database.Read(out List<Notifs>? notifs) <= 0 || notifs == null)
                 return Array.Empty<Notifs>();
             return notifs.ToArray();
         }

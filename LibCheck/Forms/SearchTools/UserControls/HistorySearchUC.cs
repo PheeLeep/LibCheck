@@ -1,13 +1,13 @@
 ﻿using LibCheck.Database.Tables;
 using LibCheck.Modules;
-using System.Text;
 
 namespace LibCheck.Forms.SearchTools.UserControls {
     public partial class HistorySearchUC : UserControl {
         private readonly object _lock = new object();
-
+        private readonly List<Records>? query_snapshot;
         public HistorySearchUC() {
             InitializeComponent();
+            Database.Database.Read(out query_snapshot);
         }
 
         private void CBoxCheckChanged(object sender, EventArgs e) {
@@ -35,41 +35,31 @@ namespace LibCheck.Forms.SearchTools.UserControls {
         private void Compose() {
             lock (_lock) {
                 if (ParentForm is SearchWindow sw) {
-                    List<string> queries = new List<string>();
-                    StringBuilder sb = new StringBuilder();
-                    if (KeywordRB.Checked) {
-                        if (!string.IsNullOrWhiteSpace(keywordTextBox.Text)) {
+                    List<Records>? r = query_snapshot?.ToList();
+
+                    if (r != null) {
+                        if (KeywordRB.Checked && !string.IsNullOrWhiteSpace(keywordTextBox.Text)) {
                             if (BookRB.Checked && Regexes.IsValidISBN(keywordTextBox.Text))
-                                queries.Add($"ISBN LIKE '%{keywordTextBox.Text}%'");
+                                r = r.Where(rr => !string.IsNullOrWhiteSpace(rr.ISBN) &&
+                                                   rr.ISBN.Contains(keywordTextBox.Text)).ToList();
                             if (StudentRB.Checked && Regexes.IsValidStudentID(keywordTextBox.Text))
-                                queries.Add($"StudentID LIKE '%{keywordTextBox.Text}%'");
+                                r = r.Where(rr => !string.IsNullOrWhiteSpace(rr.StudentID) &&
+                                                  rr.StudentID.Contains(keywordTextBox.Text)).ToList();
+                        }
+
+
+                        if (CategoryRB.Checked) {
+                            r = r.Where(rr => (BookAddedCBox.Checked && rr.Category == Records.RecordStatus.BookAdded) ||
+                                              (BookBorrowedCBox.Checked && rr.Category == Records.RecordStatus.BookBorrowed) ||
+                                              (bookModCBox.Checked && rr.Category == Records.RecordStatus.BookModified) ||
+                                              (BookDelCBox.Checked && rr.Category == Records.RecordStatus.BookDeleted) ||
+                                              (BookLDmgCBox.Checked && rr.Category == Records.RecordStatus.BookMissingDamaged) ||
+                                              (BookReturnedCBox.Checked && rr.Category == Records.RecordStatus.BookReturned) ||
+                                              (BookRestoredCBox.Checked && rr.Category == Records.RecordStatus.BookRestored)).ToList();
                         }
                     }
 
-                    if (CategoryRB.Checked) {
-                        if (BookAddedCBox.Checked)
-                            queries.Add($"Category = {(int)Records.RecordStatus.BookAdded}");
-                        if (BookBorrowedCBox.Checked)
-                            queries.Add($"Category = {(int)Records.RecordStatus.BookBorrowed}");
-                        if (bookModCBox.Checked)
-                            queries.Add($"Category = {(int)Records.RecordStatus.BookModified}");
-                        if (BookDelCBox.Checked)
-                            queries.Add($"Category = {(int)Records.RecordStatus.BookDeleted}");
-                        if (BookLDmgCBox.Checked)
-                            queries.Add($"Category = {(int)Records.RecordStatus.BookMissingDamaged}");
-                        if (BookReturnedCBox.Checked)
-                            queries.Add($"Category = {(int)Records.RecordStatus.BookReturned}");
-                        if (BookRestoredCBox.Checked)
-                            queries.Add($"Category = {(int)Records.RecordStatus.BookRestored}");
-                    }
-
-                    for (int i = 0; i < queries.Count; i++) {
-                        sb.Append(queries[i]);
-                        if (i < queries.Count - 1)
-                            sb.Append(" AND ");
-                    }
-
-                    sw.PassOffWhereCond(sb.ToString());
+                    sw.PassOffWhereCond(r);
                 }
             }
         }
@@ -78,6 +68,10 @@ namespace LibCheck.Forms.SearchTools.UserControls {
             groupBox2.Enabled = KeywordRB.Checked;
             groupBox1.Enabled = CategoryRB.Checked;
             Compose();
+        }
+
+        private void HistorySearchUC_Load(object sender, EventArgs e) {
+            CriteriaRB_CheckedChanged(sender, e);
         }
     }
 }

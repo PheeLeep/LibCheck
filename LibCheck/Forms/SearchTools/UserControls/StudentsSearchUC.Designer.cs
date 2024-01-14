@@ -69,7 +69,7 @@
             LevelComboBox.FormattingEnabled = true;
             LevelComboBox.Location = new Point(99, 79);
             LevelComboBox.Name = "LevelComboBox";
-            LevelComboBox.Size = new Size(213, 27);
+            LevelComboBox.Size = new Size(213, 31);
             LevelComboBox.TabIndex = 17;
             LevelComboBox.SelectedIndexChanged += LevelComboBox_SelectedIndexChanged;
             // 
@@ -79,7 +79,7 @@
             LevelCBox.Location = new Point(25, 81);
             LevelCBox.Margin = new Padding(2);
             LevelCBox.Name = "LevelCBox";
-            LevelCBox.Size = new Size(65, 24);
+            LevelCBox.Size = new Size(74, 27);
             LevelCBox.TabIndex = 16;
             LevelCBox.Text = "Level:";
             LevelCBox.UseVisualStyleBackColor = true;
@@ -90,7 +90,7 @@
             label1.AutoSize = true;
             label1.Location = new Point(34, 47);
             label1.Name = "label1";
-            label1.Size = new Size(60, 20);
+            label1.Size = new Size(70, 23);
             label1.TabIndex = 15;
             label1.Text = "Gender:";
             // 
@@ -99,10 +99,10 @@
             FemaleCBox.AutoSize = true;
             FemaleCBox.Checked = true;
             FemaleCBox.CheckState = CheckState.Checked;
-            FemaleCBox.Location = new Point(164, 45);
+            FemaleCBox.Location = new Point(181, 46);
             FemaleCBox.Margin = new Padding(2);
             FemaleCBox.Name = "FemaleCBox";
-            FemaleCBox.Size = new Size(76, 24);
+            FemaleCBox.Size = new Size(86, 27);
             FemaleCBox.TabIndex = 13;
             FemaleCBox.Text = "Female";
             FemaleCBox.UseVisualStyleBackColor = true;
@@ -113,10 +113,10 @@
             MaleCBox.AutoSize = true;
             MaleCBox.Checked = true;
             MaleCBox.CheckState = CheckState.Checked;
-            MaleCBox.Location = new Point(99, 46);
+            MaleCBox.Location = new Point(108, 46);
             MaleCBox.Margin = new Padding(2);
             MaleCBox.Name = "MaleCBox";
-            MaleCBox.Size = new Size(61, 24);
+            MaleCBox.Size = new Size(69, 27);
             MaleCBox.TabIndex = 13;
             MaleCBox.Text = "Male";
             MaleCBox.UseVisualStyleBackColor = true;
@@ -151,9 +151,9 @@
             // LastNameRB
             // 
             LastNameRB.AutoSize = true;
-            LastNameRB.Location = new Point(186, 77);
+            LastNameRB.Location = new Point(198, 80);
             LastNameRB.Name = "LastNameRB";
-            LastNameRB.Size = new Size(97, 24);
+            LastNameRB.Size = new Size(112, 27);
             LastNameRB.TabIndex = 5;
             LastNameRB.Text = "Last Name";
             LastNameRB.UseVisualStyleBackColor = true;
@@ -162,9 +162,9 @@
             // FNameRB
             // 
             FNameRB.AutoSize = true;
-            FNameRB.Location = new Point(82, 77);
+            FNameRB.Location = new Point(83, 80);
             FNameRB.Name = "FNameRB";
-            FNameRB.Size = new Size(98, 24);
+            FNameRB.Size = new Size(113, 27);
             FNameRB.TabIndex = 3;
             FNameRB.Text = "First Name";
             FNameRB.UseVisualStyleBackColor = true;
@@ -174,9 +174,9 @@
             // 
             StudentIDRB.AutoSize = true;
             StudentIDRB.Checked = true;
-            StudentIDRB.Location = new Point(34, 77);
+            StudentIDRB.Location = new Point(34, 80);
             StudentIDRB.Name = "StudentIDRB";
-            StudentIDRB.Size = new Size(42, 24);
+            StudentIDRB.Size = new Size(48, 27);
             StudentIDRB.TabIndex = 4;
             StudentIDRB.TabStop = true;
             StudentIDRB.Text = "ID";
@@ -188,7 +188,7 @@
             keywordTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             keywordTextBox.Location = new Point(34, 48);
             keywordTextBox.Name = "keywordTextBox";
-            keywordTextBox.Size = new Size(271, 27);
+            keywordTextBox.Size = new Size(271, 30);
             keywordTextBox.TabIndex = 2;
             keywordTextBox.TextChanged += keywordTextBox_TextChanged;
             // 
@@ -209,7 +209,7 @@
             CategoryRB.AutoSize = true;
             CategoryRB.Location = new Point(34, 66);
             CategoryRB.Name = "CategoryRB";
-            CategoryRB.Size = new Size(155, 24);
+            CategoryRB.Size = new Size(179, 27);
             CategoryRB.TabIndex = 5;
             CategoryRB.Text = "Search by Category";
             CategoryRB.UseVisualStyleBackColor = true;
@@ -221,7 +221,7 @@
             KeywordRB.Checked = true;
             KeywordRB.Location = new Point(34, 36);
             KeywordRB.Name = "KeywordRB";
-            KeywordRB.Size = new Size(153, 24);
+            KeywordRB.Size = new Size(175, 27);
             KeywordRB.TabIndex = 4;
             KeywordRB.TabStop = true;
             KeywordRB.Text = "Search by Keyword";
@@ -230,13 +230,12 @@
             // 
             // StudentsSearchUC
             // 
-            AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.None;
             Controls.Add(groupBox1);
             Controls.Add(groupBox2);
             Controls.Add(groupBox3);
             DoubleBuffered = true;
-            Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
+            Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             Name = "StudentsSearchUC";
             Size = new Size(400, 411);
             Load += StudentsSearchUC_Load;

@@ -1,17 +1,20 @@
-﻿using System.Text;
+﻿using LibCheck.Database.Tables;
 
 namespace LibCheck.Forms.SearchTools.UserControls {
     public partial class StudentsSearchUC : UserControl {
         private readonly object _lock = new object();
         private bool isLoaded = false;
+        private readonly List<Students>? query_snapshot;
         public StudentsSearchUC() {
             InitializeComponent();
+            Database.Database.Read(out query_snapshot);
         }
 
         private void StudentsSearchUC_Load(object sender, EventArgs e) {
             LevelComboBox.Items.AddRange(Modules.Miscellaneous.Levels);
             LevelComboBox.SelectedIndex = 0;
             isLoaded = true;
+            CriteriaRB_CheckedChanged(sender, e);
         }
 
         private void ScanButton_Click(object sender, EventArgs e) {
@@ -37,39 +40,38 @@ namespace LibCheck.Forms.SearchTools.UserControls {
         private void Compose() {
             lock (_lock) {
                 if (ParentForm is SearchWindow sw) {
-                    List<string> queries = new List<string>();
-                    StringBuilder sb = new StringBuilder();
-                    if (KeywordRB.Checked) {
-                        if (!string.IsNullOrWhiteSpace(keywordTextBox.Text)) {
+                    List<Students>? s = query_snapshot?.ToList();
+                    if (s != null) {
+                        if (KeywordRB.Checked && !string.IsNullOrWhiteSpace(keywordTextBox.Text)) {
                             if (StudentIDRB.Checked) {
-                                queries.Add($"StudentID LIKE '%{keywordTextBox.Text}%'");
+                                s = s.Where(ss => !string.IsNullOrWhiteSpace(ss.StudentID) &&
+                                           ss.StudentID.Contains(keywordTextBox.Text)).ToList();
                             } else if (FNameRB.Checked) {
-                                queries.Add($"FirstName LIKE '%{keywordTextBox.Text}%'");
+                                s = s.Where(ss => !string.IsNullOrWhiteSpace(ss.FirstName) &&
+                                                  ss.FirstName.Contains(keywordTextBox.Text)).ToList();
                             } else if (LastNameRB.Checked) {
-                                queries.Add($"LastName LIKE '%{keywordTextBox.Text}%'");
+                                s = s.Where(ss => !string.IsNullOrWhiteSpace(ss.LastName) &&
+                                                   ss.LastName.Contains(keywordTextBox.Text)).ToList();
                             }
                         }
-                    }
 
-                    if (CategoryRB.Checked) {
-                        if (MaleCBox.Checked)
-                            queries.Add($"IsFemale = 0");
-                        if (FemaleCBox.Checked)
-                            queries.Add($"IsFemale = 1");
-                        if (LevelCBox.Checked) {
-                            int idx = LevelComboBox.SelectedIndex;
 
-                            if (idx != -1)
-                                queries.Add($"Level = {idx}");
+                        if (CategoryRB.Checked) {
+                            if (MaleCBox.Checked)
+                                s = s.Where(ss => !ss.IsFemale).ToList();
+                            if (FemaleCBox.Checked)
+                                s = s.Where(ss => ss.IsFemale).ToList();
+                            if (LevelCBox.Checked) {
+                                int idx = LevelComboBox.SelectedIndex;
+
+                                if (idx != -1)
+                                    s = s.Where(ss => ss.Level == idx).ToList();
+                            }
+
                         }
+                    }
 
-                    }
-                    for (int i = 0; i < queries.Count; i++) {
-                        sb.Append(queries[i]);
-                        if (i < queries.Count - 1)
-                            sb.Append(" AND ");
-                    }
-                    sw.PassOffWhereCond(sb.ToString());
+                    sw.PassOffWhereCond(s);
                 }
             }
         }

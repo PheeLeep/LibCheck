@@ -18,13 +18,15 @@ namespace LibCheck.Forms.Admin
             InitializeComponent();
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             this.mode = mode;
-            if (mode != DatabaseMode.Add)
-            {
-                if (string.IsNullOrWhiteSpace(isbn) || Database.Database.Read(out List<Books>? r,
-                                                                              whereCond: $"ISBN = '{isbn}'") < 1)
+            if (mode != DatabaseMode.Add) {
+                if (string.IsNullOrWhiteSpace(isbn) || Database.Database.Read(out List<Books>? r) <= 0)
                     throw new InvalidOperationException("No ISBN provided.");
 
                 if (r == null)
+                    throw new InvalidOperationException("No data provided.");
+                r = r.Where(b => isbn.Equals(b.ISBN)).ToList();
+
+                if (r.Count == 0)
                     throw new InvalidOperationException("No data provided.");
                 book = r[0];
             }

@@ -13,9 +13,12 @@ namespace LibCheck.Forms
         public StudentInfo(string studentID)
         {
             InitializeComponent();
-            if (string.IsNullOrWhiteSpace(studentID) ||
-                Database.Database.Read(out List<Students>? l, whereCond: $"StudentID = '{studentID}'") <= 0 ||
+            if (string.IsNullOrWhiteSpace(studentID) ||  Database.Database.Read(out List<Students>? l) <= 0 ||
                 l == null)
+                throw new StudentNotFoundException(studentID);
+            l = l.Where(os => studentID.Equals(os.StudentID)).ToList();
+
+            if (l.Count == 0)
                 throw new StudentNotFoundException(studentID);
 
             student = l[0];
@@ -25,10 +28,12 @@ namespace LibCheck.Forms
         {
             LoadItems();
         }
-        private void LoadItems()
-        {
-            Database.Database.Read(out List<Books>? l, "ISBN, Title, DateToReturn",
-                                   $"StudentID = '{student.StudentID}'");
+        private void LoadItems() {
+            Database.Database.Read(out List<Books>? l);
+
+            if (l != null)
+                l = l.Where(l1 => !string.IsNullOrWhiteSpace(l1.StudentID) &&
+                                   l1.StudentID.Equals(student.StudentID)).ToList();
 
             DateTime currentDate = DateTime.Now;
             DateTime bdate = student.BirthDate;
@@ -50,7 +55,7 @@ namespace LibCheck.Forms
             EmailAddressLabel.Text = $"Email Address: {student.EmailAddress}";
 
             dataGridView1.DataSource = l;
-
+            Miscellaneous.ResetDGVColumns(dataGridView1);
             dataGridView1.Columns.Add("DateIssued", "Date Issued");
             dataGridView1.Columns["DateIssued"].DisplayIndex = dataGridView1.Columns["SafeDateToReturn"].DisplayIndex - 1;
 
@@ -59,15 +64,15 @@ namespace LibCheck.Forms
                 for (int i = 0; i < l.Count; i++)
                 {
                     Books b = l[i];
-                    if (Database.Database.Read(out List<Records>? records,
-                                                    whereCond: $"StudentID = '{student.StudentID}' " +
-                                                               $"AND ISBN = '{b.ISBN}' AND " +
-                                                               $"Category = {(int)Records.RecordStatus.BookBorrowed}") <= 0
-                                               || records == null)
-                    {
-                        dataGridView1.Rows[i].Cells["DateIssued"].Value = "(none)";
+                    dataGridView1.Rows[i].Cells["DateIssued"].Value = "(none)";
+                    if (Database.Database.Read(out List<Records>? records) <= 0 || records == null) 
                         continue;
-                    }
+                    
+                    records = records.Where(r => !string.IsNullOrWhiteSpace(r.StudentID) && r.StudentID.Equals(student.StudentID) &&
+                                                 !string.IsNullOrWhiteSpace(r.ISBN) && r.ISBN.Equals(b.ISBN) &&
+                                                  r.Category == Records.RecordStatus.BookBorrowed).ToList();
+                    if (records.Count == 0) continue;
+
                     dataGridView1.Rows[i].Cells["DateIssued"].Value = records[0].DateOccurred.ToString("dd/MM/yyyy");
                 }
             }
@@ -78,9 +83,6 @@ namespace LibCheck.Forms
             dataGridView1.Columns["SafeDateToReturn"].Visible = true;
             dataGridView1.Columns["SafeDateToReturn"].HeaderText = "Date to Return";
             dataGridView1.Columns["DateIssued"].Visible = true;
-
-
-
         }
 
         private void ReturnBookButton_Click(object sender, EventArgs e)

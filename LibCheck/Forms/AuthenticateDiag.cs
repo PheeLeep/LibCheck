@@ -11,7 +11,6 @@ namespace LibCheck.Forms {
                 MessageBox.Show(this, "Invalid password.", "Failed to login", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 return;
             }
-            Credentials.TimeoutEvent -= Credentials_TimeoutEvent;
             DialogResult = DialogResult.Yes;
             Close();
         }
@@ -39,6 +38,11 @@ namespace LibCheck.Forms {
             } catch {
                 // Ignore
             }
+        }
+
+        private void AuthenticateDiag_FormClosing(object sender, FormClosingEventArgs e) {
+
+            Credentials.TimeoutEvent -= Credentials_TimeoutEvent;
         }
     }
 }

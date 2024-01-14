@@ -40,28 +40,10 @@ namespace LibCheck.Modules {
         }
 
         private void _mainForm_Load(object? sender, EventArgs e) {
-            if (_mainForm != null) {
-
-                CancellationTokenSource sauce = new CancellationTokenSource();
-                void cancelAct(object? s, EventArgs ea) {
-                    if (!sauce.IsCancellationRequested)
-                        sauce.Cancel();
-                }
-
-                PleaseWait.RunInPleaseWait(_mainForm, new Action(() => {
-                    try {
-                        PleaseWait.SetPWDText("Authorizing the email service... If the sign in does not take in a minute, it will cancel.");
-                        EmailService.Initialize(sauce.Token);
-                    } catch (AggregateException) {
-                        _mainForm.Invoke(new Action(() => {
-                            MessageBox.Show(_mainForm, "Failed to login for email service. Please try again later.",
-                                            "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }));
-                    } finally {
-                        _mainForm.Load -= _mainForm_Load;
-                    }
-                }), cancelAct);
-            }
+            if (sender is not null)
+                EmailService.Initialize(sender);
+            if (_mainForm != null)
+                _mainForm.Load -= _mainForm_Load;
         }
 
         internal static bool Auth() {
@@ -98,6 +80,7 @@ namespace LibCheck.Modules {
             Logger.Log(Logger.LogEnums.Info, "Context switched to normal mode.");
             return true;
         }
+
         private void Application_ThreadException(object sender, ThreadExceptionEventArgs e) {
             Logger.Log(Logger.LogEnums.Fatal, "An unhandled exception occurred! A scram will perform immediately." +
                                               $" (E:{e.Exception.HResult:X})");

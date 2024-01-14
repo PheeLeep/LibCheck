@@ -127,6 +127,7 @@
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Authenticate";
+            FormClosing += AuthenticateDiag_FormClosing;
             Load += AuthenticateDiag_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);

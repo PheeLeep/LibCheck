@@ -93,13 +93,11 @@ namespace LibCheck.Database {
             }
         }
 
-        internal static int Read<T>(out List<T>? res, string cols = "*", string whereCond = "") where T : new() {
+        internal static int Read<T>(out List<T>? res) where T : new() {
             res = new List<T>();
             try {
                 CheckConn();
-                string q = $"SELECT {cols} FROM {typeof(T).Name}";
-                if (!string.IsNullOrWhiteSpace(whereCond)) q += $" WHERE {whereCond}";
-                res = _conn?.Query<T>(q);
+                res = _conn?.Query<T>($"SELECT * FROM {typeof(T).Name}");
                 if (res == null) throw new InvalidOperationException("READ_FAILED");
                 return res.Count;
             } catch (Exception ex) {

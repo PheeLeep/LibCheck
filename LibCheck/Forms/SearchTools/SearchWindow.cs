@@ -1,6 +1,6 @@
 ﻿namespace LibCheck.Forms.SearchTools {
     public partial class SearchWindow : Form {
-        internal delegate void SearchWhereConditionDelegate(string whereCond);
+        internal delegate void SearchWhereConditionDelegate(object? list);
 
         internal event SearchWhereConditionDelegate? SearchWhereCondition;
 
@@ -18,8 +18,8 @@
             }
         }
 
-        internal void PassOffWhereCond(string whereCond) {
-            SearchWhereCondition?.Invoke(whereCond);
+        internal void PassOffWhereCond<T>(List<T>? query) {
+            SearchWhereCondition?.Invoke(query);
         }
     }
 }

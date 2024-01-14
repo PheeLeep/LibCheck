@@ -1,11 +1,13 @@
-﻿using System.Text;
+﻿using LibCheck.Database.Tables;
 
 namespace LibCheck.Forms.SearchTools.UserControls {
     public partial class BooksSearchUC : UserControl {
         private readonly object _lock = new object();
         private bool isLoaded = false;
+        private readonly List<Books>? query_snapshot;
         public BooksSearchUC() {
             InitializeComponent();
+            Database.Database.Read(out query_snapshot);
         }
 
         private void BrowseButton_Click(object sender, EventArgs e) {
@@ -23,6 +25,7 @@ namespace LibCheck.Forms.SearchTools.UserControls {
             genreComboBox.Items.AddRange(Modules.Miscellaneous.Genres);
             genreComboBox.SelectedIndex = 0;
             isLoaded = true;
+            CriteriaRB_CheckedChanged(sender, e);
         }
 
         private void CriteriaRB_CheckedChanged(object sender, EventArgs e) {
@@ -34,43 +37,40 @@ namespace LibCheck.Forms.SearchTools.UserControls {
         private void Compose() {
             lock (_lock) {
                 if (ParentForm is SearchWindow sw) {
-                    List<string> queries = new List<string>();
-                    StringBuilder sb = new StringBuilder();
-
-                    if (KeywordRB.Checked) {
-                        if (!string.IsNullOrWhiteSpace(keywordTextBox.Text)) {
+                    List<Books>? b = query_snapshot?.ToList();
+                    if (b != null) {
+                        if (KeywordRB.Checked && !string.IsNullOrWhiteSpace(keywordTextBox.Text)) {
                             if (IsbnRB.Checked) {
-                                queries.Add($"ISBN LIKE '%{keywordTextBox.Text}%'");
+                                b = b.Where(bb => !string.IsNullOrWhiteSpace(bb.ISBN) &&
+                                                  bb.ISBN.Contains(keywordTextBox.Text)).ToList();
                             } else if (TitleRB.Checked) {
-                                queries.Add($"Title LIKE '%{keywordTextBox.Text}%'");
+                                b = b.Where(bb => !string.IsNullOrWhiteSpace(bb.Title) &&
+                                                  bb.Title.Contains(keywordTextBox.Text)).ToList();
                             } else if (AuthorRB.Checked) {
-                                queries.Add($"Author LIKE '%{keywordTextBox.Text}%'");
+                                b = b.Where(bb => !string.IsNullOrWhiteSpace(bb.Author) &&
+                                                 bb.Author.Contains(keywordTextBox.Text)).ToList();
+                            }
+                        }
+
+
+                        if (CategoryRB.Checked) {
+                            if (BookBorrowedCBox.Checked)
+                                b = b.Where(bb => !string.IsNullOrWhiteSpace(bb.StudentID) &&
+                                                  !bb.StudentID.Equals("(none)")).ToList();
+                            if (BookLDmgCbox.Checked)
+                                 b = b.Where(bb => bb.IsLostOrDamaged).ToList();
+                            if (GenreCBox.Checked) {
+                                int idx = genreComboBox.SelectedIndex;
+                                if (idx != -1) {
+                                    string? val = genreComboBox.Items[idx].ToString();
+                                    if (!string.IsNullOrWhiteSpace(val))
+                                        b = b.Where(bb => !string.IsNullOrWhiteSpace(bb.Genre) &&
+                                                           bb.Genre.Contains(val)).ToList();
+                                }
                             }
                         }
                     }
-
-                    if (CategoryRB.Checked) {
-                        if (BookBorrowedCBox.Checked)
-                            queries.Add($"StudentID <> '(none)'");
-                        if (BookLDmgCbox.Checked)
-                            queries.Add($"IsLostOrDamaged = 1");
-                        if (GenreCBox.Checked) {
-                            int idx = genreComboBox.SelectedIndex;
-                            if (idx != -1) {
-                                string? val = genreComboBox.Items[idx].ToString();
-                                if (!string.IsNullOrWhiteSpace(val))
-                                    queries.Add($"Genre = '{val}'");
-                            }
-                        }
-                    }
-
-                    for (int i = 0; i < queries.Count; i++) {
-                        sb.Append(queries[i]);
-                        if (i < queries.Count - 1)
-                            sb.Append(" AND ");
-                    }
-
-                    sw.PassOffWhereCond(sb.ToString());
+                    sw.PassOffWhereCond(b);
                 }
             }
         }
