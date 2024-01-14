@@ -384,6 +384,16 @@ namespace LibCheck.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_print_queue_45 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-print-queue-45", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_search_32 {
             get {
                 object obj = ResourceManager.GetObject("icons8-search-32", resourceCulture);
@@ -499,6 +509,16 @@ namespace LibCheck.Properties {
         internal static System.Drawing.Bitmap Portrait_Mode_Scanning_50px {
             get {
                 object obj = ResourceManager.GetObject("Portrait Mode Scanning_50px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap print_32px {
+            get {
+                object obj = ResourceManager.GetObject("print_32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

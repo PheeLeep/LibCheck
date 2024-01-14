@@ -15,7 +15,7 @@ namespace LibCheck.Forms.Admin {
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             this.mode = mode;
             if (mode != DatabaseMode.Add) {
-                if (string.IsNullOrWhiteSpace(studentID) ||  Database.Database.Read(out List<Students>? l) <= 0 ||
+                if (string.IsNullOrWhiteSpace(studentID) || Database.Database.Read(out List<Students>? l) <= 0 ||
                     l == null)
                     throw new InvalidOperationException("No Student ID provided.");
                 l = l.Where(os => studentID.Equals(os.StudentID)).ToList();
@@ -187,7 +187,7 @@ namespace LibCheck.Forms.Admin {
                     || !Regexes.IsValidEmail(EmailAddressTextBox.Text, out _))
                     throw new InvalidOperationException("Invalid Email Address.");
 
-                if (Database.Database.Read(out List<Students>? s) > 0 && s != null && 
+                if (Database.Database.Read(out List<Students>? s) > 0 && s != null &&
                     s.Any(s => !string.IsNullOrWhiteSpace(s.EmailAddress) &&
                                s.EmailAddress.Equals(EmailAddressTextBox.Text) &&
                                !string.IsNullOrWhiteSpace(s.StudentID) &&

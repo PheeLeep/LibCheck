@@ -174,6 +174,7 @@ namespace LibCheck.Forms.Admin.UserControls {
                         using (Graphics g = Graphics.FromImage(isbnCard)) {
                             g.FillRectangle(new SolidBrush(Color.White), 0, 0, isbnCard.Width, isbnCard.Height);
                             g.DrawImage(qr, new Point(0, 0));
+                            g.DrawRectangle(new Pen(Color.Black), 0, 0, isbnCard.Width - 1, isbnCard.Height - 1);
                             g.Flush();
 
                             PleaseWait.SetPWDText("Writing the information...");
@@ -189,7 +190,8 @@ namespace LibCheck.Forms.Admin.UserControls {
                     Logger.Log(Logger.LogEnums.Info, "Book QR code generated.");
                     Task.Factory.StartNew(() => {
                         Task.Delay(10).Wait();
-                        Invoke(new Action(() => new IDResultDialog(isbnCard).ShowDialog(this)));
+                        Invoke(new Action(() => new IDResultDialog(isbnCard, $"{Credentials.Librarian?.SchoolGUID}-{isbn}")
+                                                    .ShowDialog(this)));
                     });
                 } catch (Exception ex) {
                     Logger.Log(Logger.LogEnums.Error, $"Failed to update a book. ({ex.Message})");
@@ -204,7 +206,7 @@ namespace LibCheck.Forms.Admin.UserControls {
                 SearchWindow sw = new SearchWindow();
                 BooksSearchUC hsuc = new BooksSearchUC();
                 sw.Controls.Add(hsuc);
-                sw.SearchWhereCondition += Sw_SearchWhereCondition; 
+                sw.SearchWhereCondition += Sw_SearchWhereCondition;
                 sw.FormClosing += (s, e) => {
                     sw.SearchWhereCondition -= Sw_SearchWhereCondition;
                     Sw_SearchWhereCondition(null);

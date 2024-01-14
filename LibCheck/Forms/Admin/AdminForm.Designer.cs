@@ -49,6 +49,7 @@ namespace LibCheck.Forms
             emailDashboard1 = new EmailDashboard();
             logsDashboard1 = new LogsDashboard();
             panel3 = new Panel();
+            PrintQueueButton = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             StagePanel.SuspendLayout();
@@ -75,6 +76,7 @@ namespace LibCheck.Forms
             // 
             panel1.BackColor = Color.DarkBlue;
             panel1.Controls.Add(WelcomeLabel);
+            panel1.Controls.Add(PrintQueueButton);
             panel1.Controls.Add(SettingsButton);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
@@ -291,6 +293,22 @@ namespace LibCheck.Forms
             panel3.Size = new Size(242, 521);
             panel3.TabIndex = 4;
             // 
+            // PrintQueueButton
+            // 
+            PrintQueueButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            PrintQueueButton.BackColor = Color.Transparent;
+            PrintQueueButton.BackgroundImageLayout = ImageLayout.Zoom;
+            PrintQueueButton.FlatAppearance.BorderSize = 0;
+            PrintQueueButton.FlatStyle = FlatStyle.Flat;
+            PrintQueueButton.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            PrintQueueButton.Image = Properties.Resources.print_32px;
+            PrintQueueButton.Location = new Point(1011, 25);
+            PrintQueueButton.Name = "PrintQueueButton";
+            PrintQueueButton.Size = new Size(32, 32);
+            PrintQueueButton.TabIndex = 2;
+            PrintQueueButton.UseVisualStyleBackColor = false;
+            PrintQueueButton.Click += PrintQueueButton_Click;
+            // 
             // AdminForm
             // 
             AutoScaleMode = AutoScaleMode.None;
@@ -333,5 +351,6 @@ namespace LibCheck.Forms
         private EmailDashboard emailDashboard1;
         private LogsDashboard logsDashboard1;
         private StatisticsDashboard statisticsDashboard1;
+        private Button PrintQueueButton;
     }
 }

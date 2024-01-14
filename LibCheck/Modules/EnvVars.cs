@@ -33,6 +33,14 @@
         internal static DirectoryInfo BookImages {
             get => new DirectoryInfo(Path.Combine(_mainPath, "book_images"));
         }
+
+        /// <summary>
+        /// A <see cref="DirectoryInfo"/> containing the book images folder.
+        /// </summary>
+        internal static DirectoryInfo PrintQueue {
+            get => new DirectoryInfo(Path.Combine(_mainPath, "print_queue"));
+        }
+
     }
 }
 

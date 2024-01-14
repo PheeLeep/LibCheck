@@ -35,6 +35,7 @@
             groupBox1 = new GroupBox();
             FrontPicBox = new PictureBox();
             SFD = new SaveFileDialog();
+            AddToPrintQueue = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -46,6 +47,7 @@
             // panel1
             // 
             panel1.BackColor = Color.CornflowerBlue;
+            panel1.Controls.Add(AddToPrintQueue);
             panel1.Controls.Add(SaveImageButton);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 489);
@@ -132,6 +134,21 @@
             // 
             SFD.Filter = "PNG Image|*.png|JPG Image|*.jpg|BMP Image|*.bmp";
             // 
+            // AddToPrintQueue
+            // 
+            AddToPrintQueue.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            AddToPrintQueue.BackColor = Color.RoyalBlue;
+            AddToPrintQueue.FlatStyle = FlatStyle.Flat;
+            AddToPrintQueue.ForeColor = Color.White;
+            AddToPrintQueue.Location = new Point(216, 22);
+            AddToPrintQueue.Margin = new Padding(4);
+            AddToPrintQueue.Name = "AddToPrintQueue";
+            AddToPrintQueue.Size = new Size(177, 44);
+            AddToPrintQueue.TabIndex = 2;
+            AddToPrintQueue.Text = "Add to Print Queue";
+            AddToPrintQueue.UseVisualStyleBackColor = false;
+            AddToPrintQueue.Click += AddToPrintQueue_Click;
+            // 
             // LibCardDialogBox
             // 
             AutoScaleMode = AutoScaleMode.None;
@@ -169,5 +186,6 @@
         private PictureBox BackPicBox;
         private PictureBox FrontPicBox;
         private SaveFileDialog SFD;
+        private Button AddToPrintQueue;
     }
 }

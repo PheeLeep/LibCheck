@@ -58,7 +58,7 @@ namespace LibCheck.Forms.SearchTools.UserControls {
                                 b = b.Where(bb => !string.IsNullOrWhiteSpace(bb.StudentID) &&
                                                   !bb.StudentID.Equals("(none)")).ToList();
                             if (BookLDmgCbox.Checked)
-                                 b = b.Where(bb => bb.IsLostOrDamaged).ToList();
+                                b = b.Where(bb => bb.IsLostOrDamaged).ToList();
                             if (GenreCBox.Checked) {
                                 int idx = genreComboBox.SelectedIndex;
                                 if (idx != -1) {

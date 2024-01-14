@@ -30,6 +30,24 @@ namespace LibCheck.Modules.Security {
         }
 
         /// <summary>
+        /// Generates a computed hash of a file.
+        /// </summary>
+        /// <param name="filePath">An input file path.</param>
+        /// <returns>Returns a SHA256 digested hash.</returns>
+        internal static string GenerateFileHash(string filePath) {
+            FileInfo f = new FileInfo(filePath);
+            if (!f.Exists) return "";
+            try {
+                using (SHA256 sHA = SHA256.Create())
+                using (var fs = f.OpenRead())
+                    return Convert.ToHexString(sHA.ComputeHash(fs)).Replace("-", "");
+            } catch (Exception ex) {
+                Logger.Log(Logger.LogEnums.Error, $"Failed to compute hash. ({ex.Message})");
+                return "";
+            }
+        }
+
+        /// <summary>
         /// Generates the randomized bytes.
         /// </summary>
         /// <param name="length">A length of bytes to be made.</param>

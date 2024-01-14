@@ -29,8 +29,8 @@ namespace LibCheck.Forms.Admin.UserControls {
             StudentsLabel.Text = $"{Database.Database.Read<Students>(out _)}";
             // Get notifications
             if (Database.Database.Read(out List<Records>? infos) >= 0 && infos != null) {
-                infos = infos.Where(s => s.DateOccurred.Date == DateTime.Now.Date && 
-                                        (s.Category == Records.RecordStatus.BookReturned || 
+                infos = infos.Where(s => s.DateOccurred.Date == DateTime.Now.Date &&
+                                        (s.Category == Records.RecordStatus.BookReturned ||
                                          s.Category == Records.RecordStatus.BookBorrowed)).ToList();
                 NBRLabel.Text = $"{infos.Count(s => s.Category == Records.RecordStatus.BookReturned)}";
 

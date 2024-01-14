@@ -172,7 +172,9 @@ namespace LibCheck.Forms.Admin.UserControls {
                     Logger.Log(Logger.LogEnums.Info, $"Student QR code printed.");
                     Task.Factory.StartNew(() => {
                         Task.Delay(10).Wait();
-                        Invoke(new Action(() => new LibCardDialogBox(frontCard, backCard).ShowDialog(this)));
+                        Invoke(new Action(() => new LibCardDialogBox(frontCard, backCard,
+                                                                     $"{Credentials.Librarian?.SchoolGUID}-{id}")
+                                                    .ShowDialog(this)));
                     });
                 } catch (Exception ex) {
                     Logger.Log(Logger.LogEnums.Error, $"Failed to print a student info. ({ex.Message})");

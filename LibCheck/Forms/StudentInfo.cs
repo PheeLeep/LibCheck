@@ -3,17 +3,14 @@ using LibCheck.Exceptions;
 using LibCheck.Forms.Admin;
 using LibCheck.Modules;
 
-namespace LibCheck.Forms
-{
-    public partial class StudentInfo : Form
-    {
+namespace LibCheck.Forms {
+    public partial class StudentInfo : Form {
         private readonly Students student;
 
         private ComposeDiag? _diag;
-        public StudentInfo(string studentID)
-        {
+        public StudentInfo(string studentID) {
             InitializeComponent();
-            if (string.IsNullOrWhiteSpace(studentID) ||  Database.Database.Read(out List<Students>? l) <= 0 ||
+            if (string.IsNullOrWhiteSpace(studentID) || Database.Database.Read(out List<Students>? l) <= 0 ||
                 l == null)
                 throw new StudentNotFoundException(studentID);
             l = l.Where(os => studentID.Equals(os.StudentID)).ToList();
@@ -24,8 +21,7 @@ namespace LibCheck.Forms
             student = l[0];
         }
 
-        private void StudentInfo_Load(object sender, EventArgs e)
-        {
+        private void StudentInfo_Load(object sender, EventArgs e) {
             LoadItems();
         }
         private void LoadItems() {
@@ -38,12 +34,9 @@ namespace LibCheck.Forms
             DateTime currentDate = DateTime.Now;
             DateTime bdate = student.BirthDate;
             int age;
-            if (bdate.Month > currentDate.Month || (bdate.Month == currentDate.Month && bdate.Day > currentDate.Day))
-            {
+            if (bdate.Month > currentDate.Month || (bdate.Month == currentDate.Month && bdate.Day > currentDate.Day)) {
                 age = currentDate.Year - bdate.Year - 1;
-            }
-            else
-            {
+            } else {
                 age = currentDate.Year - bdate.Year;
             }
 
@@ -59,15 +52,13 @@ namespace LibCheck.Forms
             dataGridView1.Columns.Add("DateIssued", "Date Issued");
             dataGridView1.Columns["DateIssued"].DisplayIndex = dataGridView1.Columns["SafeDateToReturn"].DisplayIndex - 1;
 
-            if (l != null)
-            {
-                for (int i = 0; i < l.Count; i++)
-                {
+            if (l != null) {
+                for (int i = 0; i < l.Count; i++) {
                     Books b = l[i];
                     dataGridView1.Rows[i].Cells["DateIssued"].Value = "(none)";
-                    if (Database.Database.Read(out List<Records>? records) <= 0 || records == null) 
+                    if (Database.Database.Read(out List<Records>? records) <= 0 || records == null)
                         continue;
-                    
+
                     records = records.Where(r => !string.IsNullOrWhiteSpace(r.StudentID) && r.StudentID.Equals(student.StudentID) &&
                                                  !string.IsNullOrWhiteSpace(r.ISBN) && r.ISBN.Equals(b.ISBN) &&
                                                   r.Category == Records.RecordStatus.BookBorrowed).ToList();
@@ -85,23 +76,17 @@ namespace LibCheck.Forms
             dataGridView1.Columns["DateIssued"].Visible = true;
         }
 
-        private void ReturnBookButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
+        private void ReturnBookButton_Click(object sender, EventArgs e) {
+            try {
                 if (new BorrowReturnDialog(false, studentID: student.StudentID).ShowDialog(this) == DialogResult.Yes)
                     LoadItems();
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 MessageBox.Show(ex.Message);
             }
         }
 
-        private void EmailAddressLabel_DoubleClick(object sender, EventArgs e)
-        {
-            if (_diag != null)
-            {
+        private void EmailAddressLabel_DoubleClick(object sender, EventArgs e) {
+            if (_diag != null) {
                 _diag.BringToFront();
                 _diag.WindowState = FormWindowState.Normal;
                 _diag.Focus();
@@ -113,8 +98,7 @@ namespace LibCheck.Forms
                 return;
 
             _diag = new ComposeDiag();
-            _diag.FormClosed += (g, e) =>
-            {
+            _diag.FormClosed += (g, e) => {
                 _diag = null;
             };
             _diag.Show();
@@ -122,8 +106,7 @@ namespace LibCheck.Forms
             _diag.SetSpecificEmail(student.EmailAddress);
         }
 
-        private void StudentInfo_FormClosing(object sender, FormClosingEventArgs e)
-        {
+        private void StudentInfo_FormClosing(object sender, FormClosingEventArgs e) {
             if (_diag != null)
                 _diag.Close();
         }

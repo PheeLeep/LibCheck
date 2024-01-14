@@ -114,7 +114,7 @@ namespace LibCheck.Forms.Admin.UserControls.Statistics {
                 SearchWindow sw = new SearchWindow();
                 HistorySearchUC hsuc = new HistorySearchUC();
                 sw.Controls.Add(hsuc);
-                sw.SearchWhereCondition += Sw_SearchWhereCondition; 
+                sw.SearchWhereCondition += Sw_SearchWhereCondition;
                 sw.FormClosing += (s, e) => {
                     sw.SearchWhereCondition -= Sw_SearchWhereCondition;
                     Sw_SearchWhereCondition(null);

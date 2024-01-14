@@ -17,6 +17,7 @@ namespace LibCheck.Modules {
         }
 
         internal AppContext() {
+            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
             Application.ApplicationExit += Application_ApplicationExit;
             Application.ThreadException += Application_ThreadException;
             RecoveryCodesCenter.Load();

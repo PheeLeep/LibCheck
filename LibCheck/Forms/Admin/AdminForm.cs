@@ -1,4 +1,5 @@
-﻿using LibCheck.Forms.Admin;
+﻿using LibCheck.Database.Tables;
+using LibCheck.Forms.Admin;
 using LibCheck.Forms.SearchTools;
 using LibCheck.Modules.Security;
 
@@ -93,6 +94,12 @@ namespace LibCheck.Forms {
 
         private void SettingsButton_Click(object sender, EventArgs e) {
             new LibrarianOptions().ShowDialog(this);
+        }
+
+        private void PrintQueueButton_Click(object sender, EventArgs e) {
+            if (Database.Database.Read(out List<PrintQueue>? queue) < 0 || queue == null)
+                return;
+            new PrintQueueDialog(queue).ShowDialog(this);
         }
     }
 }
