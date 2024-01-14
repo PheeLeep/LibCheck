@@ -84,6 +84,7 @@ namespace LibCheck.Forms.Admin {
                         }
                     }
                     e.Graphics?.DrawImage(bmp, new Rectangle(xPos, yPos, scaledWidth, scaledHeight));
+                    xPos += scaledWidth + 20;
                     images.RemoveAt(0);
                 } catch (Exception ex) {
                     Logger.Log(Logger.LogEnums.Error, $"Print >> {ex.Message}");
