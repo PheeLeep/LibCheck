@@ -132,6 +132,8 @@ namespace LibCheck.Modules.Security {
                 conn.CreateTable<RecentEmail>();
                 conn.CreateTable<Records>();
                 conn.CreateTable<Notifs>();
+                conn.CreateTable<PrintQueue>();
+
                 conn.Insert(lInfo);
             }
             Logger.Log(Logger.LogEnums.Info, "Main database created.");
