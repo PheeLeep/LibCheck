@@ -7,6 +7,7 @@ namespace LibCheck.Forms.Admin {
     public partial class PrintQueueDialog : Form {
 
         private List<PrintQueue>? queue;
+
         internal PrintQueueDialog(List<PrintQueue> queue) {
             InitializeComponent();
             this.queue = queue;
@@ -83,11 +84,13 @@ namespace LibCheck.Forms.Admin {
                             return;
                         }
                     }
+
                     e.Graphics?.DrawImage(bmp, new Rectangle(xPos, yPos, scaledWidth, scaledHeight));
                     xPos += scaledWidth + 20;
                     images.RemoveAt(0);
                 } catch (Exception ex) {
-                    Logger.Log(Logger.LogEnums.Error, $"Print >> {ex.Message}");
+                    images.RemoveAt(0);
+                    Logger.Log(Logger.LogEnums.Error, $"Print Exception >> {ex.Message}");
                 } finally {
                     try {
                         bmp.Dispose();
@@ -143,6 +146,8 @@ namespace LibCheck.Forms.Admin {
                     if (string.IsNullOrWhiteSpace(hash) || !hash.Equals(q.HashSHA256)) continue;
                     bmps.Add(new Bitmap(imgPath));
                     PleaseWait.SetPWDText($"Added image. {q.QueueName}");
+                    if (bmps[^1].Width == 1012 && bmps[^1].Height == 1276)
+                        bmps[^1].RotateFlip(RotateFlipType.Rotate270FlipNone);
                 } catch (Exception ex) {
                     Logger.Log(Logger.LogEnums.Error, $"Print >> {ex.Message}");
                 }
@@ -155,6 +160,7 @@ namespace LibCheck.Forms.Admin {
                 int size2 = bmp2.Width * bmp2.Height;
                 return size1.CompareTo(size2);
             });
+
             return bmps;
         }
     }
